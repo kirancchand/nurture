@@ -55,10 +55,10 @@ class LoginPage extends State<Login>{
               SizedBox(height: 20),
                 DropdownButton(// Not necessary for Option 1
                   value: _selectedLang,
-                  onChanged: (String? newValue) {
+                  onChanged: (String newValue) {
                     print(newValue);
-                    setState(() => _selectedLang = newValue!);
-                    Localization().changeLocale(newValue!);
+                    setState(() => _selectedLang = newValue);
+                    Localization().changeLocale(newValue);
                     // setState(() => _selectedLang = newValue);
                   },
                   items: Localization.langs.map((String lang) {

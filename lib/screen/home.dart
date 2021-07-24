@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nurture/config/controller.dart';
 class Home extends StatefulWidget {
-  Home({Key? key, required this.title}) : super(key: key);
+  Home({Key key,  this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect

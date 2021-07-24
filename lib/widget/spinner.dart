@@ -15,7 +15,7 @@ class SpinController extends GetxController {
 }
 
 class Spinner extends StatelessWidget {
-  Spinner({required this.child});
+  Spinner({this.child});
   Widget child;
 
   SpinController controller = Get.put(SpinController());

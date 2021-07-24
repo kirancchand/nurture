@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:nurture/widget/actions.dart';
 import 'package:nurture/widget/spinner.dart';
-
-List<Widget> loginButtons(formKey,_email,_password) {
+import 'package:nurture/model/login_model.dart';
+List<Widget> loginButtons(formKey,email,password,loginRequestModel) {
 
   return <Widget>[
     ElevatedButton(
@@ -12,8 +12,9 @@ List<Widget> loginButtons(formKey,_email,_password) {
       child: Text('Login', style: TextStyle(fontSize: 20.0)),
       onPressed:() async {
         showSpinner();
-        String data = await validateAndLogin(formKey,_email,_password);
-        print(jsonDecode(data)["data"]["message"]);
+        LoginResponseModel data = await validateAndLogin(formKey,email,password,loginRequestModel);
+        // String data = await validateAndLogin(formKey,email,password,loginRequestModel);
+        print(data);
         hideSpinner();
       },
     ),

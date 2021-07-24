@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nurture/service/api.dart';
+import 'package:nurture/model/login_model.dart';
+
 
 bool validateAndSave(formKey) {
   final FormState form = formKey.currentState;
@@ -12,14 +14,22 @@ bool validateAndSave(formKey) {
 }
 
 
-Future<String> validateAndLogin(formKey,_email,_password) async {
-
+Future<LoginResponseModel> validateAndLogin(formKey,email,password,loginRequestModel) async {
+  Api api = new Api();
   if (validateAndSave(formKey)) {
-    final String userId = await Api().signInWithEmailAndPassword(_email,_password);
-    return userId;
+    LoginResponseModel data = await api.signInWithEmailAndPassword(email,password,loginRequestModel);
+    return data;
   }
   else{
-    return "";
+    return LoginResponseModel(error: '', token: '');
   }
+
+  // if (validateAndSave(formKey)) {
+  //   final String userId = await api.signInWithEmailAndPassword(email,password);
+  //   return userId;
+  // }
+  // else{
+  //   return "";
+  // }
 
 }

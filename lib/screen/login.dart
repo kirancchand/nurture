@@ -11,11 +11,25 @@ class LoginPage extends State<Login>{
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   String _email="";
   String _password="";
+  // callback function
+  void getEmail(value) {
+    setState(() {
+      _email=value;
+    });
+
+  }
+  void getPassword(value) {
+    setState(() {
+      _password=value;
+    });
+
+  }
+
 
 
   @override
   Widget build(BuildContext context) {
-
+    TextEditingController textFieldController = TextEditingController();
     return Scaffold(
       body: Container(
         child:Form(
@@ -23,7 +37,7 @@ class LoginPage extends State<Login>{
           child: Center(
             child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: loginInputs()+loginButtons(formKey),
+            children: loginInputs(getEmail,getPassword)+loginButtons(formKey,_email,_password),
           ),
         ),
     ),

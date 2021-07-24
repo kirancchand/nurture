@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nurture/widget/spinner.dart';
+import 'package:nurture/service/api.dart';
 
 bool validateAndSave(formKey) {
   final FormState form = formKey.currentState;
@@ -12,10 +12,14 @@ bool validateAndSave(formKey) {
 }
 
 
-Future<void> validateAndLogin(formKey) async {
-  showSpinner();
+Future<String> validateAndLogin(formKey,_email,_password) async {
+
   if (validateAndSave(formKey)) {
-    print("hyy");
+    final String userId = await Api().signInWithEmailAndPassword(_email,_password);
+    return userId;
   }
-  hideSpinner();
+  else{
+    return "";
+  }
+
 }

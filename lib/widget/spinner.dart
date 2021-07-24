@@ -21,6 +21,7 @@ class Spinner extends StatelessWidget {
   SpinController controller = Get.put(SpinController());
   @override
   Widget build(BuildContext context) {
+    print("hyy");
     return Obx(
           () => ModalProgressHUD(
               inAsyncCall: controller.spin.value,

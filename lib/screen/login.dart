@@ -23,17 +23,39 @@ class LoginPage extends State<Login>{
     TextEditingController textFieldController = TextEditingController();
     return Spinner(
       child:Scaffold(
-      body: Container(
-        child:Form(
-          key: formKey,
-          child: Center(
-            child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: loginInputs(loginRequestModel)+loginButtons(formKey,loginRequestModel),
-          ),
+        body: SingleChildScrollView(
+          child:Container(
+              margin:EdgeInsets.fromLTRB(48.0,85.0,48.0,0.0),
+            child:Column(
+              children: <Widget>[
+                Container(
+                  child:Image.asset('assets/images/img1.PNG')
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 82.0),
+                  child:Form(
+                    key: formKey,
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Column(
+                              children:loginInputs(loginRequestModel)
+                          ),
+                          Column(
+                              children:loginButtons(formKey,loginRequestModel)
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
+
+          )
         ),
-    ),
-      ),
+
     )
     );
   }

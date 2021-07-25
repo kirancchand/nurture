@@ -17,22 +17,6 @@ class LoginPage extends State<Login>{
     loginRequestModel = new LoginRequestModel(email: '', password: '');
   }
 
-  String email="";
-  String password="";
-  // callback function
-  void getEmail(value) {
-    setState(() {
-      email=value;
-    });
-  }
-  void getPassword(value) {
-    setState(() {
-      password=value;
-    });
-
-  }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +29,7 @@ class LoginPage extends State<Login>{
           child: Center(
             child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: loginInputs(getEmail,getPassword,loginRequestModel)+loginButtons(formKey,email,password,loginRequestModel),
+            children: loginInputs(loginRequestModel)+loginButtons(formKey,loginRequestModel),
           ),
         ),
     ),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:nurture/widget/actions.dart';
 import 'package:nurture/widget/spinner.dart';
 import 'package:nurture/model/login_model.dart';
+import 'package:get/get.dart';
 List<Widget> loginButtons(formKey,loginRequestModel) {
 
   return <Widget>[
@@ -17,6 +18,7 @@ List<Widget> loginButtons(formKey,loginRequestModel) {
           {
             print(data.message);
             print(data.response.access_token);
+            Get.toNamed("/otpform");
           }
         else{
           print(data);

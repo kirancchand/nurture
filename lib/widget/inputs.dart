@@ -3,6 +3,16 @@ import 'package:nurture/widget/validators.dart';
 
 List<Widget> loginInputs(loginRequestModel) {
   return <Widget>[
+    RichText(
+      text:TextSpan(
+        children: [
+          TextSpan(
+            text: 'Sign In',
+          ),
+        ],
+        style: TextStyle(fontSize: 15, color: Colors.black),
+      ),
+    ),
     TextFormField(
       key: Key('email'),
       decoration: InputDecoration(labelText: 'Email'),

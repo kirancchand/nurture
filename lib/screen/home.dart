@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nurture/config/controller.dart';
 import 'package:nurture/widget/list.dart';
+import 'package:nurture/screen/paymentPending.dart';
+import 'package:nurture/screen/myhome.dart';
 class Home extends StatefulWidget {
   Home({Key key,  this.title}) : super(key: key);
 
@@ -17,12 +19,18 @@ class Home extends StatefulWidget {
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _HomePageState createState() => _HomePageState();
 
 }
 
-class _MyHomePageState extends State<Home> {
+class _HomePageState extends State<Home> {
 
+  List<Widget> pages = [
+    MyHome(),
+    PaymentPending()
+  ];
+
+  int pageIndex = 0;
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -37,46 +45,83 @@ class _MyHomePageState extends State<Home> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+      body:pages[pageIndex],
+      // body: Center(
+      //   // Center is a layout widget. It takes a single child and positions it
+      //   // in the middle of the parent.
+      //   child: Column(
+      //     // Column is also a layout widget. It takes a list of children and
+      //     // arranges them vertically. By default, it sizes itself to fit its
+      //     // children horizontally, and tries to be as tall as its parent.
+      //     //
+      //     // Invoke "debug painting" (press "p" in the console, choose the
+      //     // "Toggle Debug Paint" action from the Flutter Inspector in Android
+      //     // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
+      //     // to see the wireframe for each widget.
+      //     //
+      //     // Column has various properties to control how it sizes itself and
+      //     // how it positions its children. Here we use mainAxisAlignment to
+      //     // center the children vertically; the main axis here is the vertical
+      //     // axis because Columns are vertical (the cross axis would be
+      //     // horizontal).
+      //     mainAxisAlignment: MainAxisAlignment.center,
+      //     children: <Widget>[
+      //         ListView.builder(
+      //             itemCount: 3,
+      //             shrinkWrap: true,
+      //             physics: ClampingScrollPhysics(),
+      //             itemBuilder: (context, int index) {
+      //               return StudentList();
+      //             },
+      //           ),
+      //       ListView.builder(
+      //         itemCount: 3,
+      //         shrinkWrap: true,
+      //         physics: ClampingScrollPhysics(),
+      //         itemBuilder: (context, int index) {
+      //           return OutstandingPayment();
+      //         },
+      //       ),
+      //     ],
+      //   ),
+      // ),
+      bottomNavigationBar: BottomNavigationBar(
+        //  selectedIconTheme: IconThemeData(color: Colors.red),
+          onTap: (index) {
+            setState(() {
+              pageIndex = index;
+              //print(pageIndex);
+            });
+          },
 
-              ListView.builder(
-                  itemCount: 3,
-                  shrinkWrap: true,
-                  physics: ClampingScrollPhysics(),
-                  itemBuilder: (context, int index) {
-                    return StudentList();
-                  },
+          currentIndex: pageIndex,
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: Colors.greenAccent,
+          // backgroundColor: Colors.red,
+
+          items: [
+            BottomNavigationBarItem(
+                icon: Image.asset(
+                "assets/images/icons_png/Home.png",
                 ),
-            ListView.builder(
-              itemCount: 3,
-              shrinkWrap: true,
-              physics: ClampingScrollPhysics(),
-              itemBuilder: (context, int index) {
-                return OutstandingPayment();
-              },
+                  label: ''
             ),
-          ],
-        ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+            BottomNavigationBarItem(
+                icon: Image.asset(
+                  "assets/images/icons_png/PaymentPending.png",
+                ),
+                label: ""),
+            BottomNavigationBarItem(
+                icon: Image.asset(
+                  "assets/images/icons_png/PaymentHistory.png",
+                ),
+                label: ""),
+            BottomNavigationBarItem(
+                icon: Image.asset(
+                  "assets/images/icons_png/Notification.png",
+                ),
+                label: "")
+          ]),// This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

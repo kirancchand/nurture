@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:nurture/screen/login.dart';
 import 'package:nurture/screen/otpform.dart';
 import 'package:nurture/screen/home.dart';
+import 'package:nurture/screen/paymentPending.dart';
 
 
 class Routes {
   static final Map<String, WidgetBuilder> _routes = {
-    "/": (BuildContext context) => Login(),
+    "/login": (BuildContext context) => Login(),
     "/otpform": (BuildContext context) => OtpForm(),
-    "/home": (context) => Home(title: 'Flutter Demo Home Pages'),
+    "/": (context) => Home(title: 'Flutter Demo Home Pages'),
+    "/paymentpending": (context) => PaymentPending(),
   };
   static Map<String, WidgetBuilder> getAll() => _routes;
 }

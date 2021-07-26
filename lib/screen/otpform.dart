@@ -43,10 +43,10 @@ class OtpFormPage extends State<OtpForm>{
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Column(
-                                    children:loginInputs(loginRequestModel)
+                                    children:otpInputs(loginRequestModel)
                                 ),
                                 Column(
-                                    children:loginButtons(formKey,loginRequestModel)
+                                    children:otpButtons(formKey,loginRequestModel)
                                 )
                               ],
                             ),

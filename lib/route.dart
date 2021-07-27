@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:nurture/screen/login.dart';
 import 'package:nurture/screen/otpform.dart';
 import 'package:nurture/screen/home.dart';
-import 'package:nurture/screen/paymentPending.dart';
+import 'package:nurture/screen/paymentpending.dart';
 
 
 class Routes {

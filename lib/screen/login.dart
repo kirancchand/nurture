@@ -3,6 +3,8 @@ import 'package:nurture/widget/inputs.dart';
 import 'package:nurture/widget/buttons.dart';
 import 'package:nurture/model/login_model.dart';
 import 'package:nurture/widget/spinner.dart';
+import 'package:nurture/widget/indexheader.dart';
+import 'package:nurture/widget/indexfooter.dart';
 class Login extends StatefulWidget{
   LoginPage createState()=> LoginPage();
 }
@@ -23,17 +25,43 @@ class LoginPage extends State<Login>{
     TextEditingController textFieldController = TextEditingController();
     return Spinner(
       child:Scaffold(
-      body: Container(
-        child:Form(
-          key: formKey,
-          child: Center(
-            child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: loginInputs(loginRequestModel)+loginButtons(formKey,loginRequestModel),
-          ),
+        body: SingleChildScrollView(
+          child:Container(
+              margin:EdgeInsets.fromLTRB(48.0,85.0,48.0,0.0),
+            child:Column(
+              children: <Widget>[
+                Column(
+                  children:indexHeader(),
+                ),
+                Container(
+
+                  margin: const EdgeInsets.only(top: 82.0),
+                  child:Form(
+                    key: formKey,
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Column(
+                              children:loginInputs(loginRequestModel)
+                          ),
+                          Column(
+                              children:loginButtons(formKey,loginRequestModel)
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Column(
+                  children:indexFooter(),
+                ),
+              ],
+            )
+
+          )
         ),
-    ),
-      ),
+
     )
     );
   }

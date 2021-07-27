@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nurture/config/controller.dart';
-import 'package:nurture/widget/list.dart';
 class Home extends StatefulWidget {
   Home({Key key,  this.title}) : super(key: key);
 
@@ -22,9 +21,22 @@ class Home extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<Home> {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      // This call to setState tells the Flutter framework that something has
+      // changed in this State, which causes it to rerun the build method below
+      // so that the display can reflect the updated values. If we changed
+      // _counter without calling setState(), then the build method would not be
+      // called again, and so nothing would appear to happen.
+      _counter++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    Controller c = Get.put(Controller());
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -57,25 +69,48 @@ class _MyHomePageState extends State<Home> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-
-              ListView.builder(
-                  itemCount: 3,
-                  shrinkWrap: true,
-                  physics: ClampingScrollPhysics(),
-                  itemBuilder: (context, int index) {
-                    return StudentList();
-                  },
-                ),
-            ListView.builder(
-              itemCount: 3,
-              shrinkWrap: true,
-              physics: ClampingScrollPhysics(),
-              itemBuilder: (context, int index) {
-                return OutstandingPayment();
-              },
+            Text(
+              'You have pushed the button this many times: from local',
             ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            Text(
+              'You have pushed the button this many times: from getX builder',
+            ),
+            ElevatedButton(
+              child: Text('Add +1 getX'),
+              onPressed:  c.increment,
+            ),
+            GetBuilder<Controller>(
+              builder: (s) => Text('${c.counter}'),
+            ),
+            Container(
+              child:Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      'You have pushed the button this many times: RxInt type',
+                    ),
+                  Obx(
+                      () => Text('${c.log2.value}')
+                    ),
+                    ElevatedButton(
+                      child: Text('Add +1 RxInt'),
+                      onPressed: c.change,
+                  )]
+              ),
+
+            )
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

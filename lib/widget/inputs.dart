@@ -3,6 +3,14 @@ import 'package:nurture/widget/validators.dart';
 
 List<Widget> loginInputs(loginRequestModel) {
   return <Widget>[
+    Row(
+      children: [
+        Text(
+          "Sign in",
+          style: TextStyle(fontSize: 25),
+        ),
+      ],
+    ),
     TextFormField(
       key: Key('email'),
       decoration: InputDecoration(
@@ -32,6 +40,11 @@ List<Widget> loginInputs(loginRequestModel) {
 
 List<Widget> otpInputs(loginRequestModel) {
   return <Widget>[
+    Row(
+      children: [
+        Text("Enter 4 digit PIN", style: TextStyle(fontSize: 25)),
+      ],
+    ),
     TextFormField(
       key: Key('pin'),
       decoration: InputDecoration(
@@ -58,3 +71,30 @@ List<Widget> otpInputs(loginRequestModel) {
     )
   ];
 }
+
+
+
+List<Widget> pinInputs(loginRequestModel) {
+  return <Widget>[
+    Row(
+      children: [
+        Text("Login", style: TextStyle(fontSize: 25)),
+      ],
+    ),
+    TextFormField(
+      key: Key('pin'),
+      decoration: InputDecoration(
+          labelText: ' Enter PIN',
+          enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey[300])),
+          labelStyle: TextStyle(color: Colors.grey[400])),
+      validator: EmailFieldValidator.validate,
+      onSaved: (String value) => loginRequestModel.email = value,
+    ),
+    
+    SizedBox(
+      height: 35,
+    )
+  ];
+}
+

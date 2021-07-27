@@ -1,35 +1,47 @@
 import 'package:flutter/material.dart';
+
 List<Widget> indexFooter() {
-
   return <Widget>[
-    RichText(
-        text:TextSpan(
-        children: [
-                TextSpan(
-                text: 'Language',
+    SizedBox(height: 70,),
+    Padding(
+      padding: const EdgeInsets.all(10),
+      child: SizedBox(
+        height: 50,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Language:  ",
+                    style: TextStyle(color: Colors.grey),
                   ),
-                TextSpan(
-                  text: 'English',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xff2682AB),
+                  Text(
+                    "English  ",
+                    style: TextStyle(color: Colors.greenAccent),
                   ),
-                ),
-           ],
-          style: TextStyle(fontSize: 15, color: Colors.black),
-          ),
-    ),
-    RichText(
-      text:TextSpan(
-        children: [
-          TextSpan(
-            text: 'AL JEEL AL JADEED EDUCATIONAL INST.',
-          ),
-        ],
-        style: TextStyle(fontSize: 15, color: Colors.black),
+                  Icon(
+                    Icons.check_circle,
+                    color: Colors.greenAccent,
+                    size: 15,
+                  )
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              " AL JEEL AL JADEED EDUCATIONAL INST.",
+              style: TextStyle(fontSize: 12),
+            )
+          ],
+        ),
       ),
-    )
-  ];
-
+    ),
+    SizedBox(height:52),
+   ];
 }

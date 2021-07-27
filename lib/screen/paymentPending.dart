@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nurture/widget/buttons.dart';
 
 class PaymentPending extends StatefulWidget {
   const PaymentPending({Key key}) : super(key: key);
@@ -46,7 +47,15 @@ class _PaymentPendingState extends State<PaymentPending> {
                 border: Border.all(color: Colors.grey.shade300)),
             child: Padding(
               padding: const EdgeInsets.only(left: 15, top: 15, right: 20),
-              child: Column(
+              child:installment(),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+  Widget installment(){
+    return  Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   newMethod2("Installment 1"),
@@ -79,26 +88,10 @@ class _PaymentPendingState extends State<PaymentPending> {
                   ),
                   SizedBox(height: 40),
                   Center(
-                    child: Container(
-                      height: 40,
-                      width: 200,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          color: Colors.greenAccent),
-                      child: Center(
-                          child: Text(
-                        "Pay Now",
-                        style: TextStyle(color: Colors.white),
-                      )),
-                    ),
+                    child:payNowButtons(),
                   )
                 ],
-              ),
-            ),
-          )
-        ],
-      ),
-    );
+              );
   }
 
   Column newMethod2(String txt3) {

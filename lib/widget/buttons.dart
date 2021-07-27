@@ -45,7 +45,6 @@ List<Widget> loginButtons(
         }
       },
     ),
-   
   ];
 }
 
@@ -85,17 +84,15 @@ List<Widget> otpButtons(formKey, loginRequestModel) {
         }
       },
     ),
-
     Padding(
       padding: const EdgeInsets.all(8),
-      child: Text("Lets set your 4 digit PIN for future login",
-      style: TextStyle(color:Colors.grey,fontSize: 11),),
+      child: Text(
+        "Lets set your 4 digit PIN for future login",
+        style: TextStyle(color: Colors.grey, fontSize: 11),
+      ),
     ),
-     
   ];
 }
-
-
 
 List<Widget> pinButtons(formKey, loginRequestModel) {
   return <Widget>[
@@ -133,14 +130,26 @@ List<Widget> pinButtons(formKey, loginRequestModel) {
         }
       },
     ),
-
     Padding(
       padding: const EdgeInsets.all(8),
-      child: Text("Lets set your 4 digit PIN for future login",
-      style: TextStyle(color:Colors.grey,fontSize: 11),),
+      child: Text(
+        "Lets set your 4 digit PIN for future login",
+        style: TextStyle(color: Colors.grey, fontSize: 11),
+      ),
     ),
-     
   ];
 }
 
-
+Widget payNowButtons() {
+  return Container(
+    height: 40,
+    width: 200,
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16), color: Colors.greenAccent),
+    child: Center(
+        child: Text(
+      "Pay Now",
+      style: TextStyle(color: Colors.white),
+    )),
+  );
+}

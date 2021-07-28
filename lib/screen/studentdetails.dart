@@ -12,7 +12,7 @@ class _StudentDetailsState extends State<StudentDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
+     backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
         titleSpacing: 60,

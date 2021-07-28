@@ -256,50 +256,63 @@ class StudentInfoList extends StatelessWidget {
         padding:
             const EdgeInsets.only(top: 25, left: 18, right: 18, bottom: 10),
         child: Stack(
-          children:[ Container(
-            height: MediaQuery.of(context).size.height * .65,
-             width: MediaQuery.of(context).size.width,
-            child: Container(
-                height: MediaQuery.of(context).size.height * .60,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.shade300, width: 1),
-                    borderRadius: BorderRadius.circular(10)),
-                child: Row(children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 20),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        
-                        txt("Name"),
-                        txt("Gender"),
-                        txt("Date of Birth"),
-                        txt("School Name"),
-                        txt("Grade"),
-                        txt("Academic Year"),
-                        txt("Nationality"),
-                        txt("Religion"),
-                        txt("Civil id"),
-                        txt("Civil idExpiry date"),
-                        txt("Passport Number"),
-                        txt("Address"),
-                      ],
+          children:[ 
+            Align(
+              child: Container(
+                height: MediaQuery.of(context).size.height * .61,
+                  width: MediaQuery.of(context).size.width,
+              
+              ),
+            ),
+             Positioned(
+              bottom: 0,
+               child: Container(
+                  height: MediaQuery.of(context).size.height * .60,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade300, width: 1),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Row(children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15, right: 20),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          
+                          txt("Name"),
+                          txt("Gender"),
+                          txt("Date of Birth"),
+                          txt("School Name"),
+                          txt("Grade"),
+                          txt("Academic Year"),
+                          txt("Nationality"),
+                          txt("Religion"),
+                          txt("Civil id"),
+                          txt("Civil idExpiry date"),
+                          txt("Passport Number"),
+                          txt("Address"),
+                        ],
+                      ),
                     ),
+                   
+                  ])
                   ),
-                ])),
-          ),
+             ),
+          
           Positioned(
-                          left:20,
+                          left:15,
                           top:0,
-                          child: Container(
-                            height: 20,
-                            width:81,
-                          //  color:Colors.white,
-                            child: Text(
-                              "Student info",
-                              style: TextStyle(color: Colors.greenAccent),
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 8),
+                            child: Container(
+                              height: 20,
+                              width:81,
+                              color:Colors.white,
+                              child: Text(
+                                "Student info",
+                                style: TextStyle(color: Colors.greenAccent),
+                              ),
                             ),
                           ),
                         ),
@@ -313,3 +326,51 @@ class StudentInfoList extends StatelessWidget {
     );
   }
 }
+
+class Installment extends StatelessWidget {
+  Installment({
+    Key key,
+    // this.txt,
+    // this.data
+  }) : super(key: key);
+  // String txt;
+  // Response data;
+  @override
+  Widget build(BuildContext context) {
+    return
+      ListTile(
+            title: Text("Installment 1"),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children:[
+            ListView.builder(
+              itemCount: 3,
+              shrinkWrap: true,
+              physics: ClampingScrollPhysics(),
+              itemBuilder: (context, int index) {
+                return Padding(
+                    padding: const EdgeInsets.only(top: 5, bottom: 3),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [list_txt("Tution",isSelected: true), list_txt("0 KD")],
+                    ),
+                );
+              },
+            ),
+          ]
+
+
+        ),
+
+      );
+  }
+}
+
+Widget list_txt(String txt, {bool isSelected = false}) {
+  return Text(
+    txt,
+    style: TextStyle(color: isSelected ? Colors.red : Colors.grey),
+  );
+}
+
+

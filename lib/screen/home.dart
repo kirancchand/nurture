@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:nurture/config/controller.dart';
 import 'package:nurture/screen/paymenthistory.dart';
 import 'package:nurture/widget/list.dart';
-import 'package:nurture/screen/paymentPending.dart';
+import 'package:nurture/screen/paymentpending.dart';
 import 'package:nurture/screen/myhome.dart';
 import 'package:nurture/screen/notification.dart';
 class Home extends StatefulWidget {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nurture/widget/list.dart';
+import 'package:nurture/common/constants.dart';
 
 class Notifications extends StatefulWidget {
   const Notifications({ Key key }) : super(key: key);
@@ -17,7 +18,7 @@ class _NotificationsState extends State<Notifications> {
   Widget build(BuildContext context) {
     return Scaffold(
       body:  ListView(children: [
-        header(),
+        Header(),
          ListView.builder(
                         itemCount: 5,
                         shrinkWrap: true,
@@ -31,7 +32,7 @@ class _NotificationsState extends State<Notifications> {
     );
   }
    
-  Widget header() {
+  Widget Header() {
     return Stack(
       children: [
         Container(
@@ -82,14 +83,14 @@ class _NotificationsState extends State<Notifications> {
                         children: [
                           Text(
                             "Student",
-                            style: TextStyle(color: Colors.greenAccent),
+                            style: TextStyle(color: kColorGreen),
                           ),
                           Center(
                               child: DropdownButton(
                             isExpanded: true,
                             icon: Icon(
                               Icons.keyboard_arrow_down_outlined,
-                              color: Colors.greenAccent,
+                              color: kColorGreen,
                             ),
                             value: _valueChoose,
                             onChanged: (newValue) {

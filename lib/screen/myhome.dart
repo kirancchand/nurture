@@ -4,6 +4,7 @@ import 'package:nurture/screen/confirmpayment.dart';
 import 'package:nurture/screen/contactinformation.dart';
 import 'package:nurture/widget/list.dart';
 import 'package:nurture/widget/student.dart';
+import 'package:nurture/common/constants.dart';
 
 class MyHome extends StatefulWidget {
   const MyHome({Key key}) : super(key: key);
@@ -64,7 +65,7 @@ class _MyHomeState extends State<MyHome> {
                 CircleAvatar(
                   radius: 30,
                   backgroundColor: Colors.white,
-                  //  backgroundImage:AssetImage(assetName)
+                   backgroundImage:AssetImage("assets/images/arabian-vector-icon-260nw-445427119.png")
                 ),
                 SizedBox(
                   height: 10,
@@ -176,7 +177,7 @@ class _MyHomeState extends State<MyHome> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.vertical(
                       bottom: Radius.circular(15)), //circular(15),
-                  color: Colors.greenAccent),
+                  color: kColorGreen),
               child: Center(
                 child: Text("Pay Now",
                     style: TextStyle(
@@ -203,14 +204,14 @@ class _MyHomeState extends State<MyHome> {
               child: ListTile(
                   leading: Icon(
                     Icons.mail,
-                    color: Colors.greenAccent,
+                    color: kColorGreen,
                   ),
                   title: Text("Contact Us"),
                   trailing: Icon(Icons.keyboard_arrow_right_outlined,
-                      color: Colors.greenAccent)),
+                      color: kColorGreen)),
             )),
         onTap: () {
-          Get.to(ContactInformation());
+          Get.toNamed('/contactinformation');
         });
   }
 }

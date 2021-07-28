@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nurture/widget/list.dart';
+import 'package:nurture/common/constants.dart';
 
 class StudentDetails extends StatefulWidget {
   const StudentDetails({ Key key }) : super(key: key);

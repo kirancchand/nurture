@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nurture/widget/list.dart';
-
+import 'package:nurture/common/constants.dart';
 class PaymentHistory extends StatefulWidget {
   const PaymentHistory({ Key key }) : super(key: key);
 
@@ -16,7 +16,7 @@ class _PaymentHistoryState extends State<PaymentHistory> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(children: [
-        header(),
+        Header(),
          ListView.builder(
                         itemCount: 5,
                         shrinkWrap: true,
@@ -30,7 +30,7 @@ class _PaymentHistoryState extends State<PaymentHistory> {
     );
   }
   
-  Widget header() {
+  Widget Header() {
     return Stack(
       children: [
         Container(
@@ -81,14 +81,14 @@ class _PaymentHistoryState extends State<PaymentHistory> {
                         children: [
                           Text(
                             "Academic Year",
-                            style: TextStyle(color: Colors.greenAccent),
+                            style: TextStyle(color: kColorGreen),
                           ),
                           Center(
                               child: DropdownButton(
                             isExpanded: true,
                             icon: Icon(
                               Icons.keyboard_arrow_down_outlined,
-                              color: Colors.greenAccent,
+                              color: kColorGreen,
                             ),
                             value: _valueChoose,
                             onChanged: (newValue) {

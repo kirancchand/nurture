@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nurture/widget/buttons.dart';
-
+import 'package:nurture/common/constants.dart';
 class ContactInformation extends StatefulWidget {
   const ContactInformation({Key key}) : super(key: key);
 
@@ -54,7 +54,7 @@ class _ContactInformationState extends State<ContactInformation> {
                 child: Row(
                   children: [
                     CircleAvatar(
-                      backgroundColor: Colors.greenAccent,
+                      backgroundColor: kColorGreen,
                       radius: 10,
                       child: CircleAvatar(
                         radius: 8,
@@ -63,11 +63,11 @@ class _ContactInformationState extends State<ContactInformation> {
                     ),
                     Text(
                       "  general",
-                      style: TextStyle(color: Colors.greenAccent),
+                      style: TextStyle(color: kColorGreen),
                     ),
                     SizedBox(width: 30),
                     CircleAvatar(
-                      backgroundColor: Colors.greenAccent,
+                      backgroundColor: kColorGreen,
                       radius: 10,
                       child: CircleAvatar(
                         radius: 8,
@@ -76,7 +76,7 @@ class _ContactInformationState extends State<ContactInformation> {
                     ),
                     Text(
                       "  Student",
-                      style: TextStyle(color: Colors.greenAccent),
+                      style: TextStyle(color: kColorGreen),
                     ),
                   ],
                 ),
@@ -89,7 +89,7 @@ class _ContactInformationState extends State<ContactInformation> {
                     labelText: "select student",
                     suffixIcon: Icon(
                       Icons.keyboard_arrow_down_outlined,
-                      color: Colors.greenAccent,
+                      color: kColorGreen,
                     )),
               ),
               SizedBox(
@@ -184,7 +184,7 @@ class _ContactInformationState extends State<ContactInformation> {
                   Text(
                     "Add Attachment",
                     style: TextStyle(
-                      color: Colors.greenAccent,
+                      color: kColorGreen,
                     ),
                   ),
                 ],

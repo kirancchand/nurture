@@ -6,6 +6,7 @@ import 'package:nurture/widget/actions.dart';
 import 'package:nurture/widget/spinner.dart';
 import 'package:nurture/model/login_model.dart';
 import 'package:get/get.dart';
+import 'package:nurture/common/constants.dart';
 
 List<Widget> loginButtons(
   formKey,
@@ -19,15 +20,12 @@ List<Widget> loginButtons(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(6),
             gradient: LinearGradient(
-              colors: [
-                Color(0xff43CEA2),
-                Color(0xff279DD4),
-              ],
+              colors: kColorGradiant,
             ),
           ),
           child: Center(
             child: Text(
-              "Login",
+              "Sign In",
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
@@ -58,10 +56,7 @@ List<Widget> otpButtons(formKey, loginRequestModel) {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(6),
             gradient: LinearGradient(
-              colors: [
-                Color(0xff43CEA2),
-                Color(0xff279DD4),
-              ],
+              colors: kColorGradiant,
             ),
           ),
           child: Center(
@@ -79,7 +74,7 @@ List<Widget> otpButtons(formKey, loginRequestModel) {
         if (data.statuscode == "200") {
           print(data.message);
           print(data.response.access_token);
-          Get.toNamed("/home");
+          Get.toNamed("/pinform");
         } else {
           print(data);
         }
@@ -104,10 +99,7 @@ List<Widget> pinButtons(formKey, loginRequestModel) {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(6),
             gradient: LinearGradient(
-              colors: [
-                Color(0xff43CEA2),
-                Color(0xff279DD4),
-              ],
+              colors: kColorGradiant,
             ),
           ),
           child: Center(
@@ -147,7 +139,7 @@ Widget payNowButtons() {
       height: 40,
       width: 200,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16), color: Color(0xff43CEA2)),
+          borderRadius: BorderRadius.circular(16), color: kColorGreen),
       child: Center(
           child: Text(
         "Pay Now",
@@ -155,7 +147,7 @@ Widget payNowButtons() {
       )),
     ),
     onTap: () {
-      Get.to(ConfirmPayment());
+      Get.toNamed("/confirmpayment");
     },
   );
 }
@@ -165,7 +157,7 @@ Widget submitButtons() {
     height: 40,
     width: 200,
     decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16), color: Color(0xff43CEA2)),
+        borderRadius: BorderRadius.circular(16), color: kColorGreen),
     child: Center(
         child: Text(
       "Submit",
@@ -180,7 +172,7 @@ Widget confirmButtons() {
     height: 40,
     width: 200,
     decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16), color: Color(0xff43CEA2)),
+        borderRadius: BorderRadius.circular(16), color: kColorGreen),
     child: Center(
         child: Text(
       "Confirm Payment",

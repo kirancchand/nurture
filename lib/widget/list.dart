@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nurture/screen/studentdetails.dart';
-
+import 'package:nurture/common/constants.dart';
 class StudentList extends StatelessWidget {
   StudentList({
     Key key,
@@ -16,6 +16,7 @@ class StudentList extends StatelessWidget {
         leading: CircleAvatar(
           radius: 25,
           backgroundColor: Colors.pink.shade300,
+            backgroundImage:AssetImage("assets/images/chil.png")
           // backgroundImage: AssetImage(img),
         ),
         title: Text("Asim Muhammad"),
@@ -166,9 +167,9 @@ class paymentHistoryList extends StatelessWidget {
                                     "300 KD",
                                     style: TextStyle(
                                       fontSize: 12,
-                                      color:
+                                      color:kColorGreen,
                                           //failed?
-                                          Colors.greenAccent,
+
                                       //:Colors.red,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -190,7 +191,7 @@ class paymentHistoryList extends StatelessWidget {
                       // failed?
                       Icon(
                         Icons.check_circle_outline,
-                        color: Colors.greenAccent,
+                        color: kColorGreen,
                       ),
                       //:Icon(
                       //Icons.close_rounded,//lose_outlined,
@@ -324,7 +325,7 @@ class StudentInfoList extends StatelessWidget {
                 color: Colors.white,
                 child: Text(
                   "Student info",
-                  style: TextStyle(color: Colors.greenAccent),
+                  style: TextStyle(color: kColorGreen),
                 ),
               ),
             ),

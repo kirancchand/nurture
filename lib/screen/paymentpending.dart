@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nurture/widget/buttons.dart';
 import 'package:nurture/widget/list.dart';
-
+import 'package:nurture/common/constants.dart';
 class PaymentPending extends StatefulWidget {
   const PaymentPending({Key key}) : super(key: key);
 
@@ -74,7 +74,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                         children: [
                           Text(
                             "Student",
-                            style: TextStyle(color: Colors.greenAccent),
+                            style: TextStyle(color: kColorGreen),
                           ),
                           Center(
                               child: DropdownButton(

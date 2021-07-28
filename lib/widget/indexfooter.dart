@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nurture/common/constants.dart';
 
 List<Widget> indexFooter() {
   return <Widget>[
@@ -21,11 +22,11 @@ List<Widget> indexFooter() {
                   ),
                   Text(
                     "English  ",
-                    style: TextStyle(color: Colors.greenAccent),
+                    style: TextStyle(color: kColorGreen),
                   ),
                   Icon(
                     Icons.check_circle,
-                    color: Colors.greenAccent,
+                    color: kColorGreen,
                     size: 15,
                   )
                 ],

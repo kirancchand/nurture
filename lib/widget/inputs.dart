@@ -52,7 +52,7 @@ List<Widget> otpInputs(loginRequestModel) {
           enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey[300])),
           labelStyle: TextStyle(color: Colors.grey[400])),
-      validator: EmailFieldValidator.validate,
+      validator: OtpFieldValidator.validate,
       onSaved: (String value) => loginRequestModel.email = value,
     ),
     TextFormField(
@@ -63,7 +63,7 @@ List<Widget> otpInputs(loginRequestModel) {
               borderSide: BorderSide(color: Colors.grey[300])),
           labelStyle: TextStyle(color: Colors.grey[400])),
       obscureText: true,
-      validator: PasswordFieldValidator.validate,
+      validator: ConfirmOtpFieldFieldValidator.validate,
       onSaved: (String value) => loginRequestModel.password = value,
     ),
     SizedBox(
@@ -88,7 +88,7 @@ List<Widget> pinInputs(loginRequestModel) {
           enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey[300])),
           labelStyle: TextStyle(color: Colors.grey[400])),
-      validator: EmailFieldValidator.validate,
+      validator: PinFieldValidator.validate,
       onSaved: (String value) => loginRequestModel.email = value,
     ),
     

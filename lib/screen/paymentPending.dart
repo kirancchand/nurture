@@ -181,7 +181,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                   height: 17,
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height * .135,
+                  height: MediaQuery.of(context).size.height * .137,
                   width: MediaQuery.of(context).size.width * .85,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6),

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:nurture/screen/confirmpayment.dart';
 import 'package:nurture/widget/actions.dart';
 import 'package:nurture/widget/spinner.dart';
 import 'package:nurture/model/login_model.dart';
@@ -141,14 +142,48 @@ List<Widget> pinButtons(formKey, loginRequestModel) {
 }
 
 Widget payNowButtons() {
+  return GestureDetector(
+    child: Container(
+      height: 40,
+      width: 200,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16), color: Color(0xff43CEA2)),
+      child: Center(
+          child: Text(
+        "Pay Now",
+        style: TextStyle(color: Colors.white),
+      )),
+    ),
+    onTap: () {
+      Get.to(ConfirmPayment());
+    },
+  );
+}
+
+Widget submitButtons() {
   return Container(
     height: 40,
     width: 200,
     decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16), color: Colors.greenAccent),
+        borderRadius: BorderRadius.circular(16), color: Color(0xff43CEA2)),
     child: Center(
         child: Text(
-      "Pay Now",
+      "Submit",
+      style: TextStyle(color: Colors.white),
+    )),
+  );
+}
+
+
+Widget confirmButtons() {
+  return Container(
+    height: 40,
+    width: 200,
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16), color: Color(0xff43CEA2)),
+    child: Center(
+        child: Text(
+      "Confirm Payment",
       style: TextStyle(color: Colors.white),
     )),
   );

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:nurture/screen/confirmpayment.dart';
+import 'package:nurture/screen/contactinformation.dart';
 import 'package:nurture/widget/list.dart';
 import 'package:nurture/widget/student.dart';
-
 
 class MyHome extends StatefulWidget {
   const MyHome({Key key}) : super(key: key);
@@ -16,7 +18,7 @@ class _MyHomeState extends State<MyHome> {
     return Scaffold(
       // Center is a layout widget. It takes a single child and positions it
       // in the middle of the parent.
-     body: SafeArea(
+      body: SafeArea(
         child: ListView(
           // Column is also a layout widget. It takes a list of children and
           // arranges them vertically. By default, it sizes itself to fit its
@@ -32,80 +34,83 @@ class _MyHomeState extends State<MyHome> {
           // center the children vertically; the main axis here is the vertical
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
-         // mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             // Student(),
-          Stack(children: [
-            Container(
-            height: MediaQuery.of(context).size.height * .3,
-               width: MediaQuery.of(context).size.width,
-               decoration: BoxDecoration(
-                 gradient: LinearGradient(
-                   colors: [
-                     Color(0xff43CEA2),
-                     Color(0xff279DD4),
-                   ],
-                 ),
-               ),
-             ),
-                Column(children: [
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Icon(
-                          Icons.settings,
-                          color: Colors.white,
-                        ),
-                      ),
+            Stack(children: [
+              Container(
+                height: MediaQuery.of(context).size.height * .3,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xff43CEA2),
+                      Color(0xff279DD4),
+                    ],
+                  ),
+                ),
+              ),
+              Column(children: [
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Icon(
+                      Icons.settings,
+                      color: Colors.white,
                     ),
-                    CircleAvatar(
-                      radius: 30,
-                      backgroundColor: Colors.white,
-                      //  backgroundImage:AssetImage(assetName)
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "Muhammad Nabil",
-                      style: TextStyle(
-                          color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),
-                    ),
-                    Text("Parent ID: 538939nks52",
-                        style: TextStyle(
-                          color: Colors.white,
-                        )),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Container(
-                        height: MediaQuery.of(context).size.height * .5,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: Colors.grey.shade300, width: 1),
-                          color: Colors.white,
-                        ),
-                        child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                              Padding(
-            padding: const EdgeInsets.all(10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("Students"),
+                  ),
+                ),
+                CircleAvatar(
+                  radius: 30,
+                  backgroundColor: Colors.white,
+                  //  backgroundImage:AssetImage(assetName)
+                ),
+                SizedBox(
+                  height: 10,
+                ),
                 Text(
-                  "Academic year: 2021-2022",
-                  style:
-                  TextStyle(color: Colors.grey, fontSize: 11),
-                )
-              ],
-            ),
-          ),
+                  "Muhammad Nabil",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold),
+                ),
+                Text("Parent ID: 538939nks52",
+                    style: TextStyle(
+                      color: Colors.white,
+                    )),
+                SizedBox(
+                  height: 15,
+                ),
+                Container(
+                    height: MediaQuery.of(context).size.height * .5,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.grey.shade200, width: 1),
+                      color: Colors.white,
+                    ),
+                    child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text("Students"),
+                                    Text(
+                                      "Academic year: 2021-2022",
+                                      style: TextStyle(
+                                          color: Colors.grey, fontSize: 11),
+                                    )
+                                  ],
+                                ),
+                              ),
                               ListView.builder(
                                 itemCount: 3,
                                 shrinkWrap: true,
@@ -115,11 +120,15 @@ class _MyHomeState extends State<MyHome> {
                                 },
                               ),
                             ]))),
-                  ])
+              ])
             ]),
-            SizedBox(height: 15,),
+            SizedBox(
+              height: 15,
+            ),
             OutStandingSection(),
-            //  SizedBox(height: 10),
+            SizedBox(height: 10),
+            ContactUs(),
+            SizedBox(height: 10)
           ],
         ),
       ),
@@ -128,12 +137,11 @@ class _MyHomeState extends State<MyHome> {
 
   Widget OutStandingSection() {
     return Container(
-      height: MediaQuery.of(context).size.height * .5,
+      height: 312, //MediaQuery.of(context).size.height*.488,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-        borderRadius:
-            BorderRadius.vertical(top: Radius.circular(15)), //circular(15),
-        // border: Border.all(color: Colors.grey.shade300, width: 1),
+        borderRadius: BorderRadius.circular(15), //circular(15),
+        border: Border.all(color: Colors.grey.shade200, width: 1),
         color: Colors.white,
       ),
       child: Column(
@@ -159,7 +167,9 @@ class _MyHomeState extends State<MyHome> {
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Get.to(ConfirmPayment());
+            },
             child: Container(
               height: 50,
               width: MediaQuery.of(context).size.width,
@@ -177,5 +187,30 @@ class _MyHomeState extends State<MyHome> {
         ],
       ),
     );
+  }
+
+  Widget ContactUs() {
+    return GestureDetector(
+        child: Container(
+            height: 45,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.grey.shade200, width: 1),
+              color: Colors.white,
+            ),
+            child: Center(
+              child: ListTile(
+                  leading: Icon(
+                    Icons.mail,
+                    color: Colors.greenAccent,
+                  ),
+                  title: Text("Contact Us"),
+                  trailing: Icon(Icons.keyboard_arrow_right_outlined,
+                      color: Colors.greenAccent)),
+            )),
+        onTap: () {
+          Get.to(ContactInformation());
+        });
   }
 }

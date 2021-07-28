@@ -33,9 +33,8 @@ class _StudentDetailsState extends State<StudentDetails> {
         flexibleSpace: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(colors: [
-            Colors.greenAccent,
-            Colors.lightBlueAccent,
-            Colors.lightBlue,
+              Color(0xff43CEA2),
+                Color(0xff279DD4),
           ])),
         ),
       ),

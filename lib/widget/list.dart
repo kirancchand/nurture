@@ -80,7 +80,7 @@ class paymentHistoryList extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
       child: Container(
-        height: 103,
+       // height:  MediaQuery.of(context).size.height*.19,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey, width: .5),

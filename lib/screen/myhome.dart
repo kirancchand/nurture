@@ -84,7 +84,7 @@ class _MyHomeState extends State<MyHome> {
                   height: 15,
                 ),
                 Container(
-                    height: MediaQuery.of(context).size.height * .5,
+                   // height: MediaQuery.of(context).size.height * .5,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
@@ -137,7 +137,7 @@ class _MyHomeState extends State<MyHome> {
 
   Widget OutStandingSection() {
     return Container(
-      height: 312, //MediaQuery.of(context).size.height*.488,
+      //height: MediaQuery.of(context).size.height*.488,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15), //circular(15),

@@ -45,7 +45,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
         child: ListView(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height * .50,
+              height: MediaQuery.of(context).size.height * .54,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),

@@ -16,7 +16,7 @@ class PinFormPage extends State<PinForm>{
   @override
   void initState() {
     super.initState();
-    loginRequestModel = new LoginRequestModel(email: '', password: '');
+    loginRequestModel = new LoginRequestModel(Username: '', Password: '');
   }
 
 

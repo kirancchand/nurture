@@ -19,20 +19,20 @@ class LoginResponseModel {
 class Response {
   Response({
     this.access_token,
-    this.username,
+    this.Username,
   });
 
   String access_token;
-  String username;
+  String Username;
 
   factory Response.fromJson(Map<String, dynamic> json) => Response(
     access_token: json["access_token"] ?? "",
-    username: json["username"] ?? "",
+    Username: json["username"] ?? "",
   );
 
   Map<String, dynamic> toJson() => {
     "access_token": access_token,
-    "username": username,
+    "Username": Username,
   };
 }
 
@@ -51,18 +51,18 @@ class Response {
 // }
 
 class LoginRequestModel {
-  String email;
-  String password;
+  String Username;
+  String Password;
 
   LoginRequestModel({
-     this.email,
-     this.password,
+     this.Username,
+     this.Password,
   });
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> map = {
-      'email': email.trim(),
-      'password': password.trim(),
+      'Username': Username.trim(),
+      'password': Password.trim(),
     };
 
     return map;

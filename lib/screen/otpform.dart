@@ -16,7 +16,7 @@ class OtpFormPage extends State<OtpForm>{
   @override
   void initState() {
     super.initState();
-    loginRequestModel = new LoginRequestModel(email: '', password: '');
+    loginRequestModel = new LoginRequestModel(Username: '', Password: '');
   }
 
 

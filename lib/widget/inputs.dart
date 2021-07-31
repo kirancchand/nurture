@@ -12,14 +12,15 @@ List<Widget> loginInputs(loginRequestModel) {
       ],
     ),
     TextFormField(
-      key: Key('email'),
+      key: Key('username'),
       decoration: InputDecoration(
-          labelText: ' Enter Email',
+          labelText: ' Enter Username',
           enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey[300])),
           labelStyle: TextStyle(color: Colors.grey[400])),
       validator: EmailFieldValidator.validate,
-      onSaved: (String value) => loginRequestModel.email = value,
+      initialValue: "G-0000002102",
+      onSaved: (String value) => loginRequestModel.Username = value,
     ),
     TextFormField(
       key: Key('password'),
@@ -29,8 +30,9 @@ List<Widget> loginInputs(loginRequestModel) {
               borderSide: BorderSide(color: Colors.grey[300])),
           labelStyle: TextStyle(color: Colors.grey[400])),
       obscureText: true,
+      initialValue: "MBXEXPZX",
       validator: PasswordFieldValidator.validate,
-      onSaved: (String value) => loginRequestModel.password = value,
+      onSaved: (String value) => loginRequestModel.Password = value,
     ),
     SizedBox(
       height: 35,
@@ -52,8 +54,9 @@ List<Widget> otpInputs(loginRequestModel) {
           enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey[300])),
           labelStyle: TextStyle(color: Colors.grey[400])),
+      initialValue: "G-0000002102",
       validator: OtpFieldValidator.validate,
-      onSaved: (String value) => loginRequestModel.email = value,
+      onSaved: (String value) => loginRequestModel.Username = value,
     ),
     TextFormField(
       key: Key('confirm'),
@@ -63,8 +66,9 @@ List<Widget> otpInputs(loginRequestModel) {
               borderSide: BorderSide(color: Colors.grey[300])),
           labelStyle: TextStyle(color: Colors.grey[400])),
       obscureText: true,
+      initialValue: "MBXEXPZX",
       validator: ConfirmOtpFieldFieldValidator.validate,
-      onSaved: (String value) => loginRequestModel.password = value,
+      onSaved: (String value) => loginRequestModel.Password = value,
     ),
     SizedBox(
       height: 35,
@@ -88,8 +92,9 @@ List<Widget> pinInputs(loginRequestModel) {
           enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey[300])),
           labelStyle: TextStyle(color: Colors.grey[400])),
+      initialValue: "MBXEXPZX",
       validator: PinFieldValidator.validate,
-      onSaved: (String value) => loginRequestModel.email = value,
+      onSaved: (String value) => loginRequestModel.Username = value,
     ),
     
     SizedBox(

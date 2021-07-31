@@ -7,6 +7,7 @@ import 'package:nurture/widget/spinner.dart';
 import 'package:nurture/model/login_model.dart';
 import 'package:get/get.dart';
 import 'package:nurture/common/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 List<Widget> loginButtons(
   formKey,
@@ -36,9 +37,13 @@ List<Widget> loginButtons(
         LoginResponseModel data =
             await validateAndLogin(formKey, loginRequestModel);
         if (data.statuscode == "200") {
-          print(data.message);
+          toastFn(comment: data.message);
+          SharedPreferences localCache = await SharedPreferences.getInstance();
+          localCache.setString('Username', "${data.response.Username}");
+          localCache.setString('access_token', "${data.response.access_token}");
+          print("DSFDS"+data.message);
           print(data.response.access_token);
-          Get.toNamed("/otpform");
+          // Get.toNamed("/otpform");
         } else {
           print(data);
         }

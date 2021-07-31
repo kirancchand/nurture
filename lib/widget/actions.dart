@@ -21,7 +21,6 @@ Future<LoginResponseModel> validateAndLogin(formKey,loginRequestModel) async {
     LoginResponseModel data = await api.signInWithEmailAndPassword(loginRequestModel);
     hideSpinner();
     return data;
-
   }
   else{
     return LoginResponseModel();

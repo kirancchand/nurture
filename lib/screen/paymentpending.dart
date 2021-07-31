@@ -54,7 +54,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                   height: 17,
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height * .137,
+                 // height: MediaQuery.of(context).size.height * .137,
                   width: MediaQuery.of(context).size.width * .85,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6),
@@ -137,7 +137,7 @@ class _PaymentPendingState extends State<PaymentPending> {
             height: 5,
           ),
           Container(
-            height: MediaQuery.of(context).size.height * .70,
+           // height: MediaQuery.of(context).size.height * .70,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
@@ -179,7 +179,8 @@ class _PaymentPendingState extends State<PaymentPending> {
                   SizedBox(height: 20),
                   Center(
                     child:payNowButtons(),
-                  )
+                  ),
+                  SizedBox(height:20)
                 ],
               )
 

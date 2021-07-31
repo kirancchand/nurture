@@ -86,7 +86,12 @@ class _ContactInformationState extends State<ContactInformation> {
               ),
               TextFormField(
                 decoration: InputDecoration(
-                    labelText: "select student",
+                   // labelText: "select student",
+                    hintText:"select student",
+                   enabledBorder: UnderlineInputBorder(
+                     borderSide: BorderSide(color:Colors.grey[200])
+                   ),
+                    hintStyle:TextStyle(color: Colors.grey),
                     suffixIcon: Icon(
                       Icons.keyboard_arrow_down_outlined,
                       color: kColorGreen,
@@ -128,6 +133,7 @@ class _ContactInformationState extends State<ContactInformation> {
                         borderSide: BorderSide(color: Colors.grey[200]),
                         borderRadius: BorderRadius.circular(8)),
                     hintText: "Phone number",
+                    hintStyle:TextStyle(color: Colors.grey)
                   ),
                 ),
               ),

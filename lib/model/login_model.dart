@@ -1,7 +1,7 @@
 import 'dart:convert';
 class LoginResponseModel {
   final String statuscode;
-  final Response response;
+  final LoginResponse response;
   final String message;
 
   LoginResponseModel({this.statuscode,this.response, this.message});
@@ -9,15 +9,15 @@ class LoginResponseModel {
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) {
     return LoginResponseModel(
       statuscode: json["statuscode"],
-      response: Response.fromJson(json["response"]),
+      response: LoginResponse.fromJson(json["response"]),
       message: json["message"],
     );
   }
 }
 
 
-class Response {
-  Response({
+class LoginResponse {
+  LoginResponse({
     this.access_token,
     this.Username,
   });
@@ -25,7 +25,7 @@ class Response {
   String access_token;
   String Username;
 
-  factory Response.fromJson(Map<String, dynamic> json) => Response(
+  factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
     access_token: json["access_token"] ?? "",
     Username: json["username"] ?? "",
   );

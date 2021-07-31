@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nurture/screen/studentdetails.dart';
 import 'package:nurture/common/constants.dart';
+import 'package:nurture/model/student.dart';
 class StudentList extends StatelessWidget {
   StudentList({
     Key key,
-    // this.txt,
-    // this.data
+    this.txt,
+    this.data
   }) : super(key: key);
-  // String txt;
-  // Response data;
+  String txt;
+  StudentResponse data;
+
+  // List<Response> data;
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -19,13 +22,13 @@ class StudentList extends StatelessWidget {
             backgroundImage:AssetImage("assets/images/chil.png")
           // backgroundImage: AssetImage(img),
         ),
-        title: Text("Asim Muhammad"),
+        title: Text(data.studentname),
         isThreeLine: true,
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Student Id 849302hjk",
+              "Student Id ${data.studentid}",
               style: TextStyle(fontSize: 11),
             ),
             Text("Al Mina aljadeed", style: TextStyle(fontSize: 11))

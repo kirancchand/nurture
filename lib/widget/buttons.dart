@@ -38,9 +38,9 @@ List<Widget> loginButtons(
             await validateAndLogin(formKey, loginRequestModel);
         if (data.statuscode == "200") {
           toastFn(comment: data.message);
-          SharedPreferences localCache = await SharedPreferences.getInstance();
-          localCache.setString('Username', "${data.response.Username}");
-          localCache.setString('access_token', "${data.response.access_token}");
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setString('Username', "${data.response.Username}");
+          prefs.setString('access_token', "${data.response.access_token}");
           print("DSFDS"+data.message);
           print(data.response.access_token);
           Get.toNamed("/home");
@@ -74,15 +74,16 @@ List<Widget> otpButtons(formKey, loginRequestModel) {
             ),
           )),
       onTap: () async {
-        LoginResponseModel data =
-            await validateAndLogin(formKey, loginRequestModel);
-        if (data.statuscode == "200") {
-          print(data.message);
-          print(data.response.access_token);
-          Get.toNamed("/pinform");
-        } else {
-          print(data);
-        }
+        Get.toNamed("/pinform");
+        // LoginResponseModel data =
+        //     await validateAndLogin(formKey, loginRequestModel);
+        // if (data.statuscode == "200") {
+        //   print(data.message);
+        //   print(data.response.access_token);
+        //   Get.toNamed("/pinform");
+        // } else {
+        //   print(data);
+        // }
       },
     ),
     Padding(
@@ -117,15 +118,16 @@ List<Widget> pinButtons(formKey, loginRequestModel) {
             ),
           )),
       onTap: () async {
-        LoginResponseModel data =
-            await validateAndLogin(formKey, loginRequestModel);
-        if (data.statuscode == "200") {
-          print(data.message);
-          print(data.response.access_token);
-          Get.toNamed("/home");
-        } else {
-          print(data);
-        }
+        Get.toNamed("/home");
+        // LoginResponseModel data =
+        //     await validateAndLogin(formKey, loginRequestModel);
+        // if (data.statuscode == "200") {
+        //   print(data.message);
+        //   print(data.response.access_token);
+        //   Get.toNamed("/home");
+        // } else {
+        //   print(data);
+        // }
       },
     ),
     Padding(

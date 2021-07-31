@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Color colorblue = Color(0xff2682AB);
 const kColorGreen = Color(0xff43CEA2);
@@ -23,4 +24,10 @@ toastFn({String comment}) {
     backgroundColor: colorblue,
     fontSize: 14,
   );
+}
+
+Future getToken() async {
+  var pref = await SharedPreferences.getInstance();
+  print(pref.getString('access_token'));
+  return pref.getString('access_token');
 }

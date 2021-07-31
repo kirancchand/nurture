@@ -40,7 +40,8 @@ class _StudentDetailsState extends State<StudentDetails> {
         ),
       ),
       body:  ListView(children: [
-         ListView.builder(
+
+                  ListView.builder(
                         itemCount: 5,
                         shrinkWrap: true,
                         physics: ClampingScrollPhysics(),

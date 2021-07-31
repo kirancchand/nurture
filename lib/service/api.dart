@@ -2,7 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:nurture/model/login_model.dart';
+import 'package:nurture/model/student.dart';
 import 'package:nurture/common/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 class Api {
   Future<LoginResponseModel> signInWithEmailAndPassword(LoginRequestModel loginRequestModel) async {
     // String url = "https://run.mocky.io/v3/10dbe39e-ba24-488b-af81-fe10fbc092a0";  // success
@@ -15,6 +18,24 @@ class Api {
       throw Exception('Failed to load data!');
     }
   }
+
+  Future<StudentResponseModel> getStudent() async {
+    // String url = "https://run.mocky.io/v3/10dbe39e-ba24-488b-af81-fe10fbc092a0";  // success
+    // String url = "https://run.mocky.io/v3/4e1f3524-732a-426c-881b-4ae567685de6";   //failed
+    // String url = "https://run.mocky.io/v3/c0586d5b-47fd-4c1b-8eae-277796c80ec6";
+    var token=await getToken();
+    final response = await http.get(getUrl('GetAllDetails'),headers: {
+      'Authorization': 'Bearer $token',
+    });
+    print(jsonDecode(response.body));
+    if (response.statusCode == 200 || response.statusCode == 400) {
+      return StudentResponseModel.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Failed to load data!');
+    }
+  }
+
+
 }
 
 

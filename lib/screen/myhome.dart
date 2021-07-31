@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nurture/screen/confirmpayment.dart';
@@ -5,6 +7,8 @@ import 'package:nurture/screen/contactinformation.dart';
 import 'package:nurture/widget/list.dart';
 import 'package:nurture/widget/student.dart';
 import 'package:nurture/common/constants.dart';
+import 'package:nurture/model/student.dart';
+import 'package:nurture/service/api.dart';
 
 class MyHome extends StatefulWidget {
   const MyHome({Key key}) : super(key: key);
@@ -14,6 +18,7 @@ class MyHome extends StatefulWidget {
 }
 
 class _MyHomeState extends State<MyHome> {
+  Api api = new Api();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,14 +117,51 @@ class _MyHomeState extends State<MyHome> {
                                   ],
                                 ),
                               ),
-                              ListView.builder(
-                                itemCount: 3,
-                                shrinkWrap: true,
-                                physics: ClampingScrollPhysics(),
-                                itemBuilder: (context, int index) {
-                                  return StudentList();
-                                },
-                              ),
+                              Container(
+                                  child:FutureBuilder<StudentResponseModel>(
+                                    future: api.getStudent(),
+                                    builder: (BuildContext context,
+                                        AsyncSnapshot<StudentResponseModel> snapshot) {
+                                      if (snapshot.hasData) {
+                                        var response=snapshot.data?.response;
+
+                                        print("fsdfd");
+                                        // print(data[0]);
+                                        // // data.response.length>0?
+                                        // var response=[];
+                                        return response.length>0?ListView.builder(
+                                          itemCount: response.length,
+                                          shrinkWrap: true,
+                                          physics: ClampingScrollPhysics(),
+                                          itemBuilder: (context, int index) {
+                                            print(response[index].studentname);
+
+                                            return StudentList(data:response[index]);
+                                          },
+                                        ):Center(child:Text("No Data"));
+
+                                      } else if (snapshot.hasError) {
+                                        // return Text("${snapshot.error}");
+                                        return Text("${snapshot.error}");
+                                      }
+                                      else
+                                      {
+                                        return CircularProgressIndicator();
+                                      }
+
+                                      // By default, show a loading spinner.
+
+                                    },
+                                  ),
+                                // child:ListView.builder(
+                                //   itemCount: 3,
+                                //   shrinkWrap: true,
+                                //   physics: ClampingScrollPhysics(),
+                                //   itemBuilder: (context, int index) {
+                                //     return StudentList();
+                                //   },
+                                // ),
+                              )
                             ]))),
               ])
             ]),

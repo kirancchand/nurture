@@ -43,7 +43,7 @@ List<Widget> loginButtons(
           localCache.setString('access_token', "${data.response.access_token}");
           print("DSFDS"+data.message);
           print(data.response.access_token);
-          // Get.toNamed("/otpform");
+          Get.toNamed("/home");
         } else {
           print(data);
         }

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:nurture/screen/studentdetails.dart';
 import 'package:nurture/common/constants.dart';
 import 'package:nurture/model/student.dart';
+import 'package:nurture/model/fee.dart';
 class StudentList extends StatelessWidget {
   StudentList({
     Key key,
@@ -22,7 +23,7 @@ class StudentList extends StatelessWidget {
             backgroundImage:AssetImage("assets/images/chil.png")
           // backgroundImage: AssetImage(img),
         ),
-        title: Text(data.studentname),
+        title: Text(data.sfirstname),
         isThreeLine: true,
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,11 +50,11 @@ class StudentList extends StatelessWidget {
 class OutstandingPayment extends StatelessWidget {
   OutstandingPayment({
     Key key,
-    // this.txt,
-    // this.data
+    this.txt,
+    this.data
   }) : super(key: key);
-  // String txt;
-  // Response data;
+  String txt;
+  FeeResponse data;
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -68,10 +69,10 @@ class OutstandingPayment extends StatelessWidget {
         shape: CircleBorder(),
         activeColor: Colors.green,
       ),
-      title: Text("Asim Muhammad", style: TextStyle(color: Colors.grey)),
+      title: Text(data.studentname, style: TextStyle(color: Colors.grey)),
       selected: true,
       horizontalTitleGap: 1,
-      trailing: Text("300 KD", style: TextStyle(color: Colors.grey)),
+      trailing: Text(data.dueamount.toString(), style: TextStyle(color: Colors.grey)),
     );
   }
 }

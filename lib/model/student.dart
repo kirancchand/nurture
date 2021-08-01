@@ -21,36 +21,25 @@ class StudentResponse {
 
   StudentResponse({
     this.studentid,
+    this.sfirstname,
     this.studentnumber,
-    this.studentname,
-    this.passportnumber,
-    this.civilid,
-    this.dueamount,
   });
 
   int studentid;
+  String sfirstname;
   String studentnumber;
-  String studentname;
-  String passportnumber;
-  String civilid;
-  double dueamount;
+
 
   factory StudentResponse.fromJson(Map<String, dynamic> json) => StudentResponse(
     studentid: json["studentid"] ?? "",
+    sfirstname: json["sfirstname"] ?? "",
     studentnumber: json["studentnumber"] ?? "",
-    studentname: json["studentname"] ?? "",
-    passportnumber: json["passportnumber"] ?? "",
-    civilid: json["civilid"] ?? "",
-    dueamount: json["dueamount"] ?? "",
   );
 
   Map<String, dynamic> toJson() => {
     "studentid": studentid,
+    "sfirstname": sfirstname,
     "studentnumber": studentnumber,
-    "studentname": studentname,
-    "passportnumber": passportnumber,
-    "civilid": civilid,
-    "dueamount": dueamount,
   };
 }
 

@@ -8,6 +8,7 @@ import 'package:nurture/widget/list.dart';
 import 'package:nurture/widget/student.dart';
 import 'package:nurture/common/constants.dart';
 import 'package:nurture/model/student.dart';
+import 'package:nurture/model/fee.dart';
 import 'package:nurture/service/api.dart';
 
 class MyHome extends StatefulWidget {
@@ -134,7 +135,7 @@ class _MyHomeState extends State<MyHome> {
                                           shrinkWrap: true,
                                           physics: ClampingScrollPhysics(),
                                           itemBuilder: (context, int index) {
-                                            print(response[index].studentname);
+                                            print(response[index].sfirstname);
 
                                             return StudentList(data:response[index]);
                                           },
@@ -179,6 +180,7 @@ class _MyHomeState extends State<MyHome> {
   }
 
   Widget OutStandingSection() {
+    double total=0.0;
     return Container(
       //height: MediaQuery.of(context).size.height*.488,
       width: MediaQuery.of(context).size.width,
@@ -194,19 +196,56 @@ class _MyHomeState extends State<MyHome> {
             padding: const EdgeInsets.all(15.0),
             child: Text("Total Fee Outstanding"),
           ),
-          ListView.builder(
-            itemCount: 3,
-            shrinkWrap: true,
-            physics: ClampingScrollPhysics(),
-            itemBuilder: (context, int index) {
-              return OutstandingPayment();
-            },
+          Container(
+            child:FutureBuilder<FeeResponseModel>(
+              future: api.getFee(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<FeeResponseModel> snapshot) {
+                if (snapshot.hasData) {
+                  var response=snapshot.data?.response;
+
+                  print("fsdfd");
+                  // print(data[0]);
+                  // // data.response.length>0?
+                  // var response=[];
+                  return response.length>0?ListView.builder(
+                    itemCount: response.length,
+                    shrinkWrap: true,
+                    physics: ClampingScrollPhysics(),
+                    itemBuilder: (context, int index) {
+                      print(response[index].studentname);
+                      total=total+response[index].dueamount;
+                      return OutstandingPayment(data:response[index]);
+                    },
+                  ):Center(child:Text("No Data"));
+
+                } else if (snapshot.hasError) {
+                  // return Text("${snapshot.error}");
+                  return Text("${snapshot.error}");
+                }
+                else
+                {
+                  return CircularProgressIndicator();
+                }
+
+                // By default, show a loading spinner.
+
+              },
+            ),
+            // child:ListView.builder(
+            //   itemCount: 3,
+            //   shrinkWrap: true,
+            //   physics: ClampingScrollPhysics(),
+            //   itemBuilder: (context, int index) {
+            //     return StudentList();
+            //   },
+            // ),
           ),
           Padding(
             padding: const EdgeInsets.all(15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text("Total"), Text("0KD")],
+              children: [Text("Total"), Text(total.toString()+"KD")],
             ),
           ),
           GestureDetector(

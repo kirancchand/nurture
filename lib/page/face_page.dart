@@ -1,45 +1,19 @@
+//import 'package:faceid_auth_example/api/local_auth_api.dart';
+//import 'package:faceid_auth_example/main.dart';
+//import 'package:faceid_auth_example/page/home_page.dart';
 import 'package:flutter/material.dart';
-//import 'package:nurture/api/local_auth_api.dart';
-import 'package:nurture/service/api.dart';
-import 'package:nurture/screen/home.dart';
-import 'package:nurture/widget/inputs.dart';
-import 'package:nurture/widget/buttons.dart';
-import 'package:nurture/model/login_model.dart';
-import 'package:nurture/widget/spinner.dart';
-import 'package:nurture/widget/indexheader.dart';
-import 'package:nurture/widget/indexfooter.dart';
-class PinForm extends StatefulWidget{
-  PinFormPage createState()=> PinFormPage();
-}
+import 'package:nurture/api/local_auth_api.dart';
+import 'package:nurture/main.dart';
+import 'package:nurture/page/home_page.dart';
 
-
-class PinFormPage extends State<PinForm>{
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  LoginRequestModel loginRequestModel;
+class FacePage extends StatelessWidget {
   @override
-  void initState() {
-    super.initState();
-    loginRequestModel = new LoginRequestModel(Username: '', Password: '');
-  }
-
-
-  @override
-  Widget build(BuildContext context) {
-    TextEditingController textFieldController = TextEditingController();
-    return Spinner(
-      child:Scaffold(
-        body: SingleChildScrollView(
-          child:Container(
-              margin:EdgeInsets.fromLTRB(48.0,85.0,48.0,0.0),
-            child:Column(
-              children: <Widget>[
-                Column(
-                  children:indexHeader(),
-                ),
-                Container(
-
-                  margin: const EdgeInsets.only(top: 82.0),
-                  child:Padding(
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text(MyApp.title),
+          centerTitle: true,
+        ),
+        body: Padding(
           padding: EdgeInsets.all(32),
           child: Center(
             child: Column(
@@ -54,21 +28,8 @@ class PinFormPage extends State<PinForm>{
             ),
           ),
         ),
-      ),
-  
+      );
 
-                Column(
-                  children:indexFooter(),
-                ),
-              ],
-            )
-
-          )
-        ),
-
-    )
-    );
-  }
   Widget buildAvailability(BuildContext context) => buildButton(
         text: 'Check Availability',
         icon: Icons.event_available,
@@ -119,7 +80,7 @@ class PinFormPage extends State<PinForm>{
 
           if (isAuthenticated) {
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => Home()),
+              MaterialPageRoute(builder: (context) => HomePage()),
             );
           }
         },
@@ -132,12 +93,12 @@ class PinFormPage extends State<PinForm>{
   }) =>
       ElevatedButton.icon(
         style: ElevatedButton.styleFrom(
-          minimumSize: Size.fromHeight(30),
+          minimumSize: Size.fromHeight(50),
         ),
-        icon: Icon(icon, size: 10),
+        icon: Icon(icon, size: 26),
         label: Text(
           text,
-          style: TextStyle(fontSize: 15),
+          style: TextStyle(fontSize: 20),
         ),
         onPressed: onClicked,
       );
@@ -162,5 +123,3 @@ class PinFormPage extends State<PinForm>{
         ],
       );
 }
-
-

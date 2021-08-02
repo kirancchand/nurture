@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nurture/page/face_page.dart';
 import 'route.dart';
 import 'localization.dart';
 import 'package:nurture/widget/spinner.dart';
@@ -8,12 +9,15 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
+  static String title;
+
   // This widget is the root of your application.
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
+  static final String title = 'Local Auth';
   // This widget is the root of your application.
   @override
   void initState() {
@@ -24,7 +28,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
+    // home: FacePage(),
+      title: title,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -36,6 +41,7 @@ class _MyAppState extends State<MyApp> {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.blue,
+        
       ),
       routes: Routes.getAll(),
       locale: Localization.locale,

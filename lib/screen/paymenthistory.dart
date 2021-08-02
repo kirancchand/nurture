@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nurture/widget/list.dart';
 import 'package:nurture/common/constants.dart';
+import 'package:nurture/model/paymenthistory.dart';
+import 'package:nurture/service/api.dart';
 class PaymentHistory extends StatefulWidget {
   const PaymentHistory({ Key key }) : super(key: key);
 
@@ -11,20 +13,49 @@ class PaymentHistory extends StatefulWidget {
 class _PaymentHistoryState extends State<PaymentHistory> {
   var _valueChoose;
   List listItem = ["2021-2022", "2020-2021", "2019-2020"];
-
+  Api api = new Api();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(children: [
         Header(),
-         ListView.builder(
-                        itemCount: 5,
-                        shrinkWrap: true,
-                        physics: ClampingScrollPhysics(),
-                        itemBuilder: (context, int index) {
-                          return paymentHistoryList();
-                        },
-                      ),
+        Container(
+          child:FutureBuilder<PaymentHistoryResponseModel>(
+            future: api.getPaymentHistory(),
+            builder: (BuildContext context,
+                AsyncSnapshot<PaymentHistoryResponseModel> snapshot) {
+              if (snapshot.hasData) {
+                var response=snapshot.data?.response;
+
+                print("fsdfd");
+                // print(data[0]);
+                // // data.response.length>0?
+                // var response=[];
+                return response.length>0?ListView.builder(
+                  itemCount: response.length,
+                  shrinkWrap: true,
+                  physics: ClampingScrollPhysics(),
+                  itemBuilder: (context, int index) {
+                    // print(response[index].studentname);
+
+                    return paymentHistoryList(data:response[index]);
+                  },
+                ):Center(child:Text("No Data"));
+
+              } else if (snapshot.hasError) {
+                // return Text("${snapshot.error}");
+                return Text("${snapshot.error}");
+              }
+              else
+              {
+                return CircularProgressIndicator();
+              }
+
+              // By default, show a loading spinner.
+
+            },
+          ),
+        ),
       ],),
       
     );
@@ -85,20 +116,22 @@ class _PaymentHistoryState extends State<PaymentHistory> {
                           ),
                           Center(
                               child: DropdownButton(
-                            isExpanded: true,
-                            icon: Icon(
-                              Icons.keyboard_arrow_down_outlined,
-                              color: kColorGreen,
-                            ),
-                            value: _valueChoose,
-                            onChanged: (newValue) {
-                              setState(() {
-                                _valueChoose = newValue;
-                              });
+
+                                isExpanded: true,
+                                icon: Icon(
+                                  Icons.keyboard_arrow_down_outlined,
+                                  color: kColorGreen,
+                                ),
+                                value: listItem[0],
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    _valueChoose = newValue;
+                                  });
                             },
                             items: listItem.map((valueItem) {
                               return DropdownMenuItem(
                                 value: valueItem,
+
                                 child: Text(valueItem),
                               );
                             }).toList(),

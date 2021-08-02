@@ -30,7 +30,7 @@ List<Widget> loginInputs(loginRequestModel) {
               borderSide: BorderSide(color: Colors.grey[300])),
           labelStyle: TextStyle(color: Colors.grey[400])),
       obscureText: true,
-      initialValue: "MBXEXPZX",
+      initialValue: "P@ssword1",
       validator: PasswordFieldValidator.validate,
       onSaved: (String value) => loginRequestModel.Password = value,
     ),

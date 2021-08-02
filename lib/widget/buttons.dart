@@ -45,7 +45,7 @@ List<Widget> loginButtons(
           print(data.response.access_token);
           Get.toNamed("/home");
         } else {
-          print(data);
+          toastFn(comment: data.message);
         }
       },
     ),

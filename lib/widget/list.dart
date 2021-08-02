@@ -4,6 +4,8 @@ import 'package:nurture/screen/studentdetails.dart';
 import 'package:nurture/common/constants.dart';
 import 'package:nurture/model/student.dart';
 import 'package:nurture/model/fee.dart';
+import 'package:nurture/model/paymenthistory.dart';
+
 class StudentList extends StatelessWidget {
   StudentList({
     Key key,
@@ -78,7 +80,13 @@ class OutstandingPayment extends StatelessWidget {
 }
 
 class paymentHistoryList extends StatelessWidget {
-  paymentHistoryList({Key key}) : super(key: key);
+  paymentHistoryList({Key key,
+    this.txt,
+    this.data
+  }) : super(key: key);
+
+  String txt;
+  PaymentHistoryResponse data;
 
   @override
   Widget build(BuildContext context) {
@@ -147,31 +155,31 @@ class paymentHistoryList extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "202117630055787",
+                                    data.knettransactionid,
                                     style: TextStyle(fontSize: 12),
                                   ),
                                   SizedBox(
                                     height: 8,
                                   ),
                                   Text(
-                                    "2 jun 2021 at 10:30 am",
+                                      data.postdate,
                                     style: TextStyle(fontSize: 12),
                                   ),
                                   SizedBox(
                                     height: 8,
                                   ),
                                   Text(
-                                    "#4542f2m",
+                                      data.paymentid,
                                     style: TextStyle(fontSize: 12),
                                   ),
                                   SizedBox(
                                     height: 8,
                                   ),
                                   Text(
-                                    "300 KD",
+                                    data.amount.toString(),
                                     style: TextStyle(
                                       fontSize: 12,
-                                      color:kColorGreen,
+                                      color:data.result=="Success"?kColorGreen:Colors.red,
                                           //failed?
 
                                       //:Colors.red,
@@ -194,8 +202,8 @@ class paymentHistoryList extends StatelessWidget {
                     children: [
                       // failed?
                       Icon(
-                        Icons.check_circle_outline,
-                        color: kColorGreen,
+                        data.result=="Success"?Icons.check_circle_outline:Icons.cancel_outlined,
+                        color: data.result=="Success"?kColorGreen:Colors.red,
                       ),
                       //:Icon(
                       //Icons.close_rounded,//lose_outlined,
@@ -205,13 +213,13 @@ class paymentHistoryList extends StatelessWidget {
                           height: 20,
                           width: MediaQuery.of(context).size.width * .22,
                           decoration: BoxDecoration(
-                              color: Colors.green[50],
+                              color: data.result=="Success"?Colors.green[50]:Colors.grey[50],
                               borderRadius: BorderRadius.circular(10)),
                           child: Center(
                               child: Text(
-                            "Download Receipt",
+                                data.result=="Success"?"Download Receipt":data.result=="Cancelled"?"Cancelled":"Failed Transaction",
                             style:
-                                TextStyle(fontSize: 8.5, color: Colors.green),
+                                TextStyle(fontSize: 8.5, color: data.result=="Success"?kColorGreen:Colors.grey),
                           )))
                     ],
                   ),

@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:nurture/model/fee.dart';
 import 'package:nurture/model/login_model.dart';
 import 'package:nurture/model/student.dart';
-import 'package:nurture/model/fee.dart';
+import 'package:nurture/model/paymenthistory.dart';
 import 'package:nurture/common/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -53,6 +53,23 @@ class Api {
       throw Exception('Failed to load data!');
     }
   }
+
+
+  Future<PaymentHistoryResponseModel> getPaymentHistory() async {
+    var token=await getToken();
+    final response = await http.get(getUrl('PaymentHistory'),headers: {
+      'Authorization': 'Bearer $token',
+    });
+    print(response.body);
+    if (response.statusCode == 200 || response.statusCode == 400) {
+      return PaymentHistoryResponseModel.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Failed to load data!');
+    }
+  }
+
+
+
 
 }
 

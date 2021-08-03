@@ -25,12 +25,15 @@ class Api {
     // String url = "https://run.mocky.io/v3/10dbe39e-ba24-488b-af81-fe10fbc092a0";  // success
     // String url = "https://run.mocky.io/v3/4e1f3524-732a-426c-881b-4ae567685de6";   //failed
     // String url = "https://run.mocky.io/v3/c0586d5b-47fd-4c1b-8eae-277796c80ec6";
+    String url = "https://run.mocky.io/v3/cdadde32-9982-459b-8d5d-8f1d687a9455";
     var token=await getToken();
-    final response = await http.get(getUrl('GetAllChildren'),headers: {
-      'Authorization': 'Bearer $token',
-    });
-    print(jsonDecode(response.body));
+    // final response = await http.get(getUrl("GetBasicDetails"),headers: {
+    //   'Authorization': 'Bearer $token',
+    // });
+    final response = await http.get(Uri.parse(url));
+
     if (response.statusCode == 200 || response.statusCode == 400) {
+
       return StudentResponseModel.fromJson(json.decode(response.body));
     } else {
       throw Exception('Failed to load data!');
@@ -46,7 +49,7 @@ class Api {
     final response = await http.get(getUrl('GetAllDetails'),headers: {
       'Authorization': 'Bearer $token',
     });
-    print(jsonDecode(response.body));
+    // print(jsonDecode(response.body));
     if (response.statusCode == 200 || response.statusCode == 400) {
       return FeeResponseModel.fromJson(json.decode(response.body));
     } else {

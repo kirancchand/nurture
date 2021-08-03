@@ -20,6 +20,107 @@ class MyHome extends StatefulWidget {
 
 class _MyHomeState extends State<MyHome> {
   Api api = new Api();
+ var mydata= [
+              {
+              "studentid": 2920,
+              "studentnumber": "EA-S-00006205",
+              "userid": 2107,
+              "birthdate": "1900-01-01T00:00:00",
+              "isguardian": false,
+              "gender": "F",
+              "contactphonenumber": null,
+              "contactmobilenumber": null,
+              "contactemailid": null,
+              "createdby": 2107,
+              "createdon": "2021-04-19T07:09:48.7",
+              "updatedby": 2107,
+              "updatedon": "2021-04-19T07:09:48.7",
+              "civilid": "307062702055",
+              "countryid": 272,
+              "passportnumber": "",
+              "addressline1": "",
+              "addressline2": null,
+              "regionalarea": "Other Country",
+              "gradeid": 217,
+              "schoolid": 5637145327,
+              "isfather": null,
+              "ismother": null,
+              "issameforaddress": false,
+              "studentname": "Rawan Ahmed Nabil Abdelmoghny Mohamed",
+              "arabstudentname": "روان احمد نبيل عبدالمغني محمد",
+              "isprimarycontact": "Father",
+              "uniformfee": 0.0,
+              "religion": "",
+              "studntcode": null,
+              "grade": null
+              },
+              {
+              "studentid": 10164,
+              "studentnumber": "EA-S-00006222",
+              "userid": 2107,
+              "birthdate": "1900-01-01T00:00:00",
+              "isguardian": false,
+              "gender": "F",
+              "contactphonenumber": null,
+              "contactmobilenumber": null,
+              "contactemailid": null,
+              "createdby": 2107,
+              "createdon": "2021-06-10T09:09:45.587",
+              "updatedby": 2107,
+              "updatedon": "2021-06-10T09:09:45.587",
+              "civilid": "310090302056",
+              "countryid": 91,
+              "passportnumber": "",
+              "addressline1": "",
+              "addressline2": null,
+              "regionalarea": "Kuwait",
+              "gradeid": null,
+              "schoolid": 5637145327,
+              "isfather": null,
+              "ismother": null,
+              "issameforaddress": false,
+              "studentname": "Mahmoud Ahmed Nabil Abdelmoghny Mohamed",
+              "arabstudentname": "محمود احمد نبيل عبدالمغني محمد",
+              "isprimarycontact": "Father",
+              "uniformfee": 0.0,
+              "religion": "",
+              "studntcode": null,
+              "grade": null
+              },
+              {
+              "studentid": 11761,
+              "studentnumber": "EA-S-00006689",
+              "userid": 2107,
+              "birthdate": "1900-01-01T00:00:00",
+              "isguardian": false,
+              "gender": "F",
+              "contactphonenumber": null,
+              "contactmobilenumber": null,
+              "contactemailid": null,
+              "createdby": 2107,
+              "createdon": "2021-06-10T09:21:47.027",
+              "updatedby": 2107,
+              "updatedon": "2021-06-10T09:21:47.027",
+              "civilid": "125478965412",
+              "countryid": 91,
+              "passportnumber": "",
+              "addressline1": "",
+              "addressline2": null,
+              "regionalarea": "Kuwait",
+              "gradeid": null,
+              "schoolid": 5637145327,
+              "isfather": null,
+              "ismother": null,
+              "issameforaddress": false,
+              "studentname": "MHMOUD A N MOHAMED",
+              "arabstudentname": "محمود احمد نبيل عبدالمغني محمد",
+              "isprimarycontact": "Father",
+              "uniformfee": 0.0,
+              "religion": "",
+              "studntcode": null,
+              "grade": null
+              }
+              ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -119,6 +220,7 @@ class _MyHomeState extends State<MyHome> {
                                 ),
                               ),
                               Container(
+
                                   child:FutureBuilder<StudentResponseModel>(
                                     future: api.getStudent(),
                                     builder: (BuildContext context,
@@ -127,17 +229,17 @@ class _MyHomeState extends State<MyHome> {
                                         var response=snapshot.data?.response;
 
                                         print("fsdfd");
-                                        // print(data[0]);
+                                        print(response);
                                         // // data.response.length>0?
                                         // var response=[];
-                                        return response.length>0?ListView.builder(
-                                          itemCount: response.length,
+                                        return response.childrens.length>0?ListView.builder(
+                                          itemCount: response.childrens.length,
                                           shrinkWrap: true,
                                           physics: ClampingScrollPhysics(),
                                           itemBuilder: (context, int index) {
-                                            print(response[index].sfirstname);
-
-                                            return StudentList(data:response[index]);
+                                            // print(response[index].studentname);
+                                            // data:response[index]
+                                            return StudentList(data:response.childrens[index]);
                                           },
                                         ):Center(child:Text("No Data"));
 

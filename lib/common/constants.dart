@@ -28,6 +28,6 @@ toastFn({String comment}) {
 
 Future getToken() async {
   var pref = await SharedPreferences.getInstance();
-  print(pref.getString('access_token'));
+  // print(pref.getString('access_token'));
   return pref.getString('access_token');
 }

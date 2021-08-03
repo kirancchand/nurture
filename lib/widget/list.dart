@@ -25,13 +25,14 @@ class StudentList extends StatelessWidget {
             backgroundImage:AssetImage("assets/images/chil.png")
           // backgroundImage: AssetImage(img),
         ),
-        title: Text(data.sfirstname),
+        title: Text(data.studentname),
         isThreeLine: true,
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Student Id ${data.studentid}",
+              "Student Id ",
+                  // "${data.studentid}",
               style: TextStyle(fontSize: 11),
             ),
             Text("Al Mina aljadeed", style: TextStyle(fontSize: 11))

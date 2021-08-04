@@ -7,7 +7,7 @@ class StudentResponseModel {
   StudentResponseModel({this.statuscode,this.response, this.message});
 
   factory StudentResponseModel.fromJson(Map<String, dynamic> json) {
-    print(json["response"]["parents"]);
+    // print(json["response"]["childrens"][0]["studentid"].runtimeType);
     return StudentResponseModel(
       statuscode: json["statuscode"],
       // response: List<HomeResponse>.from(json["response"].map((x) => HomeResponse.fromJson(x))),
@@ -23,18 +23,18 @@ class HomeResponse {
     this.parents,
     this.childrens,
   });
-  List<StudentResponse> parents;
+  List<ParentResponse> parents;
   List<StudentResponse> childrens;
 
   factory HomeResponse.fromJson(Map<String, dynamic> json) => HomeResponse(
 
-    parents: List<StudentResponse>.from(json["parents"].map((x) => StudentResponse.fromJson(x))),
+    parents: List<ParentResponse>.from(json["parents"].map((x) => ParentResponse.fromJson(x))),
     childrens: List<StudentResponse>.from(json["childrens"].map((x) => StudentResponse.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "parents": parents,
-    "children": childrens,
+    "childrens": childrens,
   };
 }
 
@@ -42,24 +42,24 @@ class HomeResponse {
 class StudentResponse {
 
   StudentResponse({
-    // this.studentid,
+    this.studentid,
     this.studentname,
     this.studentnumber,
   });
 
-  // int studentid;
+  int studentid;
   String studentname;
   String studentnumber;
 
 
   factory StudentResponse.fromJson(Map<String, dynamic> json) => StudentResponse(
-    // studentid: json["studentid"] ?? "",
+    studentid: json["studentid"] ,
     studentname: json["studentname"] ?? "",
     studentnumber: json["studentnumber"] ?? "",
   );
 
   Map<String, dynamic> toJson() => {
-    // "studentid": studentid,
+    "studentid": studentid,
     "studentname": studentname,
     "studentnumber": studentnumber,
   };

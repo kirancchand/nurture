@@ -5,19 +5,25 @@ import 'package:nurture/common/constants.dart';
 import 'package:nurture/model/student.dart';
 import 'package:nurture/model/fee.dart';
 import 'package:nurture/model/paymenthistory.dart';
+import 'package:nurture/widget/student.dart';
 
 class StudentList extends StatelessWidget {
   StudentList({
     Key key,
-    this.txt,
-    this.data
+    this.data,
+    this.parents,
+    this.childrens
   }) : super(key: key);
-  String txt;
   StudentResponse data;
+  List<ParentResponse> parents;
+  List<StudentResponse> childrens;
+
+
 
   // List<Response> data;
   @override
   Widget build(BuildContext context) {
+    debugPrint('parent civil id: ${parents[0].civilid}');
     return ListTile(
         leading: CircleAvatar(
           radius: 25,
@@ -31,8 +37,7 @@ class StudentList extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Student Id ",
-                  // "${data.studentid}",
+              "Student Id ${data.studentid}",
               style: TextStyle(fontSize: 11),
             ),
             Text("Al Mina aljadeed", style: TextStyle(fontSize: 11))
@@ -40,7 +45,8 @@ class StudentList extends StatelessWidget {
         ),
         trailing: IconButton(
           onPressed: () {
-            Get.to(StudentDetails());
+            // print(childrens);
+            Get.to(StudentDetails(data:data,parents:parents));
           },
           icon: Icon(
             Icons.keyboard_arrow_right,
@@ -262,8 +268,11 @@ class NotificationList extends StatelessWidget {
 }
 
 class StudentInfoList extends StatelessWidget {
-  const StudentInfoList({Key key}) : super(key: key);
 
+  StudentInfoList({Key key,this.data}) : super(key: key);
+  StudentResponse data;
+
+  List<StudentResponse> studentresponse;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -310,8 +319,9 @@ class StudentInfoList extends StatelessWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
+
                     children: [
-                      Text("Asim Muhammad"),
+                      Text("Dfd"),
                       Text("Male"),
                       Text("29/05/2000"),
                       Text("Al Jeel Al Jadeed"),

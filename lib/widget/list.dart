@@ -364,6 +364,104 @@ class StudentInfoList extends StatelessWidget {
   }
 }
 
+class ParentsInfoList extends StatelessWidget {
+
+  ParentsInfoList({Key key,this.data}) : super(key: key);
+  List<ParentResponse> data;
+
+
+  @override
+  Widget build(BuildContext context) {
+    debugPrint('parent civil id: ${data[0].emailid}');
+    return Padding(
+        padding:
+        const EdgeInsets.only(top: 25, left: 18, right: 18, bottom: 10),
+        child: Stack(children: [
+          Align(
+            child: Container(
+              height: MediaQuery.of(context).size.height * .61,
+              width: MediaQuery.of(context).size.width,
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            child: Container(
+                height: MediaQuery.of(context).size.height * .60,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey.shade300, width: 1),
+                    borderRadius: BorderRadius.circular(10)),
+                child: Row(children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15, right: 20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        txt("Name"),
+                        txt("Gender"),
+                        txt("Date of Birth"),
+                        txt("School Name"),
+                        txt("Grade"),
+                        txt("Academic Year"),
+                        txt("Nationality"),
+                        txt("Religion"),
+                        txt("Civil id"),
+                        txt("Civil idExpiry date"),
+                        txt("Passport Number"),
+                        txt("Address"),
+                      ],
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+
+                    children: [
+                      Text("Dfd"),
+                      Text("Male"),
+                      Text("29/05/2000"),
+                      Text("Al Jeel Al Jadeed"),
+                      Text("5"),
+                      Text("2021-2022"),
+                      Text("British"),
+                      Text("Muslim"),
+                      Text("432578"),
+                      Text("30/6/2022"),
+                      Text("74K13L57D"),
+                      Text("Kuwait")
+                    ],
+                  )
+                ])),
+          ),
+          Positioned(
+            left: 15,
+            top: 0,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Container(
+                height: 20,
+                width: 83,
+                color: Colors.white,
+                child: Text(
+                  "Student info",
+                  style: TextStyle(color: kColorGreen),
+                ),
+              ),
+            ),
+          ),
+        ]));
+  }
+
+  Widget txt(String txta) {
+    return Text(
+      txta,
+      style: TextStyle(color: Colors.grey),
+    );
+  }
+}
+
 class Installment extends StatelessWidget {
   Installment({
     Key key,

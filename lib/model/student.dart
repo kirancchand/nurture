@@ -69,12 +69,14 @@ class ParentResponse {
 
   ParentResponse({
     this.name,
+    this.parentdetailsid,
     this.civilid,
     this.mobilenumber,
     this.emailid,
   });
 
   String name;
+  int parentdetailsid;
   String civilid;
   String mobilenumber;
   String emailid;
@@ -82,6 +84,7 @@ class ParentResponse {
 
   factory ParentResponse.fromJson(Map<String, dynamic> json) => ParentResponse(
     name:json["name"] ?? "",
+    parentdetailsid:json["parentdetailsid"]??"",
     civilid: json["civilid"] ?? "",
     mobilenumber: json["mobilenumber"] ?? "",
     emailid: json["emailid"] ?? "",

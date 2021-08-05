@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:nurture/screen/confirmpayment.dart';
 import 'package:nurture/screen/contactinformation.dart';
@@ -83,17 +84,58 @@ class _MyHomeState extends State<MyHome> {
                 SizedBox(
                   height: 10,
                 ),
-                Text(
-                  "Muhammad Nabil",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold),
+                Container(
+                  child:FutureBuilder<StudentResponseModel>(
+                    future: getStudents,
+                    builder: (BuildContext context,
+                        AsyncSnapshot<StudentResponseModel> snapshot) {
+                      if (snapshot.hasData) {
+                        var response=snapshot.data?.response;
+
+                        // // data.response.length>0?
+                        // var response=[];
+                        return response.parents.length>0?Column(
+                          children:[
+                            Stack(
+                              children:[
+                                Text(
+                                  response.parents[0].emailid,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ]
+                          ),
+                            Stack(
+                                children:[
+                                  Text("Parent ID: ${response.parents[0].parentdetailsid}",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      )),
+                                ]
+                            )
+                         ]
+                        )
+                        :Center(child:Text("No Data"));
+
+                      } else if (snapshot.hasError) {
+                        // return Text("${snapshot.error}");
+                        return Text("${snapshot.error}");
+                      }
+                      else
+                      {
+                        return CircularProgressIndicator();
+                      }
+
+                      // By default, show a loading spinner.
+
+                    },
+                  ),
+
                 ),
-                Text("Parent ID: 538939nks52",
-                    style: TextStyle(
-                      color: Colors.white,
-                    )),
+
+
                 SizedBox(
                   height: 15,
                 ),

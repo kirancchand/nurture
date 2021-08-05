@@ -11,7 +11,7 @@ class StudentDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('parent civil id: ${parents[0].emailid}');
+
     return Scaffold(
      backgroundColor: Colors.white,
       appBar: AppBar(
@@ -39,8 +39,25 @@ class StudentDetails extends StatelessWidget {
           ])),
         ),
       ),
-      body: Container(
-        child:StudentInfoList(data:data)
+      body: SingleChildScrollView(
+          child:Column(
+            children:[
+              StudentInfoList(data:data),
+              ListView.builder(
+                itemCount: parents.length,
+                shrinkWrap: true,
+                physics: ClampingScrollPhysics(),
+                itemBuilder: (context, int index) {
+                  // print(response[index].studentname);
+                  // data:response[index]
+                  return ParentsInfoList(data:parents);
+                },
+              )
+            ]
+          )
+
+
+
       )
 
       // ListView(children: [

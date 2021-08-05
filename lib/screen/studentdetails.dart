@@ -40,7 +40,7 @@ class StudentDetails extends StatelessWidget {
         ),
       ),
       body: Container(
-        child:StudentInfoList(data:data)
+        child:StudentInfoList(data:data,)
       )
 
       // ListView(children: [

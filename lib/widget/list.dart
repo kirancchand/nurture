@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:nurture/screen/studentdetails.dart';
 import 'package:nurture/common/constants.dart';
@@ -8,17 +9,11 @@ import 'package:nurture/model/paymenthistory.dart';
 import 'package:nurture/widget/student.dart';
 
 class StudentList extends StatelessWidget {
-  StudentList({
-    Key key,
-    this.data,
-    this.parents,
-    this.childrens
-  }) : super(key: key);
+  StudentList({Key key, this.data, this.parents, this.childrens})
+      : super(key: key);
   StudentResponse data;
   List<ParentResponse> parents;
   List<StudentResponse> childrens;
-
-
 
   // List<Response> data;
   @override
@@ -26,11 +21,11 @@ class StudentList extends StatelessWidget {
     debugPrint('parent civil id: ${parents[0].civilid}');
     return ListTile(
         leading: CircleAvatar(
-          radius: 25,
-          backgroundColor: Colors.pink.shade300,
-            backgroundImage:AssetImage("assets/images/chil.png")
-          // backgroundImage: AssetImage(img),
-        ),
+            radius: 25,
+            backgroundColor: Colors.pink.shade300,
+            backgroundImage: AssetImage("assets/images/chil.png")
+            // backgroundImage: AssetImage(img),
+            ),
         title: Text(data.studentname),
         isThreeLine: true,
         subtitle: Column(
@@ -46,7 +41,7 @@ class StudentList extends StatelessWidget {
         trailing: IconButton(
           onPressed: () {
             // print(childrens);
-            Get.to(StudentDetails(data:data,parents:parents));
+            Get.to(StudentDetails(data: data, parents: parents));
           },
           icon: Icon(
             Icons.keyboard_arrow_right,
@@ -57,11 +52,7 @@ class StudentList extends StatelessWidget {
 }
 
 class OutstandingPayment extends StatelessWidget {
-  OutstandingPayment({
-    Key key,
-    this.txt,
-    this.data
-  }) : super(key: key);
+  OutstandingPayment({Key key, this.txt, this.data}) : super(key: key);
   String txt;
   FeeResponse data;
   @override
@@ -81,16 +72,14 @@ class OutstandingPayment extends StatelessWidget {
       title: Text(data.studentname, style: TextStyle(color: Colors.grey)),
       selected: true,
       horizontalTitleGap: 1,
-      trailing: Text(data.dueamount.toString(), style: TextStyle(color: Colors.grey)),
+      trailing:
+          Text(data.dueamount.toString(), style: TextStyle(color: Colors.grey)),
     );
   }
 }
 
 class paymentHistoryList extends StatelessWidget {
-  paymentHistoryList({Key key,
-    this.txt,
-    this.data
-  }) : super(key: key);
+  paymentHistoryList({Key key, this.txt, this.data}) : super(key: key);
 
   String txt;
   PaymentHistoryResponse data;
@@ -100,141 +89,163 @@ class paymentHistoryList extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
       child: Container(
-       // height:  MediaQuery.of(context).size.height*.19,
+        // height:  MediaQuery.of(context).size.height*.19,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey, width: .5),
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Container(
-                    height: 99,
-                    width: MediaQuery.of(context).size.width * .65,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Row(
-                           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            // crossAxisAlignment: CrossAxisAlignment.,
-                            children: [
-                              Column(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                      // height: 99,
+                      // width: MediaQuery.of(context).size.width ,
+                      child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          // crossAxisAlignment: CrossAxisAlignment.,
+                          children: [
+                            Column(
                               //  mainAxisAlignment:
-                                //    MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Transaction Id",
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 12),
-                                  ),
-                                  SizedBox(
-                                    height: 8,
-                                  ),
-                                  Text(
-                                    "DateTime",
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 12),
-                                  ),
-                                  SizedBox(
-                                    height: 8,
-                                  ),
-                                  Text(
-                                    "Payment Id",
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 12),
-                                  ),
-                                  SizedBox(
-                                    height: 8,
-                                  ),
-                                  Text(
-                                    "Amount",
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 12),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(width: 45,),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    data.knettransactionid,
-                                    style: TextStyle(fontSize: 12),
-                                  ),
-                                  SizedBox(
-                                    height: 8,
-                                  ),
-                                  Text(
-                                      data.postdate,
-                                    style: TextStyle(fontSize: 12),
-                                  ),
-                                  SizedBox(
-                                    height: 8,
-                                  ),
-                                  Text(
-                                      data.paymentid,
-                                    style: TextStyle(fontSize: 12),
-                                  ),
-                                  SizedBox(
-                                    height: 8,
-                                  ),
-                                  Text(
-                                    data.amount.toString(),
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color:data.result=="Success"?kColorGreen:Colors.red,
-                                          //failed?
+                              //    MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Transaction Id",
+                                  style: TextStyle(
+                                      color: Colors.grey, fontSize: 12),
+                                ),
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  "DateTime",
+                                  style: TextStyle(
+                                      color: Colors.grey, fontSize: 12),
+                                ),
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  "Payment Id",
+                                  style: TextStyle(
+                                      color: Colors.grey, fontSize: 12),
+                                ),
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  "Amount",
+                                  style: TextStyle(
+                                      color: Colors.grey, fontSize: 12),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  data.knettransactionid,
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  data.postdate,
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  data.paymentid,
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  data.amount.toString(),
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: data.result == "Success"
+                                        ? kColorGreen
+                                        : Colors.red,
+                                    //failed?
 
-                                      //:Colors.red,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                    //:Colors.red,
+                                    fontWeight: FontWeight.bold,
                                   ),
-                                ],
-                              ),
-                            ],
-                          )
+                                ),
+                              ],
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  )),
+                  Expanded(
+                    child: SizedBox(
+                      height: 83,
+                      width: MediaQuery.of(context).size.width * .22,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          // failed?
+                          Icon(
+                            data.result == "Success"
+                                ? Icons.check_circle_outline
+                                : Icons.cancel_outlined,
+                            color: data.result == "Success"
+                                ? kColorGreen
+                                : Colors.red,
+                          ),
+                          //:Icon(
+                          //Icons.close_rounded,//lose_outlined,
+                          //color: Colors.red,
+                          // ),
+                          Container(
+                              height: 20,
+                              width: MediaQuery.of(context).size.width * .22,
+                              decoration: BoxDecoration(
+                                  color: data.result == "Success"
+                                      ? Colors.green[50]
+                                      : Colors.grey[100],
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Center(
+                                  child: Text(
+                                data.result == "Success"
+                                    ? "Download Receipt"
+                                    : data.result == "Cancelled"
+                                        ? "Cancelled"
+                                        : "Failed Transaction",
+                                style: TextStyle(
+                                    fontSize: 8.5,
+                                    color: data.result == "Success"
+                                        ? kColorGreen
+                                        : Colors.grey),
+                              )))
                         ],
                       ),
-                    )),
-                SizedBox(
-                  height: 83,
-                  width: MediaQuery.of(context).size.width * .22,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      // failed?
-                      Icon(
-                        data.result=="Success"?Icons.check_circle_outline:Icons.cancel_outlined,
-                        color: data.result=="Success"?kColorGreen:Colors.red,
-                      ),
-                      //:Icon(
-                      //Icons.close_rounded,//lose_outlined,
-                      //color: Colors.red,
-                      // ),
-                      Container(
-                          height: 20,
-                          width: MediaQuery.of(context).size.width * .22,
-                          decoration: BoxDecoration(
-                              color: data.result=="Success"?Colors.green[50]:Colors.grey[100],
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Center(
-                              child: Text(
-                                data.result=="Success"?"Download Receipt":data.result=="Cancelled"?"Cancelled":"Failed Transaction",
-                            style:
-                                TextStyle(fontSize: 8.5, color: data.result=="Success"?kColorGreen:Colors.grey),
-                          )))
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ],
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -269,101 +280,190 @@ class NotificationList extends StatelessWidget {
 }
 
 class StudentInfoList extends StatelessWidget {
-
-  StudentInfoList({Key key,this.data}) : super(key: key);
+  StudentInfoList({Key key, this.data,}) : super(key: key);
   StudentResponse data;
+ // ParentResponse data1;
+// List<ParentResponse> parentresponse;
 
   List<StudentResponse> studentresponse;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding:
-            const EdgeInsets.only(top: 25, left: 18, right: 18, bottom: 10),
-        child: Stack(children: [
-          Align(
-            child: Container(
-              height: MediaQuery.of(context).size.height * .61,
-              width: MediaQuery.of(context).size.width,
-            ),
-          ),
-          Positioned(
-            bottom: 0,
-            child: Container(
-                height: MediaQuery.of(context).size.height * .60,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.shade300, width: 1),
-                    borderRadius: BorderRadius.circular(10)),
-                child: Row(children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 20),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        txt("Name"),
-                        txt("Gender"),
-                        txt("Date of Birth"),
-                        txt("School Name"),
-                        txt("Grade"),
-                        txt("Academic Year"),
-                        txt("Nationality"),
-                        txt("Religion"),
-                        txt("Civil id"),
-                        txt("Civil idExpiry date"),
-                        txt("Passport Number"),
-                        txt("Address"),
-                      ],
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-
-                    children: [
-                      Text("Dfd"),
-                      Text("Male"),
-                      Text("29/05/2000"),
-                      Text("Al Jeel Al Jadeed"),
-                      Text("5"),
-                      Text("2021-2022"),
-                      Text("British"),
-                      Text("Muslim"),
-                      Text("432578"),
-                      Text("30/6/2022"),
-                      Text("74K13L57D"),
-                      Text("Kuwait")
-                    ],
-                  )
-                ])),
-          ),
-          Positioned(
-            left: 15,
-            top: 0,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: Container(
-                height: 20,
-                width: 83,
-                color: Colors.white,
-                child: Text(
-                  "Student info",
-                  style: TextStyle(color: kColorGreen),
+    return ListView(
+      children: [
+        Padding(
+            padding:
+                const EdgeInsets.only(top: 25, left: 18, right: 18, bottom: 10),
+            child: Stack(children: [
+              Align(
+                child: Container(
+                  height: MediaQuery.of(context).size.height * .61,
+                  width: MediaQuery.of(context).size.width,
                 ),
               ),
-            ),
-          ),
-        ]));
+              Positioned(
+                bottom: 0,
+                child: Container(
+                    height: MediaQuery.of(context).size.height * .60,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(color: Colors.grey.shade300, width: 1),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Row(children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15, right: 20),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            txt("Name"),
+                            txt("Gender"),
+                            txt("Date of Birth"),
+                            txt("School Name"),
+                            txt("Grade"),
+                            txt("Academic Year"),
+                            txt("Nationality"),
+                            txt("Religion"),
+                            txt("Civil id"),
+                            txt("Civil idExpiry date"),
+                            txt("Passport Number"),
+                            txt("Address"),
+                          ],
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      Flexible(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              data.studentname,
+                            ),
+                            Text("Male"),
+                            Text("29/05/2000"),
+                            Text("Al Jeel Al Jadeed"),
+                            Text("5"),
+                            Text("2021-2022"),
+                            Text("British"),
+                            Text("Muslim"),
+                            Text(data.civilid.toString()),
+                            Text("30/6/2022"),
+                            Text("74K13L57D"),
+                            Text("Kuwait")
+                          ],
+                        ),
+                      )
+                    ])),
+              ),
+              Positioned(
+                left: 15,
+                top: 0,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Container(
+                    height: 20,
+                    width: 83,
+                    color: Colors.white,
+                    child: Text(
+                      "Student info",
+                      style: TextStyle(color: kColorGreen),
+                    ),
+                  ),
+                ),
+              ),
+            ])),
+      Padding(
+            padding:
+                const EdgeInsets.only(top: 25, left: 18, right: 18, bottom: 10),
+            child: Stack(children: [
+              Align(
+                child: Container(
+                  height: MediaQuery.of(context).size.height * .61,
+                  width: MediaQuery.of(context).size.width,
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                child: Container(
+                    height: MediaQuery.of(context).size.height * .60,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(color: Colors.grey.shade300, width: 1),
+                      
+                        borderRadius: BorderRadius.circular(10)),
+                   child: Flexible(
+                     child: Padding(
+                       padding: const EdgeInsets.only(left: 15, right: 20),
+                       child: Column(
+                         mainAxisAlignment:MainAxisAlignment.spaceEvenly,
+                         children: [
+                           SizedBox(height: 20,),
+                           txt2("Name",""),
+                           txt2("CivilId", ""),
+                           txt2("MobilNumber", ""),
+                           txt2("Email id", ""),
+                            txt2("Date of Birth",""),
+                            
+                              txt2("Nationality",""),
+                              txt2("Religion",""),
+                              txt2("Civil id",""),
+                              txt2("Civil idExpiry date",""),
+                              txt2("Passport Number",""),
+                              txt2("Address",""),
+                         ],
+                       ),
+                     ),
+                   ),
+                   
+                    ),
+              ),
+              Positioned(
+                left: 15,
+                top: 0,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Container(
+                    height: 20,
+                    width: 83,
+                    color: Colors.white,
+                    child: Text(
+                      "Father info",
+                      style: TextStyle(color: kColorGreen),
+                    ),
+                  ),
+                ),
+              ),
+            ])),
+      ],
+    );
+  }
+  
+
+  Widget txt2(String t1,String t2) {
+    return Row(
+      children: [
+        Text(t1, style: TextStyle(color: Colors.grey),),
+        SizedBox(width: 50,),
+        Expanded(child: Text(t2)),
+      ],
+    );
   }
 
+
   Widget txt(String txta) {
-    return Text(
-      txta,
-      style: TextStyle(color: Colors.grey),
+    return Row(
+      children: [
+        Text(
+          txta,
+          style: TextStyle(color: Colors.grey),
+        ),
+      ],
     );
   }
 }
+
 
 class Installment extends StatelessWidget {
   Installment({

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:nurture/widget/list.dart';
 import 'package:nurture/common/constants.dart';
+import 'package:nurture/model/student.dart';
 
-class StudentDetails extends StatefulWidget {
-  const StudentDetails({ Key key }) : super(key: key);
+class StudentDetails extends StatelessWidget {
+  StudentDetails({ Key key,this.data,this.parents }) : super(key: key);
+  StudentResponse data;
+  List<ParentResponse> parents;
 
-  @override
-  _StudentDetailsState createState() => _StudentDetailsState();
-}
 
-class _StudentDetailsState extends State<StudentDetails> {
   @override
   Widget build(BuildContext context) {
+    debugPrint('parent civil id: ${parents[0].emailid}');
     return Scaffold(
      backgroundColor: Colors.white,
       appBar: AppBar(
@@ -39,17 +39,22 @@ class _StudentDetailsState extends State<StudentDetails> {
           ])),
         ),
       ),
-      body:  ListView(children: [
+      body: Container(
+        child:StudentInfoList(data:data)
+      )
 
-                  ListView.builder(
-                        itemCount: 5,
-                        shrinkWrap: true,
-                        physics: ClampingScrollPhysics(),
-                        itemBuilder: (context, int index) {
-                          return StudentInfoList();
-                        },
-                      ),
-      ],),
+      // ListView(children: [
+      //
+      //             ListView.builder(
+      //                   itemCount: 5,
+      //                   shrinkWrap: true,
+      //                   physics: ClampingScrollPhysics(),
+      //                   itemBuilder: (context, int index) {
+      //                     // print(studentResponse);
+      //                     return StudentInfoList();
+      //                   },
+      //                 ),
+      // ],),
       
     );
   }

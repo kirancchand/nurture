@@ -113,12 +113,12 @@ class paymentHistoryList extends StatelessWidget {
                       child: Column(
                         children: [
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             // crossAxisAlignment: CrossAxisAlignment.,
                             children: [
                               Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                              //  mainAxisAlignment:
+                                //    MainAxisAlignment.spaceAround,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
@@ -152,6 +152,7 @@ class paymentHistoryList extends StatelessWidget {
                                   ),
                                 ],
                               ),
+                              SizedBox(width: 45,),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -214,7 +215,7 @@ class paymentHistoryList extends StatelessWidget {
                           height: 20,
                           width: MediaQuery.of(context).size.width * .22,
                           decoration: BoxDecoration(
-                              color: data.result=="Success"?Colors.green[50]:Colors.grey[50],
+                              color: data.result=="Success"?Colors.green[50]:Colors.grey[100],
                               borderRadius: BorderRadius.circular(10)),
                           child: Center(
                               child: Text(

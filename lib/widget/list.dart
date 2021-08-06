@@ -423,7 +423,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
           shrinkWrap: true,
           physics: ClampingScrollPhysics(),
           itemBuilder: (context, int index) {
-            // print(studentResponse);
+
             return Parentlist(widget.parents);
           },
         ),

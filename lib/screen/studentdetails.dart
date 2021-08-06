@@ -44,7 +44,7 @@ class StudentDetails extends StatelessWidget {
         child:
         Column(
             children:[
-               Flexible(child: StudentInfoList(data:data)),
+               Flexible(child: StudentInfoList(data:data,parents:parents)),
              /*
               Expanded(
                 child:

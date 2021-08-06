@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:nurture/widget/buttons.dart';
 import 'package:nurture/widget/list.dart';
 import 'package:nurture/common/constants.dart';
+import 'package:nurture/service/api.dart';
+import 'package:nurture/model/paymentpending.dart';
 class PaymentPending extends StatefulWidget {
   const PaymentPending({Key key}) : super(key: key);
 
@@ -11,8 +13,14 @@ class PaymentPending extends StatefulWidget {
 
 class _PaymentPendingState extends State<PaymentPending> {
   var _valueChoose;
-
+  Api api = new Api();
   List listItem = ["Asim Muhammad", "Dana Muhammad", "Dalal Muhammad"];
+  Future<PaymentPendingResponseModel> getPayment;
+  @override
+  void initState() {
+    super.initState();
+    getPayment=api.getPendingPayment();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -146,14 +154,42 @@ class _PaymentPendingState extends State<PaymentPending> {
               padding: const EdgeInsets.only(left: 15, top: 15, right: 20),
               child:Column(
                 children: [
-                  ListView.builder(
-                    itemCount: 3,
-                    shrinkWrap: true,
-                    physics: ClampingScrollPhysics(),
-                    itemBuilder: (context, int index) {
-                      return Installment();
-                    },
+                  Container(
+                    child:FutureBuilder<PaymentPendingResponseModel>(
+                future: getPayment,
+                builder: (BuildContext context,
+                    AsyncSnapshot<PaymentPendingResponseModel> snapshot) {
+                  if (snapshot.hasData) {
+                    var response=snapshot.data?.response;
+
+                    // // data.response.length>0?
+                    // var response=[];
+                    return response.length>0?ListView.builder(
+                      itemCount: response.length,
+                      shrinkWrap: true,
+                      physics: ClampingScrollPhysics(),
+                      itemBuilder: (context, int index) {
+                        // print(response[index].studentname);
+                        // data:response[index]
+                        return Installment();
+                      },
+                    ):Center(child:Text("No Data"));
+
+                  } else if (snapshot.hasError) {
+                    // return Text("${snapshot.error}");
+                    return Text("${snapshot.error}");
+                  }
+                  else
+                  {
+                    return CircularProgressIndicator();
+                  }
+
+                  // By default, show a loading spinner.
+
+                },
+              ),
                   ),
+
                   Padding(
                     padding:
                     const EdgeInsets.symmetric(horizontal: 3, vertical: 10),

@@ -5,6 +5,7 @@ import 'package:nurture/model/fee.dart';
 import 'package:nurture/model/login_model.dart';
 import 'package:nurture/model/student.dart';
 import 'package:nurture/model/paymenthistory.dart';
+import 'package:nurture/model/paymentpending.dart';
 import 'package:nurture/common/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -70,7 +71,22 @@ class Api {
     }
   }
 
-
+  Future<PaymentPendingResponseModel> getPendingPayment() async {
+    // String url = "https://run.mocky.io/v3/10dbe39e-ba24-488b-af81-fe10fbc092a0";  // success
+    // String url = "https://run.mocky.io/v3/4e1f3524-732a-426c-881b-4ae567685de6";   //failed
+    // String url = "https://run.mocky.io/v3/c0586d5b-47fd-4c1b-8eae-277796c80ec6";
+    // String url = "https://run.mocky.io/v3/cdadde32-9982-459b-8d5d-8f1d687a9455";
+    var token=await getToken();
+    final queryParameters = "1375";
+    final response = await http.get(getUrl("getstudentfeedetails?studentId=${queryParameters}"),headers: {'Authorization': 'Bearer $token'});
+    // final response = await http.get(Uri.parse(url));
+  print(response.body);
+    if (response.statusCode == 200 || response.statusCode == 400) {
+      return PaymentPendingResponseModel.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Failed to load data!');
+    }
+  }
 
 
 }

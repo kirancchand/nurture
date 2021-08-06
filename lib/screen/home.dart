@@ -46,8 +46,8 @@ class _HomePageState extends State<Home> {
     // than having to individually change instances of widgets.
     return MaterialApp(
        theme: ThemeData(
-      // primarySwatch:Colors.green,
-        
+     //primarySwatch:Colors.green,
+      //  primaryColor: Colors.orange
       
       ),
       home: Scaffold(
@@ -96,7 +96,9 @@ class _HomePageState extends State<Home> {
       //     ],
       //   ),
       // ),
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar:
+      
+       BottomNavigationBar(
           //selectedIconTheme: IconThemeData(color: Colors.red),
           onTap: (index) {
             setState(() {
@@ -107,33 +109,40 @@ class _HomePageState extends State<Home> {
 
           currentIndex: pageIndex,
           type: BottomNavigationBarType.fixed,
-          selectedItemColor: Colors.greenAccent,
-          // backgroundColor: Colors.red,
+         selectedItemColor: Colors.greenAccent,
+          // backgroundColor: Colors.greenAccent,
+         // unselectedItemColor: Colors.yellow,
 
+           
           items: [
             BottomNavigationBarItem(
-                icon: Image.asset(
+              icon: Icon(Icons.home_outlined,size: 30,),
+               /* icon: Image.asset(
                 "assets/images/icons_png/Home.png",
-                ),
+                ),*/
                   label: ''
             ),
             BottomNavigationBarItem(
-                icon: Image.asset(
+              icon:Icon(Icons.monetization_on_outlined,size: 30,),
+               /* icon: Image.asset(
                   "assets/images/icons_png/PaymentPending.png",
-                ),
+                ),*/
                 label: ""),
             BottomNavigationBarItem(
-                icon: Image.asset(
+              icon: Icon(Icons.article_outlined,size: 30,),
+               /* icon: Image.asset(
                   "assets/images/icons_png/PaymentHistory.png",
-                ),
+                ),*/
                 label: ""),
             BottomNavigationBarItem(
-                icon: Image.asset(
+              icon:Icon(Icons.notifications_none_outlined,size: 30,),
+               /* icon: Image.asset(
                   "assets/images/icons_png/Notification.png",
-                ),
+                ),*/
                 label: "")
           ]),
           )// This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+ 
 }

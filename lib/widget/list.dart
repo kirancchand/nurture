@@ -47,14 +47,53 @@ class StudentList extends StatelessWidget {
             Icons.keyboard_arrow_right,
             color: Colors.green,
           ),
-        ));
+        ),
+        onTap: () {
+          Get.to(StudentDetails(data: data, parents: parents));
+        });
   }
 }
 
-class OutstandingPayment extends StatelessWidget {
+class OutstandingPayment extends StatefulWidget {
   OutstandingPayment({Key key, this.txt, this.data}) : super(key: key);
   String txt;
   FeeResponse data;
+  @override
+  _OutstandingPaymentState createState() => _OutstandingPaymentState();
+}
+
+class _OutstandingPaymentState extends State<OutstandingPayment> {
+  bool asim = true ;
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Checkbox(
+                    value: asim,
+                    onChanged: (value) {
+                      setState(() {
+                        this.asim = value;
+                      });
+                    },
+                    side: BorderSide(color: Colors.greenAccent),
+                    shape: CircleBorder(),
+                    activeColor: Colors.greenAccent,
+                  ),
+
+      title:
+          Text(widget.data.studentname, style: TextStyle(color:asim? Colors.greenAccent:Colors.grey)),
+      selected: true,
+      horizontalTitleGap: 1,
+      trailing: Text(widget.data.dueamount.toString(),
+          style: TextStyle(color:asim?Colors.greenAccent: Colors.grey)),
+    );
+  }
+}
+/*
+class OutstandingPaymentm extends StatelessWidget {
+  OutstandingPaymentm({Key key, this.txt, this.data}) : super(key: key);
+  String txt;
+  FeeResponse data;
+  bool asim = true;
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -77,7 +116,7 @@ class OutstandingPayment extends StatelessWidget {
     );
   }
 }
-
+*/
 class paymentHistoryList extends StatelessWidget {
   paymentHistoryList({Key key, this.txt, this.data}) : super(key: key);
 
@@ -279,12 +318,227 @@ class NotificationList extends StatelessWidget {
   }
 }
 
+class StudentInfoList extends StatefulWidget {
+  StudentInfoList({
+    Key key,
+    this.data,
+    this.parents,
+  }) : super(key: key);
+  StudentResponse data;
+  List<ParentResponse> parents;
+  @override
+  _StudentInfoListState createState() => _StudentInfoListState();
+}
+
+class _StudentInfoListState extends State<StudentInfoList> {
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: [
+        Padding(
+            padding:
+                const EdgeInsets.only(top: 25, left: 18, right: 18, bottom: 10),
+            child: Stack(children: [
+              Align(
+                child: Container(
+                  height: MediaQuery.of(context).size.height * .61,
+                  width: MediaQuery.of(context).size.width,
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                child: Container(
+                    height: MediaQuery.of(context).size.height * .60,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(color: Colors.grey.shade300, width: 1),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Row(children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15, right: 20),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            txt("Name"),
+                            txt("Gender"),
+                            txt("Date of Birth"),
+                            txt("School Name"),
+                            txt("Grade"),
+                            txt("Academic Year"),
+                            txt("Nationality"),
+                            txt("Religion"),
+                            txt("Civil id"),
+                            txt("Civil idExpiry date"),
+                            txt("Passport Number"),
+                            txt("Address"),
+                          ],
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      Flexible(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.data.studentname,
+                            ),
+                            Text("Male"),
+                            Text("29/05/2000"),
+                            Text("Al Jeel Al Jadeed"),
+                            Text("5"),
+                            Text("2021-2022"),
+                            Text("British"),
+                            Text("Muslim"),
+                            Text(widget.data.civilid.toString()),
+                            Text("30/6/2022"),
+                            Text("74K13L57D"),
+                            Text("Kuwait")
+                          ],
+                        ),
+                      )
+                    ])),
+              ),
+              Positioned(
+                left: 15,
+                top: 0,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Container(
+                    height: 20,
+                    width: 83,
+                    color: Colors.white,
+                    child: Text(
+                      "Student info",
+                      style: TextStyle(color: kColorGreen),
+                    ),
+                  ),
+                ),
+              ),
+            ])),
+        ListView.builder(
+          itemCount: 2,
+          shrinkWrap: true,
+          physics: ClampingScrollPhysics(),
+          itemBuilder: (context, int index) {
+            // print(studentResponse);
+            return Parentlist(widget.parents);
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget Parentlist(
+    List<ParentResponse> data,
+  ) {
+    return Column(
+      children: [
+        Padding(
+            padding:
+                const EdgeInsets.only(top: 25, left: 18, right: 18, bottom: 10),
+            child: Stack(children: [
+              Align(
+                child: Container(
+                  height: MediaQuery.of(context).size.height * .61,
+                  width: MediaQuery.of(context).size.width,
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                child: Container(
+                    height: MediaQuery.of(context).size.height * .60,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(color: Colors.grey.shade300, width: 1),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Row(children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15, right: 20),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            txt("Name"),
+                            txt("Gender"),
+                            txt("Date of Birth"),
+                            txt("School Name"),
+                            txt("Grade"),
+                            txt("Academic Year"),
+                            txt("Nationality"),
+                            txt("Religion"),
+                            txt("Civil id"),
+                            txt("Civil idExpiry date"),
+                            txt("Passport Number"),
+                            txt("Address"),
+                          ],
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("dfd"),
+                          Text("Male"),
+                          Text("29/05/2000"),
+                          Text("Al Jeel Al Jadeed"),
+                          Text("5"),
+                          Text("2021-2022"),
+                          Text("British"),
+                          Text("Muslim"),
+                          Text("432578"),
+                          Text("30/6/2022"),
+                          Text("74K13L57D"),
+                          Text("Kuwait")
+                        ],
+                      )
+                    ])),
+              ),
+              Positioned(
+                left: 15,
+                top: 0,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Container(
+                    height: 20,
+                    width: 83,
+                    color: Colors.white,
+                    child: Text(
+                      " Mother info",
+                      style: TextStyle(color: kColorGreen),
+                    ),
+                  ),
+                ),
+              ),
+            ])),
+      ],
+    );
+  }
+
+  Widget txt(String txta) {
+    return Row(
+      children: [
+        Text(
+          txta,
+          style: TextStyle(color: Colors.grey),
+        ),
+      ],
+    );
+  }
+}
+/*
 class StudentInfoList extends StatelessWidget {
   StudentInfoList({
     Key key,
     this.data,
+    this.parents,
   }) : super(key: key);
   StudentResponse data;
+  List<ParentResponse> parents;
   // ParentResponse data1;
 // List<ParentResponse> parentresponse;
 
@@ -376,37 +630,13 @@ class StudentInfoList extends StatelessWidget {
                 ),
               ),
             ])),
-
+       
       ],
     );
   }
 
-  Widget txt2(String t1, String t2) {
-    return Row(
-      children: [
-        Text(
-          t1,
-          style: TextStyle(color: Colors.grey),
-        ),
-        SizedBox(
-          width: 50,
-        ),
-        Expanded(child: Text(t2)),
-      ],
-    );
-  }
-
-  Widget txt(String txta) {
-    return Row(
-      children: [
-        Text(
-          txta,
-          style: TextStyle(color: Colors.grey),
-        ),
-      ],
-    );
-  }
-}
+ 
+*/
 
 class ParentsInfoList extends StatelessWidget {
   ParentsInfoList({Key key, this.data}) : super(key: key);
@@ -415,84 +645,89 @@ class ParentsInfoList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     debugPrint('parent civil id: ${data[1].emailid}');
-    return Padding(
-        padding:
-            const EdgeInsets.only(top: 25, left: 18, right: 18, bottom: 10),
-        child: Stack(children: [
-          Align(
-            child: Container(
-              height: MediaQuery.of(context).size.height * .61,
-              width: MediaQuery.of(context).size.width,
-            ),
-          ),
-          Positioned(
-            bottom: 0,
-            child: Container(
-                height: MediaQuery.of(context).size.height * .60,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.shade300, width: 1),
-                    borderRadius: BorderRadius.circular(10)),
-                child: Row(children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 20),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        txt("Name"),
-                        txt("Gender"),
-                        txt("Date of Birth"),
-                        txt("School Name"),
-                        txt("Grade"),
-                        txt("Academic Year"),
-                        txt("Nationality"),
-                        txt("Religion"),
-                        txt("Civil id"),
-                        txt("Civil idExpiry date"),
-                        txt("Passport Number"),
-                        txt("Address"),
-                      ],
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Dfd"),
-                      Text("Male"),
-                      Text("29/05/2000"),
-                      Text("Al Jeel Al Jadeed"),
-                      Text("5"),
-                      Text("2021-2022"),
-                      Text("British"),
-                      Text("Muslim"),
-                      Text("432578"),
-                      Text("30/6/2022"),
-                      Text("74K13L57D"),
-                      Text("Kuwait")
-                    ],
-                  )
-                ])),
-          ),
-          Positioned(
-            left: 15,
-            top: 0,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: Container(
-                height: 20,
-                width: 83,
-                color: Colors.white,
-                child: Text(
-                  "Student info",
-                  style: TextStyle(color: kColorGreen),
+    return Column(
+      children: [
+        Padding(
+            padding:
+                const EdgeInsets.only(top: 25, left: 18, right: 18, bottom: 10),
+            child: Stack(children: [
+              Align(
+                child: Container(
+                  height: MediaQuery.of(context).size.height * .61,
+                  width: MediaQuery.of(context).size.width,
                 ),
               ),
-            ),
-          ),
-        ]));
+              Positioned(
+                bottom: 0,
+                child: Container(
+                    height: MediaQuery.of(context).size.height * .60,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(color: Colors.grey.shade300, width: 1),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Row(children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15, right: 20),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            txt("Name"),
+                            txt("Gender"),
+                            txt("Date of Birth"),
+                            txt("School Name"),
+                            txt("Grade"),
+                            txt("Academic Year"),
+                            txt("Nationality"),
+                            txt("Religion"),
+                            txt("Civil id"),
+                            txt("Civil idExpiry date"),
+                            txt("Passport Number"),
+                            txt("Address"),
+                          ],
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Dfd"),
+                          Text("Male"),
+                          Text("29/05/2000"),
+                          Text("Al Jeel Al Jadeed"),
+                          Text("5"),
+                          Text("2021-2022"),
+                          Text("British"),
+                          Text("Muslim"),
+                          Text("432578"),
+                          Text("30/6/2022"),
+                          Text("74K13L57D"),
+                          Text("Kuwait")
+                        ],
+                      )
+                    ])),
+              ),
+              Positioned(
+                left: 15,
+                top: 0,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Container(
+                    height: 20,
+                    width: 83,
+                    color: Colors.white,
+                    child: Text(
+                      " Mother info",
+                      style: TextStyle(color: kColorGreen),
+                    ),
+                  ),
+                ),
+              ),
+            ])),
+      ],
+    );
   }
 
   Widget txt(String txta) {

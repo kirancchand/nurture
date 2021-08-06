@@ -39,11 +39,16 @@ class StudentDetails extends StatelessWidget {
           ])),
         ),
       ),
-      body:Container(
-        child:Column(
+      body:
+      Container(
+        child:
+        Column(
             children:[
+               Flexible(child: StudentInfoList(data:data)),
+             /*
               Expanded(
-                child:ListView.builder(
+                child:
+                ListView.builder(
                   itemCount:2,
                   shrinkWrap: true,
                   physics: ClampingScrollPhysics(),
@@ -52,7 +57,7 @@ class StudentDetails extends StatelessWidget {
                     return ParentsInfoList(data:parents);
                   },
                 ),
-              )
+              )*/
             ]
         )
 
@@ -70,7 +75,7 @@ class StudentDetails extends StatelessWidget {
             //     ]
             // )
 
-        )
+      //  )
 
 
         // children:[
@@ -108,7 +113,7 @@ class StudentDetails extends StatelessWidget {
       //                   },
       //                 ),
       // ],),
-      
+      )
     );
   }
 }

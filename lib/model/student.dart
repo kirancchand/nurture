@@ -58,6 +58,8 @@ class StudentResponse {
     studentnumber: json["studentnumber"] ?? "",
   );
 
+  String get civilid => null;
+
   Map<String, dynamic> toJson() => {
     "studentid": studentid,
     "studentname": studentname,

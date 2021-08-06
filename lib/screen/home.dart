@@ -44,7 +44,13 @@ class _HomePageState extends State<Home> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return Scaffold(
+    return MaterialApp(
+       theme: ThemeData(
+      // primarySwatch:Colors.green,
+        
+      
+      ),
+      home: Scaffold(
      // appBar: AppBar(
           // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
@@ -91,11 +97,11 @@ class _HomePageState extends State<Home> {
       //   ),
       // ),
       bottomNavigationBar: BottomNavigationBar(
-        //  selectedIconTheme: IconThemeData(color: Colors.red),
+          //selectedIconTheme: IconThemeData(color: Colors.red),
           onTap: (index) {
             setState(() {
               pageIndex = index;
-              //print(pageIndex);
+              print(pageIndex);
             });
           },
 
@@ -126,7 +132,8 @@ class _HomePageState extends State<Home> {
                   "assets/images/icons_png/Notification.png",
                 ),
                 label: "")
-          ]),// This trailing comma makes auto-formatting nicer for build methods.
+          ]),
+          )// This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

@@ -39,26 +39,62 @@ class StudentDetails extends StatelessWidget {
           ])),
         ),
       ),
-      body: SingleChildScrollView(
-          child:Column(
+      body:Container(
+        child:Column(
             children:[
-              StudentInfoList(data:data),
-              ListView.builder(
-                itemCount: parents.length,
-                shrinkWrap: true,
-                physics: ClampingScrollPhysics(),
-                itemBuilder: (context, int index) {
-                  // print(response[index].studentname);
-                  // data:response[index]
-                  return ParentsInfoList(data:parents);
-                },
+              Expanded(
+                child:ListView.builder(
+                  itemCount:2,
+                  shrinkWrap: true,
+                  physics: ClampingScrollPhysics(),
+                  itemBuilder: (context, int index) {
+                    // print(studentResponse);
+                    return ParentsInfoList(data:parents);
+                  },
+                ),
               )
             ]
-          )
+        )
+
+            // Stack(
+            //     children:[
+            //       ListView.builder(
+            //         itemCount:2,
+            //         shrinkWrap: true,
+            //         physics: ClampingScrollPhysics(),
+            //         itemBuilder: (context, int index) {
+            //           // print(studentResponse);
+            //           return ParentsInfoList(data:parents);
+            //         },
+            //       ),
+            //     ]
+            // )
+
+        )
 
 
+        // children:[
+        //   Expanded(child: StudentInfoList(data:data)),
+        //   Expanded(
+        //     child:ListView.builder(
+        //       itemCount:2,
+        //       shrinkWrap: true,
+        //       physics: ClampingScrollPhysics(),
+        //       itemBuilder: (context, int index) {
+        //         // print(studentResponse);
+        //         return ParentsInfoList(data:parents);
+        //       },
+        //     ),
+        //   )
+        // ]
 
-      )
+      // body: Container(
+      //   child:StudentInfoList(data:data),
+      //   // children:[
+      //   //   StudentInfoList(data:data),
+      //   //   ParentsInfoList(data:parents)
+      //   // ]
+      // )
 
       // ListView(children: [
       //

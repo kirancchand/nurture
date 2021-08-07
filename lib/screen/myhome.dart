@@ -23,10 +23,15 @@ class _MyHomeState extends State<MyHome> {
   Api api = new Api();
   Future<StudentResponseModel> getStudents;
   String parentName;
+  List childrens=[];
   @override
   void initState() {
     super.initState();
-    getStudents = api.getStudent();
+    getStudents = api.getStudent().then((student){
+      childrens=student.response.childrens;
+      return student;
+    });
+    print(getStudents);
   }
   @override
   Widget build(BuildContext context) {
@@ -99,7 +104,7 @@ class _MyHomeState extends State<MyHome> {
                             Stack(
                               children:[
                                 Text(
-                                  response.parents[0].emailid,
+                                  response.parents[0].name,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 25,
@@ -340,7 +345,7 @@ class _MyHomeState extends State<MyHome> {
                       color: kColorGreen)),
             )),
         onTap: () {
-          Get.toNamed('/contactinformation');
+          Get.toNamed('/contactinformation',arguments:childrens);
         });
   }
 }

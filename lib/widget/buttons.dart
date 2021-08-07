@@ -8,6 +8,7 @@ import 'package:nurture/model/login_model.dart';
 import 'package:get/get.dart';
 import 'package:nurture/common/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:nurture/model/contact.dart';
 
 List<Widget> loginButtons(
   formKey,
@@ -34,6 +35,7 @@ List<Widget> loginButtons(
             ),
           )),
       onTap: () async {
+
         LoginResponseModel data =
             await validateAndLogin(formKey, loginRequestModel);
         if (data.statuscode == "200") {
@@ -159,17 +161,33 @@ Widget payNowButtons() {
   );
 }
 
-Widget submitButtons() {
-  return Container(
-    height: 40,
-    width: 200,
-    decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16), color: kColorGreen),
-    child: Center(
-        child: Text(
-      "Submit",
-      style: TextStyle(color: Colors.white),
-    )),
+Widget submitButtons(formKey,studentContactRequestModel) {
+  return GestureDetector(
+      child:Container(
+        height: 40,
+        width: 200,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16), color: kColorGreen),
+              child: Center(
+                child: Text(
+                    "Submit",
+                style: TextStyle(color: Colors.white),
+              )),
+      ),
+      onTap: () async {
+        StudentContactResponseModel data = await validateAndSubmitContact(formKey, studentContactRequestModel);
+    if (data.statuscode == "200") {
+      toastFn(comment: data.message);
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('Username', "${data.response.Username}");
+      prefs.setString('access_token', "${data.response.access_token}");
+      print("DSFDS"+data.message);
+      print(data.response.access_token);
+      Get.toNamed("/home");
+    } else {
+      toastFn(comment: data.message);
+    }
+  },
   );
 }
 

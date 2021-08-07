@@ -63,7 +63,7 @@ class OutstandingPayment extends StatefulWidget {
 }
 
 class _OutstandingPaymentState extends State<OutstandingPayment> {
-  bool asim = true ;
+  bool asim = false ;
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -74,17 +74,17 @@ class _OutstandingPaymentState extends State<OutstandingPayment> {
                         this.asim = value;
                       });
                     },
-                    side: BorderSide(color: Colors.greenAccent),
+                    side: BorderSide(color: kColorGreen),
                     shape: CircleBorder(),
-                    activeColor: Colors.greenAccent,
+                    activeColor: kColorGreen,
                   ),
 
       title:
-          Text(widget.data.studentname, style: TextStyle(color:asim? Colors.greenAccent:Colors.grey)),
+          Text(widget.data.studentname, style: TextStyle(color:asim? kColorGreen:Colors.grey)),
       selected: true,
       horizontalTitleGap: 1,
       trailing: Text(widget.data.dueamount.toString(),
-          style: TextStyle(color:asim?Colors.greenAccent: Colors.grey)),
+          style: TextStyle(color:asim?kColorGreen: Colors.grey)),
     );
   }
 }

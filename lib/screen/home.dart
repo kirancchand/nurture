@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nurture/common/constants.dart';
 import 'package:nurture/config/controller.dart';
 import 'package:nurture/screen/paymenthistory.dart';
 import 'package:nurture/widget/list.dart';
@@ -109,7 +110,7 @@ class _HomePageState extends State<Home> {
 
           currentIndex: pageIndex,
           type: BottomNavigationBarType.fixed,
-         selectedItemColor: Colors.greenAccent,
+         selectedItemColor: kColorGreen,//Colors.greenAccent,
           // backgroundColor: Colors.greenAccent,
          // unselectedItemColor: Colors.yellow,
 

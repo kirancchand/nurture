@@ -4,6 +4,7 @@ import 'package:nurture/widget/list.dart';
 import 'package:nurture/common/constants.dart';
 import 'package:nurture/service/api.dart';
 import 'package:nurture/model/paymentpending.dart';
+
 class PaymentPending extends StatefulWidget {
   const PaymentPending({Key key}) : super(key: key);
 
@@ -14,22 +15,24 @@ class PaymentPending extends StatefulWidget {
 class _PaymentPendingState extends State<PaymentPending> {
   var _valueChoose;
   Api api = new Api();
-  List listItem = ["Asim Muhammad", "Dana Muhammad", "Dalal Muhammad"];
+  List listItem =
+     ["Asim Muhammad", "Dana Muhammad", "Dalal Muhammad"];
+  
+  
   Future<PaymentPendingResponseModel> getPayment;
   @override
   void initState() {
     super.initState();
-    getPayment=api.getPendingPayment();
+    getPayment = api.getPendingPayment();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: ListView(
-            children: [_header(), _installmentSection()],
+      children: [_header(), _installmentSection()],
     ));
   }
-
 
   Widget _header() {
     return Stack(
@@ -62,7 +65,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                   height: 17,
                 ),
                 Container(
-                 // height: MediaQuery.of(context).size.height * .137,
+                  // height: MediaQuery.of(context).size.height * .137,
                   width: MediaQuery.of(context).size.width * .85,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6),
@@ -86,28 +89,28 @@ class _PaymentPendingState extends State<PaymentPending> {
                           ),
                           Center(
                               child: DropdownButton(
-                                isExpanded: true,
-                                icon: Icon(
-                                  Icons.keyboard_arrow_down_outlined,
-                                  color: Colors.greenAccent,
-                                ),
-                                value: _valueChoose,
-                                onChanged: (newValue) {
-                                  setState(() {
-                                    _valueChoose = newValue;
-                                  });
-                                },
-                                items: listItem.map((valueItem) {
-                                  return DropdownMenuItem(
-                                    value: valueItem,
-                                    child: Text(valueItem),
-                                  );
-                                }).toList(),
-                              ))
+                            isExpanded: true,
+                            icon: Icon(
+                              Icons.keyboard_arrow_down_outlined,
+                              color: Colors.greenAccent,
+                            ),
+                            value: _valueChoose,
+                            onChanged: (newValue) {
+                              setState(() {
+                                _valueChoose = newValue;
+                              });
+                            },
+                            items: listItem.map((valueItem) {
+                              return DropdownMenuItem(
+                                value: valueItem,
+                                child: Text(valueItem),
+                              );
+                            }).toList(),
+                          ))
                           // DropdownButtonFormField(items: items)
                         ],
                       )
-                    /*
+                      /*
        TextFormField(
         decoration: InputDecoration(
           labelText: "Student",
@@ -116,7 +119,7 @@ class _PaymentPendingState extends State<PaymentPending> {
       ),
 */
 
-                  ),
+                      ),
                 )
               ],
             ),
@@ -145,85 +148,79 @@ class _PaymentPendingState extends State<PaymentPending> {
             height: 5,
           ),
           Container(
-           // height: MediaQuery.of(context).size.height * .70,
+            // height: MediaQuery.of(context).size.height * .70,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: Colors.grey.shade300)),
             child: Padding(
-              padding: const EdgeInsets.only(left: 15, top: 15, right: 20),
-              child:Column(
-                children: [
-                  Container(
-                    child:FutureBuilder<PaymentPendingResponseModel>(
-                future: getPayment,
-                builder: (BuildContext context,
-                    AsyncSnapshot<PaymentPendingResponseModel> snapshot) {
-                  if (snapshot.hasData) {
-                    var response=snapshot.data?.response;
+                padding: const EdgeInsets.only(left: 15, top: 15, right: 20),
+                child: Column(
+                  children: [
+                    Container(
+                      child: FutureBuilder<PaymentPendingResponseModel>(
+                        future: getPayment,
+                        builder: (BuildContext context,
+                            AsyncSnapshot<PaymentPendingResponseModel>
+                                snapshot) {
+                          if (snapshot.hasData) {
+                            var response = snapshot.data?.response;
 
-                    // // data.response.length>0?
-                    // var response=[];
-                    return response.length>0?ListView.builder(
-                      itemCount: response.length,
-                      shrinkWrap: true,
-                      physics: ClampingScrollPhysics(),
-                      itemBuilder: (context, int index) {
-                        // print(response[index].studentname);
-                        // data:response[index]
-                        return Installment();
-                      },
-                    ):Center(child:Text("No Data"));
+                            // // data.response.length>0?
+                            // var response=[];
+                            return response.length > 0
+                                ? ListView.builder(
+                                    itemCount: response.length,
+                                    shrinkWrap: true,
+                                    physics: ClampingScrollPhysics(),
+                                    itemBuilder: (context, int index) {
+                                      // print(response[index].studentname);
+                                      // data:response[index]
+                                      return Installment();
+                                    },
+                                  )
+                                : Center(child: Text("No Data"));
+                          } else if (snapshot.hasError) {
+                            // return Text("${snapshot.error}");
+                            return Text("${snapshot.error}");
+                          } else {
+                            return CircularProgressIndicator();
+                          }
 
-                  } else if (snapshot.hasError) {
-                    // return Text("${snapshot.error}");
-                    return Text("${snapshot.error}");
-                  }
-                  else
-                  {
-                    return CircularProgressIndicator();
-                  }
-
-                  // By default, show a loading spinner.
-
-                },
-              ),
-                  ),
-
-                  Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 3, vertical: 10),
-                    child: Divider(),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Total",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
+                          // By default, show a loading spinner.
+                        },
                       ),
-                      Text(
-                        "500 KD",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 3, vertical: 10),
+                      child: Divider(),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Total",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  Center(
-                    child:payNowButtons(),
-                  ),
-                  SizedBox(height:20)
-                ],
-              )
-
-            ),
-
+                        Text(
+                          "500 KD",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                    Center(
+                      child: payNowButtons(),
+                    ),
+                    SizedBox(height: 20)
+                  ],
+                )),
           ),
-
         ],
       ),
     );
@@ -323,6 +320,5 @@ class _PaymentPendingState extends State<PaymentPending> {
   //     style: TextStyle(color: isSelected ? Colors.red : Colors.grey),
   //   );
   // }
-
 
 }

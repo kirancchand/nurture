@@ -77,8 +77,6 @@ List<Widget> otpInputs(loginRequestModel) {
   ];
 }
 
-
-
 List<Widget> pinInputs(loginRequestModel) {
   return <Widget>[
     Row(
@@ -97,59 +95,187 @@ List<Widget> pinInputs(loginRequestModel) {
       validator: PinFieldValidator.validate,
       onSaved: (String value) => loginRequestModel.Username = value,
     ),
-    
     SizedBox(
       height: 35,
     )
   ];
 }
 
-
 List<Widget> contactReqInputs(studentContactRequestModel) {
   return <Widget>[
     Row(
       children: [
         Text(
-          "Sign in",
-          style: TextStyle(fontSize: 25),
+          " Contact Information",
+          //  style: TextStyle(fontSize: 25),
         ),
       ],
     ),
-    TextFormField(
-      key: Key('studentname'),
-      decoration: InputDecoration(
-          labelText: ' Enter Username',
-          enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey[300])),
-          labelStyle: TextStyle(color: Colors.grey[400])),
-      validator: EmailFieldValidator.validate,
-      initialValue: "G-0000001035",
-      onSaved: (String value) => studentContactRequestModel.studentname = value,
+    Padding(
+      padding: const EdgeInsets.only(top: 8, bottom: 8),
+      child: TextFormField(
+        key: Key('studentname'),
+        decoration: InputDecoration(
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey[200]),
+                borderRadius: BorderRadius.circular(8)),
+            hintText: "full name",
+            hintStyle: TextStyle(color: Colors.grey)),
+        validator: EmailFieldValidator.validate,
+        // initialValue: "G-0000001035",
+        onSaved: (String value) =>
+            studentContactRequestModel.studentname = value,
+      ),
     ),
-    TextFormField(
-      key: Key('studentemail'),
-      decoration: InputDecoration(
-          labelText: 'Enter Password',
-          enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey[300])),
-          labelStyle: TextStyle(color: Colors.grey[400])),
-      obscureText: true,
-      initialValue: "P@ssword1",
-      validator: PasswordFieldValidator.validate,
-      onSaved: (String value) => studentContactRequestModel.studentemail = value,
+    Padding(
+      padding: const EdgeInsets.only(top: 8, bottom: 8),
+      child: TextFormField(
+        key: Key('studentemail'),
+        decoration: InputDecoration(
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey[200]),
+                borderRadius: BorderRadius.circular(8)),
+            hintText: "Email",
+            hintStyle: TextStyle(color: Colors.grey)),
+        //obscureText: true,
+        // initialValue: "P@ssword1",
+        validator: PasswordFieldValidator.validate,
+        onSaved: (String value) =>
+            studentContactRequestModel.studentemail = value,
+      ),
+    ),
+    Padding(
+      padding: const EdgeInsets.only(top: 8, bottom: 8),
+      child: TextFormField(
+        key: Key('studentphonenumber'),
+        decoration: InputDecoration(
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey[200]),
+                borderRadius: BorderRadius.circular(8)),
+            hintText: "Phone number",
+            hintStyle: TextStyle(color: Colors.grey)),
+        validator: PasswordFieldValidator.validate,
+        onSaved: (String value) =>
+            studentContactRequestModel.studentphonenumber = value,
+      ),
     ),
     SizedBox(
-      height: 35,
+      height: 10,
     ),
+    Row(
+      children: [
+        Text("  What is the issue about?"),
+      ],
+    ),
+    Padding(
+      padding: const EdgeInsets.only(top: 8, bottom: 8),
+      child: TextFormField(
+        key: Key('studentissuesubject'),
+        decoration: InputDecoration(
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey[200]),
+                borderRadius: BorderRadius.circular(8)),
+            hintText: "Subject",
+            hintStyle: TextStyle(color: Colors.grey)),
+        validator: PasswordFieldValidator.validate,
+        onSaved: (String value) =>
+            studentContactRequestModel.studentissuesubject = value,
+      ),
+    ),
+    Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text("  Tell us more..."),
+        Text(
+          "0/1500",
+          style: TextStyle(color: Colors.grey),
+        ),
+      ],
+    ),
+    SizedBox(
+      height: 10,
+    ),
+    Container(
+        height: 200,
+        width: double.infinity,
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey[300]),
+            borderRadius: BorderRadius.circular(8)),
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: TextFormField(
+            key: Key('studentinquiry'),
+            decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: "Please enter your inquiry.....",
+                hintStyle: TextStyle(color: Colors.grey)),
+            validator: PasswordFieldValidator.validate,
+            onSaved: (String value) =>
+                studentContactRequestModel.studentinquiry = value,
+          ),
+        )),
+    SizedBox(
+      height: 10,
+    ),
+    Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Text(
+          "Add Attachment",
+          style: TextStyle(
+            color: kColorGreen,
+          ),
+        ),
+      ],
+    ),
+    SizedBox(height: 31),
+
+    /* Container(
+                                height: 200,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.grey[300]),
+                                    borderRadius: BorderRadius.circular(8)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8),
+                                  child: TextFormField(
+                                    key: Key('studentinquiry'),
+                                    decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        enabledBorder: OutlineInputBorder(
+                                           borderSide: BorderSide(color: Colors.grey[200]),
+                                         borderRadius: BorderRadius.circular(8)),
+                                        hintText: "Please enter your inquiry.....",
+                                        hintStyle:TextStyle(color: Colors.grey)
+                                    ),
+                                    validator: PasswordFieldValidator.validate,
+                                    onSaved: (String value) => studentContactRequestModel.studentinquiry = value,
+                                  ),
+                                )),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(
+                                  "Add Attachment",
+                                  style: TextStyle(
+                                    color: kColorGreen,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 31),*/
   ];
 }
 
 
 // List<Widget> contactInputs(studentContactRequestModel) {
-//   var _valueChoose;
-//   return <Widget>[
-//     // TextFormField(
-//     //   key: Key('username'),
+  // var _valueChoose;
+  // return <Widget>[
+     // TextFormField(
+     //   key: Key('username'),
 //     //   decoration: InputDecoration(
 //     //       labelText: ' Enter Username',
 //     //       enabledBorder: UnderlineInputBorder(
@@ -171,9 +297,9 @@ List<Widget> contactReqInputs(studentContactRequestModel) {
 //     //   validator: PasswordFieldValidator.validate,
 //     //   onSaved: (String value) => studentContactRequestModel.Password = value,
 //     // ),
-//     ListView(
-//       children: [
-//         DropdownButton(
+ //    ListView(
+   //    children: [
+     //    DropdownButton(
 //           isExpanded: true,
 //           icon: Icon(
 //             Icons.keyboard_arrow_down_outlined,
@@ -324,4 +450,4 @@ List<Widget> contactReqInputs(studentContactRequestModel) {
 //       height: 35,
 //     ),
 //   ];
-// }
+// } 

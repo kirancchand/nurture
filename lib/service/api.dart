@@ -91,6 +91,15 @@ class Api {
 
   Future<StudentContactResponseModel> submitContactRequest(StudentContactRequestModel studentContactRequestModel) async {
     print(studentContactRequestModel.toJson());
+    var stud={
+                "statuscode": "200",
+                "response": {
+                  "access_token": "G4WuNVe5c-vN8cybn7KUXkALKfRkOhDCGKjYFwS1XDpW6O57thAdzdFIRewFXe_vTtOrw5kdYmylHwIEEVxyDfEWIMvmwx7_bVYHmw-TISIWEf7_y34KviTxDzkLXqysj00oydbC75eglOy9GN_39E1QrtlfXispKyvMAcNHqBVzIkTBgQVLeydrMgUIKdSchz8cGhIBrbxb4qw8d8Go3dywTYgc7b3ZVZdTezT0IT8dt-1gCsja9MNlo-hbntaCBxNksGc75RLXcftVxHJXdppKl9XN05qwYFllKK2aY7zJQXlLsohPtFAfUHkXlzHWDquZtybj3CpjCfzwr1cK-qxRw1EtLm1X_9lvVx6s3vKhstVgv2cWqKbnZ2rjIVgEaO2RJvmjfw65scEtxAkPBOctgQjqX43L-xpd-Mjra02iH7dOdzM3kxoLq1Q_jbiyX1SFHRYYYu0O1jR7pGAeCjTusqS07-QUQyHjfNvLsk918fcAtRCyKGFsx8OT9odtt6VHf3B1lNT1RNQ101mHcg",
+                },
+                "message": "Success"
+              };
+    return StudentContactResponseModel.fromJson(stud);
+    // print(studentContactRequestModel.toJson());
     // String url = "https://run.mocky.io/v3/10dbe39e-ba24-488b-af81-fe10fbc092a0";  // success
     // String url = "https://run.mocky.io/v3/4e1f3524-732a-426c-881b-4ae567685de6";   //failed
     // String url = "https://run.mocky.io/v3/c0586d5b-47fd-4c1b-8eae-277796c80ec6";

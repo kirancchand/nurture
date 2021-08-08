@@ -4,6 +4,8 @@ import 'package:nurture/service/api.dart';
 import 'package:nurture/model/login_model.dart';
 import 'package:nurture/widget/spinner.dart';
 import 'package:nurture/model/contact.dart';
+import 'dart:developer' as developer;
+import 'dart:convert';
 
 bool validateAndSave(formKey) {
   final FormState form = formKey.currentState;
@@ -34,6 +36,32 @@ Future<LoginResponseModel> validateAndLogin(formKey,loginRequestModel) async {
   }
   else{
     return LoginResponseModel();
+  }
+
+  // if (validateAndSave(formKey)) {
+  //   final String userId = await api.signInWithEmailAndPassword(email,password);
+  //   return userId;
+  // }
+  // else{
+  //   return "";
+  // }
+
+}
+
+
+
+Future<StudentContactResponseModel> validateAndSubmitContactReq(formKey,studentContactRequestModel) async {
+
+  Api api = new Api();
+  if (validateAndSave(formKey)) {
+    showSpinner();
+    StudentContactResponseModel data = await api.submitContactRequest(studentContactRequestModel);
+    print(data.message);
+    hideSpinner();
+    return data;
+  }
+  else{
+    return StudentContactResponseModel();
   }
 
   // if (validateAndSave(formKey)) {

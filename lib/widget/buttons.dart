@@ -35,7 +35,6 @@ List<Widget> loginButtons(
             ),
           )),
       onTap: () async {
-
         LoginResponseModel data =
             await validateAndLogin(formKey, loginRequestModel);
         if (data.statuscode == "200") {
@@ -162,6 +161,7 @@ Widget payNowButtons() {
 }
 
 Widget submitButtons(formKey,studentContactRequestModel) {
+  debugPrint("studentContactRequestModel");
   return GestureDetector(
       child:Container(
         height: 40,
@@ -176,21 +176,60 @@ Widget submitButtons(formKey,studentContactRequestModel) {
       ),
       onTap: () async {
         StudentContactResponseModel data = await validateAndSubmitContact(formKey, studentContactRequestModel);
-    if (data.statuscode == "200") {
-      toastFn(comment: data.message);
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('Username', "${data.response.Username}");
-      prefs.setString('access_token', "${data.response.access_token}");
-      print("DSFDS"+data.message);
-      print(data.response.access_token);
-      Get.toNamed("/home");
-    } else {
-      toastFn(comment: data.message);
-    }
+    // if (data.statuscode == "200") {
+    //   toastFn(comment: data.message);
+    //   SharedPreferences prefs = await SharedPreferences.getInstance();
+    //   prefs.setString('Username', "${data.response.Username}");
+    //   prefs.setString('access_token', "${data.response.access_token}");
+    //   print("DSFDS"+data.message);
+    //   print(data.response.access_token);
+    //   Get.toNamed("/home");
+    // } else {
+    //   toastFn(comment: data.message);
+    // }
   },
   );
 }
 
+
+
+List<Widget> contactReqButton(
+    formKey,
+    studentContactRequestModel,
+    ) {
+  return <Widget>[
+
+    GestureDetector(
+      child: Container(
+          height: 40,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(6),
+            gradient: LinearGradient(
+              colors: kColorGradiant,
+            ),
+          ),
+          child: Center(
+            child: Text(
+              "Sign In",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
+            ),
+          )),
+      onTap: () async {
+        StudentContactResponseModel data = await validateAndSubmitContactReq(formKey, studentContactRequestModel);
+        if (data.statuscode == "200") {
+          toastFn(comment: data.message);
+          Get.toNamed("/home");
+        } else {
+          toastFn(comment: data.message);
+        }
+      },
+    ),
+  ];
+}
 
 Widget confirmButtons() {
   return Container(

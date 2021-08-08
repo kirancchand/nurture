@@ -105,6 +105,44 @@ List<Widget> pinInputs(loginRequestModel) {
 }
 
 
+List<Widget> contactReqInputs(studentContactRequestModel) {
+  return <Widget>[
+    Row(
+      children: [
+        Text(
+          "Sign in",
+          style: TextStyle(fontSize: 25),
+        ),
+      ],
+    ),
+    TextFormField(
+      key: Key('studentname'),
+      decoration: InputDecoration(
+          labelText: ' Enter Username',
+          enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey[300])),
+          labelStyle: TextStyle(color: Colors.grey[400])),
+      validator: EmailFieldValidator.validate,
+      initialValue: "G-0000001035",
+      onSaved: (String value) => studentContactRequestModel.studentname = value,
+    ),
+    TextFormField(
+      key: Key('studentemail'),
+      decoration: InputDecoration(
+          labelText: 'Enter Password',
+          enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey[300])),
+          labelStyle: TextStyle(color: Colors.grey[400])),
+      obscureText: true,
+      initialValue: "P@ssword1",
+      validator: PasswordFieldValidator.validate,
+      onSaved: (String value) => studentContactRequestModel.studentemail = value,
+    ),
+    SizedBox(
+      height: 35,
+    ),
+  ];
+}
 
 
 // List<Widget> contactInputs(studentContactRequestModel) {

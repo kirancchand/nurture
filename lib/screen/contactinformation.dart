@@ -66,27 +66,31 @@ class _ContactInformationState extends State<ContactInformation> {
         ),
       ),
       body: 
-         Padding(
-           padding: const EdgeInsets.all(20),
-           child:Container(
-             child:Form(
-               key: formKey,
-               child: Center(
-                 child: Column(
-                   mainAxisAlignment: MainAxisAlignment.center,
-                   children: <Widget>[
-                     Column(
-                         children:contactReqInputs(studentContactRequestModel)
+    ListView(
+           children: [
+             Padding(
+               padding: const EdgeInsets.all(20),
+               child:Container(
+                 child:Form(
+                   key: formKey,
+                   child: Center(
+                     child: Column(
+                       mainAxisAlignment: MainAxisAlignment.center,
+                       children: <Widget>[
+                         Column(
+                             children:contactReqInputs(studentContactRequestModel)
+                         ),
+                         Column(
+                             children:contactReqButton(formKey,studentContactRequestModel)
+                         )
+                       ],
                      ),
-                     Column(
-                         children:contactReqButton(formKey,studentContactRequestModel)
-                     )
-                   ],
+                   ),
                  ),
-               ),
-             ),
-           )
+               )
 
+             ),
+           ],
          ),
       
     )

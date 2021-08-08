@@ -3,6 +3,7 @@ class PaymentPendingResponseModel {
   final String statuscode;
   final List<PaymentPendingResponse> response;
   final String message;
+  
 
   PaymentPendingResponseModel({this.statuscode,this.response, this.message});
 

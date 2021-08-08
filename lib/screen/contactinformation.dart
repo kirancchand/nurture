@@ -36,7 +36,7 @@ class _ContactInformationState extends State<ContactInformation> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("${widget.childrens[0].studentname}");
+    // debugPrint("${widget.childrens[0].studentname}");
     return Spinner(
     child:Scaffold(
       backgroundColor: Colors.white,
@@ -77,6 +77,33 @@ class _ContactInformationState extends State<ContactInformation> {
                      child: Column(
                        mainAxisAlignment: MainAxisAlignment.center,
                        children: <Widget>[
+                         DropdownButton(
+                           isExpanded: true,
+                           icon: Icon(
+                             Icons.keyboard_arrow_down_outlined,
+                             color: kColorGreen,
+                           ),
+                           value: studentContactRequestModel.studentid,
+                           hint:Align(
+                             alignment: Alignment.centerLeft,
+                             child: Text(
+                               "Select Student",
+                               style: TextStyle(color: Colors.grey),
+                             ),
+                           ),
+                           onChanged: (newValue) {
+                             setState(() {
+                               // _valueChoose = newValue;
+                               studentContactRequestModel.studentid=newValue;
+                             });
+                           },
+                           items: widget.childrens.map((valueItem) {
+                             return DropdownMenuItem(
+                               value: valueItem.studentid,
+                               child: Text(valueItem.studentname),
+                             );
+                           }).toList(),
+                         ),
                          Column(
                              children:contactReqInputs(studentContactRequestModel)
                          ),

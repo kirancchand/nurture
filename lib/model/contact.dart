@@ -36,6 +36,7 @@ class StudentContactResponse {
 }
 
 class StudentContactRequestModel {
+  int studentid;
   String studentname;
   String studentemail;
   String studentphonenumber;
@@ -43,6 +44,7 @@ class StudentContactRequestModel {
   String studentinquiry;
 
   StudentContactRequestModel({
+    this.studentid,
     this.studentname,
     this.studentemail,
     this.studentphonenumber,
@@ -54,6 +56,7 @@ class StudentContactRequestModel {
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> map = {
+      'studentid': studentid,
       'studentname': studentname.trim(),
       'studentemail': studentemail.trim(),
       'studentphonenumber': studentphonenumber.trim(),

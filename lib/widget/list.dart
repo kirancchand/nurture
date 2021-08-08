@@ -64,15 +64,15 @@ class OutstandingPayment extends StatefulWidget {
 }
 
 class _OutstandingPaymentState extends State<OutstandingPayment> {
-  bool asim = false ;
+  bool selectedStudent = false ;
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: Checkbox(
-                    value: asim,
+                    value: selectedStudent,
                     onChanged: (value) {
                       setState(() {
-                        this.asim = value;
+                        this.selectedStudent = value;
                       });
                     },
                     side: BorderSide(color: kColorGreen),
@@ -81,11 +81,11 @@ class _OutstandingPaymentState extends State<OutstandingPayment> {
                   ),
 
       title:
-          Text(widget.data.studentname, style: TextStyle(color:asim? kColorGreen:Colors.grey)),
+          Text(widget.data.studentname, style: TextStyle(color:selectedStudent? kColorGreen:Colors.grey)),
       selected: true,
       horizontalTitleGap: 1,
       trailing: Text(widget.data.dueamount.toString(),
-          style: TextStyle(color:asim?kColorGreen: Colors.grey)),
+          style: TextStyle(color:selectedStudent?kColorGreen: Colors.grey)),
     );
   }
 }

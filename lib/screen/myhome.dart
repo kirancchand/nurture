@@ -31,7 +31,6 @@ class _MyHomeState extends State<MyHome> {
       childrens=student.response.childrens;
       return student;
     });
-    print(getStudents);
   }
   @override
   Widget build(BuildContext context) {
@@ -250,6 +249,7 @@ class _MyHomeState extends State<MyHome> {
             child: Text("Total Fee Outstanding"),
           ),
           Container(
+
             child:FutureBuilder<FeeResponseModel>(
               future: api.getFee(),
               builder: (BuildContext context,
@@ -266,7 +266,7 @@ class _MyHomeState extends State<MyHome> {
                     shrinkWrap: true,
                     physics: ClampingScrollPhysics(),
                     itemBuilder: (context, int index) {
-                      // print(response[index].studentname);
+                      print(response);
                       total=total+response[index].dueamount;
                       return OutstandingPayment(data:response[index]);
                     },

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+//import 'package:nurture/model/contact.dart';
+import 'package:nurture/model/student.dart';
 import 'package:nurture/widget/buttons.dart';
 import 'package:nurture/widget/list.dart';
 import 'package:nurture/common/constants.dart';
@@ -6,7 +9,8 @@ import 'package:nurture/service/api.dart';
 import 'package:nurture/model/paymentpending.dart';
 
 class PaymentPending extends StatefulWidget {
-  const PaymentPending({Key key}) : super(key: key);
+  PaymentPending({Key key}) : super(key: key);
+  List<StudentResponse> childrens = Get.arguments;
 
   @override
   _PaymentPendingState createState() => _PaymentPendingState();
@@ -14,16 +18,17 @@ class PaymentPending extends StatefulWidget {
 
 class _PaymentPendingState extends State<PaymentPending> {
   var _valueChoose;
+  // value: studentContactRequestModel.studentid,
+  // StudentContactRequestModel studentContactRequestModel;
   Api api = new Api();
-  List listItem =
-     ["Asim Muhammad", "Dana Muhammad", "Dalal Muhammad"];
-  
-  
+  List listItem = ["Asim Muhammad", "Dana Muhammad", "Dalal Muhammad"];
+
   Future<PaymentPendingResponseModel> getPayment;
   @override
   void initState() {
     super.initState();
     getPayment = api.getPendingPayment();
+    //studentContactRequestModel = new StudentContactRequestModel();
   }
 
   @override
@@ -94,16 +99,21 @@ class _PaymentPendingState extends State<PaymentPending> {
                               Icons.keyboard_arrow_down_outlined,
                               color: Colors.greenAccent,
                             ),
-                            value: _valueChoose,
+                            value:
+                                _valueChoose, //studentContactRequestModel.studentid,
                             onChanged: (newValue) {
                               setState(() {
-                                _valueChoose = newValue;
+                               _valueChoose = newValue;
+                                // studentContactRequestModel.studentid = newValue;
                               });
                             },
-                            items: listItem.map((valueItem) {
+                        // items: widget.childrens.map((valueItem) 
+                            items: listItem.map((valueItem){
                               return DropdownMenuItem(
+                               // value: valueItem.studentid,
                                 value: valueItem,
-                                child: Text(valueItem),
+                                 child: Text(valueItem),
+                              //  child: Text(valueItem.studentname),
                               );
                             }).toList(),
                           ))

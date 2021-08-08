@@ -64,31 +64,31 @@ class OutstandingPayment extends StatefulWidget {
 }
 
 class _OutstandingPaymentState extends State<OutstandingPayment> {
-  bool selectedStudent = false ;
+  bool selectedStudent = false;
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: Checkbox(
-                    value: selectedStudent,
-                    onChanged: (value) {
-                      setState(() {
-                        this.selectedStudent = value;
-                      });
-                    },
-                    side: BorderSide(color: kColorGreen),
-                    shape: CircleBorder(),
-                    activeColor: kColorGreen,
-                  ),
-
-      title:
-          Text(widget.data.studentname, style: TextStyle(color:selectedStudent? kColorGreen:Colors.grey)),
+        value: selectedStudent,
+        onChanged: (value) {
+          setState(() {
+            this.selectedStudent = value;
+          });
+        },
+        side: BorderSide(color: kColorGreen),
+        shape: CircleBorder(),
+        activeColor: kColorGreen,
+      ),
+      title: Text(widget.data.studentname,
+          style: TextStyle(color: selectedStudent ? kColorGreen : Colors.grey)),
       selected: true,
       horizontalTitleGap: 1,
       trailing: Text(widget.data.dueamount.toString(),
-          style: TextStyle(color:selectedStudent?kColorGreen: Colors.grey)),
+          style: TextStyle(color: selectedStudent ? kColorGreen : Colors.grey)),
     );
   }
 }
+
 /*
 class OutstandingPaymentm extends StatelessWidget {
   OutstandingPaymentm({Key key, this.txt, this.data}) : super(key: key);
@@ -293,7 +293,7 @@ class paymentHistoryList extends StatelessWidget {
 }
 
 class NotificationList extends StatelessWidget {
-  NotificationList({Key key,this.data}) : super(key: key);
+  NotificationList({Key key, this.data}) : super(key: key);
   NotificationResponse data;
   @override
   Widget build(BuildContext context) {
@@ -424,7 +424,6 @@ class _StudentInfoListState extends State<StudentInfoList> {
           shrinkWrap: true,
           physics: ClampingScrollPhysics(),
           itemBuilder: (context, int index) {
-
             return Parentlist(widget.parents);
           },
         ),
@@ -443,14 +442,16 @@ class _StudentInfoListState extends State<StudentInfoList> {
             child: Stack(children: [
               Align(
                 child: Container(
-                  height: MediaQuery.of(context).size.height * .61,
+                  height:210,
+               // height: MediaQuery.of(context).size.height * .61,
                   width: MediaQuery.of(context).size.width,
                 ),
               ),
               Positioned(
                 bottom: 0,
                 child: Container(
-                    height: MediaQuery.of(context).size.height * .60,
+                  height:200,
+                   // height: MediaQuery.of(context).size.height * .60,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                         border:
@@ -464,16 +465,10 @@ class _StudentInfoListState extends State<StudentInfoList> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             txt("Name"),
-                            txt("Gender"),
-                            txt("Date of Birth"),
-                            txt("School Name"),
-                            txt("Grade"),
-                            txt("Academic Year"),
                             txt("Nationality"),
-                            txt("Religion"),
                             txt("Civil id"),
                             txt("Civil idExpiry date"),
-                            txt("Passport Number"),
+                            txt("Email address"),
                             txt("Address"),
                           ],
                         ),
@@ -483,17 +478,11 @@ class _StudentInfoListState extends State<StudentInfoList> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("dfd"),
-                          Text("Male"),
-                          Text("29/05/2000"),
-                          Text("Al Jeel Al Jadeed"),
-                          Text("5"),
-                          Text("2021-2022"),
+                          Text(widget.parents[0].name),
                           Text("British"),
-                          Text("Muslim"),
-                          Text("432578"),
+                          Text(widget.parents[0].civilid),
                           Text("30/6/2022"),
-                          Text("74K13L57D"),
+                          Text(widget.parents[0].emailid),
                           Text("Kuwait")
                         ],
                       )
@@ -509,7 +498,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                     width: 83,
                     color: Colors.white,
                     child: Text(
-                      " Mother info",
+                      " Father info",
                       style: TextStyle(color: kColorGreen),
                     ),
                   ),

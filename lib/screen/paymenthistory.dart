@@ -11,14 +11,39 @@ class PaymentHistory extends StatefulWidget {
 }
 
 class _PaymentHistoryState extends State<PaymentHistory> {
-  var _valueChoose;
   List listItem = ["2021-2022", "2020-2021", "2019-2020"];
   Api api = new Api();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       appBar: AppBar(
+         elevation: 0,
+        centerTitle: true,
+      /*/ titleSpacing: 60,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.keyboard_arrow_left,
+            color: Colors.white,
+          ),
+        ),*/
+        toolbarHeight: 80,
+        title: Text("Payment history ",
+            style: TextStyle(
+              color: Colors.white,
+            )),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(colors: [
+              Color(0xff43CEA2),
+                Color(0xff279DD4),
+          ])),
+        ),
+      ),
       body: ListView(children: [
-        Header(),
+       // Header(),
         Container(
           child:FutureBuilder<PaymentHistoryResponseModel>(
             future: api.getPaymentHistory(),
@@ -58,7 +83,7 @@ class _PaymentHistoryState extends State<PaymentHistory> {
       
     );
   }
-  
+ /* 
   Widget Header() {
     return Stack(
       children: [
@@ -123,7 +148,6 @@ class _PaymentHistoryState extends State<PaymentHistory> {
                                 value: listItem[0],
                                 onChanged: (newValue) {
                                   setState(() {
-                                    _valueChoose = newValue;
                                   });
                             },
                             items: listItem.map((valueItem) {
@@ -145,5 +169,5 @@ class _PaymentHistoryState extends State<PaymentHistory> {
       ],
     );
   }
-
+*/
 }

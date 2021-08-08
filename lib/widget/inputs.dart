@@ -113,50 +113,82 @@ List<Widget> contactReqInputs(studentContactRequestModel) {
     ),
     Padding(
       padding: const EdgeInsets.only(top: 8, bottom: 8),
-      child: TextFormField(
-        key: Key('studentname'),
-        decoration: InputDecoration(
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.grey[200]),
-                borderRadius: BorderRadius.circular(8)),
-            hintText: "full name",
-            hintStyle: TextStyle(color: Colors.grey)),
-        validator: EmailFieldValidator.validate,
-        // initialValue: "G-0000001035",
-        onSaved: (String value) =>
-            studentContactRequestModel.studentname = value,
+      child: Container(
+        height: 50,
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey[300]),
+            borderRadius: BorderRadius.circular(8)),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 15),
+          child: TextFormField(
+            key: Key('studentname'),
+            minLines: 1,
+            maxLines: 10,
+            keyboardType: TextInputType.multiline,
+
+            decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: "full name",
+                hintStyle: TextStyle(color: Colors.grey)),
+            validator: EmailFieldValidator.validate,
+            // initialValue: "G-0000001035",
+            onSaved: (String value) =>
+                studentContactRequestModel.studentname = value,
+          ),
+        ),
       ),
     ),
     Padding(
       padding: const EdgeInsets.only(top: 8, bottom: 8),
-      child: TextFormField(
-        key: Key('studentemail'),
-        decoration: InputDecoration(
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.grey[200]),
-                borderRadius: BorderRadius.circular(8)),
-            hintText: "Email",
-            hintStyle: TextStyle(color: Colors.grey)),
-        //obscureText: true,
-        // initialValue: "P@ssword1",
-        validator: PasswordFieldValidator.validate,
-        onSaved: (String value) =>
-            studentContactRequestModel.studentemail = value,
+      child: Container(
+        height: 50,
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey[300]),
+            borderRadius: BorderRadius.circular(8)),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 15),
+          child: TextFormField(
+            key: Key('studentemail'),
+            minLines: 1,
+            maxLines: 10,
+            keyboardType: TextInputType.multiline,
+
+            decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: "Email",
+                hintStyle: TextStyle(color: Colors.grey)),
+            //obscureText: true,
+            // initialValue: "P@ssword1",
+            validator: PasswordFieldValidator.validate,
+            onSaved: (String value) =>
+                studentContactRequestModel.studentemail = value,
+          ),
+        ),
       ),
     ),
     Padding(
       padding: const EdgeInsets.only(top: 8, bottom: 8),
-      child: TextFormField(
-        key: Key('studentphonenumber'),
-        decoration: InputDecoration(
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.grey[200]),
-                borderRadius: BorderRadius.circular(8)),
-            hintText: "Phone number",
-            hintStyle: TextStyle(color: Colors.grey)),
-        validator: PasswordFieldValidator.validate,
-        onSaved: (String value) =>
-            studentContactRequestModel.studentphonenumber = value,
+      child: Container(
+        height: 50,
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey[300]),
+            borderRadius: BorderRadius.circular(8)),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 15),
+          child: TextFormField(
+            key: Key('studentphonenumber'),
+            minLines: 1,
+            maxLines: 10,
+            keyboardType: TextInputType.multiline,
+            decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: "Phone number",
+                hintStyle: TextStyle(color: Colors.grey)),
+            validator: PasswordFieldValidator.validate,
+            onSaved: (String value) =>
+                studentContactRequestModel.studentphonenumber = value,
+          ),
+        ),
       ),
     ),
     SizedBox(
@@ -169,17 +201,27 @@ List<Widget> contactReqInputs(studentContactRequestModel) {
     ),
     Padding(
       padding: const EdgeInsets.only(top: 8, bottom: 8),
-      child: TextFormField(
-        key: Key('studentissuesubject'),
-        decoration: InputDecoration(
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.grey[200]),
-                borderRadius: BorderRadius.circular(8)),
-            hintText: "Subject",
-            hintStyle: TextStyle(color: Colors.grey)),
-        validator: PasswordFieldValidator.validate,
-        onSaved: (String value) =>
-            studentContactRequestModel.studentissuesubject = value,
+      child: Container(
+        height: 50,
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey[300]),
+            borderRadius: BorderRadius.circular(8)),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 15),
+          child: TextFormField(
+            key: Key('studentissuesubject'),
+            minLines: 1,
+            maxLines: 10,
+            keyboardType: TextInputType.multiline,
+            decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: "Subject",
+                hintStyle: TextStyle(color: Colors.grey)),
+            validator: PasswordFieldValidator.validate,
+            onSaved: (String value) =>
+                studentContactRequestModel.studentissuesubject = value,
+          ),
+        ),
       ),
     ),
     Row(
@@ -204,6 +246,9 @@ List<Widget> contactReqInputs(studentContactRequestModel) {
         child: Padding(
           padding: const EdgeInsets.all(8),
           child: TextFormField(
+            minLines: 1,
+            maxLines: 10,
+            keyboardType: TextInputType.multiline,
             key: Key('studentinquiry'),
             decoration: InputDecoration(
                 border: InputBorder.none,

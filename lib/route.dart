@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nurture/screen/confirmpayment.dart';
 // import 'package:ki/Screens/Home/Home.dart';
 // import 'package:ki/Screens/users/signup.dart';
 import 'package:nurture/screen/login.dart';
@@ -17,7 +18,7 @@ class Routes {
     "/home": (context) => Home(title: 'Flutter Demo Home Pages'),
     "/paymentpending": (context) => PaymentPending(),
     "/contactinformation": (context) => ContactInformation(),
-    "/confirmpayment": (context) => ContactInformation(),
+    "/confirmpayment": (context) => ConfirmPayment(),
   };
   static Map<String, WidgetBuilder> getAll() => _routes;
 }

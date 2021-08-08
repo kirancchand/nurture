@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:nurture/widget/buttons.dart';
 import 'package:nurture/widget/list.dart';
+import 'package:get/get.dart';
+import 'package:nurture/model/fee.dart';
 
 class ConfirmPayment extends StatefulWidget {
-  const ConfirmPayment({Key key}) : super(key: key);
+  ConfirmPayment({Key key}) : super(key: key);
+  List childrens = Get.arguments;
+
 
   @override
   _ConfirmPaymentState createState() => _ConfirmPaymentState();
 }
 
 class _ConfirmPaymentState extends State<ConfirmPayment> {
+  double total=0.0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,12 +70,16 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                         ],
                       ),
                       ListView.builder(
-                          itemCount: 3,
+                          itemCount: widget.childrens.length,
                           shrinkWrap: true,
                           physics: ClampingScrollPhysics(),
                           itemBuilder: (context, int index) {
-                            return paymentList();
+                            print(widget.childrens[index].studentname);
+                            total=total+widget.childrens[index].dueamount;
+                            return paymentList(data:widget.childrens[index]);
                           }),
+
+
                           
                     ],
                                  ),
@@ -91,7 +100,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                           Text("Total Amount"),
-                          Text("1700 KD", style: TextStyle(fontWeight: FontWeight.bold), )
+                          Text("${total} KD", style: TextStyle(fontWeight: FontWeight.bold), )
                         ],),
                         SizedBox(height: 20,),
                         confirmButtons(),

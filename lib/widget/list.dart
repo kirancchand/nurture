@@ -782,8 +782,8 @@ Widget list_txt(String txt, {bool isSelected = false}) {
 }
 
 class paymentList extends StatefulWidget {
-  const paymentList({Key key}) : super(key: key);
-
+  paymentList({Key key,this.data}) : super(key: key);
+  dynamic data;
   @override
   _paymentListState createState() => _paymentListState();
 }
@@ -800,8 +800,8 @@ class _paymentListState extends State<paymentList> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Asim Muhammad"),
-              Text("300 KD"),
+              Text(widget.data.studentname),
+              Text(widget.data.dueamount.toString()),
             ],
           ),
           Row(

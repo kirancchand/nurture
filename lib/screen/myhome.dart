@@ -22,8 +22,32 @@ class MyHome extends StatefulWidget {
 class _MyHomeState extends State<MyHome> {
   Api api = new Api();
   Future<StudentResponseModel> getStudents;
+  Future<FeeResponseModel> getFee;
+  List<String> _texts = [
+    "InduceSmile.com",
+    "Flutter.io",
+    "google.com",
+    "youtube.com",
+    "yahoo.com",
+    "gmail.com"
+  ];
   String parentName;
   List childrens=[];
+  bool selectedStudent = false ;
+  List _selectedStudent = [];
+
+  void _onCategorySelected(bool selected, student) {
+    if (selected == true) {
+      setState(() {
+        _selectedStudent.add(student);
+      });
+    } else {
+      setState(() {
+        _selectedStudent.remove(student);
+
+      });
+    }
+  }
   @override
   void initState() {
     super.initState();
@@ -31,6 +55,7 @@ class _MyHomeState extends State<MyHome> {
       childrens=student.response.childrens;
       return student;
     });
+    getFee = api.getFee();
   }
   @override
   Widget build(BuildContext context) {
@@ -249,42 +274,112 @@ class _MyHomeState extends State<MyHome> {
             child: Text("Total Fee Outstanding"),
           ),
           Container(
+            child:Form(
+              child:Column(
 
-            child:FutureBuilder<FeeResponseModel>(
-              future: api.getFee(),
-              builder: (BuildContext context,
-                  AsyncSnapshot<FeeResponseModel> snapshot) {
-                if (snapshot.hasData) {
-                  var response=snapshot.data?.response;
+                children:[
+                  FutureBuilder<FeeResponseModel>(
+                future: getFee,
+                builder: (BuildContext context,
+                    AsyncSnapshot<FeeResponseModel> snapshot) {
+                  if (snapshot.hasData) {
+                    var response=snapshot.data?.response;
 
 
-                  // print(data[0]);
-                  // // data.response.length>0?
-                  // var response=[];
-                  return response.length>0?ListView.builder(
-                    itemCount: response.length,
-                    shrinkWrap: true,
-                    physics: ClampingScrollPhysics(),
-                    itemBuilder: (context, int index) {
-                      print(response);
-                      total=total+response[index].dueamount;
-                      return OutstandingPayment(data:response[index]);
-                    },
-                  ):Center(child:Text("No Data"));
+                    // print(data[0]);
+                    // // data.response.length>0?
+                    // var response=[];
+                    return response.length>0?ListView.builder(
+                      itemCount: response.length,
+                      shrinkWrap: true,
+                      physics: ClampingScrollPhysics(),
+                      itemBuilder: (context, int index) {
+                        print(response);
+                        total=total+response[index].dueamount;
+                        // return OutstandingPayment(data:response[index]);
+                        return ListTile(
+                            leading:Checkbox(
+                          value: _selectedStudent
+                              .contains(response[index]),
+                          onChanged: (bool selected) {
+                            _onCategorySelected(selected,
+                                response[index]);
+                          },
+                              side: BorderSide(color: kColorGreen),
+                              shape: CircleBorder(),
+                              activeColor: kColorGreen,
+                        ),
 
-                } else if (snapshot.hasError) {
-                  // return Text("${snapshot.error}");
-                  return Text("${snapshot.error}");
-                }
-                else
-                {
-                  return CircularProgressIndicator();
-                }
+                            title: Text(response[index].studentname, style: TextStyle(color:selectedStudent? kColorGreen:Colors.grey)),
+                            trailing: Text(response[index].dueamount.toString(),
+                                style: TextStyle(color:selectedStudent?kColorGreen: Colors.grey)),
+                        );
 
-                // By default, show a loading spinner.
+                        //   ListTile(
+                        //   leading: Checkbox(
+                        //     value: selectedStudent,
+                        //     onChanged: (value) {
+                        //       setState(() {
+                        //         this.selectedStudent = value;
+                        //       });
+                        //     },
+                        //     side: BorderSide(color: kColorGreen),
+                        //     shape: CircleBorder(),
+                        //     activeColor: kColorGreen,
+                        //   ),
+                        //
+                        //   title:
+                        //   Text(response[index].studentname, style: TextStyle(color:selectedStudent? kColorGreen:Colors.grey)),
+                        //   selected: true,
+                        //   horizontalTitleGap: 1,
+                        //   trailing: Text(response[index].dueamount.toString(),
+                        //       style: TextStyle(color:selectedStudent?kColorGreen: Colors.grey)),
+                        // );
+                      },
+                    ):Center(child:Text("No Data"));
 
-              },
+                  } else if (snapshot.hasError) {
+                    // return Text("${snapshot.error}");
+                    return Text("${snapshot.error}");
+                  }
+                  else
+                  {
+                    return CircularProgressIndicator();
+                  }
+
+                  // By default, show a loading spinner.
+
+                },
+              ),
+                Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [Text("Total"), Text(total.toString()+"KD")],
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed('/confirmpayment',arguments:_selectedStudent);
+                  },
+                  child: Container(
+                    height: 50,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.vertical(
+                            bottom: Radius.circular(15)), //circular(15),
+                        color: kColorGreen),
+                    child: Center(
+                      child: Text("Pay Now",
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                )
+              ]
+              )
             ),
+
             // child:ListView.builder(
             //   itemCount: 3,
             //   shrinkWrap: true,
@@ -294,31 +389,7 @@ class _MyHomeState extends State<MyHome> {
             //   },
             // ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text("Total"), Text(total.toString()+"KD")],
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              Get.to(ConfirmPayment());
-            },
-            child: Container(
-              height: 50,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.vertical(
-                      bottom: Radius.circular(15)), //circular(15),
-                  color: kColorGreen),
-              child: Center(
-                child: Text("Pay Now",
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold)),
-              ),
-            ),
-          )
+
         ],
       ),
     );

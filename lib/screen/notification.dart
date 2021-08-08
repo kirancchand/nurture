@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nurture/widget/list.dart';
 import 'package:nurture/common/constants.dart';
-
+import 'package:nurture/service/api.dart';
+import 'package:nurture/model/notification.dart';
 class Notifications extends StatefulWidget {
   const Notifications({ Key key }) : super(key: key);
 
@@ -12,21 +13,58 @@ class Notifications extends StatefulWidget {
 class _NotificationsState extends State<Notifications> {
   var _valueChoose;
 
+
   List listItem = ["All", "Asim Muhammad", "Dana Muhammad", "Dalal Muhammad"];
+  Api api = new Api();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body:  ListView(children: [
         Header(),
-         ListView.builder(
-                        itemCount: 5,
-                        shrinkWrap: true,
-                        physics: ClampingScrollPhysics(),
-                        itemBuilder: (context, int index) {
-                          return NotificationList();
-                        },
-                      ),
+        Container(
+          child:FutureBuilder<NotificationResponseModel>(
+            future: api.getNotification(),
+            builder: (BuildContext context,
+                AsyncSnapshot<NotificationResponseModel> snapshot) {
+              if (snapshot.hasData) {
+                var response=snapshot.data?.response;
+                // print(data[0]);
+                // // data.response.length>0?
+                // var response=[];
+                return response.length>0?ListView.builder(
+                  itemCount: response.length,
+                  shrinkWrap: true,
+                  physics: ClampingScrollPhysics(),
+                  itemBuilder: (context, int index) {
+                    print(response[index].notificationid);
+                    // data:response[index]
+                    return NotificationList(data:response[index]);
+                  },
+                ):Center(child:Text("No Data"));
+
+              } else if (snapshot.hasError) {
+                // return Text("${snapshot.error}");
+                return Text("${snapshot.error}");
+              }
+              else
+              {
+                return CircularProgressIndicator();
+              }
+
+              // By default, show a loading spinner.
+
+            },
+          ),
+        ),
+         // ListView.builder(
+         //                itemCount: 5,
+         //                shrinkWrap: true,
+         //                physics: ClampingScrollPhysics(),
+         //                itemBuilder: (context, int index) {
+         //                  return NotificationList();
+         //                },
+         //              ),
       ],),
       
     );

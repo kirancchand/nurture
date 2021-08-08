@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:nurture/model/notification.dart';
 import 'package:nurture/screen/studentdetails.dart';
 import 'package:nurture/common/constants.dart';
 import 'package:nurture/model/student.dart';
@@ -292,8 +293,8 @@ class paymentHistoryList extends StatelessWidget {
 }
 
 class NotificationList extends StatelessWidget {
-  const NotificationList({Key key}) : super(key: key);
-
+  NotificationList({Key key,this.data}) : super(key: key);
+  NotificationResponse data;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -304,7 +305,7 @@ class NotificationList extends StatelessWidget {
               minVerticalPadding: 3,
               title: Padding(
                 padding: const EdgeInsets.only(bottom: 10),
-                child: Text("Uniform Available"),
+                child: Text(data.notificationid.toString()),
               ),
               subtitle: Text(
                   "Lorem ipsumdolor sit amet consetetur sadipsing elitr,sed diam nonumy eirmod tempor invidunt ut")),

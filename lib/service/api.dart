@@ -6,6 +6,7 @@ import 'package:nurture/model/login_model.dart';
 import 'package:nurture/model/student.dart';
 import 'package:nurture/model/paymenthistory.dart';
 import 'package:nurture/model/paymentpending.dart';
+import 'package:nurture/model/notification.dart';
 import 'package:nurture/common/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:nurture/model/contact.dart';
@@ -111,7 +112,22 @@ class Api {
     // }
   }
 
+  Future<NotificationResponseModel> getNotification() async {
+    var token=await getToken();
+    final queryParameters = "1";
+    final response = await http.get(getUrl("getnotifications?studentid=${queryParameters}"),headers: {
+      'Authorization': 'Bearer $token',
+    });
+    print(response.body);
+    if (response.statusCode == 200 || response.statusCode == 400) {
+      return NotificationResponseModel.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Failed to load data!');
+    }
+  }
+
 }
+
 
 
 

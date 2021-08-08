@@ -26,8 +26,6 @@ class _PaymentHistoryState extends State<PaymentHistory> {
                 AsyncSnapshot<PaymentHistoryResponseModel> snapshot) {
               if (snapshot.hasData) {
                 var response=snapshot.data?.response;
-
-                print("fsdfd");
                 // print(data[0]);
                 // // data.response.length>0?
                 // var response=[];

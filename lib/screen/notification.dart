@@ -13,7 +13,7 @@ class Notifications extends StatefulWidget {
 }
 
 class _NotificationsState extends State<Notifications> {
-  String _valueChoose = '';
+  String _valueChoose;
   Api api = new Api();
   List childrens = [];
   Future<StudentResponseModel> getStudents;
@@ -66,11 +66,9 @@ class _NotificationsState extends State<Notifications> {
                         )
                       : Center(child: Text("No Data"));
                 } else if (snapshot.hasError) {
-                  // return Text("${snapshot.error}");
-                  if (_valueChoose == '') {
-                    return CircularProgressIndicator();
-                  } else
-                    return Text("${snapshot.error}");
+                  return CircularProgressIndicator();
+
+                  //return Text("${snapshot.error}");
                 } else {
                   return CircularProgressIndicator();
                 }
@@ -158,7 +156,7 @@ class _NotificationsState extends State<Notifications> {
                                       Icons.keyboard_arrow_down_outlined,
                                       color: kColorGreen,
                                     ),
-                                    value: childrens[0].studentid.toString(),
+                                    value: _valueChoose,
                                     onChanged: (newValue) {
                                       setState(() {
                                         _valueChoose = newValue;

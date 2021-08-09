@@ -1,75 +1,97 @@
 import 'package:flutter/material.dart';
-import 'package:nurture/widget/list.dart';
 import 'package:nurture/common/constants.dart';
-import 'package:nurture/service/api.dart';
 import 'package:nurture/model/notification.dart';
+import 'package:nurture/model/student.dart';
+import 'package:nurture/service/api.dart';
+import 'package:nurture/widget/list.dart';
+
 class Notifications extends StatefulWidget {
-  const Notifications({ Key key }) : super(key: key);
+  const Notifications({Key key}) : super(key: key);
 
   @override
   _NotificationsState createState() => _NotificationsState();
 }
 
 class _NotificationsState extends State<Notifications> {
-  var _valueChoose;
-
-
-  List listItem = ["All", "Asim Muhammad", "Dana Muhammad", "Dalal Muhammad"];
+  String _valueChoose = '';
   Api api = new Api();
+  List childrens = [];
+  Future<StudentResponseModel> getStudents;
+
+  // List listItem = ["All", "Asim Muhammad", "Dana Muhammad", "Dalal Muhammad"];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getStudents = api.getStudent().then((student) {
+      childrens = student.response.childrens;
+      // for (int i = 0; i < childrens.length; i++)
+      //   print(childrens[i].studentname);
+      // print('000');
+      setState(() {
+        _valueChoose = childrens[0].studentid.toString();
+      });
+
+      return student;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:  ListView(children: [
-        Header(),
-        Container(
-          child:FutureBuilder<NotificationResponseModel>(
-            future: api.getNotification(),
-            builder: (BuildContext context,
-                AsyncSnapshot<NotificationResponseModel> snapshot) {
-              if (snapshot.hasData) {
-                var response=snapshot.data?.response;
-                // print(data[0]);
-                // // data.response.length>0?
-                // var response=[];
-                return response.length>0?ListView.builder(
-                  itemCount: response.length,
-                  shrinkWrap: true,
-                  physics: ClampingScrollPhysics(),
-                  itemBuilder: (context, int index) {
-                    print(response[index].notificationid);
-                    // data:response[index]
-                    return NotificationList(data:response[index]);
-                  },
-                ):Center(child:Text("No Data"));
+      body: ListView(
+        children: [
+          Header(),
+          Container(
+            child: FutureBuilder<NotificationResponseModel>(
+              future: api.getNotification(_valueChoose),
+              builder: (BuildContext context,
+                  AsyncSnapshot<NotificationResponseModel> snapshot) {
+                if (snapshot.hasData) {
+                  var response = snapshot.data?.response;
+                  // print(response[1].message);
+                  // // data.response.length>0?
+                  // var response=[];
+                  return response.length > 0
+                      ? ListView.builder(
+                          itemCount: response.length,
+                          shrinkWrap: true,
+                          physics: ClampingScrollPhysics(),
+                          itemBuilder: (context, int index) {
+                            print(response[index].notificationid);
+                            // data:response[index]
+                            return NotificationList(data: response[index]);
+                          },
+                        )
+                      : Center(child: Text("No Data"));
+                } else if (snapshot.hasError) {
+                  // return Text("${snapshot.error}");
+                  if (_valueChoose == '') {
+                    return CircularProgressIndicator();
+                  } else
+                    return Text("${snapshot.error}");
+                } else {
+                  return CircularProgressIndicator();
+                }
 
-              } else if (snapshot.hasError) {
-                // return Text("${snapshot.error}");
-                return Text("${snapshot.error}");
-              }
-              else
-              {
-                return CircularProgressIndicator();
-              }
-
-              // By default, show a loading spinner.
-
-            },
+                // By default, show a loading spinner.
+              },
+            ),
           ),
-        ),
-         // ListView.builder(
-         //                itemCount: 5,
-         //                shrinkWrap: true,
-         //                physics: ClampingScrollPhysics(),
-         //                itemBuilder: (context, int index) {
-         //                  return NotificationList();
-         //                },
-         //              ),
-      ],),
-      
+          // ListView.builder(
+          //                itemCount: 5,
+          //                shrinkWrap: true,
+          //                physics: ClampingScrollPhysics(),
+          //                itemBuilder: (context, int index) {
+          //                  return NotificationList();
+          //                },
+          //              ),
+        ],
+      ),
     );
   }
-   
+
   Widget Header() {
     return Stack(
       children: [
@@ -83,7 +105,7 @@ class _NotificationsState extends State<Notifications> {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                 Color(0xff43CEA2),
+                Color(0xff43CEA2),
                 Color(0xff279DD4),
               ],
             ),
@@ -101,7 +123,7 @@ class _NotificationsState extends State<Notifications> {
                   height: 17,
                 ),
                 Container(
-                 // height: MediaQuery.of(context).size.height * .137,
+                  // height: MediaQuery.of(context).size.height * .137,
                   width: MediaQuery.of(context).size.width * .85,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6),
@@ -123,26 +145,42 @@ class _NotificationsState extends State<Notifications> {
                             "Student",
                             style: TextStyle(color: kColorGreen),
                           ),
+
                           Center(
-                              child: DropdownButton(
-                            isExpanded: true,
-                            icon: Icon(
-                              Icons.keyboard_arrow_down_outlined,
-                              color: kColorGreen,
+                            child: FutureBuilder(
+                              future: getStudents,
+                              // ignore: missing_return
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  return DropdownButton(
+                                    isExpanded: true,
+                                    icon: Icon(
+                                      Icons.keyboard_arrow_down_outlined,
+                                      color: kColorGreen,
+                                    ),
+                                    value: childrens[0].studentid.toString(),
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        _valueChoose = newValue;
+                                        print(_valueChoose);
+                                      });
+                                    },
+                                    items: childrens.map((valueItem) {
+                                      return DropdownMenuItem(
+                                        value: valueItem.studentid.toString(),
+                                        child: Text(valueItem.studentname),
+                                      );
+                                    }).toList(),
+                                  );
+                                } else if (snapshot.hasError) {
+                                  // return Text("${snapshot.error}");
+                                  return Text("${snapshot.error}");
+                                } else {
+                                  return CircularProgressIndicator();
+                                }
+                              },
                             ),
-                            value: _valueChoose,
-                            onChanged: (newValue) {
-                              setState(() {
-                                _valueChoose = newValue;
-                              });
-                            },
-                            items: listItem.map((valueItem) {
-                              return DropdownMenuItem(
-                                value: valueItem,
-                                child: Text(valueItem),
-                              );
-                            }).toList(),
-                          ))
+                          )
                           // DropdownButtonFormField(items: items)
                         ],
                       )),
@@ -154,6 +192,4 @@ class _NotificationsState extends State<Notifications> {
       ],
     );
   }
-
-
 }

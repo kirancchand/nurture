@@ -24,7 +24,8 @@ class NotificationResponse {
     this.subject,
     this.message,
     this.notificationid,
-    this.date
+    this.date,
+    this.studentid,
   });
 
   bool readstatus;
@@ -32,6 +33,7 @@ class NotificationResponse {
   String message;
   int notificationid;
   String date;
+  int studentid;
 
 
 
@@ -42,6 +44,7 @@ class NotificationResponse {
     message: json["message"] ?? "",
     notificationid: json["notificationid"] ?? "",
     date: json["date"] ?? null,
+    studentid: json["studentid"] ?? "",
   );
 
   Map<String, dynamic> toJson() => {
@@ -50,5 +53,6 @@ class NotificationResponse {
     "message": message,
     "notificationid": notificationid,
     "date": date,
+    "studentid": studentid,
   };
 }

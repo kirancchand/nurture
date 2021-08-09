@@ -28,6 +28,17 @@ class PaymentPendingResponse {
     this.installment_1,
     this.installment_2,
     this.installment_3,
+    this.duenow,
+    this.absopeningbalance,
+    this.row,
+    this.arabstudentname,
+    this.feetypeid,
+    this.studentid,
+    this.dueamount,
+    this.academicyear,
+    this.parentnumber,
+    this.feetypename,
+     
   });
 
 
@@ -40,6 +51,17 @@ class PaymentPendingResponse {
   double installment_1;
   double installment_2;
   double installment_3;
+  double duenow;
+  double absopeningbalance;
+  int row;
+  String arabstudentname;
+  int feetypeid;
+  int studentid;
+  double dueamount;
+  String academicyear;
+  String parentnumber;
+  String feetypename;
+ 
 
 
 
@@ -51,6 +73,17 @@ class PaymentPendingResponse {
     installment_1: json["installment_1"] ?? null,
     installment_2: json["installment_2"] ?? "",
     installment_3: json["installment_3"] ?? "",
+    duenow: json["duenow"] ?? "",
+    absopeningbalance: json["absopeningbalance"] ?? "",
+    row: json["row"] ?? "",
+    arabstudentname: json["arabstudentname"] ?? "",
+    feetypeid: json["feetypeid"] ?? "",
+    studentid: json["studentid"] ?? "",
+    dueamount: json["dueamount"] ?? "",
+    academicyear: json["academicyear"] ?? "",
+    parentnumber: json["parentnumber"] ?? "",
+    feetypename: json["feetypename"] ?? "",
+   
   );
 
   Map<String, dynamic> toJson() => {
@@ -61,5 +94,16 @@ class PaymentPendingResponse {
     "installment_1": installment_1,
     "installment_2": installment_2,
     "installment_3": installment_3,
+    "duenow": duenow,
+    "absopeningbalance": absopeningbalance,
+    "row": row,
+    "arabstudentname": arabstudentname,
+    "feetypeid": feetypeid,
+    "studentid": studentid,
+    "dueamount": dueamount,
+    "academicyear": academicyear,
+    "parentnumber": parentnumber,
+    "feetypename": feetypename,
+    
   };
 }

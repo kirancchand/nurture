@@ -5,9 +5,9 @@ import 'package:nurture/common/constants.dart';
 import 'package:nurture/model/fee.dart';
 import 'package:nurture/model/notification.dart';
 import 'package:nurture/model/paymenthistory.dart';
+import 'package:nurture/model/paymentpending.dart';
 import 'package:nurture/model/student.dart';
 import 'package:nurture/screen/studentdetails.dart';
-import 'package:nurture/model/paymentpending.dart';
 
 class StudentList extends StatelessWidget {
   StudentList({Key key, this.data, this.parents, this.childrens})
@@ -430,11 +430,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
     );
   }
 
-  Widget Parentlist(
-    List<ParentResponse> parents,
-    int index
-    
-  ) {
+  Widget Parentlist(List<ParentResponse> parents, int index) {
     return Column(
       children: [
         Padding(
@@ -499,7 +495,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                     width: 83,
                     color: Colors.white,
                     child: Text(
-                      widget.parents[index].type+" info",
+                      widget.parents[index].type + " info",
                       style: TextStyle(color: kColorGreen),
                     ),
                   ),
@@ -730,11 +726,11 @@ class ParentsInfoList extends StatelessWidget {
 }
 
 class Installment extends StatelessWidget {
-  Installment({
-    Key key,
-    // this.txt,
-    this.data
-  }) : super(key: key);
+  Installment(
+      {Key key,
+      // this.txt,
+      this.data})
+      : super(key: key);
   // String txt;
   PaymentPendingResponse data;
 
@@ -775,13 +771,13 @@ Widget list_txt(String txt, {bool isSelected = false}) {
 
 class paymentList extends StatefulWidget {
   paymentList({Key key, this.data}) : super(key: key);
+
   dynamic data;
   @override
   _paymentListState createState() => _paymentListState();
 }
 
 class _paymentListState extends State<paymentList> {
-
   bool enrollment = false;
   @override
   Widget build(BuildContext context) {

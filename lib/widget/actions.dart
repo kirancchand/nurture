@@ -56,7 +56,7 @@ Future<StudentContactResponseModel> validateAndSubmitContactReq(formKey,studentC
   if (validateAndSave(formKey)) {
     showSpinner();
     StudentContactResponseModel data = await api.submitContactRequest(studentContactRequestModel);
-    print(data.message);
+    print("action${data.message}");
     hideSpinner();
     return data;
   }
@@ -88,10 +88,10 @@ Future<StudentContactResponseModel> validateAndSubmitContact(formKey,studentCont
   // }
 }
 
-Future<String> submitConfirmPayment(childrens) async {
+Future<String> submitConfirmPayment(childrens,total) async {
   Api api = new Api();
   showSpinner();
-  String data = await api.submitPaymentRequest(childrens);
+  String data = await api.submitPaymentRequest(childrens,total);
   hideSpinner();
   return data;
 }

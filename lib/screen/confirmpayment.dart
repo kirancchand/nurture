@@ -104,7 +104,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                         ],),
                         SizedBox(height: 20,),
 
-                        confirmButtons(widget.childrens),
+                        confirmButtons(widget.childrens,total),
 
                         SizedBox(height: 5,),
                        SizedBox(

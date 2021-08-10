@@ -46,7 +46,7 @@ class _PaymentPendingState extends State<PaymentPending> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: ListView(
-      children: [_header(), _installmentSection()],
+            children: [_header(), _installmentSection()],
     ));
   }
 
@@ -207,7 +207,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                                     itemBuilder: (context, int index) {
                                       // print(response[index].studentname);
                                       // data:response[index]
-                                      return Installment();
+                                      return Installment(data:response[index]);
                                     },
                                   )
                                 : Center(child: Text("No Data"));

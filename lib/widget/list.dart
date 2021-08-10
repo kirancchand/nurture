@@ -7,6 +7,7 @@ import 'package:nurture/model/notification.dart';
 import 'package:nurture/model/paymenthistory.dart';
 import 'package:nurture/model/student.dart';
 import 'package:nurture/screen/studentdetails.dart';
+import 'package:nurture/model/paymentpending.dart';
 
 class StudentList extends StatelessWidget {
   StudentList({Key key, this.data, this.parents, this.childrens})
@@ -732,12 +733,14 @@ class Installment extends StatelessWidget {
   Installment({
     Key key,
     // this.txt,
-    // this.data
+    this.data
   }) : super(key: key);
   // String txt;
-  // Response data;
+  PaymentPendingResponse data;
+
   @override
   Widget build(BuildContext context) {
+    print(data.studentname);
     return ListTile(
       title: Text("Installment 1"),
       subtitle: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -752,7 +755,7 @@ class Installment extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   list_txt("Tution", isSelected: true),
-                  list_txt("0 KD")
+                  list_txt(data.studentname)
                 ],
               ),
             );
@@ -778,6 +781,7 @@ class paymentList extends StatefulWidget {
 }
 
 class _paymentListState extends State<paymentList> {
+
   bool enrollment = false;
   @override
   Widget build(BuildContext context) {

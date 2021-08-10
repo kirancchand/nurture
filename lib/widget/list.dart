@@ -384,17 +384,17 @@ class _StudentInfoListState extends State<StudentInfoList> {
                             Text(
                               widget.data.studentname,
                             ),
-                            Text("Male"),
-                            Text("29/05/2000"),
-                            Text("Al Jeel Al Jadeed"),
-                            Text("5"),
-                            Text("2021-2022"),
-                            Text("British"),
-                            Text("Muslim"),
+                            Text(widget.data.gender),
+                            Text(widget.data.birthdate),
+                            Text(widget.data.schoolname),
+                            Text(widget.data.grade),
+                            Text("pending"),
+                            Text("pending"),
+                            Text(widget.data.religion),
                             Text(widget.data.civilid.toString()),
-                            Text("30/6/2022"),
-                            Text("74K13L57D"),
-                            Text("Kuwait")
+                            Text("pending"),
+                            Text(widget.data.passportnumber),
+                            Text(widget.data.regionalarea)
                           ],
                         ),
                       )
@@ -422,7 +422,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
           shrinkWrap: true,
           physics: ClampingScrollPhysics(),
           itemBuilder: (context, int index) {
-            return Parentlist(widget.parents);
+            return Parentlist(widget.parents, index);
           },
         ),
       ],
@@ -430,7 +430,9 @@ class _StudentInfoListState extends State<StudentInfoList> {
   }
 
   Widget Parentlist(
-    List<ParentResponse> data,
+    List<ParentResponse> parents,
+    int index
+    
   ) {
     return Column(
       children: [
@@ -476,12 +478,12 @@ class _StudentInfoListState extends State<StudentInfoList> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(widget.parents[0].name),
-                          Text("British"),
-                          Text(widget.parents[0].civilid),
-                          Text("30/6/2022"),
-                          Text(widget.parents[0].emailid),
-                          Text("Kuwait")
+                          Text(widget.parents[index].name),
+                          Text("pending"),
+                          Text(widget.parents[index].civilid),
+                          Text("pending"),
+                          Text(widget.parents[index].emailid),
+                          Text(widget.parents[index].regionalarea)
                         ],
                       )
                     ])),
@@ -496,7 +498,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                     width: 83,
                     color: Colors.white,
                     child: Text(
-                      " Father info",
+                      widget.parents[index].type+" info",
                       style: TextStyle(color: kColorGreen),
                     ),
                   ),

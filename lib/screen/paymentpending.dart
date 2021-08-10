@@ -23,16 +23,20 @@ class _PaymentPendingState extends State<PaymentPending> {
   Api api = new Api();
   Future<PaymentPendingResponseModel> getPayment;
   Future<StudentResponseModel> getStudents;
-  List childrens=[];
+  List childrens = [];
   @override
   void initState() {
     super.initState();
     getPayment = api.getPendingPayment();
-    getStudents = api.getStudent().then((student){
-      childrens=student.response.childrens;
+    getStudents = api.getStudent().then((student) {
+      childrens = student.response.childrens;
+      // for (int i = 0; i < childrens.length; i++)
+      //   print(childrens[i].studentname);
+      // print('000');
       setState(() {
         _valueChoose = childrens[0].studentid.toString();
       });
+
       return student;
     });
     //studentContactRequestModel = new StudentContactRequestModel();

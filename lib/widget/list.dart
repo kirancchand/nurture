@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
-import 'package:nurture/model/notification.dart';
-import 'package:nurture/screen/studentdetails.dart';
 import 'package:nurture/common/constants.dart';
-import 'package:nurture/model/student.dart';
 import 'package:nurture/model/fee.dart';
+import 'package:nurture/model/notification.dart';
 import 'package:nurture/model/paymenthistory.dart';
-import 'package:nurture/widget/student.dart';
+import 'package:nurture/model/student.dart';
+import 'package:nurture/screen/studentdetails.dart';
 
 class StudentList extends StatelessWidget {
   StudentList({Key key, this.data, this.parents, this.childrens})
@@ -305,10 +304,9 @@ class NotificationList extends StatelessWidget {
               minVerticalPadding: 3,
               title: Padding(
                 padding: const EdgeInsets.only(bottom: 10),
-                child: Text(data.notificationid.toString()),
+                child: Text(data.subject.toString()),
               ),
-              subtitle: Text(
-                  "Lorem ipsumdolor sit amet consetetur sadipsing elitr,sed diam nonumy eirmod tempor invidunt ut")),
+              subtitle: Text(data.message.toString())),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18),
             child: Divider(),
@@ -442,16 +440,16 @@ class _StudentInfoListState extends State<StudentInfoList> {
             child: Stack(children: [
               Align(
                 child: Container(
-                  height:210,
-               // height: MediaQuery.of(context).size.height * .61,
+                  height: 210,
+                  // height: MediaQuery.of(context).size.height * .61,
                   width: MediaQuery.of(context).size.width,
                 ),
               ),
               Positioned(
                 bottom: 0,
                 child: Container(
-                  height:200,
-                   // height: MediaQuery.of(context).size.height * .60,
+                    height: 200,
+                    // height: MediaQuery.of(context).size.height * .60,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                         border:
@@ -620,12 +618,12 @@ class StudentInfoList extends StatelessWidget {
                 ),
               ),
             ])),
-       
+
       ],
     );
   }
 
- 
+
 */
 
 class ParentsInfoList extends StatelessWidget {
@@ -771,7 +769,7 @@ Widget list_txt(String txt, {bool isSelected = false}) {
 }
 
 class paymentList extends StatefulWidget {
-  paymentList({Key key,this.data}) : super(key: key);
+  paymentList({Key key, this.data}) : super(key: key);
   dynamic data;
   @override
   _paymentListState createState() => _paymentListState();

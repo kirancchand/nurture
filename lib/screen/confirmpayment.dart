@@ -103,7 +103,9 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                           Text("${total} KD", style: TextStyle(fontWeight: FontWeight.bold), )
                         ],),
                         SizedBox(height: 20,),
-                        confirmButtons(),
+
+                        confirmButtons(widget.childrens),
+
                         SizedBox(height: 5,),
                        SizedBox(
                          height:40,

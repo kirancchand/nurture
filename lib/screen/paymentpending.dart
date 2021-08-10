@@ -10,7 +10,7 @@ import 'package:nurture/model/paymentpending.dart';
 
 class PaymentPending extends StatefulWidget {
   PaymentPending({Key key}) : super(key: key);
-  List<StudentResponse> childrens = Get.arguments;
+  // List<StudentResponse> childrens = Get.arguments;
 
   @override
   _PaymentPendingState createState() => _PaymentPendingState();
@@ -21,13 +21,20 @@ class _PaymentPendingState extends State<PaymentPending> {
   // value: studentContactRequestModel.studentid,
   // StudentContactRequestModel studentContactRequestModel;
   Api api = new Api();
-  List listItem = ["Asim Muhammad", "Dana Muhammad", "Dalal Muhammad"];
-
   Future<PaymentPendingResponseModel> getPayment;
+  Future<StudentResponseModel> getStudents;
+  List childrens=[];
   @override
   void initState() {
     super.initState();
     getPayment = api.getPendingPayment();
+    getStudents = api.getStudent().then((student){
+      childrens=student.response.childrens;
+      setState(() {
+        _valueChoose = childrens[0].studentid.toString();
+      });
+      return student;
+    });
     //studentContactRequestModel = new StudentContactRequestModel();
   }
 
@@ -35,11 +42,11 @@ class _PaymentPendingState extends State<PaymentPending> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: ListView(
-      children: [_header(), _installmentSection()],
+      children: [_header(childrens), _installmentSection()],
     ));
   }
 
-  Widget _header() {
+  Widget _header(childrens) {
     return Stack(
       children: [
         Container(
@@ -93,30 +100,40 @@ class _PaymentPendingState extends State<PaymentPending> {
                             style: TextStyle(color: kColorGreen),
                           ),
                           Center(
-                              child: DropdownButton(
-                            isExpanded: true,
-                            icon: Icon(
-                              Icons.keyboard_arrow_down_outlined,
-                              color: Colors.greenAccent,
+                            child: FutureBuilder(
+                              future: getStudents,
+                              // ignore: missing_return
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  return DropdownButton(
+                                    isExpanded: true,
+                                    icon: Icon(
+                                      Icons.keyboard_arrow_down_outlined,
+                                      color: kColorGreen,
+                                    ),
+                                    value: _valueChoose,
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        _valueChoose = newValue;
+                                        print(_valueChoose);
+                                      });
+                                    },
+                                    items: childrens.map((valueItem) {
+                                      return DropdownMenuItem(
+                                        value: valueItem.studentid.toString(),
+                                        child: Text(valueItem.studentname),
+                                      );
+                                    }).toList(),
+                                  );
+                                } else if (snapshot.hasError) {
+                                  // return Text("${snapshot.error}");
+                                  return Text("${snapshot.error}");
+                                } else {
+                                  return CircularProgressIndicator();
+                                }
+                              },
                             ),
-                            value:
-                                _valueChoose, //studentContactRequestModel.studentid,
-                            onChanged: (newValue) {
-                              setState(() {
-                               _valueChoose = newValue;
-                                // studentContactRequestModel.studentid = newValue;
-                              });
-                            },
-                        // items: widget.childrens.map((valueItem) 
-                            items: listItem.map((valueItem){
-                              return DropdownMenuItem(
-                               // value: valueItem.studentid,
-                                value: valueItem,
-                                 child: Text(valueItem),
-                              //  child: Text(valueItem.studentname),
-                              );
-                            }).toList(),
-                          ))
+                          )
                           // DropdownButtonFormField(items: items)
                         ],
                       )

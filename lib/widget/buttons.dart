@@ -231,16 +231,39 @@ List<Widget> contactReqButton(
   ];
 }
 
-Widget confirmButtons() {
-  return Container(
-    height: 40,
-    width: 200,
-    decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16), color: kColorGreen),
-    child: Center(
-        child: Text(
-      "Confirm Payment",
-      style: TextStyle(color: Colors.white),
-    )),
+// Widget confirmButtons(childrens) {
+//   print(jsonDecode(childrens));
+//   return Container(
+//     height: 40,
+//     width: 200,
+//     decoration: BoxDecoration(
+//         borderRadius: BorderRadius.circular(16), color: kColorGreen),
+//     child: Center(
+//         child: Text(
+//       "Confirm Payment",
+//       style: TextStyle(color: Colors.white),
+//     )),
+//   );
+// }
+
+
+
+Widget confirmButtons(childrens) {
+  return GestureDetector(
+    child:Container(
+      height: 40,
+      width: 200,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16), color: kColorGreen),
+      child: Center(
+          child: Text(
+            "Confirm Payment",
+            style: TextStyle(color: Colors.white),
+          )),
+    ),
+    onTap: () async {
+      String data = await submitConfirmPayment(childrens);
+      print(data);
+    },
   );
 }

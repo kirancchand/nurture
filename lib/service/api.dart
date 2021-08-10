@@ -126,7 +126,32 @@ class Api {
     }
   }
 
+
+  Future<String> submitPaymentRequest(List childrens) async {
+
+// studentid;
+//  dueamount;
+
+    // "AcademicPeriodId": "2020-2021",
+    // "GrandTotal" : 2402,
+    // "IsIncludeEnrollment" : false,
+    // "KnetpaymentAmount" : 2402,
+    // "OffSet" : -330,
+    // "OpeningBalance" : 0,
+    // "StudentId" : 2920,
+    // "Paymentid" :0
+    return "hyyooo";
+
+
+
+
+  }
+
 }
+
+
+
+
 
 
 

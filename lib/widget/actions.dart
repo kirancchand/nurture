@@ -87,3 +87,11 @@ Future<StudentContactResponseModel> validateAndSubmitContact(formKey,studentCont
   //   return StudentContactResponseModel();
   // }
 }
+
+Future<String> submitConfirmPayment(childrens) async {
+  Api api = new Api();
+  showSpinner();
+  String data = await api.submitPaymentRequest(childrens);
+  hideSpinner();
+  return data;
+}

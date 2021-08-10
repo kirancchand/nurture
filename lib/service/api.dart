@@ -123,7 +123,6 @@ class Api {
         .get(getUrl("getnotifications?studentid=${queryParameters}"), headers: {
       'Authorization': 'Bearer $token',
     });
-    print(response.body);
     if (response.statusCode == 200 || response.statusCode == 400) {
       return NotificationResponseModel.fromJson(json.decode(response.body));
     } else {

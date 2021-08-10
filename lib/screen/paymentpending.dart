@@ -17,7 +17,7 @@ class PaymentPending extends StatefulWidget {
 }
 
 class _PaymentPendingState extends State<PaymentPending> {
-  var _valueChoose;
+  String _valueChoose;
   // value: studentContactRequestModel.studentid,
   // StudentContactRequestModel studentContactRequestModel;
   Api api = new Api();
@@ -27,7 +27,7 @@ class _PaymentPendingState extends State<PaymentPending> {
   @override
   void initState() {
     super.initState();
-    getPayment = api.getPendingPayment();
+    getPayment = api.getPendingPayment(_valueChoose);
     getStudents = api.getStudent().then((student) {
       childrens = student.response.childrens;
       // for (int i = 0; i < childrens.length; i++)
@@ -47,6 +47,7 @@ class _PaymentPendingState extends State<PaymentPending> {
     return Scaffold(
         body: ListView(
             children: [_header(), _installmentSection()],
+
     ));
   }
 

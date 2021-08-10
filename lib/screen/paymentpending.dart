@@ -46,11 +46,11 @@ class _PaymentPendingState extends State<PaymentPending> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: ListView(
-      children: [_header(childrens), _installmentSection()],
+      children: [_header(), _installmentSection()],
     ));
   }
 
-  Widget _header(childrens) {
+  Widget _header() {
     return Stack(
       children: [
         Container(

@@ -117,10 +117,10 @@ class InstallmentResponse {
   this.others
   });
 
-  int tuitionfee;
-  int transportfee;
-  int enrollment;
-  int others;
+  double tuitionfee;
+  double transportfee;
+  double enrollment;
+  double others;
 
   factory InstallmentResponse.fromJson(Map<String, dynamic> json) => InstallmentResponse(
     tuitionfee: json["tuitionfee"] ?? "",

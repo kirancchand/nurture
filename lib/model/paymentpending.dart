@@ -38,6 +38,10 @@ class PaymentPendingResponse {
     this.academicyear,
     this.parentnumber,
     this.feetypename,
+    this.tuitionfee,
+    this.transportfee,
+    this.enrollment,
+    this.others,
      
   });
 
@@ -49,6 +53,7 @@ class PaymentPendingResponse {
   String studentname;
   double openingbalance;
   double installment_1;
+  
   double installment_2;
   double installment_3;
   double duenow;
@@ -61,6 +66,10 @@ class PaymentPendingResponse {
   String academicyear;
   String parentnumber;
   String feetypename;
+  double tuitionfee;
+  double transportfee;
+  double enrollment;
+  double others;
  
 
 
@@ -83,7 +92,10 @@ class PaymentPendingResponse {
     academicyear: json["academicyear"] ?? "",
     parentnumber: json["parentnumber"] ?? "",
     feetypename: json["feetypename"] ?? "",
-   
+   tuitionfee: json["tuitionfee"] ?? "",
+   transportfee: json["transportfee"] ?? "",
+   enrollment: json["enrollment"] ?? "",
+   others: json["others"] ?? "",
   );
 
   Map<String, dynamic> toJson() => {
@@ -104,6 +116,10 @@ class PaymentPendingResponse {
     "academicyear": academicyear,
     "parentnumber": parentnumber,
     "feetypename": feetypename,
+    "tuitionfee": tuitionfee,
+    "transportfee": transportfee,
+    "enrollment": enrollment,
+    "others": others,
     
   };
 }

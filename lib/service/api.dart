@@ -80,6 +80,7 @@ class Api {
     // String url = "https://run.mocky.io/v3/c0586d5b-47fd-4c1b-8eae-277796c80ec6";
     // String url = "https://run.mocky.io/v3/cdadde32-9982-459b-8d5d-8f1d687a9455";
     var token = await getToken();
+    print(valueChoose);
     final queryParameters = valueChoose;
     final response = await http.get(
         getUrl("getstudentfeedetails?studentId=${queryParameters}"),
@@ -137,42 +138,55 @@ class Api {
     }
   }
 
-  Future<String> submitPaymentRequest(List childrens, double total) async {
+  Future<String> submitPaymentRequest(double total) async {
+    // List childrens,
 // studentid;
 //  dueamount;
     List paymentBody = [];
     var token = await getToken();
-    paymentBody = childrens
-        .map((child) => {
-              "AcademicPeriodId": "2020-2021",
-              "GrandTotal": total,
-              "IsIncludeEnrollment": false,
-              "KnetpaymentAmount": total,
-              "OffSet": -330,
-              "OpeningBalance": 0,
-              "StudentId": child.studentid,
-              "Paymentid": 0
-            })
-        .toList();
-    print(jsonEncode(paymentBody));
-    final response = await http.post(getUrl('PostPayment'),
-        body: jsonEncode([
-          {
-            "AcademicPeriodId": "2020-2021",
-            "GrandTotal": 2402,
-            "IsIncludeEnrollment": false,
-            "KnetpaymentAmount": 2402,
-            "OffSet": -330,
-            "OpeningBalance": 0,
-            "StudentId": 2920,
-            "Paymentid": 0
-          }
-        ]),
+    // paymentBody = childrens
+    //     .map((child) => {
+    //           "AcademicPeriodId": "2020-2021",
+    //           "GrandTotal": total,
+    //           "IsIncludeEnrollment": false,
+    //           "KnetpaymentAmount": total,
+    //           "OffSet": -330,
+    //           "OpeningBalance": 0,
+    //           "StudentId": child.studentid,
+    //           "Paymentid": 0
+    //         })
+    //     .toList();
+    String Year="2020-2021";
+    print(Year.runtimeType);
+    var newreq=[
+      {
+        "AcademicPeriodId": "2020",
+        "GrandTotal" : 2402,
+        "IsIncludeEnrollment" : false,
+        "KnetpaymentAmount" : 2402,
+        "OffSet" : -330,
+        "OpeningBalance" : 0,
+        "StudentId" : 2920,
+        "Paymentid" :0
+      }
+    ];
+
+
+    final response = await http.post(getUrl('PostPayment'),body:newreq,
         headers: {
           'Authorization': 'Bearer $token',
         });
+
+    try {
+      print(response.body);
+      return "hyy";
+    } catch (e) {
+      print(e);
+      return "Something Wrong";
+    }
     if (response.statusCode == 200 || response.statusCode == 400) {
-      print(json.decode(response.body));
+
+      return "hyy";
     } else {
       print(response.statusCode);
       throw Exception('Failed to load data!');

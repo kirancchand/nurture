@@ -91,7 +91,9 @@ Future<StudentContactResponseModel> validateAndSubmitContact(formKey,studentCont
 Future<String> submitConfirmPayment(childrens,total) async {
   Api api = new Api();
   showSpinner();
-  String data = await api.submitPaymentRequest(childrens,total);
+  // String data = await api.submitPaymentRequest(childrens,total);
+  String data = await api.submitPaymentRequest(total);
+  print("action${data}");
   hideSpinner();
   return data;
 }

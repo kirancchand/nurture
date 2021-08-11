@@ -48,9 +48,9 @@ class PaymentPendingResponse {
   String studentnumber;
   String studentname;
   double openingbalance;
-  double installment_1;
-  double installment_2;
-  double installment_3;
+  InstallmentResponse installment_1;
+  InstallmentResponse installment_2;
+  InstallmentResponse installment_3;
   double duenow;
   double absopeningbalance;
   int row;
@@ -70,9 +70,9 @@ class PaymentPendingResponse {
     studentnumber: json["studentnumber"] ?? "",
     studentname: json["studentname"] ?? "",
     openingbalance: json["openingbalance"] ?? "",
-    installment_1: json["installment_1"] ?? null,
-    installment_2: json["installment_2"] ?? "",
-    installment_3: json["installment_3"] ?? "",
+    installment_1:InstallmentResponse.fromJson(json["installment_1"]),
+    installment_2:InstallmentResponse.fromJson(json["installment_2"]),
+    installment_3:InstallmentResponse.fromJson(json["installment_3"]),
     duenow: json["duenow"] ?? "",
     absopeningbalance: json["absopeningbalance"] ?? "",
     row: json["row"] ?? "",
@@ -107,3 +107,34 @@ class PaymentPendingResponse {
     
   };
 }
+
+
+class InstallmentResponse {
+  InstallmentResponse({
+  this.tuitionfee,
+  this.transportfee,
+  this.enrollment,
+  this.others
+  });
+
+  int tuitionfee;
+  int transportfee;
+  int enrollment;
+  int others;
+
+  factory InstallmentResponse.fromJson(Map<String, dynamic> json) => InstallmentResponse(
+    tuitionfee: json["tuitionfee"] ?? "",
+    transportfee: json["transportfee"] ?? "",
+    enrollment: json["enrollment"] ?? "",
+    others: json["others"] ?? "",
+  );
+
+  Map<String, dynamic> toJson() => {
+    "tuitionfee": tuitionfee,
+    "transportfee": transportfee,
+    "enrollment": enrollment,
+    "others": others,
+  };
+}
+
+

@@ -59,7 +59,6 @@ class _NotificationsState extends State<Notifications> {
                           shrinkWrap: true,
                           physics: ClampingScrollPhysics(),
                           itemBuilder: (context, int index) {
-                            print(response[index].notificationid);
                             // data:response[index]
                             return NotificationList(data: response[index]);
                           },
@@ -160,7 +159,6 @@ class _NotificationsState extends State<Notifications> {
                                     onChanged: (newValue) {
                                       setState(() {
                                         _valueChoose = newValue;
-                                        print(_valueChoose);
                                       });
                                     },
                                     items: childrens.map((valueItem) {

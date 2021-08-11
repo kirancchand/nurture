@@ -131,6 +131,7 @@ class Api {
       'Authorization': 'Bearer $token',
     });
     if (response.statusCode == 200 || response.statusCode == 400) {
+      print(jsonDecode(response.body));
       return NotificationResponseModel.fromJson(json.decode(response.body));
     } else {
       throw Exception('Failed to load data!');

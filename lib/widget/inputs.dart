@@ -20,7 +20,7 @@ List<Widget> loginInputs(loginRequestModel) {
               borderSide: BorderSide(color: Colors.grey[300])),
           labelStyle: TextStyle(color: Colors.grey[400])),
       validator: EmailFieldValidator.validate,
-      initialValue: "G-0000001035",
+      initialValue: "G-0000001085",
       onSaved: (String value) => loginRequestModel.Username = value,
     ),
     TextFormField(
@@ -55,7 +55,7 @@ List<Widget> otpInputs(loginRequestModel) {
           enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey[300])),
           labelStyle: TextStyle(color: Colors.grey[400])),
-      initialValue: "G-0000002102",
+      initialValue: "G-0000001085",
       validator: OtpFieldValidator.validate,
       onSaved: (String value) => loginRequestModel.Username = value,
     ),

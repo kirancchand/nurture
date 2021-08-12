@@ -25,16 +25,15 @@ bool validateAndSubmit(formKey) {
   return false;
 }
 
-
-Future<LoginResponseModel> validateAndLogin(formKey,loginRequestModel) async {
+Future<LoginResponseModel> validateAndLogin(formKey, loginRequestModel) async {
   Api api = new Api();
   if (validateAndSave(formKey)) {
     showSpinner();
-    LoginResponseModel data = await api.signInWithEmailAndPassword(loginRequestModel);
+    LoginResponseModel data =
+        await api.signInWithEmailAndPassword(loginRequestModel);
     hideSpinner();
     return data;
-  }
-  else{
+  } else {
     return LoginResponseModel();
   }
 
@@ -45,22 +44,19 @@ Future<LoginResponseModel> validateAndLogin(formKey,loginRequestModel) async {
   // else{
   //   return "";
   // }
-
 }
 
-
-
-Future<StudentContactResponseModel> validateAndSubmitContactReq(formKey,studentContactRequestModel) async {
-
+Future<StudentContactResponseModel> validateAndSubmitContactReq(
+    formKey, studentContactRequestModel) async {
   Api api = new Api();
   if (validateAndSave(formKey)) {
     showSpinner();
-    StudentContactResponseModel data = await api.submitContactRequest(studentContactRequestModel);
+    StudentContactResponseModel data =
+        await api.submitContactRequest(studentContactRequestModel);
     print("action${data.message}");
     hideSpinner();
     return data;
-  }
-  else{
+  } else {
     return StudentContactResponseModel();
   }
 
@@ -71,28 +67,29 @@ Future<StudentContactResponseModel> validateAndSubmitContactReq(formKey,studentC
   // else{
   //   return "";
   // }
-
 }
 
-
-Future<StudentContactResponseModel> validateAndSubmitContact(formKey,studentContactRequestModel) async {
+Future<StudentContactResponseModel> validateAndSubmitContact(
+    formKey, studentContactRequestModel) async {
   Api api = new Api();
   // if (validateAndSubmit(formKey)) {
-    showSpinner();
-    StudentContactResponseModel data = await api.submitContactRequest(studentContactRequestModel);
-    hideSpinner();
-    return data;
+  showSpinner();
+  StudentContactResponseModel data =
+      await api.submitContactRequest(studentContactRequestModel);
+  hideSpinner();
+  return data;
   // }
   // else{
   //   return StudentContactResponseModel();
   // }
 }
 
-Future<String> submitConfirmPayment(childrens,total) async {
+Future<String> submitConfirmPayment(
+    List<Map<String, dynamic>> paymentList) async {
   Api api = new Api();
   showSpinner();
   // String data = await api.submitPaymentRequest(childrens,total);
-  String data = await api.submitPaymentRequest(total);
+  String data = await api.submitPaymentRequest(paymentList);
   print("action${data}");
   hideSpinner();
   return data;

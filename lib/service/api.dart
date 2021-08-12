@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:nurture/common/constants.dart';
 import 'package:nurture/model/contact.dart';
@@ -80,7 +79,7 @@ class Api {
     // String url = "https://run.mocky.io/v3/c0586d5b-47fd-4c1b-8eae-277796c80ec6";
     // String url = "https://run.mocky.io/v3/cdadde32-9982-459b-8d5d-8f1d687a9455";
     var token = await getToken();
-    print("paymentpending${valueChoose}");
+    print(valueChoose);
     final queryParameters = valueChoose;
     final response = await http.get(
         getUrl("getstudentfeedetails?studentId=${queryParameters}"),
@@ -126,7 +125,6 @@ class Api {
 
   Future<NotificationResponseModel> getNotification(String valueChoose) async {
     var token = await getToken();
-    print("sdsdfdf${valueChoose}");
     final queryParameters = valueChoose;
     final response = await http
         .get(getUrl("getnotifications?studentid=${queryParameters}"), headers: {
@@ -139,61 +137,44 @@ class Api {
     }
   }
 
-  Future<String> submitPaymentRequest(double total) async {
-    // List childrens,
-// studentid;
-//  dueamount;
-    List paymentBody = [];
+  Future<String> submitPaymentRequest(
+      List<Map<String, dynamic>> paymentBody) async {
+    print(paymentBody);
     var token = await getToken();
-    // paymentBody = childrens
-    //     .map((child) => {
-    //           "AcademicPeriodId": "2020-2021",
-    //           "GrandTotal": total,
-    //           "IsIncludeEnrollment": false,
-    //           "KnetpaymentAmount": total,
-    //           "OffSet": -330,
-    //           "OpeningBalance": 0,
-    //           "StudentId": child.studentid,
-    //           "Paymentid": 0
-    //         })
-    //     .toList();
-    String Year="2020-2021";
-    print(Year.runtimeType);
-    var newreq=[
+    // var newreq = jsonEncode(paymentBody);
+    var newreq = jsonEncode([
       {
         "AcademicPeriodId": "2020",
-        "GrandTotal" : 2402,
-        "IsIncludeEnrollment" : false,
-        "KnetpaymentAmount" : 2402,
-        "OffSet" : -330,
-        "OpeningBalance" : 0,
-        "StudentId" : 2920,
-        "Paymentid" :0
+        "GrandTotal": 2402,
+        "IsIncludeEnrollment": false,
+        "KnetpaymentAmount": 2402,
+        "OffSet": -330,
+        "OpeningBalance": 0,
+        "StudentId": 2920,
+        "Paymentid": 0
       }
-    ];
+    ]);
 
-
-    final response = await http.post(getUrl('PostPayment'),body:newreq,
-        headers: {
-          'Authorization': 'Bearer $token',
-        });
+    final response =
+        await http.post(getUrl('PostPayment'), body: paymentBody, headers: {
+      'Authorization': 'Bearer $token',
+    });
 
     try {
+      print("body");
       print(response.body);
       return "hyy";
     } catch (e) {
       print(e);
       return "Something Wrong";
     }
-    if (response.statusCode == 200 || response.statusCode == 400) {
-
-      return "hyy";
-    } else {
-      print(response.statusCode);
-      throw Exception('Failed to load data!');
-    }
-
-    return "hyyooo";
+    // if (response.statusCode == 200 || response.statusCode == 400) {
+    //   return "hyy";
+    // } else {
+    //   print(response.statusCode);
+    //   throw Exception('Failed to load data!');
+    // }
+    // return "hyyooo";
   }
 }
 

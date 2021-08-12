@@ -14,3 +14,10 @@ class Controller extends GetxController {
 class DropDown extends GetxController {
   var text = ''.obs;
 }
+<<<<<<< HEAD
+=======
+
+class PendingDropDown extends GetxController {
+  var text = ''.obs;
+}
+>>>>>>> 23c0c6a2579dfbaf9d7013aca9aad86731b0c0e8

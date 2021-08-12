@@ -247,7 +247,7 @@ List<Widget> contactReqButton(
 
 
 
-// Widget confirmButtons(paymentList) {
+// Widget confirmButtons(childrens,total) {
 //   return GestureDetector(
 //     child:Container(
 //       height: 40,
@@ -261,7 +261,7 @@ List<Widget> contactReqButton(
 //           )),
 //     ),
 //     onTap: () async {
-//       String data = await submitConfirmPayment(paymentList);
+//       String data = await submitConfirmPayment(childrens,total);
 //       print(data);
 //     },
 //   );

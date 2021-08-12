@@ -1,7 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.nurture">
    <application
+<<<<<<< HEAD
         android:label="nurture"
+=======
+        android:label="Madressati"
+>>>>>>> 23c0c6a2579dfbaf9d7013aca9aad86731b0c0e8
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

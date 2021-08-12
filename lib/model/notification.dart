@@ -10,10 +10,8 @@ class NotificationResponseModel {
   factory NotificationResponseModel.fromJson(Map<String, dynamic> json) {
     return NotificationResponseModel(
       statuscode: json["statuscode"],
-      response: json["statuscode"] != "200"
-          ? []
-          : List<NotificationResponse>.from(
-              json["response"].map((x) => NotificationResponse.fromJson(x))),
+      response: List<NotificationResponse>.from(
+          json["response"].map((x) => NotificationResponse.fromJson(x))),
       // response: Response.fromJson(json["response"]),
       message: json["message"],
     );

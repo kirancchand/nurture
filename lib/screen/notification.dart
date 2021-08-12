@@ -185,7 +185,7 @@ class _NotificationsState extends State<Notifications> {
                                   shrinkWrap: true,
                                   physics: ClampingScrollPhysics(),
                                   itemBuilder: (context, int index) {
-                                    print(response[index].notificationid);
+                                    // print(response[index].notificationid);
                                     // data:response[index]
                                     return NotificationList(
                                         data: response[index]);

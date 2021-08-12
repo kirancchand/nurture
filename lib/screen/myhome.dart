@@ -348,7 +348,7 @@ class _MyHomeState extends State<MyHome> {
                 },
               ),
               Padding(
-                padding: EdgeInsets.all(15),
+                padding: const EdgeInsets.all(15),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [Text("Total"), Text(total.toString() + "KD")],

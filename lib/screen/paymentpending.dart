@@ -149,7 +149,9 @@ class _PaymentPendingState extends State<PaymentPending> {
                                           }).toList(),
                                         ),
                                         Text(
-                                          'Selected Item = ' + '$_valueChoose',
+                                          'Selected Item = ' +
+                                                  '$_valueChoose' ??
+                                              "",
                                           style: TextStyle(
                                               fontSize: 22,
                                               color: Colors.black),

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nurture/common/constants.dart';
 import 'package:nurture/widget/actions.dart';
-import 'package:nurture/widget/buttons.dart';
-// import 'package:nurture/widget/list.dart';
 
 class ConfirmPayment extends StatefulWidget {
   ConfirmPayment({Key key}) : super(key: key);
@@ -234,8 +232,8 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
               ),
               onTap: () async {
                 var lists = await convert();
-                String data = await submitConfirmPayment(lists);
-                print(data);
+                var data = await submitConfirmPayment(lists);
+                // print(data);
               },
             ),
             // confirmButtons(),

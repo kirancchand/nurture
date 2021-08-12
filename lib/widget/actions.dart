@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:nurture/service/api.dart';
 import 'package:nurture/model/login_model.dart';
+import 'package:nurture/service/api.dart';
 import 'package:nurture/widget/spinner.dart';
 import 'package:nurture/model/contact.dart';
 import 'dart:developer' as developer;
-import 'dart:convert';
 
 bool validateAndSave(formKey) {
   final FormState form = formKey.currentState;
@@ -86,10 +84,9 @@ Future<StudentContactResponseModel> validateAndSubmitContact(
 
 Future<String> submitConfirmPayment(
     List<Map<String, dynamic>> paymentList) async {
-  Api api = new Api();
   showSpinner();
   // String data = await api.submitPaymentRequest(childrens,total);
-  String data = await api.submitPaymentRequest(paymentList);
+  String data = await submitPaymentRequest(paymentList);
   print("action${data}");
   hideSpinner();
   return data;

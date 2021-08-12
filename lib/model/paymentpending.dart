@@ -10,7 +10,9 @@ class PaymentPendingResponseModel {
   factory PaymentPendingResponseModel.fromJson(Map<String, dynamic> json) {
     return PaymentPendingResponseModel(
       statuscode: json["statuscode"],
-      response: PaymentPendingResponse.fromJson(json["response"]),
+      response: json["statuscode"] != '200'
+          ? PaymentPendingResponse()
+          : PaymentPendingResponse.fromJson(json["response"]),
       // response: Response.fromJson(json["response"]),
       message: json["message"],
     );

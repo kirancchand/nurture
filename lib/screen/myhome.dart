@@ -32,8 +32,8 @@ class _MyHomeState extends State<MyHome> {
     "gmail.com"
   ];
   String parentName;
-  List childrens=[];
-  bool selectedStudent = false ;
+  List childrens = [];
+  bool selectedStudent = false;
   List _selectedStudent = [];
 
   void _onCategorySelected(bool selected, student) {
@@ -44,19 +44,20 @@ class _MyHomeState extends State<MyHome> {
     } else {
       setState(() {
         _selectedStudent.remove(student);
-
       });
     }
   }
+
   @override
   void initState() {
     super.initState();
-    getStudents = api.getStudent().then((student){
-      childrens=student.response.childrens;
+    getStudents = api.getStudent().then((student) {
+      childrens = student.response.childrens;
       return student;
     });
     getFee = api.getFee();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,70 +107,59 @@ class _MyHomeState extends State<MyHome> {
                   ),
                 ),
                 CircleAvatar(
-                  radius: 30,
-                  backgroundColor: Colors.white,
-                   backgroundImage:AssetImage("assets/images/arabian-vector-icon-260nw-445427119.png")
-                ),
+                    radius: 30,
+                    backgroundColor: Colors.white,
+                    backgroundImage: AssetImage(
+                        "assets/images/arabian-vector-icon-260nw-445427119.png")),
                 SizedBox(
                   height: 10,
                 ),
                 Container(
-                  child:FutureBuilder<StudentResponseModel>(
+                  child: FutureBuilder<StudentResponseModel>(
                     future: getStudents,
                     builder: (BuildContext context,
                         AsyncSnapshot<StudentResponseModel> snapshot) {
                       if (snapshot.hasData) {
-                        var response=snapshot.data?.response;
+                        var response = snapshot.data?.response;
 
                         // // data.response.length>0?
                         // var response=[];
-                        return response.parents.length>0?Column(
-                          children:[
-                            Stack(
-                              children:[
-                                Text(
-                                  response.parents[0].name,
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ]
-                          ),
-                            Stack(
-                                children:[
-                                  Text("Parent ID: ${response.parents[0].parentdetailsid}",
+                        return response.parents.length > 0
+                            ? Column(children: [
+                                Stack(children: [
+                                  Text(
+                                    response.parents[0].name,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ]),
+                                Stack(children: [
+                                  Text(
+                                      "Parent ID: ${response.parents[0].parentdetailsid}",
                                       style: TextStyle(
                                         color: Colors.white,
                                       )),
-                                ]
-                            )
-                         ]
-                        )
-                        :Center(child:Text("No Data"));
-
+                                ])
+                              ])
+                            : Center(child: Text("No Data"));
                       } else if (snapshot.hasError) {
                         // return Text("${snapshot.error}");
                         return Text("${snapshot.error}");
-                      }
-                      else
-                      {
+                      } else {
                         return CircularProgressIndicator();
                       }
 
                       // By default, show a loading spinner.
-
                     },
                   ),
-
                 ),
-
-
                 SizedBox(
                   height: 15,
                 ),
                 Container(
-                   // height: MediaQuery.of(context).size.height * .5,
+                    // height: MediaQuery.of(context).size.height * .5,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
@@ -197,40 +187,45 @@ class _MyHomeState extends State<MyHome> {
                                 ),
                               ),
                               Container(
+                                child: FutureBuilder<StudentResponseModel>(
+                                  future: getStudents,
+                                  builder: (BuildContext context,
+                                      AsyncSnapshot<StudentResponseModel>
+                                          snapshot) {
+                                    if (snapshot.hasData) {
+                                      var response = snapshot.data?.response;
 
-                                  child:FutureBuilder<StudentResponseModel>(
-                                    future: getStudents,
-                                    builder: (BuildContext context,
-                                        AsyncSnapshot<StudentResponseModel> snapshot) {
-                                      if (snapshot.hasData) {
-                                        var response=snapshot.data?.response;
+                                      // // data.response.length>0?
+                                      // var response=[];
+                                      return response.childrens.length > 0
+                                          ? ListView.builder(
+                                              itemCount:
+                                                  response.childrens.length,
+                                              shrinkWrap: true,
+                                              physics: ClampingScrollPhysics(),
+                                              itemBuilder:
+                                                  (context, int index) {
+                                                // print(response[index].studentname);
+                                                // data:response[index]
+                                                return StudentList(
+                                                    data: response
+                                                        .childrens[index],
+                                                    parents: response.parents,
+                                                    childrens:
+                                                        response.childrens);
+                                              },
+                                            )
+                                          : Center(child: Text("No Data"));
+                                    } else if (snapshot.hasError) {
+                                      // return Text("${snapshot.error}");
+                                      return Text("${snapshot.error}");
+                                    } else {
+                                      return CircularProgressIndicator();
+                                    }
 
-                                        // // data.response.length>0?
-                                        // var response=[];
-                                        return response.childrens.length>0?ListView.builder(
-                                          itemCount: response.childrens.length,
-                                          shrinkWrap: true,
-                                          physics: ClampingScrollPhysics(),
-                                          itemBuilder: (context, int index) {
-                                            // print(response[index].studentname);
-                                            // data:response[index]
-                                            return StudentList(data:response.childrens[index],parents:response.parents,childrens:response.childrens);
-                                          },
-                                        ):Center(child:Text("No Data"));
-
-                                      } else if (snapshot.hasError) {
-                                        // return Text("${snapshot.error}");
-                                        return Text("${snapshot.error}");
-                                      }
-                                      else
-                                      {
-                                        return CircularProgressIndicator();
-                                      }
-
-                                      // By default, show a loading spinner.
-
-                                    },
-                                  ),
+                                    // By default, show a loading spinner.
+                                  },
+                                ),
                                 // child:ListView.builder(
                                 //   itemCount: 3,
                                 //   shrinkWrap: true,
@@ -257,7 +252,7 @@ class _MyHomeState extends State<MyHome> {
   }
 
   Widget OutStandingSection() {
-    double total=0.0;
+    double total = 0.0;
     return Container(
       //height: MediaQuery.of(context).size.height*.488,
       width: MediaQuery.of(context).size.width,
@@ -274,111 +269,126 @@ class _MyHomeState extends State<MyHome> {
             child: Text("Total Fee Outstanding"),
           ),
           Container(
-            child:Form(
-              child:Column(
-
-                children:[
-                  FutureBuilder<FeeResponseModel>(
+            child: Form(
+                child: Column(children: [
+              FutureBuilder<FeeResponseModel>(
                 future: getFee,
                 builder: (BuildContext context,
                     AsyncSnapshot<FeeResponseModel> snapshot) {
                   if (snapshot.hasData) {
-                    var response=snapshot.data?.response;
-
+                    var response = snapshot.data?.response;
 
                     // print(data[0]);
                     // // data.response.length>0?
                     // var response=[];
-                    return response.length>0?ListView.builder(
-                      itemCount: response.length,
-                      shrinkWrap: true,
-                      physics: ClampingScrollPhysics(),
-                      itemBuilder: (context, int index) {
-                        print(response);
-                        total=total+response[index].dueamount;
-                        // return OutstandingPayment(data:response[index]);
-                        return ListTile(
-                            leading:Checkbox(
-                          value: _selectedStudent
-                              .contains(response[index]),
-                          onChanged: (bool selected) {
-                            _onCategorySelected(selected,
-                                response[index]);
-                          },
-                              side: BorderSide(color: kColorGreen),
-                              shape: CircleBorder(),
-                              activeColor: kColorGreen,
-                        ),
+                    return response.length > 0
+                        ? ListView.builder(
+                            itemCount: response.length,
+                            shrinkWrap: true,
+                            physics: ClampingScrollPhysics(),
+                            itemBuilder: (context, int index) {
+                              print(response);
+                              total = total + response[index].dueamount;
+                              // return OutstandingPayment(data:response[index]);
 
-                            title: Text(response[index].studentname, style: TextStyle(color:selectedStudent? kColorGreen:Colors.grey)),
-                            trailing: Text(response[index].dueamount.toString(),
-                                style: TextStyle(color:selectedStudent?kColorGreen: Colors.grey)),
-                        );
+                              return Container(
+                                  height: 38,
+                                  child: ListTile(
+                                    leading: GestureDetector(
+                                        child: Container(
+                                          child: Checkbox(
+                                            value: _selectedStudent
+                                                .contains(response[index]),
+                                            onChanged: (
+                                              bool selected,
+                                            ) {
+                                              _onCategorySelected(
+                                                  selected, response[index]);
+                                            },
+                                            side:
+                                                BorderSide(color: kColorGreen),
+                                            shape: CircleBorder(),
+                                            activeColor: kColorGreen,
+                                          ),
+                                        ),
+                                        onTap: () {
+                                          print("total");
+                                          setState(() {
+                                            total = total + response[index].dueamount;
+                                          });
+                                        }),
+                                    title: Text(response[index].studentname,
+                                        style: TextStyle(
+                                            color: selectedStudent
+                                                ? kColorGreen
+                                                : Colors.grey)),
+                                    trailing: Text(
+                                        response[index].dueamount.toString(),
+                                        style: TextStyle(
+                                            color: selectedStudent
+                                                ? kColorGreen
+                                                : Colors.grey)),
+                                  ));
 
-                        //   ListTile(
-                        //   leading: Checkbox(
-                        //     value: selectedStudent,
-                        //     onChanged: (value) {
-                        //       setState(() {
-                        //         this.selectedStudent = value;
-                        //       });
-                        //     },
-                        //     side: BorderSide(color: kColorGreen),
-                        //     shape: CircleBorder(),
-                        //     activeColor: kColorGreen,
-                        //   ),
-                        //
-                        //   title:
-                        //   Text(response[index].studentname, style: TextStyle(color:selectedStudent? kColorGreen:Colors.grey)),
-                        //   selected: true,
-                        //   horizontalTitleGap: 1,
-                        //   trailing: Text(response[index].dueamount.toString(),
-                        //       style: TextStyle(color:selectedStudent?kColorGreen: Colors.grey)),
-                        // );
-                      },
-                    ):Center(child:Text("No Data"));
-
+                              //   ListTile(
+                              //   leading: Checkbox(
+                              //     value: selectedStudent,
+                              //     onChanged: (value) {
+                              //       setState(() {
+                              //         this.selectedStudent = value;
+                              //       });
+                              //     },
+                              //     side: BorderSide(color: kColorGreen),
+                              //     shape: CircleBorder(),
+                              //     activeColor: kColorGreen,
+                              //   ),
+                              //
+                              //   title:
+                              //   Text(response[index].studentname, style: TextStyle(color:selectedStudent? kColorGreen:Colors.grey)),
+                              //   selected: true,
+                              //   horizontalTitleGap: 1,
+                              //   trailing: Text(response[index].dueamount.toString(),
+                              //       style: TextStyle(color:selectedStudent?kColorGreen: Colors.grey)),
+                              // );
+                            },
+                          )
+                        : Center(child: Text("No Data"));
                   } else if (snapshot.hasError) {
                     // return Text("${snapshot.error}");
                     return Text("${snapshot.error}");
-                  }
-                  else
-                  {
+                  } else {
                     return CircularProgressIndicator();
                   }
 
                   // By default, show a loading spinner.
-
                 },
               ),
-                Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [Text("Total"), Text(total.toString()+"KD")],
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 25, 15, 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [Text("Total"), Text(total.toString() + "KD")],
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Get.toNamed('/confirmpayment', arguments: _selectedStudent);
+                },
+                child: Container(
+                  height: 50,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.vertical(
+                          bottom: Radius.circular(15)), //circular(15),
+                      color: kColorGreen),
+                  child: Center(
+                    child: Text("Pay Now",
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold)),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    Get.toNamed('/confirmpayment',arguments:_selectedStudent);
-                  },
-                  child: Container(
-                    height: 50,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.vertical(
-                            bottom: Radius.circular(15)), //circular(15),
-                        color: kColorGreen),
-                    child: Center(
-                      child: Text("Pay Now",
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold)),
-                    ),
-                  ),
-                )
-              ]
               )
-            ),
+            ])),
 
             // child:ListView.builder(
             //   itemCount: 3,
@@ -389,7 +399,6 @@ class _MyHomeState extends State<MyHome> {
             //   },
             // ),
           ),
-
         ],
       ),
     );
@@ -416,7 +425,7 @@ class _MyHomeState extends State<MyHome> {
                       color: kColorGreen)),
             )),
         onTap: () {
-          Get.toNamed('/contactinformation',arguments:childrens);
+          Get.toNamed('/contactinformation', arguments: childrens);
         });
   }
 }

@@ -479,6 +479,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                           Text("pending"),
                           Text(widget.parents[index].civilid),
                           Text("pending"),
+                         // Text(widget.parents[index].parentcivilexpirydate),
                           Text(widget.parents[index].emailid),
                           Text(widget.parents[index].regionalarea)
                         ],
@@ -738,9 +739,7 @@ class Installment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(data.studentname);
-    print("data.arabstudentname");
-
+    print("paymnt pending ${data.studentname}");
     return ListTile(
       title: Text("Installment 1"),
       subtitle: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

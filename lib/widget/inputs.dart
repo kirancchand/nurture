@@ -20,7 +20,7 @@ List<Widget> loginInputs(loginRequestModel) {
               borderSide: BorderSide(color: Colors.grey[300])),
           labelStyle: TextStyle(color: Colors.grey[400])),
       validator: EmailFieldValidator.validate,
-      initialValue: "G-0000001035",
+      initialValue: "G-0000001085",
       onSaved: (String value) => loginRequestModel.Username = value,
     ),
     TextFormField(
@@ -55,7 +55,7 @@ List<Widget> otpInputs(loginRequestModel) {
           enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey[300])),
           labelStyle: TextStyle(color: Colors.grey[400])),
-      initialValue: "G-0000002102",
+      initialValue: "G-0000001085",
       validator: OtpFieldValidator.validate,
       onSaved: (String value) => loginRequestModel.Username = value,
     ),
@@ -105,6 +105,7 @@ List<Widget> contactReqInputs(studentContactRequestModel) {
   return <Widget>[
     Row(
       children: [
+        
         Text(
           " Contact Information",
           //  style: TextStyle(fontSize: 25),
@@ -176,13 +177,16 @@ List<Widget> contactReqInputs(studentContactRequestModel) {
         child: Padding(
           padding: const EdgeInsets.only(left: 15),
           child: TextFormField(
+            
             key: Key('studentphonenumber'),
             minLines: 1,
             maxLines: 10,
             keyboardType: TextInputType.multiline,
             decoration: InputDecoration(
                 border: InputBorder.none,
-                hintText: "Phone number",
+                
+                prefixIcon: Icon(Icons.keyboard_arrow_down_outlined,),
+                hintText: "  Phone number",
                 hintStyle: TextStyle(color: Colors.grey)),
             validator: PasswordFieldValidator.validate,
             onSaved: (String value) =>
@@ -194,6 +198,7 @@ List<Widget> contactReqInputs(studentContactRequestModel) {
     SizedBox(
       height: 10,
     ),
+  
     Row(
       children: [
         Text("  What is the issue about?"),
@@ -268,9 +273,10 @@ List<Widget> contactReqInputs(studentContactRequestModel) {
         Text(
           "Add Attachment",
           style: TextStyle(
-            color: kColorGreen,
+            decoration :(TextDecoration.underline),
+            color: kColorGreen,)
           ),
-        ),
+        
       ],
     ),
     SizedBox(height: 31),

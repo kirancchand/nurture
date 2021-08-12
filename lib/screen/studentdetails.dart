@@ -40,26 +40,32 @@ class StudentDetails extends StatelessWidget {
         ),
       ),
       body:
-      Container(
-        child:
-        Column(
-            children:[
-               Flexible(child: StudentInfoList(data:data,parents:parents)),
-             /*
-              Expanded(
-                child:
-                ListView.builder(
-                  itemCount:2,
-                  shrinkWrap: true,
-                  physics: ClampingScrollPhysics(),
-                  itemBuilder: (context, int index) {
-                    // print(studentResponse);
-                    return ParentsInfoList(data:parents);
-                  },
-                ),
-              )*/
-            ]
-        )
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          width:double.infinity,
+          child: StudentInfoList(data:data,parents:parents)
+         // Column(
+            //  children:[
+                // Flexible(child:
+                //  StudentInfoList(data:data,parents:parents)
+                //  ),
+               /*
+                Expanded(
+                  child:
+                  ListView.builder(
+                    itemCount:2,
+                    shrinkWrap: true,
+                    physics: ClampingScrollPhysics(),
+                    itemBuilder: (context, int index) {
+                      // print(studentResponse);
+                      return ParentsInfoList(data:parents);
+                    },
+                  ),
+                )*/
+            //  ]
+          ),
+      )
 
             // Stack(
             //     children:[
@@ -113,7 +119,7 @@ class StudentDetails extends StatelessWidget {
       //                   },
       //                 ),
       // ],),
-      )
+     // )
     );
   }
 }

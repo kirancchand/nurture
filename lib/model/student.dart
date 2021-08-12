@@ -184,6 +184,7 @@ class ParentResponse {
     this.arabicname,
     this.dob,
     this.nationality,
+  //  this.parentcivilexpirydate,
 
   });
 
@@ -199,6 +200,7 @@ class ParentResponse {
   String arabicname;
   String dob;
   String nationality;
+  //String parentcivilexpirydate;
 
   factory ParentResponse.fromJson(Map<String, dynamic> json) => ParentResponse(
         name: json["name"] ?? "",
@@ -213,6 +215,7 @@ class ParentResponse {
         arabicname: json["arabicname"] ?? "",
         dob: json["dob"] ?? "",
         nationality: json["nationality"] ?? "",
+       // parentcivilexpirydate: json["parentcivilexpirydate"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -227,6 +230,7 @@ class ParentResponse {
         "arabicname": arabicname,
         "dob": dob,
         "nationality": nationality,
+       // "parentcivilexpirydate":parentcivilexpirydate,
       };
 }
 

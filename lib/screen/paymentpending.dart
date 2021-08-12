@@ -27,7 +27,7 @@ class _PaymentPendingState extends State<PaymentPending> {
   @override
   void initState() {
     super.initState();
-    getPayment = api.getPendingPayment(_valueChoose);
+   // getPayment = api.getPendingPayment(_valueChoose);
     getStudents = api.getStudent().then((student) {
       childrens = student.response.childrens;
       // for (int i = 0; i < childrens.length; i++)
@@ -35,8 +35,9 @@ class _PaymentPendingState extends State<PaymentPending> {
       // print('000');
       setState(() {
         _valueChoose = childrens[0].studentid.toString();
+          
       });
-
+getPayment = api.getPendingPayment(_valueChoose);
       return student;
     });
     //studentContactRequestModel = new StudentContactRequestModel();
@@ -46,9 +47,7 @@ class _PaymentPendingState extends State<PaymentPending> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: ListView(
-      children: [_header(),
-       _installmentSection()
-       ],
+      children: [_header(), _installmentSection()],
     ));
   }
 
@@ -163,6 +162,8 @@ class _PaymentPendingState extends State<PaymentPending> {
   }
 
   Widget _installmentSection() {
+    print("hai");
+   
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -209,7 +210,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                                     itemBuilder: (context, int index) {
                                       // print(response[index].studentname);
                                       // data:response[index]
-                                      return Installment();
+                                      return Installment(data: response[index],);
                                     },
                                   )
                                 : Center(child: Text("No Data"));

@@ -8,7 +8,7 @@ class StudentContactResponseModel {
   factory StudentContactResponseModel.fromJson(Map<String, dynamic> json) {
     return StudentContactResponseModel(
       statuscode: json["statuscode"],
-      response: StudentContactResponse.fromJson(json["response"]),
+      response: null,
       message: json["message"],
     );
   }

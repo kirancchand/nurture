@@ -726,17 +726,21 @@ class ParentsInfoList extends StatelessWidget {
 }
 
 class Installment extends StatelessWidget {
-  Installment({
-    Key key,
-
-    // this.txt,
-    // this.data
-  }) : super(key: key);
+  Installment(
+      {Key key,
+      // this.txt,
+      this.data})
+      : super(key: key);
   // String txt;
-  // Response data;
   PaymentPendingResponse data;
+ // int index;
+  // InstallmentResponse value;
+
   @override
   Widget build(BuildContext context) {
+    print(data.studentname);
+    print("data.arabstudentname");
+
     return ListTile(
       title: Text("Installment 1"),
       subtitle: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -747,11 +751,29 @@ class Installment extends StatelessWidget {
           itemBuilder: (context, int index) {
             return Padding(
               padding: const EdgeInsets.only(top: 5, bottom: 3),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Column(
                 children: [
-                  list_txt("Tution", isSelected: true),
-                  list_txt("0 KD")
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      list_txt("Tution", isSelected: true),
+                      list_txt(data.tuitionfee.toString()),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      list_txt("Transportation", isSelected: true),
+                      list_txt(data.transportfee.toString())
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      list_txt("Others", isSelected: true),
+                      list_txt(data.others.toString())
+                    ],
+                  ),
                 ],
               ),
             );
@@ -771,6 +793,7 @@ Widget list_txt(String txt, {bool isSelected = false}) {
 
 class paymentList extends StatefulWidget {
   paymentList({Key key, this.data}) : super(key: key);
+
   dynamic data;
   @override
   _paymentListState createState() => _paymentListState();

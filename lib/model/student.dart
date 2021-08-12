@@ -229,3 +229,38 @@ class ParentResponse {
         "nationality": nationality,
       };
 }
+
+
+class StudentParse {
+  final String AcademicPeriodId;
+  final int GrandTotal;
+  final bool IsIncludeEnrollment;
+  final int KnetpaymentAmount;
+  final int OffSet;
+  final int OpeningBalance;
+  final int StudentId;
+  final int Paymentid;
+
+  StudentParse({this.AcademicPeriodId, this.GrandTotal,this.IsIncludeEnrollment,this.KnetpaymentAmount,this.OffSet,this.OpeningBalance,this.StudentId,this.Paymentid});
+
+  factory StudentParse.fromJson(Map<String, dynamic> json) {
+    return StudentParse(AcademicPeriodId: json['AcademicPeriodId'], GrandTotal: json['GrandTotal'], IsIncludeEnrollment: json['IsIncludeEnrollment'], KnetpaymentAmount: json['KnetpaymentAmount'],OffSet: json['OffSet'], OpeningBalance: json['OpeningBalance'], StudentId: json['StudentId'], Paymentid: json['Paymentid']);
+  }
+
+  // Override toString to have a beautiful log of student object
+  @override
+  String toString() {
+    return '{AcademicPeriodId = $AcademicPeriodId, GrandTotal = $GrandTotal}';
+  }
+
+  Map<String, dynamic> toJson() => {
+    "AcademicPeriodId": AcademicPeriodId,
+    "GrandTotal": GrandTotal,
+    "IsIncludeEnrollment": IsIncludeEnrollment,
+    "KnetpaymentAmount": KnetpaymentAmount,
+    "OffSet": OffSet,
+    "OpeningBalance": OpeningBalance,
+    "StudentId": StudentId,
+    "Paymentid": Paymentid,
+  };
+}

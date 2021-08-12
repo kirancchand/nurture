@@ -73,12 +73,14 @@ class Api {
     }
   }
 
-  Future<PaymentPendingResponseModel> getPendingPayment(String valueChoose) async {
+  Future<PaymentPendingResponseModel> getPendingPayment(
+      String valueChoose) async {
     // String url = "https://run.mocky.io/v3/10dbe39e-ba24-488b-af81-fe10fbc092a0";  // success
     // String url = "https://run.mocky.io/v3/4e1f3524-732a-426c-881b-4ae567685de6";   //failed
     // String url = "https://run.mocky.io/v3/c0586d5b-47fd-4c1b-8eae-277796c80ec6";
     // String url = "https://run.mocky.io/v3/cdadde32-9982-459b-8d5d-8f1d687a9455";
     var token = await getToken();
+    print(valueChoose);
     final queryParameters = valueChoose;
     final response = await http.get(
         getUrl("getstudentfeedetails?studentId=${queryParameters}"),
@@ -86,6 +88,8 @@ class Api {
     // final response = await http.get(Uri.parse(url));
     print(response.body);
     if (response.statusCode == 200 || response.statusCode == 400) {
+     print("valueChoose");
+      print(valueChoose);
       return PaymentPendingResponseModel.fromJson(json.decode(response.body));
     } else {
       throw Exception('Failed to load data!');
@@ -94,26 +98,32 @@ class Api {
 
   Future<StudentContactResponseModel> submitContactRequest(
       StudentContactRequestModel studentContactRequestModel) async {
+    var token = await getToken();
+
+    // return StudentContactResponseModel.fromJson(stud);
     print(studentContactRequestModel.toJson());
-    var stud = {
-      "statuscode": "200",
-      "response": {
-        "access_token":
-            "G4WuNVe5c-vN8cybn7KUXkALKfRkOhDCGKjYFwS1XDpW6O57thAdzdFIRewFXe_vTtOrw5kdYmylHwIEEVxyDfEWIMvmwx7_bVYHmw-TISIWEf7_y34KviTxDzkLXqysj00oydbC75eglOy9GN_39E1QrtlfXispKyvMAcNHqBVzIkTBgQVLeydrMgUIKdSchz8cGhIBrbxb4qw8d8Go3dywTYgc7b3ZVZdTezT0IT8dt-1gCsja9MNlo-hbntaCBxNksGc75RLXcftVxHJXdppKl9XN05qwYFllKK2aY7zJQXlLsohPtFAfUHkXlzHWDquZtybj3CpjCfzwr1cK-qxRw1EtLm1X_9lvVx6s3vKhstVgv2cWqKbnZ2rjIVgEaO2RJvmjfw65scEtxAkPBOctgQjqX43L-xpd-Mjra02iH7dOdzM3kxoLq1Q_jbiyX1SFHRYYYu0O1jR7pGAeCjTusqS07-QUQyHjfNvLsk918fcAtRCyKGFsx8OT9odtt6VHf3B1lNT1RNQ101mHcg",
-      },
-      "message": "Success"
-    };
-    return StudentContactResponseModel.fromJson(stud);
-    // print(studentContactRequestModel.toJson());
+    print(studentContactRequestModel.toJson()["studentid"]);
+    // int studentid=studentContactRequestModel.toJson()["studentname"];
+    // String Name=studentContactRequestModel.toJson()["studentemail"];
+    // String Email=studentContactRequestModel.toJson()["studentid"];
+    // String PhoneNumber=studentContactRequestModel.toJson()["studentphonenumber"];
+    // String Query=studentContactRequestModel.toJson()["studentinquiry"];
+
     // String url = "https://run.mocky.io/v3/10dbe39e-ba24-488b-af81-fe10fbc092a0";  // success
     // String url = "https://run.mocky.io/v3/4e1f3524-732a-426c-881b-4ae567685de6";   //failed
     // String url = "https://run.mocky.io/v3/c0586d5b-47fd-4c1b-8eae-277796c80ec6";
-    // final response = await http.post(getUrl('login'), body: studentContactRequestModel.toJson());
-    // if (response.statusCode == 200 || response.statusCode == 400) {
-    //   return StudentContactResponseModel.fromJson(json.decode(response.body));
-    // } else {
-    //   throw Exception('Failed to load data!');
-    // }
+    // final response = await http.post(getUrl('sendenquiry?studentid="1"&Name="chitra"&Email="chitra.pzr@gmail.com"&PhoneNumber="974475667"&Query="test"'), body: studentContactRequestModel.toJson());
+    final response = await http.post(
+        getUrl(
+            'sendenquiry?studentid=${studentContactRequestModel.toJson()["studentid"]}&Name=${studentContactRequestModel.toJson()["studentname"]}&Email=${studentContactRequestModel.toJson()["studentemail"]}&PhoneNumber=${studentContactRequestModel.toJson()["studentphonenumber"]}&Query=${studentContactRequestModel.toJson()["studentinquiry"]}'),
+        headers: {'Authorization': 'Bearer $token'});
+    print("sdsdsd ${json.decode(response.body)}");
+    if (response.statusCode == 200 || response.statusCode == 400) {
+      // return StudentContactResponseModel.fromJson(json.decode(response.body));
+      return StudentContactResponseModel.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Failed to load data!');
+    }
   }
 
   Future<NotificationResponseModel> getNotification(String valueChoose) async {
@@ -123,39 +133,69 @@ class Api {
         .get(getUrl("getnotifications?studentid=${queryParameters}"), headers: {
       'Authorization': 'Bearer $token',
     });
-    print(response.body);
     if (response.statusCode == 200 || response.statusCode == 400) {
+
       return NotificationResponseModel.fromJson(json.decode(response.body));
     } else {
       throw Exception('Failed to load data!');
     }
   }
 
-
-
-  Future<String> submitPaymentRequest(List childrens) async {
-
+  Future<String> submitPaymentRequest(double total) async {
+    // List childrens,
 // studentid;
 //  dueamount;
+    List paymentBody = [];
+    var token = await getToken();
+    // paymentBody = childrens
+    //     .map((child) => {
+    //           "AcademicPeriodId": "2020-2021",
+    //           "GrandTotal": total,
+    //           "IsIncludeEnrollment": false,
+    //           "KnetpaymentAmount": total,
+    //           "OffSet": -330,
+    //           "OpeningBalance": 0,
+    //           "StudentId": child.studentid,
+    //           "Paymentid": 0
+    //         })
+    //     .toList();
+    String Year = "2020-2021";
+    print(Year.runtimeType);
+    var newreq = [
+      {
+        "AcademicPeriodId": "2020",
+        "GrandTotal": 2402,
+        "IsIncludeEnrollment": false,
+        "KnetpaymentAmount": 2402,
+        "OffSet": -330,
+        "OpeningBalance": 0,
+        "StudentId": 2920,
+        "Paymentid": 0
+      }
+    ];
 
-    // "AcademicPeriodId": "2020-2021",
-    // "GrandTotal" : 2402,
-    // "IsIncludeEnrollment" : false,
-    // "KnetpaymentAmount" : 2402,
-    // "OffSet" : -330,
-    // "OpeningBalance" : 0,
-    // "StudentId" : 2920,
-    // "Paymentid" :0
+    final response =
+        await http.post(getUrl('PostPayment'), body: newreq, headers: {
+      'Authorization': 'Bearer $token',
+    });
+
+    try {
+      print(response.body);
+      return "hyy";
+    } catch (e) {
+      print(e);
+      return "Something Wrong";
+    }
+    if (response.statusCode == 200 || response.statusCode == 400) {
+      return "hyy";
+    } else {
+      print(response.statusCode);
+      throw Exception('Failed to load data!');
+    }
+
     return "hyyooo";
-
-
-
-
   }
-
 }
-
-
 
 // class Api {
 //

@@ -148,15 +148,13 @@ class _PaymentPendingState extends State<PaymentPending> {
                                             );
                                           }).toList(),
                                         ),
-                                        Text(
-                                          'Selected Item = ' +
-                                                  '$_valueChoose' ??
-                                              "",
-                                          style: TextStyle(
-                                              fontSize: 22,
-                                              color: Colors.black),
-                                          textAlign: TextAlign.center,
-                                        ),
+                                        // Text(
+                                        //   'Selected Item = ' + '$_valueChoose',
+                                        //   style: TextStyle(
+                                        //       fontSize: 22,
+                                        //       color: Colors.black),
+                                        //   textAlign: TextAlign.center,
+                                        // ),
                                       ]));
                                     } else if (snapshot.hasError) {
                                       // return Text("${snapshot.error}");
@@ -385,12 +383,6 @@ class _PaymentPendingState extends State<PaymentPending> {
                                         );
                                       }).toList(),
                                     ),
-                                    Text(
-                                      'Selected Item = ' + '$_valueChoose',
-                                      style: TextStyle(
-                                          fontSize: 22, color: Colors.black),
-                                      textAlign: TextAlign.center,
-                                    ),
                                     Padding(
                                       padding: const EdgeInsets.all(20),
                                       child: Column(
@@ -453,6 +445,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                                       ?.response;
                                                               print(
                                                                   "helo${response.studentnumber}");
+
                                                               return Installment(
                                                                   data:
                                                                       response);
@@ -598,7 +591,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                             print(statuscode);
                             if (statuscode == "200") {
                               var response = snapshot.data?.response;
-                              print("helo${response.studentnumber}");
+                              // print("helo${response.studentnumber}");
                               return Installment(data: response);
                               // return response.length > 0
                               //     ? ListView.builder(

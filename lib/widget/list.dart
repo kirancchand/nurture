@@ -736,7 +736,7 @@ class Installment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("paymnt pending ${data.studentname}");
+    // print("paymnt pending ${data.studentname}");
     return ListTile(
       title: Text("Installment 1"),
       subtitle: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

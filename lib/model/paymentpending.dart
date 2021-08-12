@@ -32,12 +32,10 @@ class PaymentPendingResponse {
     this.absopeningbalance,
     this.row,
     this.arabstudentname,
-    this.feetypeid,
     this.studentid,
     this.dueamount,
     this.academicyear,
     this.parentnumber,
-    this.feetypename,
   });
 
   int paymentid;
@@ -51,12 +49,10 @@ class PaymentPendingResponse {
   double absopeningbalance;
   int row;
   String arabstudentname;
-  int feetypeid;
   int studentid;
   double dueamount;
   String academicyear;
   String parentnumber;
-  String feetypename;
 
   factory PaymentPendingResponse.fromJson(Map<String, dynamic> json) =>
       PaymentPendingResponse(
@@ -71,12 +67,10 @@ class PaymentPendingResponse {
         absopeningbalance: json["absopeningbalance"] ?? "",
         row: json["row"] ?? "",
         arabstudentname: json["arabstudentname"] ?? "",
-        feetypeid: json["feetypeid"] ?? "",
         studentid: json["studentid"] ?? "",
         dueamount: json["dueamount"] ?? "",
         academicyear: json["academicyear"] ?? "",
         parentnumber: json["parentnumber"] ?? "",
-        feetypename: json["feetypename"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -91,12 +85,10 @@ class PaymentPendingResponse {
         "absopeningbalance": absopeningbalance,
         "row": row,
         "arabstudentname": arabstudentname,
-        "feetypeid": feetypeid,
         "studentid": studentid,
         "dueamount": dueamount,
         "academicyear": academicyear,
         "parentnumber": parentnumber,
-        "feetypename": feetypename,
       };
 }
 

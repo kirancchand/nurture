@@ -70,13 +70,14 @@ class StudentResponse {
     this.studntcode,
     this.grade,
     this.schoolname,
+    this.academicyear,
   });
 
   int studentid;
   String studentname;
   String studentnumber;
   int userid;
-  String birthdate;
+  DateTime birthdate;
   bool isguardian;
   String gender;
   String contactphonenumber;
@@ -96,11 +97,12 @@ class StudentResponse {
   bool issameforaddress;
   String arabstudentname;
   String isprimarycontact;
-  double uniformfee ;
+  double uniformfee;
   String religion;
   String studntcode;
   String grade;
   String schoolname;
+  String academicyear;
 
   factory StudentResponse.fromJson(Map<String, dynamic> json) =>
       StudentResponse(
@@ -108,7 +110,7 @@ class StudentResponse {
         studentname: json["studentname"] ?? "",
         studentnumber: json["studentnumber"] ?? "",
         userid: json["userid"] ?? "",
-        birthdate: json["birthdate"] ?? "",
+        birthdate: DateTime.parse(json["birthdate"]) ?? "",
         isguardian: json["isguardian"] ?? "",
         gender: json["gender"] ?? "",
         contactphonenumber: json["contactphonenumber"] ?? "",
@@ -133,9 +135,10 @@ class StudentResponse {
         studntcode: json["studntcode"] ?? "",
         grade: json["grade"] ?? "",
         schoolname: json["schoolname"] ?? "",
+        academicyear: json["academicyear"] ?? "",
       );
 
- // String get civilid => null;
+  // String get civilid => null;
 
   Map<String, dynamic> toJson() => {
         "studentid": studentid,
@@ -167,6 +170,7 @@ class StudentResponse {
         "studntcode": studntcode,
         "grade": grade,
         "schoolname": schoolname,
+        "academicyear": academicyear,
       };
 }
 
@@ -184,7 +188,6 @@ class ParentResponse {
     this.arabicname,
     this.dob,
     this.nationality,
-
   });
 
   String name;
@@ -208,7 +211,7 @@ class ParentResponse {
         emailid: json["emailid"] ?? "",
         addressline: json["addressline"] ?? "",
         regionalarea: json["regionalarea"] ?? "",
-       passportnumber: json["passportnumber"] ?? "",
+        passportnumber: json["passportnumber"] ?? "",
         type: json["type"] ?? "",
         arabicname: json["arabicname"] ?? "",
         dob: json["dob"] ?? "",
@@ -230,7 +233,6 @@ class ParentResponse {
       };
 }
 
-
 class StudentParse {
   final String AcademicPeriodId;
   final int GrandTotal;
@@ -241,10 +243,26 @@ class StudentParse {
   final int StudentId;
   final int Paymentid;
 
-  StudentParse({this.AcademicPeriodId, this.GrandTotal,this.IsIncludeEnrollment,this.KnetpaymentAmount,this.OffSet,this.OpeningBalance,this.StudentId,this.Paymentid});
+  StudentParse(
+      {this.AcademicPeriodId,
+      this.GrandTotal,
+      this.IsIncludeEnrollment,
+      this.KnetpaymentAmount,
+      this.OffSet,
+      this.OpeningBalance,
+      this.StudentId,
+      this.Paymentid});
 
   factory StudentParse.fromJson(Map<String, dynamic> json) {
-    return StudentParse(AcademicPeriodId: json['AcademicPeriodId'], GrandTotal: json['GrandTotal'], IsIncludeEnrollment: json['IsIncludeEnrollment'], KnetpaymentAmount: json['KnetpaymentAmount'],OffSet: json['OffSet'], OpeningBalance: json['OpeningBalance'], StudentId: json['StudentId'], Paymentid: json['Paymentid']);
+    return StudentParse(
+        AcademicPeriodId: json['AcademicPeriodId'],
+        GrandTotal: json['GrandTotal'],
+        IsIncludeEnrollment: json['IsIncludeEnrollment'],
+        KnetpaymentAmount: json['KnetpaymentAmount'],
+        OffSet: json['OffSet'],
+        OpeningBalance: json['OpeningBalance'],
+        StudentId: json['StudentId'],
+        Paymentid: json['Paymentid']);
   }
 
   // Override toString to have a beautiful log of student object
@@ -254,13 +272,13 @@ class StudentParse {
   }
 
   Map<String, dynamic> toJson() => {
-    "AcademicPeriodId": AcademicPeriodId,
-    "GrandTotal": GrandTotal,
-    "IsIncludeEnrollment": IsIncludeEnrollment,
-    "KnetpaymentAmount": KnetpaymentAmount,
-    "OffSet": OffSet,
-    "OpeningBalance": OpeningBalance,
-    "StudentId": StudentId,
-    "Paymentid": Paymentid,
-  };
+        "AcademicPeriodId": AcademicPeriodId,
+        "GrandTotal": GrandTotal,
+        "IsIncludeEnrollment": IsIncludeEnrollment,
+        "KnetpaymentAmount": KnetpaymentAmount,
+        "OffSet": OffSet,
+        "OpeningBalance": OpeningBalance,
+        "StudentId": StudentId,
+        "Paymentid": Paymentid,
+      };
 }

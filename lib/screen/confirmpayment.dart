@@ -165,7 +165,10 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                                       ],
                                     ),
                                     Text(
-                                      "100 KD",
+                                      // widget.childrens[index].,
+                                      widget.childrens[index].enrollmentamount
+                                              .toString() ??
+                                          '',
                                       style: TextStyle(color: Colors.grey),
                                     )
                                   ],
@@ -233,6 +236,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
               onTap: () async {
                 var lists = await convert();
                 var data = await submitConfirmPayment(lists);
+
                 // print(data);
               },
             ),

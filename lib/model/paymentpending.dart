@@ -2,7 +2,7 @@ import 'dart:convert';
 
 class PaymentPendingResponseModel {
   final String statuscode;
-  final List<PaymentPendingResponse> response;
+  final PaymentPendingResponse response;
   final String message;
 
   PaymentPendingResponseModel({this.statuscode, this.response, this.message});
@@ -10,8 +10,7 @@ class PaymentPendingResponseModel {
   factory PaymentPendingResponseModel.fromJson(Map<String, dynamic> json) {
     return PaymentPendingResponseModel(
       statuscode: json["statuscode"],
-      response: List<PaymentPendingResponse>.from(
-          json["response"].map((x) => PaymentPendingResponse.fromJson(x))),
+      response: PaymentPendingResponse.fromJson(json["response"]),
       // response: Response.fromJson(json["response"]),
       message: json["message"],
     );

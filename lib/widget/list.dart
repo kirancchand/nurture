@@ -736,11 +736,7 @@ class Installment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    print(data.studentname);
-=======
     print("paymnt pending ${data.studentname}");
->>>>>>> 23c0c6a2579dfbaf9d7013aca9aad86731b0c0e8
     return ListTile(
       title: Text("Installment 1"),
       subtitle: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -773,74 +769,6 @@ Widget list_txt(String txt, {bool isSelected = false}) {
   );
 }
 
-<<<<<<< HEAD
-// class paymentList extends StatefulWidget {
-//   paymentList({Key key, this.data}) : super(key: key);
-
-//   dynamic data;
-//   @override
-//   _paymentListState createState() => _paymentListState();
-// }
-
-// class _paymentListState extends State<paymentList> {
-//   bool enrollment = false;
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.only(bottom: 10, top: 15),
-//       child: Column(
-//         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//         children: [
-//           Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//             children: [
-//               Text(widget.data.studentname),
-//               Text(widget.data.dueamount.toString()),
-//             ],
-//           ),
-//           Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//             children: [
-//               Row(
-//                 children: [
-//                   Checkbox(
-//                     value: enrollment,
-//                     onChanged: (value) {
-//                       setState(() {
-//                         this.enrollment = value;
-//                       });
-//                     },
-//                     side: BorderSide(color: Colors.green),
-//                     shape: CircleBorder(),
-//                     activeColor: Colors.green,
-//                   ),
-//                   Text(
-//                     "  Enrollment",
-//                     style: TextStyle(color: Colors.grey),
-//                   ),
-//                 ],
-//               ),
-//               Text(
-//                 "100 KD",
-//                 style: TextStyle(color: Colors.grey),
-//               )
-//             ],
-//           ),
-//           Divider(
-//             color: Colors.grey[200],
-//           ),
-//         ],
-//       ),
-//       // ],
-//       // ),
-//     );
-//     //  )
-//     //],
-//     // ),
-//     // );
-//   }
-// }
-=======
 class paymentList extends StatefulWidget {
   paymentList({Key key, this.data}) : super(key: key);
 
@@ -907,4 +835,3 @@ class _paymentListState extends State<paymentList> {
     // );
   }
 }
->>>>>>> 23c0c6a2579dfbaf9d7013aca9aad86731b0c0e8

@@ -124,7 +124,7 @@ class _NotificationsState extends State<Notifications> {
                                               setState(() {
                                                 controller.text.value =
                                                     newValue;
-                                                print(_valueChoose);
+                                                // print(_valueChoose);
                                               });
                                               Navigator.pushReplacement(
                                                 context,

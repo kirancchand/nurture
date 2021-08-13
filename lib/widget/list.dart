@@ -738,32 +738,41 @@ class Installment extends StatelessWidget {
       this.data})
       : super(key: key);
   // String txt;
-  PaymentPendingResponse data;
+  // PaymentPendingResponse data;
+  // int index;
+  InstallmentResponse data;
 
   @override
   Widget build(BuildContext context) {
+    // return Text("hyy");
     // print("paymnt pending ${data.studentname}");
-    return ListTile(
-      title: Text("Installment 1"),
-      subtitle: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        ListView.builder(
-          itemCount: 3,
-          shrinkWrap: true,
-          physics: ClampingScrollPhysics(),
-          itemBuilder: (context, int index) {
-            return Padding(
-              padding: const EdgeInsets.only(top: 5, bottom: 3),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  list_txt("Tution", isSelected: true),
-                  list_txt(data.studentname)
-                ],
-              ),
-            );
-          },
-        ),
-      ]),
+    return Padding(
+      padding: const EdgeInsets.only(top: 5, bottom: 3),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              list_txt("Tution", isSelected: true),
+              // list_txt(data.tuitionfee.toString()),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              list_txt("Transportation", isSelected: true),
+              // list_txt(data.transportfee.toString())
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              list_txt("Others", isSelected: true),
+              // list_txt(data.others.toString())
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

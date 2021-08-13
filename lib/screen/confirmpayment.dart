@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nurture/common/constants.dart';
+import 'package:nurture/model/payment.dart';
 import 'package:nurture/screen/PaymentWebPage.dart';
 import 'package:nurture/widget/actions.dart';
 
@@ -26,14 +27,22 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
     return paymentlist.map((e) => e.toMap()).toList();
   }
 
-  addPaymentlist({int sid1 = 2920, double total = 100.0, int index1, int i}) {
+  addPaymentlist({
+    int sid1,
+    double total,
+    int index1,
+    int i,
+  }) {
     // x = paymentlist.map((e) => e.index).toList();
     // var i = x.indexOf(index1);
     setState(
       () {
         if (i == 1) {
           paymentlist.add(
-            Abcd(total: total, sid: sid1),
+            Abcd(
+              total: total,
+              sid: sid1,
+            ),
           );
         } else {
           paymentlist.removeAt(index1);
@@ -42,7 +51,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
       },
     );
     // print(x.length);
-    print(paymentlist.length);
+    // print(paymentlist.length);
   }
 
   @override
@@ -106,7 +115,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                         physics: ClampingScrollPhysics(),
                         itemBuilder: (context, int index) {
                           print(widget.childrens[index].studentname);
-                          total = total + widget.childrens[index].dueamount;
+
                           return Padding(
                             padding: EdgeInsets.only(bottom: 10, top: 15),
                             child: Column(
@@ -135,15 +144,20 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                                             setState(() {
                                               this.enrollment[index] = value;
                                               if (value == true) {
+                                                total = total +
+                                                    widget.childrens[index]
+                                                        .dueamount;
                                                 addPaymentlist(
                                                     i: 1,
                                                     total: total,
-                                                    index1: index
-                                                    // sid1: widget
-                                                    //     .childrens[index]
-                                                    //     .studentname
-                                                    );
+                                                    index1: index,
+                                                    sid1: widget
+                                                        .childrens[index]
+                                                        .studentid);
                                               } else {
+                                                total = total -
+                                                    widget.childrens[index]
+                                                        .dueamount;
                                                 addPaymentlist(
                                                     i: 0,
                                                     total: total,
@@ -236,13 +250,17 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
               ),
               onTap: () async {
                 var lists = await convert();
-                var data = await submitConfirmPayment(lists);
+                print(lists);
+                Payment data = await submitConfirmPayment(lists);
+                // print(data.response);
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => PaymentWebPage(
-                              link: '',
-                            )));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PaymentWebPage(
+                      link: data.response ?? "",
+                    ),
+                  ),
+                );
                 // print(data);
               },
             ),
@@ -278,15 +296,20 @@ class Abcd {
   double total;
   int sid;
   int index;
-  Abcd({this.total, this.sid, this.index});
+
+  Abcd({
+    this.total,
+    this.sid,
+    this.index,
+  });
   Map<String, dynamic> toMap() => {
         "AcademicPeriodId": "2020-2021",
-        "GrandTotal": 2402,
+        "GrandTotal": total,
         "IsIncludeEnrollment": false,
-        "KnetpaymentAmount": 2402,
+        "KnetpaymentAmount": total,
         "OffSet": 330,
         "OpeningBalance": 0,
-        "StudentId": 2920,
+        "StudentId": sid,
         "Paymentid": 0
       };
 }

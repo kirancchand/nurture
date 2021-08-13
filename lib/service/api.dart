@@ -88,6 +88,7 @@ class Api {
     print(response.body);
     if (response.statusCode == 200 || response.statusCode == 400) {
       print("valueChoose");
+      print(queryParameters);
       print(valueChoose);
       return PaymentPendingResponseModel.fromJson(json.decode(response.body));
     } else {

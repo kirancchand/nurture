@@ -217,7 +217,7 @@ class ParentResponse {
         arabicname: json["arabicname"] ?? "",
         dob: json["dob"] ?? "",
         nationality: json["nationality"] ?? "",
-       // parentcivilexpirydate: json["parentcivilexpirydate"] ?? "",
+        // parentcivilexpirydate: json["parentcivilexpirydate"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -232,7 +232,7 @@ class ParentResponse {
         "arabicname": arabicname,
         "dob": dob,
         "nationality": nationality,
-       // "parentcivilexpirydate":parentcivilexpirydate,
+        // "parentcivilexpirydate":parentcivilexpirydate,
       };
 }
 

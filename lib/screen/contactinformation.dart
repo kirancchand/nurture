@@ -12,12 +12,11 @@ import 'package:nurture/model/login_model.dart';
 import 'package:nurture/widget/spinner.dart';
 
 class ContactInformation extends StatefulWidget {
-   ContactInformation({Key key}) : super(key: key);
-   List<StudentResponse> childrens = Get.arguments;
+  ContactInformation({Key key}) : super(key: key);
+  List<StudentResponse> childrens = Get.arguments;
 
   @override
   _ContactInformationState createState() => _ContactInformationState();
-
 }
 
 class _ContactInformationState extends State<ContactInformation> {
@@ -25,20 +24,25 @@ class _ContactInformationState extends State<ContactInformation> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   StudentContactRequestModel studentContactRequestModel;
   LoginRequestModel loginRequestModel;
+  bool choose = false;
 
   @override
   void initState() {
     super.initState();
-    studentContactRequestModel = new StudentContactRequestModel(studentname: '', studentemail: '',studentphonenumber:'',studentissuesubject:'',studentinquiry:'');
+    studentContactRequestModel = new StudentContactRequestModel(
+        studentname: '',
+        studentemail: '',
+        studentphonenumber: '',
+        studentissuesubject: '',
+        studentinquiry: '');
     loginRequestModel = new LoginRequestModel(Username: '', Password: '');
   }
-
 
   @override
   Widget build(BuildContext context) {
     // debugPrint("${widget.childrens[0].studentname}");
     return Spinner(
-    child:Scaffold(
+        child: Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
@@ -65,62 +69,131 @@ class _ContactInformationState extends State<ContactInformation> {
           ])),
         ),
       ),
-      body: 
-    ListView(
-           children: [
-             Padding(
-               padding: const EdgeInsets.all(20),
-               child:Container(
-                 child:Form(
-                   key: formKey,
-                   child: Center(
-                     child: Column(
-                       mainAxisAlignment: MainAxisAlignment.center,
-                       children: <Widget>[
-                         DropdownButton(
-                           isExpanded: true,
-                           icon: Icon(
-                             Icons.keyboard_arrow_down_outlined,
-                             color: kColorGreen,
-                           ),
-                           value: studentContactRequestModel.studentid,
-                           hint:Align(
-                             alignment: Alignment.centerLeft,
-                             child: Text(
-                               "Select Student",
-                               style: TextStyle(color: Colors.grey),
-                             ),
-                           ),
-                           onChanged: (newValue) {
-                             setState(() {
-                               // _valueChoose = newValue;
-                               studentContactRequestModel.studentid=newValue;
-                             });
-                           },
-                           items: widget.childrens.map((valueItem) {
-                             return DropdownMenuItem(
-                               value: valueItem.studentid,
-                               child: Text(valueItem.studentname),
-                             );
-                           }).toList(),
-                         ),
-                         Column(
-                             children:contactReqInputs(studentContactRequestModel)
-                         ),
-                         Column(
-                             children:contactReqButton(formKey,studentContactRequestModel)
-                         )
-                       ],
-                     ),
-                   ),
-                 ),
-               )
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: ListView(
+          children: [
+            /*Text("Enquiry type"),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                GestureDetector(
+                  child: CircleAvatar(
+                      radius: 11,
+                      backgroundColor: kColorGreen,
+                      child: choose
+                          ? CircleAvatar(
+                              radius: 10,
+                              backgroundColor: Colors.white,
+                              child: CircleAvatar(
+                                radius: 8,
+                                backgroundColor: kColorGreen,
+                              ),
+                            )
+                          : CircleAvatar(
+                                radius:10,
+                                backgroundColor: Colors.white,
+                              )),
+                  onTap: () {
+                    setState(() {
+                      
+                      print("object");
+                    });
+                  },
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  "General",
+                  style: TextStyle(color: kColorGreen),
+                ),
+                SizedBox(
+                  width: 47.3,
+                ),
+                CircleAvatar(
+                  radius: 11,
+                  backgroundColor: kColorGreen,
+                  child: CircleAvatar(
+                    radius: 10,
+                    backgroundColor: Colors.white,
+                    child: CircleAvatar(
+                      radius: 8,
+                      backgroundColor: kColorGreen,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  "Student",
+                  style: TextStyle(color: kColorGreen),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),*/
 
-             ),
-           ],
-         ),
-      
-    )
-    );
+            // Padding(
+            // padding: const EdgeInsets.all(20),
+            // child:
+            Container(
+              child: Form(
+                key: formKey,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      DropdownButton(
+                        isExpanded: true,
+                        icon: Icon(
+                          Icons.keyboard_arrow_down_outlined,
+                          color: kColorGreen,
+                        ),
+                        value: studentContactRequestModel.studentid,
+                        hint: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Select Student",
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ),
+                        onChanged: (newValue) {
+                          setState(() {
+                            // _valueChoose = newValue;
+                            studentContactRequestModel.studentid = newValue;
+                          });
+                        },
+                        items: widget.childrens.map((valueItem) {
+                          return DropdownMenuItem(
+                            value: valueItem.studentid,
+                            child: Text(valueItem.studentname),
+                          );
+                        }).toList(),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Column(
+                          children:
+                              contactReqInputs(studentContactRequestModel)),
+                      Column(
+                          children: contactReqButton(
+                              formKey, studentContactRequestModel))
+                    ],
+                  ),
+                ),
+              ),
+            )
+
+            // ),
+          ],
+        ),
+      ),
+    ));
   }
 }

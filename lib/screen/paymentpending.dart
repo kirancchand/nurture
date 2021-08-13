@@ -44,7 +44,7 @@ class _PaymentPendingState extends State<PaymentPending> {
             ? childrens[0].studentid.toString()
             : controller.text.value;
       });
-
+      getPayment = api.getPendingPayment(_valueChoose);
       return student;
     });
     //studentContactRequestModel = new StudentContactRequestModel();
@@ -234,19 +234,21 @@ class _PaymentPendingState extends State<PaymentPending> {
                                       if (statuscode == "200") {
                                         var response = snapshot.data?.response;
                                         // print("helo${response.studentnumber}");
-                                        return Installment(data: response);
-                                        // return response.length > 0
-                                        //     ? ListView.builder(
-                                        //         itemCount: response.length,
-                                        //         shrinkWrap: true,
-                                        //         physics: ClampingScrollPhysics(),
-                                        //         itemBuilder: (context, int index) {
-                                        //           print(response[index].studentname);
-                                        //           // data:response[index]
-                                        //           return Installment(data:response[index]);
-                                        //         },
-                                        // )
-                                        //     : Center(child: Text("No Data"));
+                                        // return Installment(data: response);
+                                        //
+                                        return response.installment.length > 0
+                                            ? ListView.builder(
+                                                itemCount: response.installment.length,
+                                                shrinkWrap: true,
+                                                physics: ClampingScrollPhysics(),
+                                                itemBuilder: (context, int index) {
+                                                  print("response.installment[index]");
+                                                  // data:response[index]
+                                                  // return Text("hey");
+                                                  return Installment(data:response.installment[index]);
+                                                },
+                                        )
+                                            : Center(child: Text("No Data"));
                                       } else {
                                         return Text("No Data Founds");
                                       }
@@ -446,21 +448,21 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                               print(
                                                                   "helo${response.studentnumber}");
 
-                                                              return Installment(
-                                                                  data:
-                                                                      response);
-                                                              // return response.length > 0
-                                                              //     ? ListView.builder(
-                                                              //         itemCount: response.length,
-                                                              //         shrinkWrap: true,
-                                                              //         physics: ClampingScrollPhysics(),
-                                                              //         itemBuilder: (context, int index) {
-                                                              //           print(response[index].studentname);
-                                                              //           // data:response[index]
-                                                              //           return Installment(data:response[index]);
-                                                              //         },
-                                                              // )
-                                                              //     : Center(child: Text("No Data"));
+                                                              // return Installment(
+                                                              //     data:
+                                                              //         response.installment[index]);
+                                                              return response.installment.length > 0
+                                                                  ? ListView.builder(
+                                                                      itemCount: response.installment.length,
+                                                                      shrinkWrap: true,
+                                                                      physics: ClampingScrollPhysics(),
+                                                                      itemBuilder: (context, int index) {
+                                                                        print(response.installment[index]);
+                                                                        // data:response[index]
+                                                                        return Installment(data:response.installment[index]);
+                                                                      },
+                                                              )
+                                                                  : Center(child: Text("No Data"));
                                                             } else if (snapshot
                                                                 .hasError) {
                                                               // return Text("${snapshot.error}");
@@ -553,6 +555,8 @@ class _PaymentPendingState extends State<PaymentPending> {
   }
 
   Widget _installmentSection() {
+    print("hai");
+
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -592,19 +596,19 @@ class _PaymentPendingState extends State<PaymentPending> {
                             if (statuscode == "200") {
                               var response = snapshot.data?.response;
                               // print("helo${response.studentnumber}");
-                              return Installment(data: response);
-                              // return response.length > 0
-                              //     ? ListView.builder(
-                              //         itemCount: response.length,
-                              //         shrinkWrap: true,
-                              //         physics: ClampingScrollPhysics(),
-                              //         itemBuilder: (context, int index) {
-                              //           print(response[index].studentname);
-                              //           // data:response[index]
-                              //           return Installment(data:response[index]);
-                              //         },
-                              // )
-                              //     : Center(child: Text("No Data"));
+                              // return Installment(data: response);
+                              return response.installment.length > 0
+                                  ? ListView.builder(
+                                      itemCount: response.installment.length,
+                                      shrinkWrap: true,
+                                      physics: ClampingScrollPhysics(),
+                                      itemBuilder: (context, int index) {
+                                        // print(response[index].studentname);
+                                        // data:response[index]
+                                        return Installment(data:response.installment[index]);
+                                      },
+                              )
+                                  : Center(child: Text("No Data"));
                             } else if (snapshot.hasError) {
                               // return Text("${snapshot.error}");
                               return Text("${snapshot.error}");

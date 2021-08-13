@@ -87,6 +87,8 @@ class Api {
     // final response = await http.get(Uri.parse(url));
     print(response.body);
     if (response.statusCode == 200 || response.statusCode == 400) {
+      print("valueChoose");
+      print(valueChoose);
       return PaymentPendingResponseModel.fromJson(json.decode(response.body));
     } else {
       throw Exception('Failed to load data!');

@@ -5,8 +5,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 Color colorblue = Color(0xff2682AB);
 const kColorGreen = Color(0xff43CEA2);
-const kColorGradiant = [Color(0xff43CEA2),Color(0xff279DD4)];
-getUrl(String s) => Uri.parse("http://schbackend.azurewebsites.net/api/apps/$s");
+const kColorGradiant = [Color(0xff43CEA2), Color(0xff279DD4)];
+getUrl(String s) =>
+    Uri.parse("http://schbackend.azurewebsites.net/api/apps/$s");
 
 height(context) {
   return MediaQuery.of(context).size.height;
@@ -15,7 +16,6 @@ height(context) {
 width(context) {
   return MediaQuery.of(context).size.width;
 }
-
 
 toastFn({String comment}) {
   return Fluttertoast.showToast(

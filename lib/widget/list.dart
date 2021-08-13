@@ -333,30 +333,31 @@ class StudentInfoList extends StatefulWidget {
 class _StudentInfoListState extends State<StudentInfoList> {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Padding(
-            padding:
-                const EdgeInsets.only(top: 25, left: 18, right: 18, bottom: 10),
-            child: Stack(children: [
+    return Container(
+      margin: EdgeInsets.only(right: 20, left: 20, top: 20),
+      child: ListView(
+        children: [
+          Stack(
+            children: [
               Align(
                 child: Container(
                   height: MediaQuery.of(context).size.height * .61,
-                  width: MediaQuery.of(context).size.width,
+                  width: MediaQuery.of(context).size.width - 40,
                 ),
               ),
               Positioned(
                 bottom: 0,
                 child: Container(
-                    height: MediaQuery.of(context).size.height * .60,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                        border:
-                            Border.all(color: Colors.grey.shade300, width: 1),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Row(children: [
+                  height: MediaQuery.of(context).size.height * .60,
+                  width: MediaQuery.of(context).size.width - 40,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey.shade300, width: 1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Row(
+                    children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 15, right: 20),
+                        padding: EdgeInsets.only(left: 15, right: 20),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -386,7 +387,11 @@ class _StudentInfoListState extends State<StudentInfoList> {
                               widget.data.studentname,
                             ),
                             Text(widget.data.gender),
-                            Text(widget.data.birthdate),
+                            Text(widget.data.birthdate.day.toString() +
+                                "/" +
+                                widget.data.birthdate.month.toString() +
+                                "/" +
+                                widget.data.birthdate.year.toString()),
                             Text(widget.data.schoolname),
                             Text(widget.data.grade),
                             Text("pending"),
@@ -399,13 +404,15 @@ class _StudentInfoListState extends State<StudentInfoList> {
                           ],
                         ),
                       )
-                    ])),
+                    ],
+                  ),
+                ),
               ),
               Positioned(
                 left: 15,
                 top: 0,
                 child: Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
+                  padding: EdgeInsets.only(bottom: 8),
                   child: Container(
                     height: 20,
                     width: 83,
@@ -417,93 +424,91 @@ class _StudentInfoListState extends State<StudentInfoList> {
                   ),
                 ),
               ),
-            ])),
-        ListView.builder(
-          itemCount: 2,
-          shrinkWrap: true,
-          physics: ClampingScrollPhysics(),
-          itemBuilder: (context, int index) {
-            return Parentlist(widget.parents, index);
-          },
-        ),
-      ],
+            ],
+          ),
+          ListView.builder(
+            itemCount: 2,
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemBuilder: (context, int index) {
+              return Parentlist(widget.parents, index);
+            },
+          ),
+        ],
+      ),
     );
   }
 
   Widget Parentlist(List<ParentResponse> parents, int index) {
-    return Column(
-      children: [
-        Padding(
-            padding:
-                const EdgeInsets.only(top: 25, left: 18, right: 18, bottom: 10),
-            child: Stack(children: [
-              Align(
-                child: Container(
-                  height: 210,
-                  // height: MediaQuery.of(context).size.height * .61,
-                  width: MediaQuery.of(context).size.width,
-                ),
+    return Container(
+      margin: EdgeInsets.only(top: 30),
+      child: Column(
+        children: [
+          Stack(children: [
+            Align(
+              child: Container(
+                height: 210,
+                // height: MediaQuery.of(context).size.height * .61,
               ),
-              Positioned(
-                bottom: 0,
-                child: Container(
-                    height: 200,
-                    // height: MediaQuery.of(context).size.height * .60,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                        border:
-                            Border.all(color: Colors.grey.shade300, width: 1),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Row(children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15, right: 20),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            txt("Name"),
-                            txt("Nationality"),
-                            txt("Civil id"),
-                            txt("Civil idExpiry date"),
-                            txt("Email address"),
-                            txt("Address"),
-                          ],
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      Column(
+            ),
+            Positioned(
+              bottom: 0,
+              child: Container(
+                  height: 200,
+                  width: MediaQuery.of(context).size.width - 40,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade300, width: 1),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Row(children: [
+                    Padding(
+                      padding: EdgeInsets.only(left: 15, right: 20),
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(widget.parents[index].name),
-                          Text("pending"),
-                          Text(widget.parents[index].civilid),
-                          Text("pending"),
-                         // Text(widget.parents[index].parentcivilexpirydate),
-                          Text(widget.parents[index].emailid),
-                          Text(widget.parents[index].regionalarea)
+                          txt("Name"),
+                          txt("Nationality"),
+                          txt("Civil id"),
+                          txt("Civil idExpiry date"),
+                          txt("Email address"),
+                          txt("Address"),
                         ],
-                      )
-                    ])),
-              ),
-              Positioned(
-                left: 15,
-                top: 0,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Container(
-                    height: 20,
-                    width: 83,
-                    color: Colors.white,
-                    child: Text(
-                      widget.parents[index].type + " info",
-                      style: TextStyle(color: kColorGreen),
+                      ),
                     ),
+                    SizedBox(width: 10),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(widget.parents[index].name),
+                        Text("pending"),
+                        Text(widget.parents[index].civilid),
+                        Text("pending"),
+                        Text(widget.parents[index].emailid),
+                        Text(widget.parents[index].regionalarea)
+                      ],
+                    )
+                  ])),
+            ),
+            Positioned(
+              left: 15,
+              top: 0,
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 8),
+                child: Container(
+                  height: 20,
+                  width: 83,
+                  color: Colors.white,
+                  child: Text(
+                    widget.parents[index].type + " info",
+                    style: TextStyle(color: kColorGreen),
                   ),
                 ),
               ),
-            ])),
-      ],
+            ),
+          ]),
+        ],
+      ),
     );
   }
 
@@ -739,7 +744,7 @@ class Installment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("paymnt pending ${data.studentname}");
+    // print("paymnt pending ${data.studentname}");
     return ListTile(
       title: Text("Installment 1"),
       subtitle: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

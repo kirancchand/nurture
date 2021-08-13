@@ -10,7 +10,9 @@ class PaymentPendingResponseModel {
   factory PaymentPendingResponseModel.fromJson(Map<String, dynamic> json) {
     return PaymentPendingResponseModel(
       statuscode: json["statuscode"],
-      response: PaymentPendingResponse.fromJson(json["response"]),
+      response: json["statuscode"] != '200'
+          ? PaymentPendingResponse()
+          : PaymentPendingResponse.fromJson(json["response"]),
       // response: Response.fromJson(json["response"]),
       message: json["message"],
     );
@@ -30,16 +32,10 @@ class PaymentPendingResponse {
     this.absopeningbalance,
     this.row,
     this.arabstudentname,
-    this.feetypeid,
     this.studentid,
     this.dueamount,
     this.academicyear,
     this.parentnumber,
-    this.feetypename,
-    this.tuitionfee,
-    this.transportfee,
-    this.enrollment,
-    this.others,
   });
 
   int paymentid;
@@ -53,16 +49,10 @@ class PaymentPendingResponse {
   double absopeningbalance;
   int row;
   String arabstudentname;
-  int feetypeid;
   int studentid;
   double dueamount;
   String academicyear;
   String parentnumber;
-  String feetypename;
-  double tuitionfee;
-  double transportfee;
-  double enrollment;
-  double others;
 
   factory PaymentPendingResponse.fromJson(Map<String, dynamic> json) =>
       PaymentPendingResponse(
@@ -77,16 +67,10 @@ class PaymentPendingResponse {
         absopeningbalance: json["absopeningbalance"] ?? "",
         row: json["row"] ?? "",
         arabstudentname: json["arabstudentname"] ?? "",
-        feetypeid: json["feetypeid"] ?? "",
         studentid: json["studentid"] ?? "",
         dueamount: json["dueamount"] ?? "",
         academicyear: json["academicyear"] ?? "",
         parentnumber: json["parentnumber"] ?? "",
-        feetypename: json["feetypename"] ?? "",
-        tuitionfee: json["tuitionfee"] ?? "",
-        transportfee: json["transportfee"] ?? "",
-        enrollment: json["enrollment"] ?? "",
-        others: json["others"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -101,16 +85,10 @@ class PaymentPendingResponse {
         "absopeningbalance": absopeningbalance,
         "row": row,
         "arabstudentname": arabstudentname,
-        "feetypeid": feetypeid,
         "studentid": studentid,
         "dueamount": dueamount,
         "academicyear": academicyear,
         "parentnumber": parentnumber,
-        "feetypename": feetypename,
-        "tuitionfee": tuitionfee,
-        "transportfee": transportfee,
-        "enrollment": enrollment,
-        "others": others,
       };
 }
 

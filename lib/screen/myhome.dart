@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
@@ -11,6 +10,7 @@ import 'package:nurture/common/constants.dart';
 import 'package:nurture/model/student.dart';
 import 'package:nurture/model/fee.dart';
 import 'package:nurture/service/api.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MyHome extends StatefulWidget {
   const MyHome({Key key}) : super(key: key);
@@ -53,6 +53,12 @@ class _MyHomeState extends State<MyHome> {
     super.initState();
     getStudents = api.getStudent().then((student) {
       childrens = student.response.childrens;
+      print('academic yaea');
+      print(student.response.childrens[0].academicyear);
+      Future.delayed(Duration(seconds: 1)).then((value) async {
+        SharedPreferences pref = await SharedPreferences.getInstance();
+        pref.setString("ay", student.response.childrens[0].academicyear);
+      });
       return student;
     });
     getFee = api.getFee();
@@ -178,10 +184,30 @@ class _MyHomeState extends State<MyHome> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text("Students"),
-                                    Text(
-                                      "Academic year: 2021-2022",
-                                      style: TextStyle(
-                                          color: Colors.grey, fontSize: 11),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "Academic year:",
+                                          style: TextStyle(
+                                              color: Colors.grey, fontSize: 11),
+                                        ),
+                                        FutureBuilder<SharedPreferences>(
+                                          future:
+                                              SharedPreferences.getInstance(),
+                                          builder: (context, snapshot) {
+                                            if (snapshot.hasData) {
+                                              return Text(
+                                                snapshot.data.getString('ay') ??
+                                                    "",
+                                                style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 11),
+                                              );
+                                            } else
+                                              return CircularProgressIndicator();
+                                          },
+                                        ),
+                                      ],
                                     )
                                   ],
                                 ),
@@ -290,45 +316,30 @@ class _MyHomeState extends State<MyHome> {
                               print(response);
                               total = total + response[index].dueamount;
                               // return OutstandingPayment(data:response[index]);
-
-                              return Container(
-                                  height: 38,
-                                  child: ListTile(
-                                    leading: GestureDetector(
-                                        child: Container(
-                                          child: Checkbox(
-                                            value: _selectedStudent
-                                                .contains(response[index]),
-                                            onChanged: (
-                                              bool selected,
-                                            ) {
-                                              _onCategorySelected(
-                                                  selected, response[index]);
-                                            },
-                                            side:
-                                                BorderSide(color: kColorGreen),
-                                            shape: CircleBorder(),
-                                            activeColor: kColorGreen,
-                                          ),
-                                        ),
-                                        onTap: () {
-                                          print("total");
-                                          setState(() {
-                                            total = total + response[index].dueamount;
-                                          });
-                                        }),
-                                    title: Text(response[index].studentname,
-                                        style: TextStyle(
-                                            color: selectedStudent
-                                                ? kColorGreen
-                                                : Colors.grey)),
-                                    trailing: Text(
-                                        response[index].dueamount.toString(),
-                                        style: TextStyle(
-                                            color: selectedStudent
-                                                ? kColorGreen
-                                                : Colors.grey)),
-                                  ));
+                              return ListTile(
+                                leading: Checkbox(
+                                  value: _selectedStudent
+                                      .contains(response[index]),
+                                  onChanged: (bool selected) {
+                                    _onCategorySelected(
+                                        selected, response[index]);
+                                  },
+                                  side: BorderSide(color: kColorGreen),
+                                  shape: CircleBorder(),
+                                  activeColor: kColorGreen,
+                                ),
+                                title: Text(response[index].studentname,
+                                    style: TextStyle(
+                                        color: selectedStudent
+                                            ? kColorGreen
+                                            : Colors.grey)),
+                                trailing: Text(
+                                    response[index].dueamount.toString(),
+                                    style: TextStyle(
+                                        color: selectedStudent
+                                            ? kColorGreen
+                                            : Colors.grey)),
+                              );
 
                               //   ListTile(
                               //   leading: Checkbox(
@@ -364,7 +375,7 @@ class _MyHomeState extends State<MyHome> {
                 },
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(15, 25, 15, 15),
+                padding: const EdgeInsets.all(15),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [Text("Total"), Text(total.toString() + "KD")],

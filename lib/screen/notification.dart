@@ -78,7 +78,7 @@ class _NotificationsState extends State<Notifications> {
                       children: [
                         Text("Notifications",
                             style:
-                            TextStyle(color: Colors.white, fontSize: 18)),
+                                TextStyle(color: Colors.white, fontSize: 18)),
                         SizedBox(
                           height: 17,
                         ),
@@ -140,7 +140,7 @@ class _NotificationsState extends State<Notifications> {
                                                 value: valueItem.studentid
                                                     .toString(),
                                                 child:
-                                                Text(valueItem.studentname),
+                                                    Text(valueItem.studentname),
                                               );
                                             }).toList(),
                                           );
@@ -165,45 +165,45 @@ class _NotificationsState extends State<Notifications> {
             ),
             controller.text.value.isEmpty
                 ? Container(
-              child: Center(
-                child: Text('Empty'),
-              ),
-            )
+                    child: Center(
+                      child: Text('Empty'),
+                    ),
+                  )
                 : Container(
-              child: FutureBuilder<NotificationResponseModel>(
-                future: api.getNotification(controller.text.value),
-                builder: (BuildContext context,
-                    AsyncSnapshot<NotificationResponseModel> snapshot) {
-                  if (snapshot.hasData) {
-                    var response = snapshot.data?.response;
-                    // print(response[1].message);
-                    // // data.response.length>0?
-                    // var response=[];
-                    return response.length > 0
-                        ? ListView.builder(
-                      itemCount: response.length,
-                      shrinkWrap: true,
-                      physics: ClampingScrollPhysics(),
-                      itemBuilder: (context, int index) {
-                        print(response[index].notificationid);
-                        // data:response[index]
-                        return NotificationList(
-                            data: response[index]);
+                    child: FutureBuilder<NotificationResponseModel>(
+                      future: api.getNotification(controller.text.value),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<NotificationResponseModel> snapshot) {
+                        if (snapshot.hasData) {
+                          var response = snapshot.data?.response;
+                          // print(response[1].message);
+                          // // data.response.length>0?
+                          // var response=[];
+                          return response.length > 0
+                              ? ListView.builder(
+                                  itemCount: response.length,
+                                  shrinkWrap: true,
+                                  physics: ClampingScrollPhysics(),
+                                  itemBuilder: (context, int index) {
+                                    // print(response[index].notificationid);
+                                    // data:response[index]
+                                    return NotificationList(
+                                        data: response[index]);
+                                  },
+                                )
+                              : Center(child: Text("No Data"));
+                        } else if (snapshot.hasError) {
+                          return CircularProgressIndicator();
+
+                          //return Text("${snapshot.error}");
+                        } else {
+                          return CircularProgressIndicator();
+                        }
+
+                        // By default, show a loading spinner.
                       },
-                    )
-                        : Center(child: Text("No Data"));
-                  } else if (snapshot.hasError) {
-                    return CircularProgressIndicator();
-
-                    //return Text("${snapshot.error}");
-                  } else {
-                    return CircularProgressIndicator();
-                  }
-
-                  // By default, show a loading spinner.
-                },
-              ),
-            ),
+                    ),
+                  ),
             // ListView.builder(
             //                itemCount: 5,
             //                shrinkWrap: true,

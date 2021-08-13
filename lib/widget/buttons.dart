@@ -42,7 +42,7 @@ List<Widget> loginButtons(
           SharedPreferences prefs = await SharedPreferences.getInstance();
           prefs.setString('Username', "${data.response.Username}");
           prefs.setString('access_token', "${data.response.access_token}");
-          print("DSFDS"+data.message);
+          print("DSFDS" + data.message);
           print(data.response.access_token);
           Get.toNamed("/home");
         } else {
@@ -160,45 +160,43 @@ Widget payNowButtons() {
   );
 }
 
-Widget submitButtons(formKey,studentContactRequestModel) {
+Widget submitButtons(formKey, studentContactRequestModel) {
   debugPrint("studentContactRequestModel");
   return GestureDetector(
-      child:Container(
-        height: 40,
-        width: 200,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16), color: kColorGreen),
-              child: Center(
-                child: Text(
-                    "Submit",
-                style: TextStyle(color: Colors.white),
-              )),
-      ),
-      onTap: () async {
-        StudentContactResponseModel data = await validateAndSubmitContact(formKey, studentContactRequestModel);
-    // if (data.statuscode == "200") {
-    //   toastFn(comment: data.message);
-    //   SharedPreferences prefs = await SharedPreferences.getInstance();
-    //   prefs.setString('Username', "${data.response.Username}");
-    //   prefs.setString('access_token', "${data.response.access_token}");
-    //   print("DSFDS"+data.message);
-    //   print(data.response.access_token);
-    //   Get.toNamed("/home");
-    // } else {
-    //   toastFn(comment: data.message);
-    // }
-  },
+    child: Container(
+      height: 40,
+      width: 200,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16), color: kColorGreen),
+      child: Center(
+          child: Text(
+        "Submit",
+        style: TextStyle(color: Colors.white),
+      )),
+    ),
+    onTap: () async {
+      StudentContactResponseModel data =
+          await validateAndSubmitContact(formKey, studentContactRequestModel);
+      // if (data.statuscode == "200") {
+      //   toastFn(comment: data.message);
+      //   SharedPreferences prefs = await SharedPreferences.getInstance();
+      //   prefs.setString('Username', "${data.response.Username}");
+      //   prefs.setString('access_token', "${data.response.access_token}");
+      //   print("DSFDS"+data.message);
+      //   print(data.response.access_token);
+      //   Get.toNamed("/home");
+      // } else {
+      //   toastFn(comment: data.message);
+      // }
+    },
   );
 }
 
-
-
 List<Widget> contactReqButton(
-    formKey,
-    studentContactRequestModel,
-    ) {
+  formKey,
+  studentContactRequestModel,
+) {
   return <Widget>[
-
     GestureDetector(
       child: Container(
           height: 40,
@@ -219,7 +217,8 @@ List<Widget> contactReqButton(
             ),
           )),
       onTap: () async {
-        StudentContactResponseModel data = await validateAndSubmitContactReq(formKey, studentContactRequestModel);
+        StudentContactResponseModel data = await validateAndSubmitContactReq(
+            formKey, studentContactRequestModel);
         if (data.statuscode == "200") {
           toastFn(comment: data.message);
           Get.toNamed("/home");
@@ -248,22 +247,22 @@ List<Widget> contactReqButton(
 
 
 
-Widget confirmButtons(childrens,total) {
-  return GestureDetector(
-    child:Container(
-      height: 40,
-      width: 200,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16), color: kColorGreen),
-      child: Center(
-          child: Text(
-            "Confirm Payment",
-            style: TextStyle(color: Colors.white),
-          )),
-    ),
-    onTap: () async {
-      String data = await submitConfirmPayment(childrens,total);
-      print(data);
-    },
-  );
-}
+// Widget confirmButtons(childrens,total) {
+//   return GestureDetector(
+//     child:Container(
+//       height: 40,
+//       width: 200,
+//       decoration: BoxDecoration(
+//           borderRadius: BorderRadius.circular(16), color: kColorGreen),
+//       child: Center(
+//           child: Text(
+//             "Confirm Payment",
+//             style: TextStyle(color: Colors.white),
+//           )),
+//     ),
+//     onTap: () async {
+//       String data = await submitConfirmPayment(childrens,total);
+//       print(data);
+//     },
+//   );
+// }

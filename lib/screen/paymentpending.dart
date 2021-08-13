@@ -216,7 +216,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                           border: Border.all(color: Colors.grey.shade300)),
                       child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 15, top: 15, right: 20),
+                              left: 15, top: 15, right: 20, bottom: 15),
                           child: Column(
                             children: [
                               Container(
@@ -237,20 +237,65 @@ class _PaymentPendingState extends State<PaymentPending> {
                                         // return Installment(data: response);
                                         //
                                         return response.installment.length > 0
-                                            ? ListView.builder(
-                                                itemCount: response.installment.length,
-                                                shrinkWrap: true,
-                                                physics: ClampingScrollPhysics(),
-                                                itemBuilder: (context, int index) {
-                                                  print("response.installment[index]");
-                                                  // data:response[index]
-                                                  // return Text("hey");
-                                                  return Installment(data:response.installment[index]);
-                                                },
-                                        )
+                                            ? Column(
+                                                children: [
+                                                  ListView.builder(
+                                                    itemCount: response
+                                                        .installment.length,
+                                                    shrinkWrap: true,
+                                                    physics:
+                                                        ClampingScrollPhysics(),
+                                                    itemBuilder:
+                                                        (context, int index) {
+                                                      print(
+                                                          "response.installment[index]");
+                                                      // data:response[index]
+                                                      // return Text("hey");
+                                                      return Installment(
+                                                          data: response
+                                                                  .installment[
+                                                              index]);
+                                                    },
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 3,
+                                                        vertical: 10),
+                                                    child: Divider(),
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text(
+                                                        "Total",
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        "500 KD",
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                  SizedBox(height: 20),
+                                                  Center(
+                                                    child: payNowButtons(),
+                                                  ),
+                                                  SizedBox(height: 20)
+                                                ],
+                                              )
                                             : Center(child: Text("No Data"));
                                       } else {
-                                        return Text("No Data Founds");
+                                        return Center(
+                                            child: Text("No Data Founds"));
                                       }
                                     } else if (snapshot.hasError) {
                                       // return Text("${snapshot.error}");
@@ -266,34 +311,6 @@ class _PaymentPendingState extends State<PaymentPending> {
                                   },
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 3, vertical: 10),
-                                child: Divider(),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Total",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    "500 KD",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  )
-                                ],
-                              ),
-                              SizedBox(height: 20),
-                              Center(
-                                child: payNowButtons(),
-                              ),
-                              SizedBox(height: 20)
                             ],
                           )),
                     ),
@@ -451,25 +468,40 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                               // return Installment(
                                                               //     data:
                                                               //         response.installment[index]);
-                                                              return response.installment.length > 0
-                                                                  ? ListView.builder(
-                                                                      itemCount: response.installment.length,
-                                                                      shrinkWrap: true,
-                                                                      physics: ClampingScrollPhysics(),
-                                                                      itemBuilder: (context, int index) {
-                                                                        print(response.installment[index]);
+                                                              return response
+                                                                          .installment
+                                                                          .length >
+                                                                      0
+                                                                  ? ListView
+                                                                      .builder(
+                                                                      itemCount: response
+                                                                          .installment
+                                                                          .length,
+                                                                      shrinkWrap:
+                                                                          true,
+                                                                      physics:
+                                                                          ClampingScrollPhysics(),
+                                                                      itemBuilder:
+                                                                          (context,
+                                                                              int index) {
+                                                                        print(response
+                                                                            .installment[index]);
                                                                         // data:response[index]
-                                                                        return Installment(data:response.installment[index]);
+                                                                        return Installment(
+                                                                            data:
+                                                                                response.installment[index]);
                                                                       },
-                                                              )
-                                                                  : Center(child: Text("No Data"));
+                                                                    )
+                                                                  : Center(
+                                                                      child: Text(
+                                                                          "No Data"));
                                                             } else if (snapshot
                                                                 .hasError) {
                                                               // return Text("${snapshot.error}");
                                                               return Text(
                                                                   "${snapshot.error}");
                                                             } else {
-                                                              return CircularProgressIndicator();
+                                                              return LinearProgressIndicator();
                                                             }
                                                           } else {
                                                             return Text(
@@ -527,7 +559,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                                   // return Text("${snapshot.error}");
                                   return Text("${snapshot.error}");
                                 } else {
-                                  return CircularProgressIndicator();
+                                  return LinearProgressIndicator();
                                 }
                               },
                             ),
@@ -552,6 +584,19 @@ class _PaymentPendingState extends State<PaymentPending> {
         ),
       ],
     );
+  }
+
+  String res, text = "";
+  double total = 0.0;
+  void sum(bool isSelected) {
+    if (isSelected == true) {
+      InstallmentResponse data;
+      res = total.toString() +
+          data.tuitionfee.toString() +
+          data.transportfee.toString() +
+          data.others.toString();
+    }
+    setState(() {});
   }
 
   Widget _installmentSection() {
@@ -605,9 +650,10 @@ class _PaymentPendingState extends State<PaymentPending> {
                                       itemBuilder: (context, int index) {
                                         // print(response[index].studentname);
                                         // data:response[index]
-                                        return Installment(data:response.installment[index]);
+                                        return Installment(
+                                            data: response.installment[index]);
                                       },
-                              )
+                                    )
                                   : Center(child: Text("No Data"));
                             } else if (snapshot.hasError) {
                               // return Text("${snapshot.error}");

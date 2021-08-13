@@ -148,7 +148,7 @@ class _NotificationsState extends State<Notifications> {
                                           // return Text("${snapshot.error}");
                                           return Text("${snapshot.error}");
                                         } else {
-                                          return CircularProgressIndicator();
+                                          return LinearProgressIndicator();
                                         }
                                       },
                                     ),

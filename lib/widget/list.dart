@@ -730,7 +730,24 @@ class ParentsInfoList extends StatelessWidget {
     );
   }
 }
+/*
+class Installment extends StatefulWidget {
+   Installment({Key key, this.data}) : super(key: key);
+   InstallmentResponse data;
+  @override
+  _InstallmentState createState() => _InstallmentState();
+}
 
+class _InstallmentState extends State<Installment> {
+
+  
+ 
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+*/
 class Installment extends StatelessWidget {
   Installment(
       {Key key,
@@ -754,27 +771,28 @@ class Installment extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               list_txt("Tution", isSelected: true),
-              // list_txt(data.tuitionfee.toString()),
+              list_txt(data.tuitionfee.toString()),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               list_txt("Transportation", isSelected: true),
-              // list_txt(data.transportfee.toString())
+              list_txt(data.transportfee.toString())
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               list_txt("Others", isSelected: true),
-              // list_txt(data.others.toString())
             ],
           ),
         ],
       ),
     );
   }
+
+  
 }
 
 Widget list_txt(String txt, {bool isSelected = false}) {

@@ -71,7 +71,7 @@ class _PaymentHistoryState extends State<PaymentHistory> {
               }
               else
               {
-                return CircularProgressIndicator();
+                return LinearProgressIndicator();
               }
 
               // By default, show a loading spinner.

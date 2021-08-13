@@ -154,7 +154,7 @@ class _MyHomeState extends State<MyHome> {
                         // return Text("${snapshot.error}");
                         return Text("${snapshot.error}");
                       } else {
-                        return CircularProgressIndicator();
+                        return LinearProgressIndicator();
                       }
 
                       // By default, show a loading spinner.

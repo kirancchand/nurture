@@ -28,6 +28,7 @@ class _PaymentPendingState extends State<PaymentPending> {
   Future<StudentResponseModel> getStudents;
   List childrens = [];
   PendingDropDown controller = Get.put(PendingDropDown());
+  YearController con = Get.put(YearController());
 
   @override
   void initState() {
@@ -160,7 +161,9 @@ class _PaymentPendingState extends State<PaymentPending> {
                                       // return Text("${snapshot.error}");
                                       return Text("${snapshot.error}");
                                     } else {
-                                      return CircularProgressIndicator();
+                                      return Center(
+                                        child: CircularProgressIndicator(),
+                                      );
                                     }
                                   },
                                 ),
@@ -200,8 +203,14 @@ class _PaymentPendingState extends State<PaymentPending> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          "Academic year: 2021-2022",
+                          "Academic year: ",
                           style: TextStyle(color: Colors.grey),
+                        ),
+                        Obx(
+                          () => Text(
+                            con.year.value ?? "",
+                            style: TextStyle(color: Colors.grey, fontSize: 11),
+                          ),
                         ),
                       ],
                     ),
@@ -254,7 +263,8 @@ class _PaymentPendingState extends State<PaymentPending> {
                                       // return Text("${snapshot.error}");
                                       return Text("${snapshot.error}");
                                     } else {
-                                      return CircularProgressIndicator();
+                                      return Center(
+                                          child: CircularProgressIndicator());
                                     }
 
                                     // // data.response.length>0?
@@ -467,7 +477,9 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                               return Text(
                                                                   "${snapshot.error}");
                                                             } else {
-                                                              return CircularProgressIndicator();
+                                                              return Center(
+                                                                  child:
+                                                                      CircularProgressIndicator());
                                                             }
                                                           } else {
                                                             return Text(
@@ -525,7 +537,8 @@ class _PaymentPendingState extends State<PaymentPending> {
                                   // return Text("${snapshot.error}");
                                   return Text("${snapshot.error}");
                                 } else {
-                                  return CircularProgressIndicator();
+                                  return Center(
+                                      child: CircularProgressIndicator());
                                 }
                               },
                             ),
@@ -609,7 +622,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                               // return Text("${snapshot.error}");
                               return Text("${snapshot.error}");
                             } else {
-                              return CircularProgressIndicator();
+                              return Center(child: CircularProgressIndicator());
                             }
                           } else {
                             return Text("No Data Founds");

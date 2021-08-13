@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nurture/common/constants.dart';
+import 'package:nurture/screen/PaymentWebPage.dart';
 import 'package:nurture/widget/actions.dart';
 
 class ConfirmPayment extends StatefulWidget {
@@ -236,7 +237,12 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
               onTap: () async {
                 var lists = await convert();
                 var data = await submitConfirmPayment(lists);
-
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => PaymentWebPage(
+                              link: '',
+                            )));
                 // print(data);
               },
             ),

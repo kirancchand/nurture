@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:nurture/config/controller.dart';
 import 'package:nurture/screen/confirmpayment.dart';
 import 'package:nurture/screen/contactinformation.dart';
 import 'package:nurture/widget/list.dart';
@@ -23,6 +24,7 @@ class _MyHomeState extends State<MyHome> {
   Api api = new Api();
   Future<StudentResponseModel> getStudents;
   Future<FeeResponseModel> getFee;
+  YearController con = Get.put(YearController());
   List<String> _texts = [
     "InduceSmile.com",
     "Flutter.io",
@@ -55,10 +57,11 @@ class _MyHomeState extends State<MyHome> {
       childrens = student.response.childrens;
       print('academic yaea');
       print(student.response.childrens[0].academicyear);
-      Future.delayed(Duration(seconds: 1)).then((value) async {
-        SharedPreferences pref = await SharedPreferences.getInstance();
-        pref.setString("ay", student.response.childrens[0].academicyear);
-      });
+      con.year.value = student.response.childrens[0].academicyear;
+      // Future.delayed(Duration(seconds: 1)).then((value) async {
+      //   SharedPreferences pref = await SharedPreferences.getInstance();
+      //   pref.setString("ay", student.response.childrens[0].academicyear);
+      // });
       return student;
     });
     getFee = api.getFee();
@@ -154,7 +157,7 @@ class _MyHomeState extends State<MyHome> {
                         // return Text("${snapshot.error}");
                         return Text("${snapshot.error}");
                       } else {
-                        return CircularProgressIndicator();
+                        return Center(child: CircularProgressIndicator());
                       }
 
                       // By default, show a loading spinner.
@@ -191,21 +194,13 @@ class _MyHomeState extends State<MyHome> {
                                           style: TextStyle(
                                               color: Colors.grey, fontSize: 11),
                                         ),
-                                        FutureBuilder<SharedPreferences>(
-                                          future:
-                                              SharedPreferences.getInstance(),
-                                          builder: (context, snapshot) {
-                                            if (snapshot.hasData) {
-                                              return Text(
-                                                snapshot.data.getString('ay') ??
-                                                    "",
-                                                style: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 11),
-                                              );
-                                            } else
-                                              return CircularProgressIndicator();
-                                          },
+                                        Obx(
+                                          () => Text(
+                                            con.year.value ?? "",
+                                            style: TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 11),
+                                          ),
                                         ),
                                       ],
                                     )
@@ -246,7 +241,8 @@ class _MyHomeState extends State<MyHome> {
                                       // return Text("${snapshot.error}");
                                       return Text("${snapshot.error}");
                                     } else {
-                                      return CircularProgressIndicator();
+                                      return Center(
+                                          child: CircularProgressIndicator());
                                     }
 
                                     // By default, show a loading spinner.
@@ -368,7 +364,7 @@ class _MyHomeState extends State<MyHome> {
                     // return Text("${snapshot.error}");
                     return Text("${snapshot.error}");
                   } else {
-                    return CircularProgressIndicator();
+                    return Center(child: CircularProgressIndicator());
                   }
 
                   // By default, show a loading spinner.

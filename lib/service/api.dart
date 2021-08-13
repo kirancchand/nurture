@@ -9,6 +9,7 @@ import 'package:nurture/model/notification.dart';
 import 'package:nurture/model/paymenthistory.dart';
 import 'package:nurture/model/paymentpending.dart';
 import 'package:nurture/model/student.dart';
+import 'package:nurture/model/payment.dart';
 
 class Api {
   Future<LoginResponseModel> signInWithEmailAndPassword(
@@ -140,8 +141,20 @@ class Api {
   }
 }
 
-Future submitPaymentRequest(List<Map<String, dynamic>> paymentBody) async {
+Future<Payment> submitPaymentRequest(List<Map<String, dynamic>> paymentBody) async {
   print(paymentBody);
+  var enc=jsonEncode([
+    {
+      "AcademicPeriodId": "2020-2021",
+      "GrandTotal" : 1660,
+      "IsIncludeEnrollment" : false,
+      "KnetpaymentAmount" : 1660,
+      "OffSet" : -330,
+      "OpeningBalance" : 0,
+      "StudentId" : 1375,
+      "Paymentid" :0
+    }
+  ]);
   var token = await getToken();
   var headers = {
     'Content-Type': 'application/json',
@@ -151,13 +164,20 @@ Future submitPaymentRequest(List<Map<String, dynamic>> paymentBody) async {
   };
   var request = http.Request('POST',
       Uri.parse('http://schbackend.azurewebsites.net/api/apps/PostPayment'));
-  request.body = json.encode(paymentBody);
+  request.body = json.encode(enc);
   request.headers.addAll(headers);
 
   http.StreamedResponse response = await request.send();
 
   if (response.statusCode == 200) {
-    print(await response.stream.bytesToString());
+    final responsep = await http.post(getUrl('KnetPaymentGateway'), body: enc,headers:headers);
+    if (responsep.statusCode == 200 || responsep.statusCode == 400) {
+      print(responsep);
+      return  Payment.fromJson(json.decode(responsep.body));;
+    } else {
+      throw Exception('Failed to load data!');
+    }
+
   } else {
     print(response.reasonPhrase);
   }

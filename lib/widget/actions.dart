@@ -3,6 +3,7 @@ import 'package:nurture/model/login_model.dart';
 import 'package:nurture/service/api.dart';
 import 'package:nurture/widget/spinner.dart';
 import 'package:nurture/model/contact.dart';
+import 'package:nurture/model/payment.dart';
 import 'dart:developer' as developer;
 
 bool validateAndSave(formKey) {
@@ -82,11 +83,11 @@ Future<StudentContactResponseModel> validateAndSubmitContact(
   // }
 }
 
-Future<String> submitConfirmPayment(
+Future<Payment> submitConfirmPayment(
     List<Map<String, dynamic>> paymentList) async {
   showSpinner();
   // String data = await api.submitPaymentRequest(childrens,total);
-  String data = await submitPaymentRequest(paymentList);
+  Payment data = await submitPaymentRequest(paymentList);
   print("action${data}");
   hideSpinner();
   return data;

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nurture/common/constants.dart';
 import 'package:nurture/widget/actions.dart';
+import 'package:nurture/model/payment.dart';
+import 'package:nurture/widget/webviewcontainer.dart';
 
 class ConfirmPayment extends StatefulWidget {
   ConfirmPayment({Key key}) : super(key: key);
@@ -203,6 +205,19 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                         fontSize: 11,
                       )),
             ),
+            GestureDetector(
+              child: Container(
+                child: Text(
+                    "Confirm Payment")
+
+              ),
+                onTap: () async {
+
+                  print("helos");
+                  WebViewContainer('https://blog.mindorks.com', 'MindOrks');
+
+                  },
+            ),
             // ),
             SizedBox(
               height: 40,
@@ -235,9 +250,15 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
               ),
               onTap: () async {
                 var lists = await convert();
-                var data = await submitConfirmPayment(lists);
+                Payment data = await submitConfirmPayment(lists);
 
-                // print(data);
+                if(data.statuscode==200)
+                  {
+                    print(data.response);
+                    WebViewContainer('https://blog.mindorks.com', 'MindOrks');
+                  }
+
+
               },
             ),
             // confirmButtons(),

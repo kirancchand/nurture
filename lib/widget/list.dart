@@ -371,7 +371,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                             txt("Nationality"),
                             txt("Religion"),
                             txt("Civil id"),
-                            txt("Civil idExpiry date"),
+                            txt("Civil id expiry date"),
                             txt("Passport Number"),
                             txt("Address"),
                           ],
@@ -394,11 +394,15 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                 widget.data.birthdate.year.toString()),
                             Text(widget.data.schoolname),
                             Text(widget.data.grade),
-                            Text("pending"),
-                            Text("pending"),
+                            Text(widget.data.academicyear),
+                            Text(widget.data.nationality),
                             Text(widget.data.religion),
                             Text(widget.data.civilid.toString()),
-                            Text("pending"),
+                            Text(widget.data.studentcivilexpirydate.day.toString() +
+                                "/" +
+                                widget.data.studentcivilexpirydate.month.toString() +
+                                "/" +
+                                widget.data.studentcivilexpirydate.year.toString()),
                             Text(widget.data.passportnumber),
                             Text(widget.data.regionalarea)
                           ],
@@ -469,7 +473,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                           txt("Name"),
                           txt("Nationality"),
                           txt("Civil id"),
-                          txt("Civil idExpiry date"),
+                          txt("Civil id expiry date"),
                           txt("Email address"),
                           txt("Address"),
                         ],
@@ -481,9 +485,14 @@ class _StudentInfoListState extends State<StudentInfoList> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(widget.parents[index].name),
-                        Text("pending"),
+                        Text(widget.parents[index].nationality),
                         Text(widget.parents[index].civilid),
-                        Text("pending"),
+                        Text(widget.parents[index].parentcivilexpirydate.day.toString() +
+                            "/" +
+                            widget.parents[index].parentcivilexpirydate.month.toString() +
+                            "/" +
+                            widget.parents[index].parentcivilexpirydate.year.toString()),
+                        // Text(widget.parents[index].parentcivilexpirydate),
                         Text(widget.parents[index].emailid),
                         Text(widget.parents[index].regionalarea)
                       ],

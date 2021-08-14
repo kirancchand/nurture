@@ -432,7 +432,7 @@ class _MyHomeState extends State<MyHome> {
   Widget ContactUs() {
     return GestureDetector(
         child: Container(
-            height: 45,
+            // height: 45,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),

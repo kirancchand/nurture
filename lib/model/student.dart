@@ -71,6 +71,8 @@ class StudentResponse {
     this.grade,
     this.schoolname,
     this.academicyear,
+    this.nationality,
+    this.studentcivilexpirydate
   });
 
   int studentid;
@@ -103,6 +105,8 @@ class StudentResponse {
   String grade;
   String schoolname;
   String academicyear;
+  String nationality;
+  DateTime studentcivilexpirydate;
 
   factory StudentResponse.fromJson(Map<String, dynamic> json) =>
       StudentResponse(
@@ -136,6 +140,8 @@ class StudentResponse {
         grade: json["grade"] ?? "",
         schoolname: json["schoolname"] ?? "",
         academicyear: json["academicyear"] ?? "",
+        nationality: json["nationality"] ?? "",
+        studentcivilexpirydate: DateTime.parse(json["studentcivilexpirydate"]) ?? "",
       );
 
   // String get civilid => null;
@@ -171,6 +177,8 @@ class StudentResponse {
         "grade": grade,
         "schoolname": schoolname,
         "academicyear": academicyear,
+        "nationality":nationality,
+        "studentcivilexpirydate":studentcivilexpirydate
       };
 }
 
@@ -188,6 +196,7 @@ class ParentResponse {
     this.arabicname,
     this.dob,
     this.nationality,
+    this.parentcivilexpirydate
   });
 
   String name;
@@ -202,7 +211,7 @@ class ParentResponse {
   String arabicname;
   String dob;
   String nationality;
-  //String parentcivilexpirydate;
+  DateTime parentcivilexpirydate;
 
   factory ParentResponse.fromJson(Map<String, dynamic> json) => ParentResponse(
         name: json["name"] ?? "",
@@ -217,7 +226,7 @@ class ParentResponse {
         arabicname: json["arabicname"] ?? "",
         dob: json["dob"] ?? "",
         nationality: json["nationality"] ?? "",
-        // parentcivilexpirydate: json["parentcivilexpirydate"] ?? "",
+        parentcivilexpirydate: DateTime.parse(json["parentcivilexpirydate"]) ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -232,7 +241,7 @@ class ParentResponse {
         "arabicname": arabicname,
         "dob": dob,
         "nationality": nationality,
-        // "parentcivilexpirydate":parentcivilexpirydate,
+        "parentcivilexpirydate":parentcivilexpirydate,
       };
 }
 

@@ -175,40 +175,45 @@ List<Widget> contactReqInputs(studentContactRequestModel,context) {
         decoration: BoxDecoration(
             border: Border.all(color: Colors.grey[300]),
             borderRadius: BorderRadius.circular(8)),
-        child: Column(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 15),
+          child:Column(
             children:[
-              Container(
-                  height: 30,
-
-                  child:Expanded(
-
-                    child:  CountryListPick(
-
-                      // if you need custom picker use this
-                      pickerBuilder: (context, CountryCode countryCode) {
-                        return Row(
-                          children: [
-                            Image.asset(
-                              countryCode.flagUri,
-                              package: 'country_list_pick',
-                              width: 40,
-                              height: 30,
-                            ),
-                            // Text(countryCode.code),
-                            Text(countryCode.dialCode),
-                          ],
-                        );
-                      },
-                      initialSelection: '+62',
-                      onChanged: (CountryCode code) {
-                        print(code.name);
-                        print(code.code);
-                        print(code.dialCode);
-                        print(code.flagUri);
-                      },
-                    ),
-                  )
-              ),
+              // CountryListPick(
+              //   // if you need custom picker use this
+              //   pickerBuilder: (context, CountryCode countryCode) {
+              //     return Column(
+              //       children: [
+              //         Text(countryCode.dialCode),
+              //         Image.asset(
+              //           countryCode.flagUri,
+              //           package: 'country_list_pick',
+              //           width: 50,
+              //           height: 50,
+              //         ),
+              //         // Text(countryCode.code),
+              //
+              //       ],
+              //     );
+              //   },
+              //   // theme: CountryTheme(
+              //   //   isShowFlag: true,
+              //   //   isShowTitle: true,
+              //   //   isShowCode: true,
+              //   //   isDownIcon: true,
+              //   //   showEnglishName: false,
+              //   //   labelColor: Colors.blueAccent,
+              //   // ),
+              //   initialSelection: '+62',
+              //   // // or
+              //   // // initialSelection: 'US'
+              //   onChanged: (CountryCode code) {
+              //     print(code.name);
+              //     print(code.code);
+              //     print(code.dialCode);
+              //     print(code.flagUri);
+              //   },
+              // ),
               TextFormField(
                 key: Key('studentphonenumber'),
                 minLines: 1,
@@ -216,15 +221,16 @@ List<Widget> contactReqInputs(studentContactRequestModel,context) {
                 keyboardType: TextInputType.multiline,
                 decoration: InputDecoration(
                     border: InputBorder.none,
-                    // prefixIcon: Icon(Icons.keyboard_arrow_down_outlined,),
+                    prefixIcon: Icon(Icons.keyboard_arrow_down_outlined,),
                     hintText: "  Phone number",
                     hintStyle: TextStyle(color: Colors.grey)),
                 validator: PasswordFieldValidator.validate,
                 onSaved: (String value) =>
                 studentContactRequestModel.studentphonenumber = value,
-              ),
-            ]
-        )
+                ),
+               ]
+          )
+        ),
       ),
     ),
     SizedBox(

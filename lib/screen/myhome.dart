@@ -11,6 +11,7 @@ import 'package:nurture/model/student.dart';
 import 'package:nurture/model/fee.dart';
 import 'package:nurture/service/api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:nurture/widget/spinner.dart';
 
 class MyHome extends StatefulWidget {
   const MyHome({Key key}) : super(key: key);
@@ -51,6 +52,7 @@ class _MyHomeState extends State<MyHome> {
   @override
   void initState() {
     super.initState();
+
     getStudents = api.getStudent().then((student) {
       childrens = student.response.childrens;
       print('academic yaea');
@@ -66,7 +68,8 @@ class _MyHomeState extends State<MyHome> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return
+    Scaffold(
       // Center is a layout widget. It takes a single child and positions it
       // in the middle of the parent.
       body: SafeArea(
@@ -439,4 +442,5 @@ class _MyHomeState extends State<MyHome> {
           Get.toNamed('/contactinformation', arguments: childrens);
         });
   }
+
 }

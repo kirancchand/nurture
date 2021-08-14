@@ -149,8 +149,7 @@ class _NotificationsState extends State<Notifications> {
                                           return Text("${snapshot.error}");
                                         } else {
                                           return Center(
-                                              child:
-                                                  LinearProgressIndicator());
+                                              child: LinearProgressIndicator());
                                         }
                                       },
                                     ),
@@ -290,7 +289,7 @@ class _NotificationsState extends State<Notifications> {
                                     onChanged: (newValue) {
                                       setState(() {
                                         _valueChoose = newValue;
-                                        print(_valueChoose);
+                                        // print(_valueChoose);
                                       });
                                     },
                                     items: childrens.map((valueItem) {

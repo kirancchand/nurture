@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nurture/widget/validators.dart';
 import 'package:nurture/common/constants.dart';
+import 'package:country_list_pick/country_list_pick.dart';
 
 List<Widget> loginInputs(loginRequestModel) {
   return <Widget>[
@@ -101,7 +102,7 @@ List<Widget> pinInputs(loginRequestModel) {
   ];
 }
 
-List<Widget> contactReqInputs(studentContactRequestModel) {
+List<Widget> contactReqInputs(studentContactRequestModel,context) {
   return <Widget>[
     Row(
       children: [
@@ -174,25 +175,56 @@ List<Widget> contactReqInputs(studentContactRequestModel) {
         decoration: BoxDecoration(
             border: Border.all(color: Colors.grey[300]),
             borderRadius: BorderRadius.circular(8)),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 15),
-          child: TextFormField(
-            
-            key: Key('studentphonenumber'),
-            minLines: 1,
-            maxLines: 10,
-            keyboardType: TextInputType.multiline,
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                
-                prefixIcon: Icon(Icons.keyboard_arrow_down_outlined,),
-                hintText: "  Phone number",
-                hintStyle: TextStyle(color: Colors.grey)),
-            validator: PasswordFieldValidator.validate,
-            onSaved: (String value) =>
+        child: Column(
+            children:[
+              Container(
+                  height: 30,
+
+                  child:Expanded(
+
+                    child:  CountryListPick(
+
+                      // if you need custom picker use this
+                      pickerBuilder: (context, CountryCode countryCode) {
+                        return Row(
+                          children: [
+                            Image.asset(
+                              countryCode.flagUri,
+                              package: 'country_list_pick',
+                              width: 40,
+                              height: 30,
+                            ),
+                            // Text(countryCode.code),
+                            Text(countryCode.dialCode),
+                          ],
+                        );
+                      },
+                      initialSelection: '+62',
+                      onChanged: (CountryCode code) {
+                        print(code.name);
+                        print(code.code);
+                        print(code.dialCode);
+                        print(code.flagUri);
+                      },
+                    ),
+                  )
+              ),
+              TextFormField(
+                key: Key('studentphonenumber'),
+                minLines: 1,
+                maxLines: 10,
+                keyboardType: TextInputType.multiline,
+                decoration: InputDecoration(
+                    border: InputBorder.none,
+                    // prefixIcon: Icon(Icons.keyboard_arrow_down_outlined,),
+                    hintText: "  Phone number",
+                    hintStyle: TextStyle(color: Colors.grey)),
+                validator: PasswordFieldValidator.validate,
+                onSaved: (String value) =>
                 studentContactRequestModel.studentphonenumber = value,
-          ),
-        ),
+              ),
+            ]
+        )
       ),
     ),
     SizedBox(

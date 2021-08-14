@@ -53,7 +53,7 @@ Future<StudentContactResponseModel> validateAndSubmitContactReq(
     showSpinner();
     StudentContactResponseModel data =
         await api.submitContactRequest(studentContactRequestModel);
-    print("action${data.message}");
+    // print("action${data.message}");
     hideSpinner();
     return data;
   } else {
@@ -95,6 +95,9 @@ Future<Payment> submitConfirmPayment(
       return d;
     } else
       hideSpinner();
+    return Payment();
+  } else {
+    hideSpinner();
     return Payment();
   }
 

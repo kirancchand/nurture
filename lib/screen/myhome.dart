@@ -40,14 +40,16 @@ class _MyHomeState extends State<MyHome> {
   List childrens = [];
   bool selectedStudent = false;
   List _selectedStudent = [];
-
+  double total = 0.0;
   void _onCategorySelected(bool selected, student) {
     if (selected == true) {
       setState(() {
         _selectedStudent.add(student);
+        total = total + student.dueamount;
       });
     } else {
       setState(() {
+        total = total - student.dueamount;
         _selectedStudent.remove(student);
       });
     }
@@ -285,7 +287,6 @@ class _MyHomeState extends State<MyHome> {
   }
 
   Widget OutStandingSection() {
-    double total = 0.0;
     return Container(
       //height: MediaQuery.of(context).size.height*.488,
       width: MediaQuery.of(context).size.width,
@@ -320,8 +321,9 @@ class _MyHomeState extends State<MyHome> {
                             shrinkWrap: true,
                             physics: ClampingScrollPhysics(),
                             itemBuilder: (context, int index) {
-                              print(response);
-                              total = total + response[index].dueamount;
+                              // print(response);
+                              // total = total + response[index].dueamount;
+                              // print(total);
                               // return OutstandingPayment(data:response[index]);
                               return ListTile(
                                 leading: Checkbox(
@@ -390,7 +392,12 @@ class _MyHomeState extends State<MyHome> {
               ),
               GestureDetector(
                 onTap: () {
-                  Get.toNamed('/confirmpayment', arguments: _selectedStudent);
+                  // print("dsfsd${_selectedStudent.length}");
+                  _selectedStudent.length > 0
+                      ? Get.toNamed('/confirmpayment',
+                          arguments: _selectedStudent)
+                      : Fluttertoast.showToast(
+                          msg: 'Please Select Atleast one student');
                 },
                 child: Container(
                   height: 50,
@@ -443,10 +450,10 @@ class _MyHomeState extends State<MyHome> {
                       color: kColorGreen)),
             )),
         onTap: () {
-          childrens != null
+          // print(childrens);
+          childrens.length > 0
               ? Get.toNamed('/contactinformation', arguments: childrens)
-              : Fluttertoast.showToast(msg: 'Try Again');
+              : Fluttertoast.showToast(msg: 'Please Wait..!!And Try Again');
         });
   }
-
 }

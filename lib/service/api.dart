@@ -66,7 +66,7 @@ class Api {
     final response = await http.get(getUrl('PaymentHistory'), headers: {
       'Authorization': 'Bearer $token',
     });
-    print(response.body);
+    // print(response.body);
     if (response.statusCode == 200 || response.statusCode == 400) {
       return PaymentHistoryResponseModel.fromJson(json.decode(response.body));
     } else {
@@ -81,17 +81,17 @@ class Api {
     // String url = "https://run.mocky.io/v3/c0586d5b-47fd-4c1b-8eae-277796c80ec6";
     // String url = "https://run.mocky.io/v3/cdadde32-9982-459b-8d5d-8f1d687a9455";
     var token = await getToken();
-    print(valueChoose);
+    // print(valueChoose);
     final queryParameters = valueChoose;
     final response = await http.get(
         getUrl("getstudentfeedetails?studentId=${queryParameters}"),
         headers: {'Authorization': 'Bearer $token'});
     // final response = await http.get(Uri.parse(url));
-    print(response.body);
+    // print(response.body);
     if (response.statusCode == 200 || response.statusCode == 400) {
-      print("valueChoose");
-      print(queryParameters);
-      print(valueChoose);
+      // print("valueChoose");
+      // print(queryParameters);
+      // print(valueChoose);
       return PaymentPendingResponseModel.fromJson(json.decode(response.body));
     } else {
       throw Exception('Failed to load data!');
@@ -103,8 +103,8 @@ class Api {
     var token = await getToken();
 
     // return StudentContactResponseModel.fromJson(stud);
-    print(studentContactRequestModel.toJson());
-    print(studentContactRequestModel.toJson()["studentid"]);
+    // print(studentContactRequestModel.toJson());
+    // print(studentContactRequestModel.toJson()["studentid"]);
     // int studentid=studentContactRequestModel.toJson()["studentname"];
     // String Name=studentContactRequestModel.toJson()["studentemail"];
     // String Email=studentContactRequestModel.toJson()["studentid"];
@@ -119,7 +119,7 @@ class Api {
         getUrl(
             'sendenquiry?studentid=${studentContactRequestModel.toJson()["studentid"]}&Name=${studentContactRequestModel.toJson()["studentname"]}&Email=${studentContactRequestModel.toJson()["studentemail"]}&PhoneNumber=${studentContactRequestModel.toJson()["studentphonenumber"]}&Query=${studentContactRequestModel.toJson()["studentinquiry"]}'),
         headers: {'Authorization': 'Bearer $token'});
-    print("sdsdsd ${json.decode(response.body)}");
+    // print("sdsdsd ${json.decode(response.body)}");
     if (response.statusCode == 200 || response.statusCode == 400) {
       // return StudentContactResponseModel.fromJson(json.decode(response.body));
       return StudentContactResponseModel.fromJson(json.decode(response.body));
@@ -181,11 +181,11 @@ Future<Payment> submitPaymentRequest(
   };
   final response =
       await http.post(getUrl('PostPayment'), body: enc, headers: headers);
-  print(response.body);
+  // print(response.body);
   try {
     return paymentFromJson(response.body);
   } catch (e) {
-    print(e);
+    // print(e);
     return Payment();
   }
 }
@@ -199,13 +199,15 @@ Future<Payment> paymentWeb(List<Map<String, dynamic>> paymentBody) async {
     'Cookie':
         'ARRAffinity=94a36c26088811151a0293b8f949eda23429828ef41743d274d54f411258035d'
   };
+
+  // print(enc);
   final response = await http.post(getUrl('KnetPaymentGateway'),
       body: enc, headers: headers);
-  print(response.body);
+  // print(response.body);
   try {
     return paymentFromJson(response.body);
   } catch (e) {
-    print(e);
+    // print(e);
     return Payment();
   }
 }

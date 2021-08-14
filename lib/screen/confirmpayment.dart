@@ -4,6 +4,7 @@ import 'package:nurture/common/constants.dart';
 import 'package:nurture/model/payment.dart';
 import 'package:nurture/screen/PaymentWebPage.dart';
 import 'package:nurture/widget/actions.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ConfirmPayment extends StatefulWidget {
   ConfirmPayment({Key key}) : super(key: key);
@@ -56,6 +57,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
 
   @override
   Widget build(BuildContext context) {
+    // print(widget.childrens[0].studentname);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -114,7 +116,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                         shrinkWrap: true,
                         physics: ClampingScrollPhysics(),
                         itemBuilder: (context, int index) {
-                          print(widget.childrens[index].studentname);
+                          // print(widget.childrens[index].studentname);
 
                           return Padding(
                             padding: EdgeInsets.only(bottom: 10, top: 15),
@@ -235,35 +237,55 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
             SizedBox(
               height: 20,
             ),
-            GestureDetector(
-              child: Container(
-                height: 40,
-                width: 200,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: kColorGreen),
-                child: Center(
-                    child: Text(
-                  "Confirm Payment",
-                  style: TextStyle(color: Colors.white),
-                )),
-              ),
-              onTap: () async {
-                var lists = await convert();
-                print(lists);
-                Payment data = await submitConfirmPayment(lists);
-                // print(data.response);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PaymentWebPage(
-                      link: data.response ?? "",
+            total > 0
+                ? GestureDetector(
+                    child: Container(
+                      height: 40,
+                      width: 200,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color: kColorGreen),
+                      child: Center(
+                          child: Text(
+                        "Confirm Payment",
+                        style: TextStyle(color: Colors.white),
+                      )),
                     ),
+                    onTap: () async {
+                      var lists = await convert();
+                      // print(lists);
+                      Payment data = await submitConfirmPayment(lists);
+                      // print(data.response);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PaymentWebPage(
+                            link: data.response ?? "",
+                          ),
+                        ),
+                      );
+                      // print(data);
+                    },
+                  )
+                : GestureDetector(
+                    child: Container(
+                      height: 40,
+                      width: 200,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color: kColorGreen),
+                      child: Center(
+                          child: Text(
+                        "Confirm Payment",
+                        style: TextStyle(color: Colors.white),
+                      )),
+                    ),
+                    onTap: () async {
+                      Fluttertoast.showToast(
+                          msg: 'You have any Payments Pending');
+                      // print(data);
+                    },
                   ),
-                );
-                // print(data);
-              },
-            ),
             // confirmButtons(),
             SizedBox(
               height: 5,

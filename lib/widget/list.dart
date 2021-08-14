@@ -19,7 +19,7 @@ class StudentList extends StatelessWidget {
   // List<Response> data;
   @override
   Widget build(BuildContext context) {
-    debugPrint('parent civil id: ${parents[0].civilid}');
+    // debugPrint('parent civil id: ${parents[0].civilid}');
     return ListTile(
         leading: CircleAvatar(
             radius: 25,
@@ -637,7 +637,7 @@ class ParentsInfoList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('parent civil id: ${data[1].emailid}');
+    // debugPrint('parent civil id: ${data[1].emailid}');
     return Column(
       children: [
         Padding(
@@ -730,6 +730,7 @@ class ParentsInfoList extends StatelessWidget {
     );
   }
 }
+
 /*
 class Installment extends StatefulWidget {
    Installment({Key key, this.data}) : super(key: key);
@@ -791,8 +792,6 @@ class Installment extends StatelessWidget {
       ),
     );
   }
-
-  
 }
 
 Widget list_txt(String txt, {bool isSelected = false}) {

@@ -16,7 +16,7 @@ class _WebViewContainerState extends State<WebViewContainer> {
   _WebViewContainerState(this._url, this._title);
   @override
   Widget build(BuildContext context) {
-    print(_url);
+    // print(_url);
     return Scaffold(
       appBar: AppBar(
         title: Text(_title),
@@ -35,7 +35,3 @@ class _WebViewContainerState extends State<WebViewContainer> {
     );
   }
 }
-
-
-
-

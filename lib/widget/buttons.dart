@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:nurture/screen/PaymentWebPage.dart';
 import 'package:nurture/screen/confirmpayment.dart';
 import 'package:nurture/widget/actions.dart';
 import 'package:nurture/widget/spinner.dart';
@@ -141,7 +142,7 @@ List<Widget> pinButtons(formKey, loginRequestModel) {
   ];
 }
 
-Widget payNowButtons() {
+Widget payNowButtons(List<Map<String, dynamic>> stu, context) {
   return GestureDetector(
     child: Container(
       height: 40,
@@ -154,8 +155,18 @@ Widget payNowButtons() {
         style: TextStyle(color: Colors.white),
       )),
     ),
-    onTap: () {
-      Get.toNamed("/confirmpayment");
+    onTap: () async {
+      var data = await submitConfirmPayment(stu);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => PaymentWebPage(
+            link: data.response ?? "",
+          ),
+        ),
+      );
+
+      // Get.toNamed("/confirmpayment");
     },
   );
 }

@@ -124,7 +124,7 @@ class _NotificationsState extends State<Notifications> {
                                               setState(() {
                                                 controller.text.value =
                                                     newValue;
-                                                print(_valueChoose);
+                                                // print(_valueChoose);
                                               });
                                               Navigator.pushReplacement(
                                                 context,
@@ -148,7 +148,9 @@ class _NotificationsState extends State<Notifications> {
                                           // return Text("${snapshot.error}");
                                           return Text("${snapshot.error}");
                                         } else {
-                                          return LinearProgressIndicator();
+                                          return Center(
+                                              child:
+                                                  LinearProgressIndicator());
                                         }
                                       },
                                     ),
@@ -193,11 +195,11 @@ class _NotificationsState extends State<Notifications> {
                                 )
                               : Center(child: Text("No Data"));
                         } else if (snapshot.hasError) {
-                          return CircularProgressIndicator();
+                          return Center(child: CircularProgressIndicator());
 
                           //return Text("${snapshot.error}");
                         } else {
-                          return CircularProgressIndicator();
+                          return Center(child: CircularProgressIndicator());
                         }
 
                         // By default, show a loading spinner.
@@ -302,7 +304,8 @@ class _NotificationsState extends State<Notifications> {
                                   // return Text("${snapshot.error}");
                                   return Text("${snapshot.error}");
                                 } else {
-                                  return CircularProgressIndicator();
+                                  return Center(
+                                      child: CircularProgressIndicator());
                                 }
                               },
                             ),

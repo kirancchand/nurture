@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:nurture/model/login_model.dart';
 import 'package:nurture/service/api.dart';
 import 'package:nurture/widget/spinner.dart';
@@ -86,9 +87,16 @@ Future<StudentContactResponseModel> validateAndSubmitContact(
 Future<Payment> submitConfirmPayment(
     List<Map<String, dynamic>> paymentList) async {
   showSpinner();
-  // String data = await api.submitPaymentRequest(childrens,total);
   Payment data = await submitPaymentRequest(paymentList);
-  print("action${data}");
-  hideSpinner();
-  return data;
+  if (data.statuscode == '200') {
+    Payment d = await paymentWeb(paymentList);
+    if (d.statuscode == '200') {
+      hideSpinner();
+      return d;
+    } else
+      hideSpinner();
+    return Payment();
+  }
+
+  // return data;
 }

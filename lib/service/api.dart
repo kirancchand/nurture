@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:nurture/common/constants.dart';
 import 'package:nurture/model/contact.dart';
@@ -142,20 +143,35 @@ class Api {
   }
 }
 
-Future<Payment> submitPaymentRequest(List<Map<String, dynamic>> paymentBody) async {
-  print(paymentBody);
-  var enc=jsonEncode([
-    {
-      "AcademicPeriodId": "2020-2021",
-      "GrandTotal" : 1660,
-      "IsIncludeEnrollment" : false,
-      "KnetpaymentAmount" : 1660,
-      "OffSet" : -330,
-      "OpeningBalance" : 0,
-      "StudentId" : 1375,
-      "Paymentid" :0
-    }
-  ]);
+// Future<Payment> submitPaymentRequest(
+//     List<Map<String, dynamic>> paymentBody) async {
+//   print(paymentBody);
+//   var enc = jsonEncode(paymentBody);
+//   var token = await getToken();
+//   var headers = {
+//     'Content-Type': 'application/json',
+//     'Authorization': 'Bearer $token',
+//     'Cookie':
+//         'ARRAffinity=94a36c26088811151a0293b8f949eda23429828ef41743d274d54f411258035d'
+//   };
+//   var request = http.Request('POST',
+//       Uri.parse('http://schbackend.azurewebsites.net/api/apps/PostPayment'));
+//   request.body = json.encode(enc);
+//   request.headers.addAll(headers);
+
+//   // http.StreamedResponse response = await request.send();
+//   var data = paymentFromJson(request.body);
+
+//   if (data.statuscode == "200") {
+//     return data;
+//   } else {
+//     return Payment();
+//   }
+// }
+
+Future<Payment> submitPaymentRequest(
+    List<Map<String, dynamic>> paymentBody) async {
+  var enc = jsonEncode(paymentBody);
   var token = await getToken();
   var headers = {
     'Content-Type': 'application/json',
@@ -163,23 +179,33 @@ Future<Payment> submitPaymentRequest(List<Map<String, dynamic>> paymentBody) asy
     'Cookie':
         'ARRAffinity=94a36c26088811151a0293b8f949eda23429828ef41743d274d54f411258035d'
   };
-  var request = http.Request('POST',
-      Uri.parse('http://schbackend.azurewebsites.net/api/apps/PostPayment'));
-  request.body = json.encode(enc);
-  request.headers.addAll(headers);
+  final response =
+      await http.post(getUrl('PostPayment'), body: enc, headers: headers);
+  print(response.body);
+  try {
+    return paymentFromJson(response.body);
+  } catch (e) {
+    print(e);
+    return Payment();
+  }
+}
 
-  http.StreamedResponse response = await request.send();
-
-  if (response.statusCode == 200) {
-    final responsep = await http.post(getUrl('KnetPaymentGateway'), body: enc,headers:headers);
-    if (responsep.statusCode == 200 || responsep.statusCode == 400) {
-      print(responsep);
-      return  Payment.fromJson(json.decode(responsep.body));;
-    } else {
-      throw Exception('Failed to load data!');
-    }
-
-  } else {
-    print(response.reasonPhrase);
+Future<Payment> paymentWeb(List<Map<String, dynamic>> paymentBody) async {
+  var enc = jsonEncode(paymentBody);
+  var token = await getToken();
+  var headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer $token',
+    'Cookie':
+        'ARRAffinity=94a36c26088811151a0293b8f949eda23429828ef41743d274d54f411258035d'
+  };
+  final response = await http.post(getUrl('KnetPaymentGateway'),
+      body: enc, headers: headers);
+  print(response.body);
+  try {
+    return paymentFromJson(response.body);
+  } catch (e) {
+    print(e);
+    return Payment();
   }
 }

@@ -18,3 +18,7 @@ class DropDown extends GetxController {
 class PendingDropDown extends GetxController {
   var text = ''.obs;
 }
+
+class YearController extends GetxController {
+  var year = ''.obs;
+}

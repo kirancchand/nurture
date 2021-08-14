@@ -56,7 +56,8 @@ class PaymentPendingResponse {
         studentnumber: json["studentnumber"] ?? "",
         studentname: json["studentname"] ?? "",
         openingbalance: json["openingbalance"] ?? "",
-        installment: List<InstallmentResponse>.from(json["installment"].map((x) => InstallmentResponse.fromJson(x))),
+        installment: List<InstallmentResponse>.from(
+            json["installment"].map((x) => InstallmentResponse.fromJson(x))),
         duenow: json["duenow"] ?? "",
         absopeningbalance: json["absopeningbalance"] ?? "",
         row: json["row"] ?? "",
@@ -84,7 +85,6 @@ class PaymentPendingResponse {
       };
 }
 
-
 class InstallmentResponse {
   InstallmentResponse({
     this.tuitionfee,
@@ -98,19 +98,20 @@ class InstallmentResponse {
   double enrollment;
   double others;
 
-  factory InstallmentResponse.fromJson(Map<String, dynamic> json) => InstallmentResponse(
-    tuitionfee: json["tuitionfee"],
-    transportfee: json["transportfee"],
-    enrollment: json["enrollment"],
-    others: json["others"],
-  );
+  factory InstallmentResponse.fromJson(Map<String, dynamic> json) =>
+      InstallmentResponse(
+        tuitionfee: json["tuitionfee"],
+        transportfee: json["transportfee"],
+        enrollment: json["enrollment"],
+        others: json["others"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "tuitionfee": tuitionfee,
-    "transportfee": transportfee,
-    "enrollment": enrollment,
-    "others": others,
-  };
+        "tuitionfee": tuitionfee,
+        "transportfee": transportfee,
+        "enrollment": enrollment,
+        "others": others,
+      };
 }
 
 

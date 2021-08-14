@@ -9,12 +9,11 @@ import 'package:nurture/model/contact.dart';
 import 'package:nurture/widget/validators.dart';
 
 class ContactInformation extends StatefulWidget {
-   ContactInformation({Key key}) : super(key: key);
-   List<StudentResponse> childrens = Get.arguments;
+  ContactInformation({Key key}) : super(key: key);
+  List<StudentResponse> childrens = Get.arguments;
 
   @override
   _ContactInformationState createState() => _ContactInformationState();
-
 }
 
 class _ContactInformationState extends State<ContactInformation> {
@@ -23,7 +22,7 @@ class _ContactInformationState extends State<ContactInformation> {
   StudentContactRequestModel studentContactRequestModel;
   @override
   Widget build(BuildContext context) {
-    debugPrint("${widget.childrens[0].studentname}");
+    // debugPrint("${widget.childrens[0].studentname}");
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -51,60 +50,59 @@ class _ContactInformationState extends State<ContactInformation> {
           ])),
         ),
       ),
-      body: 
-         Padding(
-           padding: const EdgeInsets.all(20),
-           child:Container(
-             child:Form(
-               key: formKey,
-                child: ListView(
-                   children: [
-                          DropdownButton(
-                           isExpanded: true,
-                             icon: Icon(
-                               Icons.keyboard_arrow_down_outlined,
-                               color: kColorGreen,
-                             ),
-                             value: _valueChoose,
-                             hint:Align(
-                               alignment: Alignment.centerLeft,
-                               child: Text(
-                                 "Select Student",
-                                 style: TextStyle(color: Colors.grey),
-                               ),
-                             ),
-                             onChanged: (newValue) {
-                               setState(() {
-                                 _valueChoose = newValue;
-                               });
-                             },
-                             items: widget.childrens.map((valueItem) {
-                               return DropdownMenuItem(
-                                 value: valueItem.studentid,
-
-                                 child: Text(valueItem.studentname),
-                               );
-                             }).toList(),
-                           ),
-                           SizedBox(
-                     height: 20,
-                   ),
-                           Text("  Contact information"),
-                           Padding(
-                             padding: const EdgeInsets.only(top: 8, bottom: 8),
-                             child: TextFormField(
-                               key: Key('studentname'),
-                               decoration: InputDecoration(
-                                   labelText: ' Enter Student Name',
-                                   enabledBorder: UnderlineInputBorder(
-                                       borderSide: BorderSide(color: Colors.grey[300])),
-                                   labelStyle: TextStyle(color: Colors.grey[400])),
-                               validator: EmailFieldValidator.validate,
-                               initialValue: "G-0000001035",
-                               onSaved: (String value) => studentContactRequestModel.studentname = value,
-                             ),
-                           ),
-                           /*
+      body: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Container(
+              child: Form(
+            key: formKey,
+            child: ListView(
+              children: [
+                DropdownButton(
+                  isExpanded: true,
+                  icon: Icon(
+                    Icons.keyboard_arrow_down_outlined,
+                    color: kColorGreen,
+                  ),
+                  value: _valueChoose,
+                  hint: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Select Student",
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                  onChanged: (newValue) {
+                    setState(() {
+                      _valueChoose = newValue;
+                    });
+                  },
+                  items: widget.childrens.map((valueItem) {
+                    return DropdownMenuItem(
+                      value: valueItem.studentid,
+                      child: Text(valueItem.studentname),
+                    );
+                  }).toList(),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text("  Contact information"),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8, bottom: 8),
+                  child: TextFormField(
+                    key: Key('studentname'),
+                    decoration: InputDecoration(
+                        labelText: ' Enter Student Name',
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey[300])),
+                        labelStyle: TextStyle(color: Colors.grey[400])),
+                    validator: EmailFieldValidator.validate,
+                    initialValue: "G-0000001035",
+                    onSaved: (String value) =>
+                        studentContactRequestModel.studentname = value,
+                  ),
+                ),
+                /*
                             Padding(
                               padding: const EdgeInsets.only(top: 8, bottom: 8),
                               child: TextFormField(
@@ -201,17 +199,13 @@ class _ContactInformationState extends State<ContactInformation> {
                             ),
                             SizedBox(height: 31),
                           */
-                           Padding(
-                             padding: const EdgeInsets.all(20),
-                             child: submitButtons(formKey,studentContactRequestModel),
-                           )
-                   ],
-           ),
-             )
-           )
-
-         ),
-      
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: submitButtons(formKey, studentContactRequestModel),
+                )
+              ],
+            ),
+          ))),
     );
   }
 }

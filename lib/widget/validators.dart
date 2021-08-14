@@ -4,6 +4,12 @@ class EmailFieldValidator {
   }
 }
 
+class NameFieldValidator {
+  static String validate(value) {
+    return value.isEmpty ? 'Field can\'t be empty' : null;
+  }
+}
+
 class PasswordFieldValidator {
   static String validate(value) {
     return value.isEmpty ? 'Password can\'t be empty' : null;

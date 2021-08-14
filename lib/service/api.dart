@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:dio/dio.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:nurture/common/constants.dart';
@@ -99,26 +101,19 @@ class Api {
   }
 
   Future<StudentContactResponseModel> submitContactRequest(
-      StudentContactRequestModel studentContactRequestModel) async {
+    StudentContactRequestModel studentContactRequestModel,
+    List<PlatformFile> file,
+  ) async {
     var token = await getToken();
+    //    FormData formData = FormData.fromMap({
+    //   "image": await MultipartFile.fromFile(file[0].path, filename: fileName),
+    // });
 
-    // return StudentContactResponseModel.fromJson(stud);
-    // print(studentContactRequestModel.toJson());
-    // print(studentContactRequestModel.toJson()["studentid"]);
-    // int studentid=studentContactRequestModel.toJson()["studentname"];
-    // String Name=studentContactRequestModel.toJson()["studentemail"];
-    // String Email=studentContactRequestModel.toJson()["studentid"];
-    // String PhoneNumber=studentContactRequestModel.toJson()["studentphonenumber"];
-    // String Query=studentContactRequestModel.toJson()["studentinquiry"];
-
-    // String url = "https://run.mocky.io/v3/10dbe39e-ba24-488b-af81-fe10fbc092a0";  // success
-    // String url = "https://run.mocky.io/v3/4e1f3524-732a-426c-881b-4ae567685de6";   //failed
-    // String url = "https://run.mocky.io/v3/c0586d5b-47fd-4c1b-8eae-277796c80ec6";
-    // final response = await http.post(getUrl('sendenquiry?studentid="1"&Name="chitra"&Email="chitra.pzr@gmail.com"&PhoneNumber="974475667"&Query="test"'), body: studentContactRequestModel.toJson());
     final response = await http.post(
-        getUrl(
-            'sendenquiry?studentid=${studentContactRequestModel.toJson()["studentid"]}&Name=${studentContactRequestModel.toJson()["studentname"]}&Email=${studentContactRequestModel.toJson()["studentemail"]}&PhoneNumber=${studentContactRequestModel.toJson()["studentphonenumber"]}&Query=${studentContactRequestModel.toJson()["studentinquiry"]}'),
-        headers: {'Authorization': 'Bearer $token'});
+      getUrl(
+          'sendenquiry?studentid=${studentContactRequestModel.toJson()["studentid"]}&Name=${studentContactRequestModel.toJson()["studentname"]}&Email=${studentContactRequestModel.toJson()["studentemail"]}&PhoneNumber=${studentContactRequestModel.toJson()["studentphonenumber"]}&Query=${studentContactRequestModel.toJson()["studentinquiry"]}'),
+      headers: {'Authorization': 'Bearer $token'},
+    );
     // print("sdsdsd ${json.decode(response.body)}");
     if (response.statusCode == 200 || response.statusCode == 400) {
       // return StudentContactResponseModel.fromJson(json.decode(response.body));

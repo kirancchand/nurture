@@ -46,7 +46,6 @@ List<Widget> loginButtons(
           // print("DSFDS" + data.message);
           // print(data.response.access_token);
           Get.toNamed("/home");
-
         } else {
           toastFn(comment: data.message);
         }
@@ -84,7 +83,7 @@ Widget payNowButtons(List<Map<String, dynamic>> stu, context) {
   );
 }
 
-Widget submitButtons(formKey, studentContactRequestModel) {
+Widget submitButtons(formKey, studentContactRequestModel, x) {
   // debugPrint("studentContactRequestModel");
   return GestureDetector(
     child: Container(
@@ -99,8 +98,8 @@ Widget submitButtons(formKey, studentContactRequestModel) {
       )),
     ),
     onTap: () async {
-      StudentContactResponseModel data =
-          await validateAndSubmitContact(formKey, studentContactRequestModel);
+      StudentContactResponseModel data = await validateAndSubmitContact(
+          formKey, studentContactRequestModel, x);
       // if (data.statuscode == "200") {
       //   toastFn(comment: data.message);
       //   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -119,6 +118,7 @@ Widget submitButtons(formKey, studentContactRequestModel) {
 List<Widget> contactReqButton(
   formKey,
   studentContactRequestModel,
+  x,
 ) {
   return <Widget>[
     GestureDetector(
@@ -142,7 +142,7 @@ List<Widget> contactReqButton(
           )),
       onTap: () async {
         StudentContactResponseModel data = await validateAndSubmitContactReq(
-            formKey, studentContactRequestModel);
+            formKey, studentContactRequestModel, x);
         if (data.statuscode == "200") {
           toastFn(comment: data.message);
           Get.toNamed("/home");

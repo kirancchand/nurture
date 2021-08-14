@@ -47,12 +47,12 @@ Future<LoginResponseModel> validateAndLogin(formKey, loginRequestModel) async {
 }
 
 Future<StudentContactResponseModel> validateAndSubmitContactReq(
-    formKey, studentContactRequestModel) async {
+    formKey, studentContactRequestModel, x) async {
   Api api = new Api();
   if (validateAndSave(formKey)) {
     showSpinner();
     StudentContactResponseModel data =
-        await api.submitContactRequest(studentContactRequestModel);
+        await api.submitContactRequest(studentContactRequestModel, x);
     // print("action${data.message}");
     hideSpinner();
     return data;
@@ -70,12 +70,12 @@ Future<StudentContactResponseModel> validateAndSubmitContactReq(
 }
 
 Future<StudentContactResponseModel> validateAndSubmitContact(
-    formKey, studentContactRequestModel) async {
+    formKey, studentContactRequestModel, x) async {
   Api api = new Api();
   // if (validateAndSubmit(formKey)) {
   showSpinner();
   StudentContactResponseModel data =
-      await api.submitContactRequest(studentContactRequestModel);
+      await api.submitContactRequest(studentContactRequestModel, x);
   hideSpinner();
   return data;
   // }

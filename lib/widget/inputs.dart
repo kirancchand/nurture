@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:nurture/widget/validators.dart';
 import 'package:nurture/common/constants.dart';
 import 'package:country_list_pick/country_list_pick.dart';
@@ -102,11 +103,10 @@ List<Widget> pinInputs(loginRequestModel) {
   ];
 }
 
-List<Widget> contactReqInputs(studentContactRequestModel,context) {
+List<Widget> contactReqInputs(studentContactRequestModel, context) {
   return <Widget>[
     Row(
       children: [
-        
         Text(
           " Contact Information",
           //  style: TextStyle(fontSize: 25),
@@ -114,156 +114,145 @@ List<Widget> contactReqInputs(studentContactRequestModel,context) {
       ],
     ),
     Padding(
-      padding: const EdgeInsets.only(top: 8, bottom: 8),
+      padding: EdgeInsets.only(top: 8, bottom: 8),
       child: Container(
-        height: 50,
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey[300]),
-            borderRadius: BorderRadius.circular(8)),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 15),
-          child: TextFormField(
-            key: Key('studentname'),
-            minLines: 1,
-            maxLines: 10,
-            keyboardType: TextInputType.multiline,
-
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: "full name",
-                hintStyle: TextStyle(color: Colors.grey)),
-            validator: EmailFieldValidator.validate,
-            // initialValue: "G-0000001035",
-            onSaved: (String value) =>
-                studentContactRequestModel.studentname = value,
-          ),
+        height: 70,
+        child: TextFormField(
+          key: Key('studentname'),
+          keyboardType: TextInputType.name,
+          decoration: InputDecoration(
+              hintText: "Full name",
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(color: Colors.grey[300]),
+              ),
+              labelStyle: TextStyle(color: Colors.grey[400])),
+          validator: NameFieldValidator.validate,
+          // initialValue: "G-0000001085",
+          onSaved: (String value) =>
+              studentContactRequestModel.studentname = value,
         ),
       ),
     ),
     Padding(
-      padding: const EdgeInsets.only(top: 8, bottom: 8),
+      padding: EdgeInsets.only(top: 8, bottom: 8),
       child: Container(
-        height: 50,
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey[300]),
-            borderRadius: BorderRadius.circular(8)),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 15),
-          child: TextFormField(
-            key: Key('studentemail'),
-            minLines: 1,
-            maxLines: 10,
-            keyboardType: TextInputType.multiline,
-
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: "Email",
-                hintStyle: TextStyle(color: Colors.grey)),
-            //obscureText: true,
-            // initialValue: "P@ssword1",
-            validator: PasswordFieldValidator.validate,
-            onSaved: (String value) =>
-                studentContactRequestModel.studentemail = value,
-          ),
+        height: 70,
+        child: TextFormField(
+          key: Key('studentemail'),
+          keyboardType: TextInputType.emailAddress,
+          decoration: InputDecoration(
+              hintText: "Email",
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(color: Colors.grey[300]),
+              ),
+              labelStyle: TextStyle(color: Colors.grey[400])),
+          validator: EmailFieldValidator.validate,
+          onSaved: (String value) =>
+              studentContactRequestModel.studentemail = value,
         ),
       ),
     ),
     Padding(
-      padding: const EdgeInsets.only(top: 8, bottom: 8),
+      padding: EdgeInsets.only(top: 8, bottom: 8),
       child: Container(
+        padding: EdgeInsets.only(left: 10),
         height: 50,
         decoration: BoxDecoration(
             border: Border.all(color: Colors.grey[300]),
             borderRadius: BorderRadius.circular(8)),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 15),
-          child:Column(
-            children:[
-              // CountryListPick(
-              //   // if you need custom picker use this
-              //   pickerBuilder: (context, CountryCode countryCode) {
-              //     return Column(
-              //       children: [
-              //         Text(countryCode.dialCode),
-              //         Image.asset(
-              //           countryCode.flagUri,
-              //           package: 'country_list_pick',
-              //           width: 50,
-              //           height: 50,
-              //         ),
-              //         // Text(countryCode.code),
-              //
-              //       ],
-              //     );
-              //   },
-              //   // theme: CountryTheme(
-              //   //   isShowFlag: true,
-              //   //   isShowTitle: true,
-              //   //   isShowCode: true,
-              //   //   isDownIcon: true,
-              //   //   showEnglishName: false,
-              //   //   labelColor: Colors.blueAccent,
-              //   // ),
-              //   initialSelection: '+62',
-              //   // // or
-              //   // // initialSelection: 'US'
-              //   onChanged: (CountryCode code) {
-              //     print(code.name);
-              //     print(code.code);
-              //     print(code.dialCode);
-              //     print(code.flagUri);
-              //   },
-              // ),
-              TextFormField(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CountryListPick(
+              // if you need custom picker use this
+              pickerBuilder: (context, CountryCode countryCode) {
+                return Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(5),
+                      child: Image.asset(
+                        countryCode.flagUri,
+                        package: 'country_list_pick',
+                        width: 25,
+                        height: 25,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Text(
+                      countryCode.dialCode,
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    Icon(
+                      Icons.keyboard_arrow_down_outlined,
+                      color: Colors.black,
+                    ),
+                    // Text(countryCode.code),
+                  ],
+                );
+              },
+              initialSelection: '+62',
+              onChanged: (CountryCode code) {
+                print(code.name);
+                print(code.code);
+                print(code.dialCode);
+                print(code.flagUri);
+              },
+            ),
+            Container(
+              height: 25,
+              width: 3,
+              color: Colors.grey[300],
+            ),
+            SizedBox(
+              width: 8,
+            ),
+            Expanded(
+              child: TextFormField(
                 key: Key('studentphonenumber'),
-                minLines: 1,
-                maxLines: 10,
-                keyboardType: TextInputType.multiline,
+                keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                     border: InputBorder.none,
-                    prefixIcon: Icon(Icons.keyboard_arrow_down_outlined,),
                     hintText: "  Phone number",
                     hintStyle: TextStyle(color: Colors.grey)),
-                validator: PasswordFieldValidator.validate,
+                validator: NameFieldValidator.validate,
                 onSaved: (String value) =>
-                studentContactRequestModel.studentphonenumber = value,
-                ),
-               ]
-          )
+                    studentContactRequestModel.studentphonenumber = value,
+              ),
+            ),
+          ],
         ),
       ),
     ),
     SizedBox(
       height: 10,
     ),
-  
     Row(
       children: [
         Text("  What is the issue about?"),
       ],
     ),
     Padding(
-      padding: const EdgeInsets.only(top: 8, bottom: 8),
+      padding: EdgeInsets.only(top: 8, bottom: 8),
       child: Container(
-        height: 50,
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey[300]),
-            borderRadius: BorderRadius.circular(8)),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 15),
-          child: TextFormField(
-            key: Key('studentissuesubject'),
-            minLines: 1,
-            maxLines: 10,
-            keyboardType: TextInputType.multiline,
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: "Subject",
-                hintStyle: TextStyle(color: Colors.grey)),
-            validator: PasswordFieldValidator.validate,
-            onSaved: (String value) =>
-                studentContactRequestModel.studentissuesubject = value,
-          ),
+        height: 70,
+        child: TextFormField(
+          key: Key('studentissuesubject'),
+          keyboardType: TextInputType.name,
+          decoration: InputDecoration(
+              hintText: "Subject",
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(color: Colors.grey[300]),
+              ),
+              labelStyle: TextStyle(color: Colors.grey[400])),
+          validator: NameFieldValidator.validate,
+          onSaved: (String value) =>
+              studentContactRequestModel.studentissuesubject = value,
         ),
       ),
     ),
@@ -282,22 +271,20 @@ List<Widget> contactReqInputs(studentContactRequestModel,context) {
     ),
     Container(
         height: 200,
-        width: double.infinity,
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey[300]),
-            borderRadius: BorderRadius.circular(8)),
         child: Padding(
-          padding: const EdgeInsets.all(8),
+          padding: EdgeInsets.all(8),
           child: TextFormField(
-            minLines: 1,
             maxLines: 10,
             keyboardType: TextInputType.multiline,
             key: Key('studentinquiry'),
             decoration: InputDecoration(
-                border: InputBorder.none,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide(color: Colors.grey[300]),
+                ),
                 hintText: "Please enter your inquiry.....",
                 hintStyle: TextStyle(color: Colors.grey)),
-            validator: PasswordFieldValidator.validate,
+            validator: NameFieldValidator.validate,
             onSaved: (String value) =>
                 studentContactRequestModel.studentinquiry = value,
           ),
@@ -305,19 +292,6 @@ List<Widget> contactReqInputs(studentContactRequestModel,context) {
     SizedBox(
       height: 10,
     ),
-    Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Text(
-          "Add Attachment",
-          style: TextStyle(
-            decoration :(TextDecoration.underline),
-            color: kColorGreen,)
-          ),
-        
-      ],
-    ),
-    SizedBox(height: 31),
 
     /* Container(
                                 height: 200,

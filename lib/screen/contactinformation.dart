@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:nurture/model/student.dart';
 import 'package:nurture/widget/buttons.dart';
@@ -25,6 +26,16 @@ class _ContactInformationState extends State<ContactInformation> {
   StudentContactRequestModel studentContactRequestModel;
   LoginRequestModel loginRequestModel;
   bool choose = false;
+  FilePickerResult resultpdf;
+  Future getPdf() async {
+    resultpdf = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf', 'doc'],
+    );
+    return resultpdf.files;
+  }
+
+  List<PlatformFile> x;
 
   @override
   void initState() {
@@ -179,11 +190,32 @@ class _ContactInformationState extends State<ContactInformation> {
                         height: 20,
                       ),
                       Column(
-                          children:
-                              contactReqInputs(studentContactRequestModel,context)),
+                          children: contactReqInputs(
+                              studentContactRequestModel, context)),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          GestureDetector(
+                            onTap: () async {
+                              x = await getPdf();
+                              print(x);
+                            },
+                            child: Text(
+                              "Add Attachment",
+                              style: TextStyle(
+                                decoration: (TextDecoration.underline),
+                                color: kColorGreen,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
                       Column(
                           children: contactReqButton(
-                              formKey, studentContactRequestModel))
+                              formKey, studentContactRequestModel, x))
                     ],
                   ),
                 ),

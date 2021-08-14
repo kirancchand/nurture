@@ -28,6 +28,7 @@ class _PaymentPendingState extends State<PaymentPending> {
   Future<StudentResponseModel> getStudents;
   List childrens = [];
   PendingDropDown controller = Get.put(PendingDropDown());
+  double total = 0.0;
   YearController con = Get.put(YearController());
 
   @override
@@ -61,10 +62,10 @@ class _PaymentPendingState extends State<PaymentPending> {
         // _installmentSection()
         Stack(
           children: [
-            Container(
-              height: MediaQuery.of(context).size.height * .30,
-              width: MediaQuery.of(context).size.width,
-            ),
+            // Container(
+            //   height: MediaQuery.of(context).size.height * .20,
+            //   width: MediaQuery.of(context).size.width,
+            // ),
             Container(
               height: MediaQuery.of(context).size.height * .17,
               width: MediaQuery.of(context).size.width,
@@ -80,7 +81,7 @@ class _PaymentPendingState extends State<PaymentPending> {
             Align(
               alignment: Alignment.center,
               child: Padding(
-                padding: const EdgeInsets.only(top: 40),
+                padding: EdgeInsets.only(top: 40),
                 child: Column(
                   children: [
                     Text("Payment Pending",
@@ -195,7 +196,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                 ),
               )
             : Padding(
-                padding: const EdgeInsets.all(20),
+                padding: EdgeInsets.all(20),
                 child: Column(
                   children: [
                     Row(
@@ -224,8 +225,8 @@ class _PaymentPendingState extends State<PaymentPending> {
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(color: Colors.grey.shade300)),
                       child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 15, top: 15, right: 20),
+                          padding:
+                              EdgeInsets.only(left: 15, top: 15, right: 20),
                           child: Column(
                             children: [
                               Container(
@@ -239,28 +240,76 @@ class _PaymentPendingState extends State<PaymentPending> {
                                     if (snapshot.hasData) {
                                       var statuscode =
                                           snapshot.data?.statuscode;
+
                                       // print(statuscode);
                                       if (statuscode == "200") {
                                         var response = snapshot.data?.response;
-                                        // print("helo${response.studentnumber}");
-                                        // return Installment(data: response);
-                                        //
-                                        return response.installment.length > 0
-                                            ? ListView.builder(
-                                                itemCount:
-                                                    response.installment.length,
-                                                shrinkWrap: true,
-                                                physics:
-                                                    ClampingScrollPhysics(),
-                                                itemBuilder:
-                                                    (context, int index) {
-                                                  // print("response.installment[index]");
+                                        for (int index = 0;
+                                            index <
+                                                    response
+                                                        .installment.length ??
+                                                0;
+                                            index++)
+                                          total = total +
+                                              response.installment[index]
+                                                  .tuitionfee +
+                                              response.installment[index]
+                                                  .transportfee +
+                                              response
+                                                  .installment[index].others;
 
-                                                  // return Text("hey");
-                                                  return Installment(
-                                                      data: response
-                                                          .installment[index]);
-                                                },
+                                        return response.installment.length > 0
+                                            ? Column(
+                                                children: [
+                                                  ListView.builder(
+                                                    itemCount: response
+                                                        .installment.length,
+                                                    shrinkWrap: true,
+                                                    physics:
+                                                        ClampingScrollPhysics(),
+                                                    itemBuilder:
+                                                        (context, int index) {
+                                                      return Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                              'Installment ${index + 1}'),
+                                                          Divider(),
+                                                          Installment(
+                                                              data: response
+                                                                      .installment[
+                                                                  index]),
+                                                          SizedBox(
+                                                            height: 15,
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text(
+                                                        "Total",
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        "${total}",
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
                                               )
                                             : Center(child: Text("No Data"));
                                       } else {
@@ -273,11 +322,6 @@ class _PaymentPendingState extends State<PaymentPending> {
                                       return Center(
                                           child: CircularProgressIndicator());
                                     }
-
-                                    // // data.response.length>0?
-                                    // var response=[];
-
-                                    // By default, show a loading spinner.
                                   },
                                 ),
                               ),
@@ -285,24 +329,6 @@ class _PaymentPendingState extends State<PaymentPending> {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 3, vertical: 10),
                                 child: Divider(),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Total",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    "500 KD",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  )
-                                ],
                               ),
                               SizedBox(height: 20),
                               Center(

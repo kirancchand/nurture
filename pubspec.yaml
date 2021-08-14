@@ -22,18 +22,19 @@ environment:
   #sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
+  country_list_pick: ^1.0.1+5
   cupertino_icons: ^1.0.2
+  dio: ^4.0.0
+  file_picker: ^4.0.0
   flutter:
     sdk: flutter
   fluttertoast: ^8.0.7
   get: ^4.1.4
   http: ^0.13.3
   modal_progress_hud_nsn: ^0.1.0-nullsafety-1
+  path_provider: ^2.0.2
   shared_preferences: ^2.0.6
   webview_flutter: ^2.0.12
-  path_provider: ^2.0.2
-  dio: ^4.0.0
-  country_list_pick: ^1.0.1+5
 dev_dependencies:
   flutter_test:
     sdk: flutter

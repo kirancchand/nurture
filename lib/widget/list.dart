@@ -33,10 +33,10 @@ class StudentList extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Student Id ${data.studentid}",
+              "Student Id ${data.studentid}" ?? "",
               style: TextStyle(fontSize: 11),
             ),
-            Text("Al Mina aljadeed", style: TextStyle(fontSize: 11))
+            Text(data.schoolname ?? "", style: TextStyle(fontSize: 11))
           ],
         ),
         trailing: IconButton(
@@ -398,11 +398,14 @@ class _StudentInfoListState extends State<StudentInfoList> {
                             Text(widget.data.nationality),
                             Text(widget.data.religion),
                             Text(widget.data.civilid.toString()),
-                            Text(widget.data.studentcivilexpirydate.day.toString() +
+                            Text(widget.data.studentcivilexpirydate.day
+                                    .toString() +
                                 "/" +
-                                widget.data.studentcivilexpirydate.month.toString() +
+                                widget.data.studentcivilexpirydate.month
+                                    .toString() +
                                 "/" +
-                                widget.data.studentcivilexpirydate.year.toString()),
+                                widget.data.studentcivilexpirydate.year
+                                    .toString()),
                             Text(widget.data.passportnumber),
                             Text(widget.data.regionalarea)
                           ],
@@ -487,11 +490,14 @@ class _StudentInfoListState extends State<StudentInfoList> {
                         Text(widget.parents[index].name),
                         Text(widget.parents[index].nationality),
                         Text(widget.parents[index].civilid),
-                        Text(widget.parents[index].parentcivilexpirydate.day.toString() +
+                        Text(widget.parents[index].parentcivilexpirydate.day
+                                .toString() +
                             "/" +
-                            widget.parents[index].parentcivilexpirydate.month.toString() +
+                            widget.parents[index].parentcivilexpirydate.month
+                                .toString() +
                             "/" +
-                            widget.parents[index].parentcivilexpirydate.year.toString()),
+                            widget.parents[index].parentcivilexpirydate.year
+                                .toString()),
                         // Text(widget.parents[index].parentcivilexpirydate),
                         Text(widget.parents[index].emailid),
                         Text(widget.parents[index].regionalarea)

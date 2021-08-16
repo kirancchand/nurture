@@ -44,16 +44,9 @@ class _MyHomeState extends State<MyHome> {
   void _onCategorySelected(bool selected, student) {
     if (selected == true) {
       setState(() {
-        
-        if((student.dueamount!=0.0)&&(student.enrollmentamount!=0.0))
-          {
             _selectedStudent.add(student);
             total = total + student.dueamount;
-          }
-        else{
-          Fluttertoast.showToast(
-              msg: 'This Student didnt have any Outstanding Payment');
-        }
+
 
       });
     } else {

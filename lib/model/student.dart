@@ -12,7 +12,9 @@ class StudentResponseModel {
     return StudentResponseModel(
       statuscode: json["statuscode"],
       // response: List<HomeResponse>.from(json["response"].map((x) => HomeResponse.fromJson(x))),
-      response: HomeResponse.fromJson(json["response"]),
+      response: json["statuscode"] != 200
+          ? HomeResponse()
+          : HomeResponse.fromJson(json["response"]),
       message: json["message"],
     );
   }
@@ -40,40 +42,39 @@ class HomeResponse {
 }
 
 class StudentResponse {
-  StudentResponse({
-    this.studentid,
-    this.studentname,
-    this.studentnumber,
-    this.userid,
-    this.birthdate,
-    this.isguardian,
-    this.gender,
-    this.contactphonenumber,
-    this.contactmobilenumber,
-    this.contactemailid,
-    //this.createdby,
-    this.civilid,
-    this.countryid,
-    this.passportnumber,
-    this.addressline1,
-    this.addressline2,
-    this.regionalarea,
-    this.gradeid,
-    this.schoolid,
-    this.isfather,
-    this.ismother,
-    this.issameforaddress,
-    this.arabstudentname,
-    this.isprimarycontact,
-    this.uniformfee,
-    this.religion,
-    this.studntcode,
-    this.grade,
-    this.schoolname,
-    this.academicyear,
-    this.nationality,
-    this.studentcivilexpirydate
-  });
+  StudentResponse(
+      {this.studentid,
+      this.studentname,
+      this.studentnumber,
+      this.userid,
+      this.birthdate,
+      this.isguardian,
+      this.gender,
+      this.contactphonenumber,
+      this.contactmobilenumber,
+      this.contactemailid,
+      //this.createdby,
+      this.civilid,
+      this.countryid,
+      this.passportnumber,
+      this.addressline1,
+      this.addressline2,
+      this.regionalarea,
+      this.gradeid,
+      this.schoolid,
+      this.isfather,
+      this.ismother,
+      this.issameforaddress,
+      this.arabstudentname,
+      this.isprimarycontact,
+      this.uniformfee,
+      this.religion,
+      this.studntcode,
+      this.grade,
+      this.schoolname,
+      this.academicyear,
+      this.nationality,
+      this.studentcivilexpirydate});
 
   int studentid;
   String studentname;
@@ -141,7 +142,8 @@ class StudentResponse {
         schoolname: json["schoolname"] ?? "",
         academicyear: json["academicyear"] ?? "",
         nationality: json["nationality"] ?? "",
-        studentcivilexpirydate: DateTime.parse(json["studentcivilexpirydate"]) ?? "",
+        studentcivilexpirydate:
+            DateTime.parse(json["studentcivilexpirydate"]) ?? "",
       );
 
   // String get civilid => null;
@@ -177,27 +179,26 @@ class StudentResponse {
         "grade": grade,
         "schoolname": schoolname,
         "academicyear": academicyear,
-        "nationality":nationality,
-        "studentcivilexpirydate":studentcivilexpirydate
+        "nationality": nationality,
+        "studentcivilexpirydate": studentcivilexpirydate
       };
 }
 
 class ParentResponse {
-  ParentResponse({
-    this.name,
-    this.parentdetailsid,
-    this.civilid,
-    this.mobilenumber,
-    this.emailid,
-    this.addressline,
-    this.regionalarea,
-    this.passportnumber,
-    this.type,
-    this.arabicname,
-    this.dob,
-    this.nationality,
-    this.parentcivilexpirydate
-  });
+  ParentResponse(
+      {this.name,
+      this.parentdetailsid,
+      this.civilid,
+      this.mobilenumber,
+      this.emailid,
+      this.addressline,
+      this.regionalarea,
+      this.passportnumber,
+      this.type,
+      this.arabicname,
+      this.dob,
+      this.nationality,
+      this.parentcivilexpirydate});
 
   String name;
   int parentdetailsid;
@@ -226,7 +227,8 @@ class ParentResponse {
         arabicname: json["arabicname"] ?? "",
         dob: json["dob"] ?? "",
         nationality: json["nationality"] ?? "",
-        parentcivilexpirydate: DateTime.parse(json["parentcivilexpirydate"]) ?? "",
+        parentcivilexpirydate:
+            DateTime.parse(json["parentcivilexpirydate"]) ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -241,7 +243,7 @@ class ParentResponse {
         "arabicname": arabicname,
         "dob": dob,
         "nationality": nationality,
-        "parentcivilexpirydate":parentcivilexpirydate,
+        "parentcivilexpirydate": parentcivilexpirydate,
       };
 }
 

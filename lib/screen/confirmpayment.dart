@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nurture/common/constants.dart';
+import 'package:nurture/config/controller.dart';
 import 'package:nurture/model/payment.dart';
 import 'package:nurture/screen/PaymentWebPage.dart';
 import 'package:nurture/widget/actions.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:nurture/widget/spinner.dart';
 
 class ConfirmPayment extends StatefulWidget {
   ConfirmPayment({Key key}) : super(key: key);
   List childrens = Get.arguments[0];
-  double total= Get.arguments[1];
+  double total = Get.arguments[1];
   @override
   _ConfirmPaymentState createState() => _ConfirmPaymentState();
 }
@@ -22,35 +24,25 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
   void initState() {
     super.initState();
     enrollment = List<bool>.filled(widget.childrens.length, false);
+    print(enrollment);
   }
 
   List<Map<String, dynamic>> convert() {
     return paymentlist.map((e) => e.toMap()).toList();
   }
 
-  addPaymentlist({
-    int sid1,
-    double total,
-    int index1,
-    int i,
-  }) {
+  addPaymentlist({int sid1, double total, bool isEnroll}) {
     // x = paymentlist.map((e) => e.index).toList();
     // var i = x.indexOf(index1);
-    setState(
-      () {
-        if (i == 1) {
-          paymentlist.add(
-            Abcd(
-              total: total,
-              sid: sid1,
-            ),
-          );
-        } else {
-          paymentlist.removeAt(index1);
-          // paymentlist[index1] = Abcd(total: total, sid: sid1);
-        }
-      },
-    );
+    setState(() {
+      paymentlist.add(
+        Abcd(
+          total: total,
+          sid: sid1,
+          isEnroll: isEnroll,
+        ),
+      );
+    });
     // print(x.length);
     // print(paymentlist.length);
   }
@@ -58,262 +50,273 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
   @override
   Widget build(BuildContext context) {
     // print(widget.childrens[0].studentname);
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
-        centerTitle: true,
-        titleSpacing: 60,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(
-            Icons.keyboard_arrow_left,
-            color: Colors.white,
-          ),
-        ),
-        toolbarHeight: 80,
-        title: Text("Confirm Payment",
-            style: TextStyle(
+    return Spinner(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          elevation: 0,
+          centerTitle: true,
+          titleSpacing: 60,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.keyboard_arrow_left,
               color: Colors.white,
-            )),
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color(0xff43CEA2),
-                Color(0xff279DD4),
-              ],
+            ),
+          ),
+          toolbarHeight: 80,
+          title: Text("Confirm Payment",
+              style: TextStyle(
+                color: Colors.white,
+              )),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color(0xff43CEA2),
+                  Color(0xff279DD4),
+                ],
+              ),
             ),
           ),
         ),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(20),
-        child: ListView(
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height * .54,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.grey[200])),
-              child: Padding(
-                padding: EdgeInsets.all(10),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("Student", style: TextStyle(color: Colors.grey)),
-                          Text("Amount", style: TextStyle(color: Colors.grey)),
-                        ],
-                      ),
-                      ListView.builder(
-                        itemCount: widget.childrens.length,
-                        shrinkWrap: true,
-                        physics: ClampingScrollPhysics(),
-                        itemBuilder: (context, int index) {
-                          // print(widget.childrens[index].studentname);
+        body: Padding(
+          padding: EdgeInsets.all(20),
+          child: ListView(
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height * .54,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.grey[200])),
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Student",
+                                style: TextStyle(color: Colors.grey)),
+                            Text("Amount",
+                                style: TextStyle(color: Colors.grey)),
+                          ],
+                        ),
+                        ListView.builder(
+                          itemCount: widget.childrens.length,
+                          shrinkWrap: true,
+                          physics: ClampingScrollPhysics(),
+                          itemBuilder: (context, int index) {
+                            // print(widget.childrens[index].studentname);
 
-                          return Padding(
-                            padding: EdgeInsets.only(bottom: 10, top: 15),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(widget.childrens[index].studentname),
-                                    Text(
-                                      widget.childrens[index].dueamount
-                                          .toString(),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        // ignore: unrelated_type_equality_checks
-                                        widget.childrens[index].enrollmentamount.toString()!=0.0?Column(
-                                          children:[
-                                            Checkbox(
-                                              value: enrollment[index],
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  this.enrollment[index] = value;
-                                                  if (value == true) {
-                                                    widget.total = widget.total +
-                                                        widget.childrens[index]
-                                                            .enrollmentamount;
-                                                    addPaymentlist(
-                                                        i: 1,
-                                                        total: widget.total,
-                                                        index1: index,
-                                                        sid1: widget
-                                                            .childrens[index]
-                                                            .studentid);
-                                                  } else {
-                                                    widget.total = widget.total -
-                                                        widget.childrens[index]
-                                                            .enrollmentamount;
-                                                    addPaymentlist(
-                                                        i: 0,
-                                                        total: widget.total,
-                                                        index1: index
-                                                      // sid1: widget
-                                                      //     .childrens[index]
-                                                      //     .studentname
-                                                    );
-                                                  }
-                                                });
-                                              },
-                                              side: BorderSide(color: Colors.green),
-                                              shape: CircleBorder(),
-                                              activeColor: Colors.green,
+                            return Padding(
+                              padding: EdgeInsets.only(bottom: 10, top: 15),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(widget.childrens[index].studentname),
+                                      Text(
+                                        widget.childrens[index].dueamount
+                                            .toString(),
+                                      ),
+                                    ],
+                                  ),
+                                  widget.childrens[index].enrollmentamount ==
+                                          0.0
+                                      ? Container()
+                                      : Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                // ignore: unrelated_type_equality_checks
+                                                Checkbox(
+                                                  value: enrollment[index],
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      enrollment[index] = value;
+                                                      if (value == true) {
+                                                        widget.total = widget
+                                                                .total +
+                                                            widget
+                                                                .childrens[
+                                                                    index]
+                                                                .enrollmentamount;
+                                                      } else {
+                                                        widget.total = widget
+                                                                .total -
+                                                            widget
+                                                                .childrens[
+                                                                    index]
+                                                                .enrollmentamount;
+                                                      }
+                                                    });
+                                                  },
+                                                  side: BorderSide(
+                                                      color: Colors.green),
+                                                  shape: CircleBorder(),
+                                                  activeColor: Colors.green,
+                                                ),
+                                                Text(
+                                                  "  Enrollment",
+                                                  style: TextStyle(
+                                                      color: Colors.grey),
+                                                ),
+                                              ],
                                             ),
                                             Text(
-                                              "  Enrollment",
-                                              style: TextStyle(color: Colors.grey),
-                                            ),
-                                          ]
-                                        ):""
-
-                                      ],
-                                    ),
-                                    Text(
-                                      // widget.childrens[index].,
-                                      widget.childrens[index].enrollmentamount
-                                              .toString() ??
-                                          '',
-                                      style: TextStyle(color: Colors.grey),
-                                    )
-                                  ],
-                                ),
-                                Divider(
-                                  color: Colors.grey[200],
-                                ),
-                              ],
-                            ),
-                          );
-                          // paymentList(
-                          //   data: widget.childrens[index],
-                          // );
-                        },
-                      ),
-                    ],
+                                              // widget.childrens[index].,
+                                              widget.childrens[index]
+                                                      .enrollmentamount
+                                                      .toString() ??
+                                                  '',
+                                              style:
+                                                  TextStyle(color: Colors.grey),
+                                            )
+                                          ],
+                                        ),
+                                  Divider(
+                                    color: Colors.grey[200],
+                                  ),
+                                ],
+                              ),
+                            );
+                            // paymentList(
+                            //   data: widget.childrens[index],
+                            // );
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            // Padding(
-            //  padding: const EdgeInsets.all(8.0),
-            //  child:
-            Center(
-              child:
-                  Text("Add enrollment fee for confirming next academic year",
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 11,
-                      )),
-            ),
-            // ),
-            SizedBox(
-              height: 40,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("Total Amount"),
-                Text(
-                  "${widget.total} KD",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            widget.total > 0
-                ? GestureDetector(
-                    child: Container(
-                      height: 40,
-                      width: 200,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          color: kColorGreen),
-                      child: Center(
-                          child: Text(
-                        "Confirm Payment",
-                        style: TextStyle(color: Colors.white),
-                      )),
-                    ),
-                    onTap: () async {
-                      var lists = await convert();
-                      // print(lists);
-                      Payment data = await submitConfirmPayment(lists);
-                      // print(data.response);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PaymentWebPage(
-                            link: data.response ?? "",
-                          ),
-                        ),
-                      );
-                      // print(data);
-                    },
-                  )
-                : GestureDetector(
-                    child: Container(
-                      height: 40,
-                      width: 200,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          color: kColorGreen),
-                      child: Center(
-                          child: Text(
-                        "Confirm Payment",
-                        style: TextStyle(color: Colors.white),
-                      )),
-                    ),
-                    onTap: () async {
-                      Fluttertoast.showToast(
-                          msg: 'You have any Payments Pending');
-                      // print(data);
-                    },
-                  ),
-            // confirmButtons(),
-            SizedBox(
-              height: 5,
-            ),
-            SizedBox(
+              SizedBox(
+                height: 5,
+              ),
+              // Padding(
+              //  padding: const EdgeInsets.all(8.0),
+              //  child:
+              Center(
+                child:
+                    Text("Add enrollment fee for confirming next academic year",
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 11,
+                        )),
+              ),
+              // ),
+              SizedBox(
                 height: 40,
-                width: double.infinity,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Confirming payment will take you",
-                      style: TextStyle(color: Colors.grey),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Total Amount"),
+                  Text(
+                    "${widget.total} KD",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              widget.total > 0
+                  ? GestureDetector(
+                      child: Container(
+                        height: 40,
+                        width: 200,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            color: kColorGreen),
+                        child: Center(
+                            child: Text(
+                          "Confirm Payment",
+                          style: TextStyle(color: Colors.white),
+                        )),
+                      ),
+                      onTap: () async {
+                        // print(enrollment);
+                        for (int i = 0; i < widget.childrens.length; i++) {
+                          addPaymentlist(
+                            isEnroll: enrollment[i],
+                            total: enrollment[i] == false
+                                ? widget.childrens[i].dueamount
+                                : widget.childrens[i].dueamount +
+                                    widget.childrens[i].enrollmentamount,
+                            sid1: widget.childrens[i].studentid,
+                          );
+                        }
+                        var lists = await convert();
+                        print(lists);
+                        showSpinner();
+                        Payment data = await submitConfirmPayment(lists);
+                        hideSpinner();
+                        // print(data.response);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PaymentWebPage(
+                              link: data.response ?? "",
+                            ),
+                          ),
+                        );
+                        print(data);
+                      },
+                    )
+                  : GestureDetector(
+                      child: Container(
+                        height: 40,
+                        width: 200,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            color: kColorGreen),
+                        child: Center(
+                            child: Text(
+                          "Confirm Payment",
+                          style: TextStyle(color: Colors.white),
+                        )),
+                      ),
+                      onTap: () async {
+                        Fluttertoast.showToast(
+                            msg: 'You did not have any Payments Pending');
+                        // print(data);
+                      },
                     ),
-                    Text(
-                      "to payment gateway",
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                  ],
-                )),
-            SizedBox(height: 20)
-          ],
+              // confirmButtons(),
+              SizedBox(
+                height: 5,
+              ),
+              SizedBox(
+                  height: 40,
+                  width: double.infinity,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Confirming payment will take you",
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                      Text(
+                        "to payment gateway",
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                    ],
+                  )),
+              SizedBox(height: 20)
+            ],
+          ),
         ),
       ),
     );
@@ -324,16 +327,19 @@ class Abcd {
   double total;
   int sid;
   int index;
+  bool isEnroll;
 
   Abcd({
     this.total,
     this.sid,
     this.index,
+    this.isEnroll,
   });
+  YearController con = Get.put(YearController());
   Map<String, dynamic> toMap() => {
-        "AcademicPeriodId": "2020-2021",
+        "AcademicPeriodId": con.year.value,
         "GrandTotal": total,
-        "IsIncludeEnrollment": false,
+        "IsIncludeEnrollment": isEnroll,
         "KnetpaymentAmount": total,
         "OffSet": 330,
         "OpeningBalance": 0,

@@ -40,7 +40,6 @@ class StudentContactRequestModel {
   String studentname;
   String studentemail;
   String studentphonenumber;
-  String studentissuesubject;
   String studentinquiry;
 
   StudentContactRequestModel({
@@ -48,7 +47,6 @@ class StudentContactRequestModel {
     this.studentname,
     this.studentemail,
     this.studentphonenumber,
-    this.studentissuesubject,
     this.studentinquiry,
   });
 
@@ -60,7 +58,6 @@ class StudentContactRequestModel {
       'studentname': studentname.trim(),
       'studentemail': studentemail.trim(),
       'studentphonenumber': studentphonenumber.trim(),
-      'studentissuesubject': studentissuesubject.trim(),
       'studentinquiry': studentinquiry.trim(),
     };
     return map;

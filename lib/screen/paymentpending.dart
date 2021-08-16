@@ -130,7 +130,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                                           onChanged: (newValue) {
                                             setState(() {
                                               controller.text.value = newValue;
-                                              print(_valueChoose);
+                                              // print(_valueChoose);
                                             });
                                             Navigator.pushReplacement(
                                               context,
@@ -245,8 +245,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                                       if (statuscode == "200") {
                                         var response = snapshot.data?.response;
                                         for (int index = 0;
-                                            index <
-                                                    response
+                                            index < response
                                                         .installment.length ??
                                                 0;
                                             index++)
@@ -309,11 +308,34 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                       ),
                                                     ],
                                                   ),
+                                                  Padding(
+                                                    padding: const EdgeInsets.symmetric(
+                                                        horizontal: 3, vertical: 10),
+                                                    child: Divider(),
+                                                  ),
+                                                  SizedBox(height: 20),
+                                                  Center(
+                                                    child: payNowButtons([
+                                                      {
+                                                        "AcademicPeriodId": "2020-2021",
+                                                        "GrandTotal": 2402,
+                                                        "IsIncludeEnrollment": false,
+                                                        "KnetpaymentAmount": 2402,
+                                                        "OffSet": -330,
+                                                        "OpeningBalance": 0,
+                                                        "StudentId": 2920,
+                                                        "Paymentid": 0
+                                                      }
+                                                    ], context),
+                                                  ),
+                                                  SizedBox(height: 20)
+
+
                                                 ],
                                               )
                                             : Center(child: Text("No Data"));
                                       } else {
-                                        return Text("No Data Founds");
+                                        return Center(child: Text("No Data Found"));
                                       }
                                     } else if (snapshot.hasError) {
                                       // return Text("${snapshot.error}");
@@ -325,27 +347,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                                   },
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 3, vertical: 10),
-                                child: Divider(),
-                              ),
-                              SizedBox(height: 20),
-                              Center(
-                                child: payNowButtons([
-                                  {
-                                    "AcademicPeriodId": "2020-2021",
-                                    "GrandTotal": 2402,
-                                    "IsIncludeEnrollment": false,
-                                    "KnetpaymentAmount": 2402,
-                                    "OffSet": -330,
-                                    "OpeningBalance": 0,
-                                    "StudentId": 2920,
-                                    "Paymentid": 0
-                                  }
-                                ], context),
-                              ),
-                              SizedBox(height: 20)
+
                             ],
                           )),
                     ),

@@ -8,14 +8,14 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 class ConfirmPayment extends StatefulWidget {
   ConfirmPayment({Key key}) : super(key: key);
-  List childrens = Get.arguments;
-
+  List childrens = Get.arguments[0];
+  double total= Get.arguments[1];
   @override
   _ConfirmPaymentState createState() => _ConfirmPaymentState();
 }
 
 class _ConfirmPaymentState extends State<ConfirmPayment> {
-  double total = 0.0;
+  // double total = 0.0;
   List<bool> enrollment;
   List<Abcd> paymentlist = [];
   var x;
@@ -146,23 +146,23 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                                             setState(() {
                                               this.enrollment[index] = value;
                                               if (value == true) {
-                                                total = total +
+                                                widget.total = widget.total +
                                                     widget.childrens[index]
-                                                        .dueamount;
+                                                        .enrollmentamount;
                                                 addPaymentlist(
                                                     i: 1,
-                                                    total: total,
+                                                    total: widget.total,
                                                     index1: index,
                                                     sid1: widget
                                                         .childrens[index]
                                                         .studentid);
                                               } else {
-                                                total = total -
+                                                widget.total = widget.total -
                                                     widget.childrens[index]
-                                                        .dueamount;
+                                                        .enrollmentamount;
                                                 addPaymentlist(
                                                     i: 0,
-                                                    total: total,
+                                                    total: widget.total,
                                                     index1: index
                                                     // sid1: widget
                                                     //     .childrens[index]
@@ -229,7 +229,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
               children: [
                 Text("Total Amount"),
                 Text(
-                  "${total} KD",
+                  "${widget.total} KD",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 )
               ],
@@ -237,7 +237,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
             SizedBox(
               height: 20,
             ),
-            total > 0
+            widget.total > 0
                 ? GestureDetector(
                     child: Container(
                       height: 40,

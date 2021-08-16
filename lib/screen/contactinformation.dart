@@ -44,7 +44,6 @@ class _ContactInformationState extends State<ContactInformation> {
         studentname: '',
         studentemail: '',
         studentphonenumber: '',
-        studentissuesubject: '',
         studentinquiry: '');
     loginRequestModel = new LoginRequestModel(Username: '', Password: '');
   }
@@ -110,7 +109,7 @@ class _ContactInformationState extends State<ContactInformation> {
                   onTap: () {
                     setState(() {
                       
-                      print("object");
+                      // print("object");
                     });
                   },
                 ),
@@ -198,7 +197,7 @@ class _ContactInformationState extends State<ContactInformation> {
                           GestureDetector(
                             onTap: () async {
                               x = await getPdf();
-                              print(x);
+                              // print(x);
                             },
                             child: Text(
                               "Add Attachment",

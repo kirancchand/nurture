@@ -52,7 +52,7 @@ class Api {
     // String url = "https://run.mocky.io/v3/4e1f3524-732a-426c-881b-4ae567685de6";   //failed
     // String url = "https://run.mocky.io/v3/c0586d5b-47fd-4c1b-8eae-277796c80ec6";
     var token = await getToken();
-    final response = await http.get(getUrl('GetAllDetails'), headers: {
+    final response = await http.get(getUrl('GetAllDetailsSingle'), headers: {
       'Authorization': 'Bearer $token',
     });
     // print(jsonDecode(response.body));

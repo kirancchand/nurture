@@ -33,7 +33,7 @@ class _PaymentWebPageState extends State<PaymentWebPage> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => Home(
-                    count: 0,
+                    count: 2,
                   ),
                 ),
               );

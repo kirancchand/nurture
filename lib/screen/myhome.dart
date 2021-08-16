@@ -116,20 +116,20 @@ class _MyHomeState extends State<MyHome> {
                     height: 10,
                   ),
                   Container(
-                    child: FutureBuilder<StudentResponseModel>(
-                      future: getStudents,
+                    child: FutureBuilder<FeeResponseModel>(
+                      future: getFee,
                       builder: (BuildContext context,
-                          AsyncSnapshot<StudentResponseModel> snapshot) {
+                          AsyncSnapshot<FeeResponseModel> snapshot) {
                         if (snapshot.hasData) {
                           var response = snapshot.data?.response;
 
                           // // data.response.length>0?
                           // var response=[];
-                          return response.parents.length > 0
+                          return response.parentnumber!=""
                               ? Column(children: [
                                   Stack(children: [
                                     Text(
-                                      response.parents[0].name,
+                                      response.parentname,
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 25,
@@ -138,7 +138,7 @@ class _MyHomeState extends State<MyHome> {
                                   ]),
                                   Stack(children: [
                                     Text(
-                                        "Parent ID: ${response.parents[0].parentdetailsid}",
+                                        "Parent ID: ${response.parentnumber}",
                                         style: TextStyle(
                                           color: Colors.white,
                                         )),
@@ -296,13 +296,12 @@ class _MyHomeState extends State<MyHome> {
                     AsyncSnapshot<FeeResponseModel> snapshot) {
                   if (snapshot.hasData) {
                     var response = snapshot.data?.response;
-
-                    // print(data[0]);
+                    print(response.children.length);
                     // // data.response.length>0?
                     // var response=[];
-                    return response.length > 0
+                    return response.children.length > 0
                         ? ListView.builder(
-                            itemCount: response.length,
+                            itemCount: response.children.length,
                             shrinkWrap: true,
                             physics: ClampingScrollPhysics(),
                             itemBuilder: (context, int index) {
@@ -313,22 +312,22 @@ class _MyHomeState extends State<MyHome> {
                               return ListTile(
                                 leading: Checkbox(
                                   value: _selectedStudent
-                                      .contains(response[index]),
+                                      .contains(response.children[index]),
                                   onChanged: (bool selected) {
                                     _onCategorySelected(
-                                        selected, response[index]);
+                                        selected, response.children[index]);
                                   },
                                   side: BorderSide(color: kColorGreen),
                                   shape: CircleBorder(),
                                   activeColor: kColorGreen,
                                 ),
-                                title: Text(response[index].studentname,
+                                title: Text(response.children[index].studentname,
                                     style: TextStyle(
                                         color: selectedStudent
                                             ? kColorGreen
                                             : Colors.grey)),
                                 trailing: Text(
-                                    response[index].dueamount.toString(),
+                                    response.children[index].dueamount.toString(),
                                     style: TextStyle(
                                         color: selectedStudent
                                             ? kColorGreen
@@ -380,7 +379,7 @@ class _MyHomeState extends State<MyHome> {
                   // print("dsfsd${_selectedStudent.length}");
                   _selectedStudent.length > 0
                       ? Get.toNamed('/confirmpayment',
-                          arguments: _selectedStudent)
+                          arguments: [_selectedStudent,total])
                       : Fluttertoast.showToast(
                           msg: 'Please Select Atleast one student');
                 },

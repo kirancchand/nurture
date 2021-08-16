@@ -232,31 +232,6 @@ List<Widget> contactReqInputs(studentContactRequestModel, context) {
       height: 10,
     ),
     Row(
-      children: [
-        Text("  What is the issue about?"),
-      ],
-    ),
-    Padding(
-      padding: EdgeInsets.only(top: 8, bottom: 8),
-      child: Container(
-        height: 70,
-        child: TextFormField(
-          key: Key('studentissuesubject'),
-          keyboardType: TextInputType.name,
-          decoration: InputDecoration(
-              hintText: "Subject",
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(color: Colors.grey[300]),
-              ),
-              labelStyle: TextStyle(color: Colors.grey[400])),
-          validator: NameFieldValidator.validate,
-          onSaved: (String value) =>
-              studentContactRequestModel.studentissuesubject = value,
-        ),
-      ),
-    ),
-    Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text("  Tell us more..."),

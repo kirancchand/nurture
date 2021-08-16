@@ -33,7 +33,7 @@ class StudentList extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Student Id ${data.studentid}" ?? "",
+              "Student Id ${data.studentnumber}" ?? "",
               style: TextStyle(fontSize: 11),
             ),
             Text(data.schoolname ?? "", style: TextStyle(fontSize: 11))
@@ -800,7 +800,15 @@ class Installment extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              list_txt("Enrollment", isSelected: true),
+              list_txt(data.enrollment.toString())
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
               list_txt("Others", isSelected: true),
+              list_txt(data.others.toString())
             ],
           ),
         ],

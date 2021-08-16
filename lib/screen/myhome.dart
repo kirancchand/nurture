@@ -44,8 +44,17 @@ class _MyHomeState extends State<MyHome> {
   void _onCategorySelected(bool selected, student) {
     if (selected == true) {
       setState(() {
-        _selectedStudent.add(student);
-        total = total + student.dueamount;
+        
+        if((student.dueamount!=0.0)&&(student.enrollmentamount!=0.0))
+          {
+            _selectedStudent.add(student);
+            total = total + student.dueamount;
+          }
+        else{
+          Fluttertoast.showToast(
+              msg: 'This Student didnt have any Outstanding Payment');
+        }
+
       });
     } else {
       setState(() {
@@ -63,14 +72,19 @@ class _MyHomeState extends State<MyHome> {
       childrens = student.response.childrens;
       // print('academic yaea');
       // print(student.response.childrens[0].academicyear);
-      con.year.value = student.response.childrens[0].academicyear;
+      // con.year.value = student.response.childrens[0].academicyear;
       // Future.delayed(Duration(seconds: 1)).then((value) async {
       //   SharedPreferences pref = await SharedPreferences.getInstance();
       //   pref.setString("ay", student.response.childrens[0].academicyear);
       // });
       return student;
     });
-    getFee = api.getFee();
+    getFee = api.getFee().then((fee){
+      con.year.value = fee.response.academicyear;
+      return fee;
+    });
+
+
   }
 
   @override

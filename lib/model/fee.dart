@@ -166,13 +166,13 @@ class Response {
 
   factory Response.fromJson(Map<String, dynamic> json) => Response(
     id: json["\u0024id"],
-    parentid: json["parentid"],
-    parentnumber: json["parentnumber"],
-    userid: json["userid"],
-    parentname: json["parentname"],
-    arabparentname: json["arabparentname"],
-    academicyearid: json["academicyearid"],
-    academicyear: json["academicyear"],
+    parentid: json["parentid"]??"",
+    parentnumber: json["parentnumber"]??"",
+    userid: json["userid"]??"",
+    parentname: json["parentname"]??"",
+    arabparentname: json["arabparentname"]??"",
+    academicyearid: json["academicyearid"]??"",
+    academicyear: json["academicyear"]??"",
     children: List<FeeResponse>.from(json["children"].map((x) => FeeResponse.fromJson(x))),
   );
 
@@ -221,17 +221,17 @@ class FeeResponse {
 
   factory FeeResponse.fromJson(Map<String, dynamic> json) => FeeResponse(
     id: json["\u0024id"],
-    studentid: json["studentid"],
-    studentnumber: json["studentnumber"],
-    studentname: json["studentname"],
-    arabstudentname: json["arabstudentname"],
-    passportnumber: json["passportnumber"],
-    civilid: json["civilid"],
-    schoolname: json["schoolname"],
-    dueamount: json["dueamount"],
-    openingbalance: json["openingbalance"],
-    isincludeenrollment: json["isincludeenrollment"],
-    enrollmentamount: json["enrollmentamount"],
+    studentid: json["studentid"]??"",
+    studentnumber: json["studentnumber"]??"",
+    studentname: json["studentname"]??"",
+    arabstudentname: json["arabstudentname"]??"",
+    passportnumber: json["passportnumber"]??"",
+    civilid: json["civilid"]??"",
+    schoolname: json["schoolname"]??"",
+    dueamount: json["dueamount"]??0.0,
+    openingbalance: json["openingbalance"]??0.0,
+    isincludeenrollment: json["isincludeenrollment"]??0,
+    enrollmentamount: json["enrollmentamount"]??0.0,
   );
 
   Map<String, dynamic> toJson() => {

@@ -37,7 +37,7 @@ class _NotificationsState extends State<Notifications> {
       // print('000');
       setState(() {
         controller.text.value = controller.text.value.isEmpty
-            ? childrens[0].studentid.toString()
+            ? childrens.length>0?childrens[0].studentid.toString():controller.text.value
             : controller.text.value;
         // _valueChoose = childrens[0].studentid.toString();
       });
@@ -112,7 +112,8 @@ class _NotificationsState extends State<Notifications> {
                                       // ignore: missing_return
                                       builder: (context, snapshot) {
                                         if (snapshot.hasData) {
-                                          return DropdownButton(
+                                          print(childrens.length);
+                                          return childrens.length>0?DropdownButton(
                                             isExpanded: true,
                                             icon: Icon(
                                               Icons
@@ -143,7 +144,7 @@ class _NotificationsState extends State<Notifications> {
                                                     Text(valueItem.studentname),
                                               );
                                             }).toList(),
-                                          );
+                                          ):Center(child:Text("No Data Found"));
                                         } else if (snapshot.hasError) {
                                           // return Text("${snapshot.error}");
                                           return Text("${snapshot.error}");

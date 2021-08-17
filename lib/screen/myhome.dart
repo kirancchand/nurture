@@ -8,13 +8,10 @@ import 'package:nurture/screen/confirmpayment.dart';
 import 'package:nurture/screen/contactinformation.dart';
 import 'package:nurture/widget/list.dart';
 import 'package:nurture/widget/spinner.dart';
-import 'package:nurture/widget/student.dart';
 import 'package:nurture/common/constants.dart';
 import 'package:nurture/model/student.dart';
 import 'package:nurture/model/fee.dart';
 import 'package:nurture/service/api.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:nurture/widget/spinner.dart';
 
 class MyHome extends StatefulWidget {
   const MyHome({Key key}) : super(key: key);
@@ -44,10 +41,8 @@ class _MyHomeState extends State<MyHome> {
   void _onCategorySelected(bool selected, student) {
     if (selected == true) {
       setState(() {
-            _selectedStudent.add(student);
-            total = total + student.dueamount;
-
-
+        _selectedStudent.add(student);
+        total = total + student.dueamount;
       });
     } else {
       setState(() {
@@ -72,12 +67,10 @@ class _MyHomeState extends State<MyHome> {
       // });
       return student;
     });
-    getFee = api.getFee().then((fee){
+    getFee = api.getFee().then((fee) {
       con.year.value = fee.response.academicyear;
       return fee;
     });
-
-
   }
 
   @override
@@ -132,7 +125,7 @@ class _MyHomeState extends State<MyHome> {
 
                           // // data.response.length>0?
                           // var response=[];
-                          return response.parentnumber!=""
+                          return response.parentnumber != ""
                               ? Column(children: [
                                   Stack(children: [
                                     Text(
@@ -144,8 +137,7 @@ class _MyHomeState extends State<MyHome> {
                                     ),
                                   ]),
                                   Stack(children: [
-                                    Text(
-                                        "Parent ID: ${response.parentnumber}",
+                                    Text("Parent ID: ${response.parentnumber}",
                                         style: TextStyle(
                                           color: Colors.white,
                                         )),
@@ -168,99 +160,99 @@ class _MyHomeState extends State<MyHome> {
                     height: 15,
                   ),
                   Container(
-                      // height: MediaQuery.of(context).size.height * .5,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        border:
-                            Border.all(color: Colors.grey.shade200, width: 1),
-                        color: Colors.white,
-                      ),
-                      child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                    // height: MediaQuery.of(context).size.height * .5,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.grey.shade200, width: 1),
+                      color: Colors.white,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(10),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text("Students"),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            "Academic year:",
-                                            style: TextStyle(
-                                                color: Colors.grey,
-                                                fontSize: 11),
-                                          ),
-                                          Obx(
-                                            () => Text(
-                                              con.year.value ?? "",
-                                              style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 11),
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  child: FutureBuilder<StudentResponseModel>(
-                                    future: getStudents,
-                                    builder: (BuildContext context,
-                                        AsyncSnapshot<StudentResponseModel>
-                                            snapshot) {
-                                      if (snapshot.hasData) {
-                                        var response = snapshot.data?.response;
-
-                                        // // data.response.length>0?
-                                        // var response=[];
-                                        return response.childrens.length > 0
-                                            ? ListView.builder(
-                                                itemCount:
-                                                    response.childrens.length,
-                                                shrinkWrap: true,
-                                                physics:
-                                                    ClampingScrollPhysics(),
-                                                itemBuilder:
-                                                    (context, int index) {
-                                                  // print(response[index].studentname);
-                                                  // data:response[index]
-                                                  return StudentList(
-                                                      data: response
-                                                          .childrens[index],
-                                                      parents: response.parents,
-                                                      childrens:
-                                                          response.childrens);
-                                                },
-                                              )
-                                            : Center(child: Text("No Data"));
-                                      } else if (snapshot.hasError) {
-                                        // return Text("${snapshot.error}");
-                                        return Text("${snapshot.error}");
-                                      } else {
-                                        return Center(
-                                            child: CircularProgressIndicator());
-                                      }
-
-                                      // By default, show a loading spinner.
-                                    },
-                                  ),
-                                  // child:ListView.builder(
-                                  //   itemCount: 3,
-                                  //   shrinkWrap: true,
-                                  //   physics: ClampingScrollPhysics(),
-                                  //   itemBuilder: (context, int index) {
-                                  //     return StudentList();
-                                  //   },
-                                  // ),
+                                Text("Students"),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "Academic year:",
+                                      style: TextStyle(
+                                          color: Colors.grey, fontSize: 11),
+                                    ),
+                                    Obx(
+                                      () => Text(
+                                        con.year.value ?? "",
+                                        style: TextStyle(
+                                            color: Colors.grey, fontSize: 11),
+                                      ),
+                                    ),
+                                  ],
                                 )
-                              ]))),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            child: FutureBuilder<StudentResponseModel>(
+                              future: getStudents,
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<StudentResponseModel>
+                                      snapshot) {
+                                if (snapshot.hasData) {
+                                  var response = snapshot.data?.response;
+
+                                  // // data.response.length>0?
+                                  // var response=[];
+                                  return response.childrens == null
+                                      ? Center(child: Text("No Data"))
+                                      : response.childrens.length > 0
+                                          ? ListView.builder(
+                                              itemCount:
+                                                  response.childrens.length,
+                                              shrinkWrap: true,
+                                              physics: ClampingScrollPhysics(),
+                                              itemBuilder:
+                                                  (context, int index) {
+                                                // print(response[index].studentname);
+                                                // data:response[index]
+                                                return StudentList(
+                                                    data: response
+                                                        .childrens[index],
+                                                    parents: response.parents,
+                                                    childrens:
+                                                        response.childrens);
+                                              },
+                                            )
+                                          : Center(child: Text("No Data"));
+                                } else if (snapshot.hasError) {
+                                  // return Text("${snapshot.error}");
+                                  return Text("${snapshot.error}");
+                                } else {
+                                  return Center(
+                                      child: CircularProgressIndicator());
+                                }
+
+                                // By default, show a loading spinner.
+                              },
+                            ),
+                            // child:ListView.builder(
+                            //   itemCount: 3,
+                            //   shrinkWrap: true,
+                            //   physics: ClampingScrollPhysics(),
+                            //   itemBuilder: (context, int index) {
+                            //     return StudentList();
+                            //   },
+                            // ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
                 ])
               ]),
               SizedBox(
@@ -328,13 +320,15 @@ class _MyHomeState extends State<MyHome> {
                                   shape: CircleBorder(),
                                   activeColor: kColorGreen,
                                 ),
-                                title: Text(response.children[index].studentname,
+                                title: Text(
+                                    response.children[index].studentname,
                                     style: TextStyle(
                                         color: selectedStudent
                                             ? kColorGreen
                                             : Colors.grey)),
                                 trailing: Text(
-                                    response.children[index].dueamount.toString(),
+                                    response.children[index].dueamount
+                                        .toString(),
                                     style: TextStyle(
                                         color: selectedStudent
                                             ? kColorGreen
@@ -386,7 +380,7 @@ class _MyHomeState extends State<MyHome> {
                   // print("dsfsd${_selectedStudent.length}");
                   _selectedStudent.length > 0
                       ? Get.toNamed('/confirmpayment',
-                          arguments: [_selectedStudent,total])
+                          arguments: [_selectedStudent, total])
                       : Fluttertoast.showToast(
                           msg: 'Please Select Atleast one student');
                 },

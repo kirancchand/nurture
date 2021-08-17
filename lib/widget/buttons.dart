@@ -62,13 +62,20 @@ Widget payNowButtons(List<Map<String, dynamic>> stu, context) {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16), color: kColorGreen),
       child: Center(
-          child: Text(
-        "Pay Now",
-        style: TextStyle(color: Colors.white),
-      )),
+        child: Text(
+          "Pay Now",
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
     ),
     onTap: () async {
+      showSpinner();
       var data = await submitConfirmPayment(stu);
+      hideSpinner();
+      // Navigator.of(
+      //   context,
+      //   rootNavigator: true,
+      // ).pop();
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -77,7 +84,6 @@ Widget payNowButtons(List<Map<String, dynamic>> stu, context) {
           ),
         ),
       );
-
       // Get.toNamed("/confirmpayment");
     },
   );

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class StudentResponseModel {
   final String statuscode;
   final HomeResponse response;
@@ -12,9 +10,7 @@ class StudentResponseModel {
     return StudentResponseModel(
       statuscode: json["statuscode"],
       // response: List<HomeResponse>.from(json["response"].map((x) => HomeResponse.fromJson(x))),
-      response: json["statuscode"] != 200
-          ? HomeResponse()
-          : HomeResponse.fromJson(json["response"]),
+      response: HomeResponse.fromJson(json["response"]),
       message: json["message"],
     );
   }

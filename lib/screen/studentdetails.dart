@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nurture/widget/list.dart';
-import 'package:nurture/common/constants.dart';
 import 'package:nurture/model/student.dart';
 
 class StudentDetails extends StatelessWidget {

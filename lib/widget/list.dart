@@ -10,7 +10,6 @@ import 'package:nurture/model/student.dart';
 import 'package:nurture/screen/studentdetails.dart';
 import 'package:nurture/service/api.dart';
 
-
 class StudentList extends StatefulWidget {
   StudentList({Key key, this.data}) : super(key: key);
   FeeResponse data;
@@ -19,8 +18,6 @@ class StudentList extends StatefulWidget {
 }
 
 class _StudentListState extends State<StudentList> {
-
-
   List<ParentResponse> parents;
   StudentResponse childrens;
 
@@ -34,7 +31,7 @@ class _StudentListState extends State<StudentList> {
       parents = student.response.parents;
       for (var i = 0; i < student.response.childrens.length; i++) {
         if (student.response.childrens[i].studentid == widget.data.studentid) {
-          childrens=student.response.childrens[i];
+          childrens = student.response.childrens[i];
         }
       }
       // childrens = student.response.childrens.firstWhere((element) =>
@@ -46,7 +43,6 @@ class _StudentListState extends State<StudentList> {
       // print('Using firstWhere: ${childrens}');
       return student;
     });
-
   }
 
   // List<Response> data;
@@ -55,56 +51,57 @@ class _StudentListState extends State<StudentList> {
     // debugPrint('parent civil id: ${parents[0].civilid}');
     return FutureBuilder<StudentResponseModel>(
       future: getStudents,
-      builder: (BuildContext context,
-          AsyncSnapshot<StudentResponseModel>
-          snapshot) {
+      builder:
+          (BuildContext context, AsyncSnapshot<StudentResponseModel> snapshot) {
         if (snapshot.hasData) {
           var response = snapshot.data?.response;
 
           // // data.response.length>0?
           // var response=[];
           return response.parents.length > 0
-                        ? ListTile(
-                            leading: CircleAvatar(
-                                radius: 25,
-                                backgroundColor: Colors.pink.shade300,
-                                backgroundImage: AssetImage("assets/images/chil.png")
-                              // backgroundImage: AssetImage(img),
-                            ),
-                            title: Text(widget.data.studentname),
-                            isThreeLine: true,
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Student Id ${widget.data.studentnumber}" ?? "",
-                                  style: TextStyle(fontSize: 11),
-                                ),
-                                Text(widget.data.schoolname ?? "", style: TextStyle(fontSize: 11))
-                              ],
-                            ),
-                            trailing: IconButton(
-                              onPressed: () {
-                                // print(childrens);
-                                Get.to(StudentDetails(data: childrens, parents: parents));
-                              },
-                              icon: Icon(
-                                Icons.keyboard_arrow_right,
-                                color: Colors.green,
-                              ),
-                            ),
+              ? ListTile(
+                  leading: CircleAvatar(
+                      radius: 25,
+                      backgroundColor: Colors.pink.shade300,
+                      backgroundImage: AssetImage("assets/images/chil.png")
+                      // backgroundImage: AssetImage(img),
+                      ),
+                  title: Text(widget.data.studentname),
+                  isThreeLine: true,
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Student Id ${widget.data.studentnumber}" ?? "",
+                        style: TextStyle(fontSize: 11),
+                      ),
+                      Text(widget.data.schoolname ?? "",
+                          style: TextStyle(fontSize: 11))
+                    ],
+                  ),
+                  trailing: IconButton(
+                    onPressed: () {
+                      // print(childrens);
+                      Get.to(StudentDetails(data: childrens, parents: parents));
+                    },
+                    icon: Icon(
+                      Icons.keyboard_arrow_right,
+                      color: Colors.green,
+                    ),
+                  ),
                   // onTap: () {
                   //   Get.to(StudentDetails(data: data, parents: parents));
                   // }
                 )
-                        : Center(child: Text("No Data"));
-                  } else if (snapshot.hasError) {
-                    // return Text("${snapshot.error}");
-                    return Text("${snapshot.error}");
-                  } else {
-                    return Center(
-                        child: CircularProgressIndicator());
-                  }
+              : Center(child: Text("No Data"));
+        } else if (snapshot.hasError) {
+          // return Text("${snapshot.error}");
+          return Text("${snapshot.error}");
+        } else {
+          return Center(
+            child: Container(),
+          );
+        }
 
         // By default, show a loading spinner.
       },

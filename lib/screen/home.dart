@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nurture/common/constants.dart';
 import 'package:nurture/config/controller.dart';
+import 'package:nurture/screen/home1.dart';
 import 'package:nurture/screen/paymenthistory.dart';
 import 'package:nurture/widget/list.dart';
 import 'package:nurture/screen/paymentpending.dart';
@@ -29,7 +30,8 @@ class Home extends StatefulWidget {
 
 class _HomePageState extends State<Home> {
   List<Widget> pages = [
-    MyHome(),
+    // MyHome(),
+    HomePage1(),
     PaymentPending(),
     PaymentHistory(),
     Notifications()

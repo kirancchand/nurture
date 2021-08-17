@@ -102,14 +102,14 @@
 //       };
 // }
 
-
 // To parse this JSON data, do
 //
 //     final welcome = welcomeFromJson(jsonString);
 
 import 'dart:convert';
 
-FeeResponseModel feeResponseFromJson(String str) => FeeResponseModel.fromJson(json.decode(str));
+FeeResponseModel feeResponseFromJson(String str) =>
+    FeeResponseModel.fromJson(json.decode(str));
 
 String feeResponseToJson(FeeResponseModel data) => json.encode(data.toJson());
 
@@ -126,19 +126,20 @@ class FeeResponseModel {
   Response response;
   String message;
 
-  factory FeeResponseModel.fromJson(Map<String, dynamic> json) => FeeResponseModel(
-    id: json["\u0024id"],
-    statuscode: json["statuscode"],
-    response: Response.fromJson(json["response"]),
-    message: json["message"],
-  );
+  factory FeeResponseModel.fromJson(Map<String, dynamic> json) =>
+      FeeResponseModel(
+        id: json["\u0024id"],
+        statuscode: json["statuscode"],
+        response: Response.fromJson(json["response"]),
+        message: json["message"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "\u0024id": id,
-    "statuscode": statuscode,
-    "response": response.toJson(),
-    "message": message,
-  };
+        "\u0024id": id,
+        "statuscode": statuscode,
+        "response": response.toJson(),
+        "message": message,
+      };
 }
 
 class Response {
@@ -165,28 +166,29 @@ class Response {
   List<FeeResponse> children;
 
   factory Response.fromJson(Map<String, dynamic> json) => Response(
-    id: json["\u0024id"],
-    parentid: json["parentid"]??"",
-    parentnumber: json["parentnumber"]??"",
-    userid: json["userid"]??"",
-    parentname: json["parentname"]??"",
-    arabparentname: json["arabparentname"]??"",
-    academicyearid: json["academicyearid"]??"",
-    academicyear: json["academicyear"]??"",
-    children: List<FeeResponse>.from(json["children"].map((x) => FeeResponse.fromJson(x))),
-  );
+        id: json["\u0024id"],
+        parentid: json["parentid"] ?? "",
+        parentnumber: json["parentnumber"] ?? "",
+        userid: json["userid"] ?? "",
+        parentname: json["parentname"] ?? "",
+        arabparentname: json["arabparentname"] ?? "",
+        academicyearid: json["academicyearid"] ?? "",
+        academicyear: json["academicyear"] ?? "",
+        children: List<FeeResponse>.from(
+            json["children"].map((x) => FeeResponse.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "\u0024id": id,
-    "parentid": parentid,
-    "parentnumber": parentnumber,
-    "userid": userid,
-    "parentname": parentname,
-    "arabparentname": arabparentname,
-    "academicyearid": academicyearid,
-    "academicyear": academicyear,
-    "children": List<dynamic>.from(children.map((x) => x.toJson())),
-  };
+        "\u0024id": id,
+        "parentid": parentid,
+        "parentnumber": parentnumber,
+        "userid": userid,
+        "parentname": parentname,
+        "arabparentname": arabparentname,
+        "academicyearid": academicyearid,
+        "academicyear": academicyear,
+        "children": List<dynamic>.from(children.map((x) => x.toJson())),
+      };
 }
 
 class FeeResponse {
@@ -218,34 +220,33 @@ class FeeResponse {
   int isincludeenrollment;
   double enrollmentamount;
 
-
   factory FeeResponse.fromJson(Map<String, dynamic> json) => FeeResponse(
-    id: json["\u0024id"],
-    studentid: json["studentid"]??"",
-    studentnumber: json["studentnumber"]??"",
-    studentname: json["studentname"]??"",
-    arabstudentname: json["arabstudentname"]??"",
-    passportnumber: json["passportnumber"]??"",
-    civilid: json["civilid"]??"",
-    schoolname: json["schoolname"]??"",
-    dueamount: json["dueamount"]??0.0,
-    openingbalance: json["openingbalance"]??0.0,
-    isincludeenrollment: json["isincludeenrollment"]??0,
-    enrollmentamount: json["enrollmentamount"]??0.0,
-  );
+        id: json["\u0024id"],
+        studentid: json["studentid"] ?? "",
+        studentnumber: json["studentnumber"] ?? "",
+        studentname: json["studentname"] ?? "",
+        arabstudentname: json["arabstudentname"] ?? "",
+        passportnumber: json["passportnumber"] ?? "",
+        civilid: json["civilid"] ?? "",
+        schoolname: json["schoolname"] ?? "",
+        dueamount: json["dueamount"] ?? 0.0,
+        openingbalance: json["openingbalance"] ?? 0.0,
+        isincludeenrollment: json["isincludeenrollment"] ?? 0,
+        enrollmentamount: json["enrollmentamount"] ?? 0.0,
+      );
 
   Map<String, dynamic> toJson() => {
-    "\u0024id": id,
-    "studentid": studentid,
-    "studentnumber": studentnumber,
-    "studentname": studentname,
-    "arabstudentname": arabstudentname,
-    "passportnumber": passportnumber,
-    "civilid": civilid,
-    "schoolname": schoolname,
-    "dueamount": dueamount,
-    "openingbalance": openingbalance,
-    "isincludeenrollment": isincludeenrollment,
-    "enrollmentamount": enrollmentamount,
-  };
+        "\u0024id": id,
+        "studentid": studentid,
+        "studentnumber": studentnumber,
+        "studentname": studentname,
+        "arabstudentname": arabstudentname,
+        "passportnumber": passportnumber,
+        "civilid": civilid,
+        "schoolname": schoolname,
+        "dueamount": dueamount,
+        "openingbalance": openingbalance,
+        "isincludeenrollment": isincludeenrollment,
+        "enrollmentamount": enrollmentamount,
+      };
 }

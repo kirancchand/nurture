@@ -140,51 +140,45 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                                   children: [
                                     Row(
                                       children: [
-                                        // ignore: unrelated_type_equality_checks
-                                        widget.childrens[index].enrollmentamount.toString()!=0.0?Column(
-                                          children:[
-                                            Checkbox(
-                                              value: enrollment[index],
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  this.enrollment[index] = value;
-                                                  if (value == true) {
-                                                    widget.total = widget.total +
-                                                        widget.childrens[index]
-                                                            .enrollmentamount;
-                                                    addPaymentlist(
-                                                        i: 1,
-                                                        total: widget.total,
-                                                        index1: index,
-                                                        sid1: widget
-                                                            .childrens[index]
-                                                            .studentid);
-                                                  } else {
-                                                    widget.total = widget.total -
-                                                        widget.childrens[index]
-                                                            .enrollmentamount;
-                                                    addPaymentlist(
-                                                        i: 0,
-                                                        total: widget.total,
-                                                        index1: index
-                                                      // sid1: widget
-                                                      //     .childrens[index]
-                                                      //     .studentname
+                                        Checkbox(
+                                          value: enrollment[index],
+                                          onChanged: (value) {
+                                            setState(() {
+                                              this.enrollment[index] = value;
+                                              if (value == true) {
+                                                widget.total = widget.total +
+                                                    widget.childrens[index]
+                                                        .enrollmentamount;
+                                                addPaymentlist(
+                                                    i: 1,
+                                                    total: widget.total,
+                                                    index1: index,
+                                                    sid1: widget
+                                                        .childrens[index]
+                                                        .studentid);
+                                              } else {
+                                                widget.total = widget.total -
+                                                    widget.childrens[index]
+                                                        .enrollmentamount;
+                                                addPaymentlist(
+                                                    i: 0,
+                                                    total: widget.total,
+                                                    index1: index
+                                                    // sid1: widget
+                                                    //     .childrens[index]
+                                                    //     .studentname
                                                     );
-                                                  }
-                                                });
-                                              },
-                                              side: BorderSide(color: Colors.green),
-                                              shape: CircleBorder(),
-                                              activeColor: Colors.green,
-                                            ),
-                                            Text(
-                                              "  Enrollment",
-                                              style: TextStyle(color: Colors.grey),
-                                            ),
-                                          ]
-                                        ):""
-
+                                              }
+                                            });
+                                          },
+                                          side: BorderSide(color: Colors.green),
+                                          shape: CircleBorder(),
+                                          activeColor: Colors.green,
+                                        ),
+                                        Text(
+                                          "  Enrollment",
+                                          style: TextStyle(color: Colors.grey),
+                                        ),
                                       ],
                                     ),
                                     Text(

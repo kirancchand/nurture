@@ -139,7 +139,7 @@ class StudentResponse {
         academicyear: json["academicyear"] ?? "",
         nationality: json["nationality"] ?? "",
         studentcivilexpirydate:
-            DateTime.parse(json["studentcivilexpirydate"]) ?? "",
+        DateTime.parse(json["studentcivilexpirydate"]) ?? "",
       );
 
   // String get civilid => null;

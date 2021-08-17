@@ -56,19 +56,20 @@ class _MyHomeState extends State<MyHome> {
   void initState() {
     super.initState();
 
-    getStudents = api.getStudent().then((student) {
-      childrens = student.response.childrens;
-      // print('academic yaea');
-      // print(student.response.childrens[0].academicyear);
-      // con.year.value = student.response.childrens[0].academicyear;
-      // Future.delayed(Duration(seconds: 1)).then((value) async {
-      //   SharedPreferences pref = await SharedPreferences.getInstance();
-      //   pref.setString("ay", student.response.childrens[0].academicyear);
-      // });
-      return student;
-    });
+    // getStudents = api.getStudent().then((student) {
+    //   childrens = student.response.childrens;
+    //   // print('academic yaea');
+    //   // print(student.response.childrens[0].academicyear);
+    //   // con.year.value = student.response.childrens[0].academicyear;
+    //   // Future.delayed(Duration(seconds: 1)).then((value) async {
+    //   //   SharedPreferences pref = await SharedPreferences.getInstance();
+    //   //   pref.setString("ay", student.response.childrens[0].academicyear);
+    //   // });
+    //   return student;
+    // });
     getFee = api.getFee().then((fee) {
       con.year.value = fee.response.academicyear;
+      childrens = fee.response.children;
       return fee;
     });
   }
@@ -127,21 +128,17 @@ class _MyHomeState extends State<MyHome> {
                           // var response=[];
                           return response.parentnumber != ""
                               ? Column(children: [
-                                  Stack(children: [
-                                    Text(
-                                      response.parentname,
+                                  Text(
+                                    response.parentname,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text("Parent ID: ${response.parentnumber}",
                                       style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ]),
-                                  Stack(children: [
-                                    Text("Parent ID: ${response.parentnumber}",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                        )),
-                                  ])
+                                        color: Colors.white,
+                                      )),
                                 ])
                               : Center(child: Text("No Data"));
                         } else if (snapshot.hasError) {
@@ -198,37 +195,30 @@ class _MyHomeState extends State<MyHome> {
                             ),
                           ),
                           Container(
-                            child: FutureBuilder<StudentResponseModel>(
-                              future: getStudents,
+                            child: FutureBuilder<FeeResponseModel>(
+                              future: getFee,
                               builder: (BuildContext context,
-                                  AsyncSnapshot<StudentResponseModel>
-                                      snapshot) {
+                                  AsyncSnapshot<FeeResponseModel> snapshot) {
                                 if (snapshot.hasData) {
                                   var response = snapshot.data?.response;
 
                                   // // data.response.length>0?
                                   // var response=[];
-                                  return response.childrens == null
-                                      ? Center(child: Text("No Data"))
-                                      : response.childrens.length > 0
-                                          ? ListView.builder(
-                                              itemCount:
-                                                  response.childrens.length,
-                                              shrinkWrap: true,
-                                              physics: ClampingScrollPhysics(),
-                                              itemBuilder:
-                                                  (context, int index) {
-                                                // print(response[index].studentname);
-                                                // data:response[index]
-                                                return StudentList(
-                                                    data: response
-                                                        .childrens[index],
-                                                    parents: response.parents,
-                                                    childrens:
-                                                        response.childrens);
-                                              },
-                                            )
-                                          : Center(child: Text("No Data"));
+                                  print(response.children.length);
+                                  return response.children.length > 0
+                                      ? ListView.builder(
+                                          itemCount: response.children.length,
+                                          shrinkWrap: true,
+                                          physics: ClampingScrollPhysics(),
+                                          itemBuilder: (context, int index) {
+                                            print(response
+                                                .children[index].studentname);
+
+                                            return StudentList(
+                                                data: response.children[index]);
+                                          },
+                                        )
+                                      : Center(child: Text("No Data"));
                                 } else if (snapshot.hasError) {
                                   // return Text("${snapshot.error}");
                                   return Text("${snapshot.error}");

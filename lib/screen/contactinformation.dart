@@ -1,6 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:nurture/model/student.dart';
+import 'package:nurture/model/fee.dart';
 import 'package:nurture/widget/buttons.dart';
 import 'package:nurture/common/constants.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,7 @@ import 'package:nurture/widget/spinner.dart';
 
 class ContactInformation extends StatefulWidget {
   ContactInformation({Key key}) : super(key: key);
-  List<StudentResponse> childrens = Get.arguments;
+  List<FeeResponse> childrens = Get.arguments;
 
   @override
   _ContactInformationState createState() => _ContactInformationState();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 //import 'package:nurture/model/contact.dart';
 import 'package:nurture/model/student.dart';
@@ -160,7 +161,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                                       // return Text("${snapshot.error}");
                                       return Text("${snapshot.error}");
                                     } else {
-                                      return CircularProgressIndicator();
+                                      return  SpinKitRipple(color: Colors.blue,);
                                     }
                                   },
                                 ),
@@ -301,7 +302,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                                       // return Text("${snapshot.error}");
                                       return Text("${snapshot.error}");
                                     } else {
-                                      return CircularProgressIndicator();
+                                      return  SpinKitRipple(color: Colors.blue,);
                                     }
 
                                     // // data.response.length>0?

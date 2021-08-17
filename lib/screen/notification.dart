@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:nurture/common/constants.dart';
 import 'package:nurture/config/controller.dart';
@@ -148,7 +149,7 @@ class _NotificationsState extends State<Notifications> {
                                           // return Text("${snapshot.error}");
                                           return Text("${snapshot.error}");
                                         } else {
-                                          return LinearProgressIndicator();
+                                          return  SpinKitRipple(color: Colors.blue,);
                                         }
                                       },
                                     ),
@@ -193,11 +194,11 @@ class _NotificationsState extends State<Notifications> {
                                 )
                               : Center(child: Text("No Data"));
                         } else if (snapshot.hasError) {
-                          return CircularProgressIndicator();
+                          return  SpinKitRipple(color: Colors.blue,);
 
                           //return Text("${snapshot.error}");
                         } else {
-                          return CircularProgressIndicator();
+                          return  SpinKitRipple(color: Colors.blue,);
                         }
 
                         // By default, show a loading spinner.
@@ -302,7 +303,7 @@ class _NotificationsState extends State<Notifications> {
                                   // return Text("${snapshot.error}");
                                   return Text("${snapshot.error}");
                                 } else {
-                                  return CircularProgressIndicator();
+                                  return  SpinKitRipple(color: Colors.blue,);
                                 }
                               },
                             ),

@@ -38,7 +38,7 @@ class _PaymentHistoryState extends State<PaymentHistory> {
         title: GestureDetector(
           onTap: () {
             print("welcome to download page");
-           // Get.to(ModelDownload());
+            Get.to(ModelDownload());
           },
           child: Text("Payment history ",
               style: TextStyle(

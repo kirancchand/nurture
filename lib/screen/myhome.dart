@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:nurture/screen/confirmpayment.dart';
 import 'package:nurture/screen/contactinformation.dart';
@@ -154,7 +155,7 @@ class _MyHomeState extends State<MyHome> {
                         // return Text("${snapshot.error}");
                         return Text("${snapshot.error}");
                       } else {
-                        return LinearProgressIndicator();
+                        return  SpinKitRipple(color: Colors.blue,);
                       }
 
                       // By default, show a loading spinner.
@@ -204,7 +205,7 @@ class _MyHomeState extends State<MyHome> {
                                                     fontSize: 11),
                                               );
                                             } else
-                                              return CircularProgressIndicator();
+                                              return  SpinKitRipple(color: Colors.blue,);
                                           },
                                         ),
                                       ],
@@ -246,7 +247,7 @@ class _MyHomeState extends State<MyHome> {
                                       // return Text("${snapshot.error}");
                                       return Text("${snapshot.error}");
                                     } else {
-                                      return CircularProgressIndicator();
+                                      return  SpinKitRipple(color: Colors.blue,);
                                     }
 
                                     // By default, show a loading spinner.
@@ -368,7 +369,7 @@ class _MyHomeState extends State<MyHome> {
                     // return Text("${snapshot.error}");
                     return Text("${snapshot.error}");
                   } else {
-                    return CircularProgressIndicator();
+                    return  SpinKitRipple(color: Colors.blue,);
                   }
 
                   // By default, show a loading spinner.

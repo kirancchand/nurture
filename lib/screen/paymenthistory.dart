@@ -5,6 +5,8 @@ import 'package:nurture/widget/list.dart';
 import 'package:nurture/common/constants.dart';
 import 'package:nurture/model/paymenthistory.dart';
 import 'package:nurture/service/api.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 
 class PaymentHistory extends StatefulWidget {
   const PaymentHistory({Key key}) : super(key: key);
@@ -36,7 +38,7 @@ class _PaymentHistoryState extends State<PaymentHistory> {
         title: GestureDetector(
           onTap: () {
             print("welcome to download page");
-            Get.to(ModelDownload());
+           // Get.to(ModelDownload());
           },
           child: Text("Payment history ",
               style: TextStyle(
@@ -80,7 +82,7 @@ class _PaymentHistoryState extends State<PaymentHistory> {
                   // return Text("${snapshot.error}");
                   return Text("${snapshot.error}");
                 } else {
-                  return LinearProgressIndicator();
+                  return SpinKitRipple(color: Colors.red,);
                 }
 
                 // By default, show a loading spinner.

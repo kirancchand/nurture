@@ -6,11 +6,13 @@ import 'package:nurture/screen/login.dart';
 import 'package:nurture/screen/home.dart';
 import 'package:nurture/screen/paymentpending.dart';
 import 'package:nurture/screen/contactinformation.dart';
+import 'package:nurture/screen/splashscreen.dart';
 
 
 class Routes {
   static final Map<String, WidgetBuilder> _routes = {
-    "/": (BuildContext context) => Login(),
+    "/": (BuildContext context) => SplashScreen(),
+    "/login": (BuildContext context) => Login(),
     "/home": (context) => Home(title: 'Flutter Demo Home Pages'),
     "/paymentpending": (context) => PaymentPending(),
     "/contactinformation": (context) => ContactInformation(),

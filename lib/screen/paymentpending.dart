@@ -39,14 +39,16 @@ class _PaymentPendingState extends State<PaymentPending> {
     // getPayment = api.getPendingPayment(_valueChoose);
     getStudents = api.getStudent().then((student) {
       childrens = student.response.childrens;
+      // print(student.response.childrens);
       // for (int i = 0; i < childrens.length; i++)
       //   print(childrens[i].studentname);
       // print('000');
       setState(() {
         // _valueChoose = childrens[0].studentid.toString();
         controller.text.value = controller.text.value.isEmpty
-            ? childrens[0].studentid.toString()
+            ? childrens.length>0?childrens[0].studentid.toString():controller.text.value
             : controller.text.value;
+        print("bvcbb${controller.text.value}");
       });
       getPayment = api.getPendingPayment(_valueChoose);
       return student;
@@ -119,6 +121,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                                     // ignore: missing_return
                                     builder: (context, snapshot) {
                                       if (snapshot.hasData) {
+
                                         return Center(
                                             child: Column(children: [
                                           DropdownButton(
@@ -133,7 +136,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                                               setState(() {
                                                 controller.text.value =
                                                     newValue;
-                                                // print(_valueChoose);
+
                                               });
                                               Navigator.pushReplacement(
                                                 context,
@@ -145,6 +148,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                                               );
                                             },
                                             items: childrens.map((valueItem) {
+                                              print("sdfsdf${valueItem.studentid}");
                                               return DropdownMenuItem(
                                                 value: valueItem.studentid
                                                     .toString(),

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:nurture/widget/list.dart';
 import 'package:nurture/model/student.dart';
+import 'package:nurture/model/fee.dart';
+
 
 class StudentDetails extends StatelessWidget {
-  StudentDetails({Key key, this.data, this.parents}) : super(key: key);
-  StudentResponse data;
-  List<ParentResponse> parents;
+  StudentDetails({Key key, this.data}) : super(key: key);
+  FeeResponse data;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,7 @@ class StudentDetails extends StatelessWidget {
         ),
         body: Container(
             child: Column(children: [
-          Flexible(child: StudentInfoList(data: data, parents: parents)),
+              Flexible(child: StudentInfoList(data: data)),
           /*
               Expanded(
                 child:

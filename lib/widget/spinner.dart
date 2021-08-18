@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:nurture/common/constants.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class SpinController extends GetxController {
   var spin = false.obs;
@@ -28,7 +29,8 @@ class Spinner extends StatelessWidget {
         inAsyncCall: controller.spin.value,
         child: child,
         color: Colors.black87,
-        progressIndicator: SpinWidget(),
+        // progressIndicator: SpinWidget(),
+        progressIndicator:SpinKitWave(color: Colors.white, type: SpinKitWaveType.start)
       ),
     );
   }

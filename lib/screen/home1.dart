@@ -7,6 +7,7 @@ import 'package:nurture/model/fee.dart';
 import 'package:nurture/model/student.dart';
 import 'package:nurture/service/api.dart';
 import 'package:nurture/widget/list.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class HomePage1 extends StatefulWidget {
   HomePage1({Key key}) : super(key: key);
@@ -60,15 +61,16 @@ class _HomePage1State extends State<HomePage1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
         child: FutureBuilder<FeeResponseModel>(
             future: api.getFee(),
             builder: (BuildContext context, snapshot) {
               if (snapshot.hasData) {
                 var response = snapshot.data?.response;
-                return Container(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
+                return SingleChildScrollView(
+
                   child: Column(
                     children: [
                       Container(
@@ -317,20 +319,25 @@ class _HomePage1State extends State<HomePage1> {
                                   ],
                                 ),
                               ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              ContactUs(context, snapshot.data.response.children),
+
                             ],
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      ContactUs(context, snapshot.data.response.children),
+                      // SizedBox(
+                      //   height: 10,
+                      // ),
+                      // ContactUs(context, snapshot.data.response.children),
                     ],
                   ),
                 );
               } else
                 return Center(
-                  child: CircularProgressIndicator(),
+                  child:SpinKitWave(color: Colors.blue, type: SpinKitWaveType.center),
                 );
             }),
       ),

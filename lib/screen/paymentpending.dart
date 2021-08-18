@@ -10,6 +10,7 @@ import 'package:nurture/model/paymentpending.dart';
 import 'package:nurture/config/controller.dart';
 import 'package:nurture/screen/home.dart';
 import 'package:nurture/widget/spinner.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class PaymentPending extends StatefulWidget {
   PaymentPending({Key key}) : super(key: key);
@@ -165,7 +166,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                                         return Text("${snapshot.error}");
                                       } else {
                                         return Center(
-                                          child: CircularProgressIndicator(),
+                                          child: SpinKitThreeBounce(color: Colors.blue),
                                         );
                                       }
                                     },

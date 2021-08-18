@@ -18,93 +18,45 @@ class StudentList extends StatefulWidget {
 }
 
 class _StudentListState extends State<StudentList> {
-  List<ParentResponse> parents;
-  StudentResponse childrens;
 
-  Api api = new Api();
-  Future<StudentResponseModel> getStudents;
-
-  @override
-  void initState() {
-    super.initState();
-    getStudents = api.getStudent().then((student) {
-      parents = student.response.parents;
-      for (var i = 0; i < student.response.childrens.length; i++) {
-        if (student.response.childrens[i].studentid == widget.data.studentid) {
-          childrens = student.response.childrens[i];
-        }
-      }
-      // childrens = student.response.childrens.firstWhere((element) =>
-      // element.studentid == widget.data.studentid,
-      //     orElse: () {
-      //       return null;
-      //     });
-      //
-      // print('Using firstWhere: ${childrens}');
-      return student;
-    });
-  }
 
   // List<Response> data;
   @override
   Widget build(BuildContext context) {
     // debugPrint('parent civil id: ${parents[0].civilid}');
-    return FutureBuilder<StudentResponseModel>(
-      future: getStudents,
-      builder:
-          (BuildContext context, AsyncSnapshot<StudentResponseModel> snapshot) {
-        if (snapshot.hasData) {
-          var response = snapshot.data?.response;
-
-          // // data.response.length>0?
-          // var response=[];
-          return response.parents.length > 0
-              ? ListTile(
-                  leading: CircleAvatar(
-                      radius: 25,
-                      backgroundColor: Colors.pink.shade300,
-                      backgroundImage: AssetImage("assets/images/chil.png")
-                      // backgroundImage: AssetImage(img),
-                      ),
-                  title: Text(widget.data.studentname),
-                  isThreeLine: true,
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Student Id ${widget.data.studentnumber}" ?? "",
-                        style: TextStyle(fontSize: 11),
-                      ),
-                      Text(widget.data.schoolname ?? "",
-                          style: TextStyle(fontSize: 11))
-                    ],
-                  ),
-                  trailing: IconButton(
-                    onPressed: () {
-                      // print(childrens);
-                      Get.to(StudentDetails(data: childrens, parents: parents));
-                    },
-                    icon: Icon(
-                      Icons.keyboard_arrow_right,
-                      color: Colors.green,
-                    ),
-                  ),
-                  // onTap: () {
-                  //   Get.to(StudentDetails(data: data, parents: parents));
-                  // }
-                )
-              : Center(child: Text("No Data"));
-        } else if (snapshot.hasError) {
-          // return Text("${snapshot.error}");
-          return Text("${snapshot.error}");
-        } else {
-          return Center(
-            child: Container(),
-          );
-        }
-
-        // By default, show a loading spinner.
-      },
+    return ListTile(
+      leading: CircleAvatar(
+          radius: 25,
+          backgroundColor: Colors.pink.shade300,
+          backgroundImage: AssetImage("assets/images/chil.png")
+        // backgroundImage: AssetImage(img),
+      ),
+      title: Text(widget.data.studentname),
+      isThreeLine: true,
+      subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Student Id ${widget.data.studentnumber}" ?? "",
+            style: TextStyle(fontSize: 11),
+          ),
+          Text(widget.data.schoolname ?? "",
+              style: TextStyle(fontSize: 11))
+        ],
+      ),
+      trailing: IconButton(
+        onPressed: () {
+          // print(childrens);
+          Get.to(StudentDetails(data: widget.data));
+        },
+        icon: Icon(
+          Icons.keyboard_arrow_right,
+          color: Colors.green,
+        ),
+      ),
+      // onTap: () {
+      //   Get.to(StudentDetails(data: data, parents: parents));
+      // }
     );
   }
 }
@@ -376,127 +328,275 @@ class StudentInfoList extends StatefulWidget {
   StudentInfoList({
     Key key,
     this.data,
-    this.parents,
   }) : super(key: key);
-  StudentResponse data;
-  List<ParentResponse> parents;
+  FeeResponse data;
   @override
   _StudentInfoListState createState() => _StudentInfoListState();
 }
 
 class _StudentInfoListState extends State<StudentInfoList> {
+
+  List<ParentResponse> parents;
+  StudentResponse childrens;
+
+  Api api = new Api();
+  Future<StudentResponseModel> getStudents;
+
+  @override
+  void initState() {
+    // super.initState();
+    getStudents = api.getStudent().then((student) {
+      parents = student.response.parents;
+      for (var i = 0; i < student.response.childrens.length; i++) {
+        if (student.response.childrens[i].studentid == widget.data.studentid) {
+          childrens=student.response.childrens[i];
+        }
+      }
+      return student;
+    });
+
+  }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(right: 20, left: 20, top: 20),
-      child: ListView(
-        children: [
-          Stack(
-            children: [
-              Align(
-                child: Container(
-                  height: MediaQuery.of(context).size.height * .61,
-                  width: MediaQuery.of(context).size.width - 40,
-                ),
-              ),
-              Positioned(
-                bottom: 0,
-                child: Container(
-                  height: MediaQuery.of(context).size.height * .60,
-                  width: MediaQuery.of(context).size.width - 40,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.shade300, width: 1),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Row(
+        child:FutureBuilder<StudentResponseModel>(
+          future: getStudents,
+          builder: (BuildContext context,
+              AsyncSnapshot<StudentResponseModel> snapshot) {
+            if (snapshot.hasData) {
+              var response = snapshot.data?.response;
+              return ListView(
+                children: [
+                  Stack(
                     children: [
-                      Padding(
-                        padding: EdgeInsets.only(left: 15, right: 20),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            txt("Name"),
-                            txt("Gender"),
-                            txt("Date of Birth"),
-                            txt("School Name"),
-                            txt("Grade"),
-                            txt("Academic Year"),
-                            txt("Nationality"),
-                            txt("Religion"),
-                            txt("Civil id"),
-                            txt("Civil id expiry date"),
-                            txt("Passport Number"),
-                            txt("Address"),
-                          ],
+                      Align(
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * .61,
+                          width: MediaQuery.of(context).size.width - 40,
                         ),
                       ),
-                      SizedBox(width: 10),
-                      Flexible(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.data.studentname,
-                            ),
-                            Text(widget.data.gender),
-                            Text(widget.data.birthdate.day.toString() +
-                                "/" +
-                                widget.data.birthdate.month.toString() +
-                                "/" +
-                                widget.data.birthdate.year.toString()),
-                            Text(widget.data.schoolname),
-                            Text(widget.data.grade),
-                            Text(widget.data.academicyear),
-                            Text(widget.data.nationality),
-                            Text(widget.data.religion),
-                            Text(widget.data.civilid.toString()),
-                            Text(widget.data.studentcivilexpirydate.day
-                                    .toString() +
-                                "/" +
-                                widget.data.studentcivilexpirydate.month
-                                    .toString() +
-                                "/" +
-                                widget.data.studentcivilexpirydate.year
-                                    .toString()),
-                            Text(widget.data.passportnumber),
-                            Text(widget.data.regionalarea)
-                          ],
+                      Positioned(
+                        bottom: 0,
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * .60,
+                          width: MediaQuery.of(context).size.width - 40,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey.shade300, width: 1),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 15, right: 20),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    txt("Name"),
+                                    txt("Gender"),
+                                    txt("Date of Birth"),
+                                    txt("School Name"),
+                                    txt("Grade"),
+                                    txt("Academic Year"),
+                                    txt("Nationality"),
+                                    txt("Religion"),
+                                    txt("Civil id"),
+                                    txt("Civil id expiry date"),
+                                    txt("Passport Number"),
+                                    txt("Address"),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(width: 10),
+                              Flexible(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      childrens.studentname,
+                                    ),
+                                    Text(childrens.gender),
+                                    Text(childrens.birthdate.day.toString() +
+                                        "/" +
+                                        childrens.birthdate.month.toString() +
+                                        "/" +
+                                        childrens.birthdate.year.toString()),
+                                    Text(childrens.schoolname),
+                                    Text(childrens.grade),
+                                    Text(childrens.academicyear),
+                                    Text(childrens.nationality),
+                                    Text(childrens.religion),
+                                    Text(childrens.civilid.toString()),
+                                    Text(childrens.studentcivilexpirydate.day
+                                            .toString() +
+                                        "/" +
+                                        childrens.studentcivilexpirydate.month
+                                            .toString() +
+                                        "/" +
+                                        childrens.studentcivilexpirydate.year
+                                            .toString()),
+                                    Text(childrens.passportnumber),
+                                    Text(childrens.regionalarea)
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                      )
+                      ),
+                      Positioned(
+                        left: 15,
+                        top: 0,
+                        child: Padding(
+                          padding: EdgeInsets.only(bottom: 8),
+                          child: Container(
+                            height: 20,
+                            width: 83,
+                            color: Colors.white,
+                            child: Text(
+                              "Student info",
+                              style: TextStyle(color: kColorGreen),
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
-                ),
-              ),
-              Positioned(
-                left: 15,
-                top: 0,
-                child: Padding(
-                  padding: EdgeInsets.only(bottom: 8),
-                  child: Container(
-                    height: 20,
-                    width: 83,
-                    color: Colors.white,
-                    child: Text(
-                      "Student info",
-                      style: TextStyle(color: kColorGreen),
-                    ),
+                  ListView.builder(
+                    itemCount: response.parents.length,
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, int index) {
+                      return Parentlist(parents, index);
+                    },
                   ),
-                ),
-              ),
-            ],
-          ),
-          ListView.builder(
-            itemCount: 2,
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemBuilder: (context, int index) {
-              return Parentlist(widget.parents, index);
-            },
-          ),
-        ],
-      ),
+                ],
+              );
+            } else if (snapshot.hasError) {
+              // return Text("${snapshot.error}");
+              return Text("${snapshot.error}");
+            } else {
+              return Center(
+                  child: CircularProgressIndicator());
+            }
+
+            // By default, show a loading spinner.
+          },
+        ),
+      // child: ListView(
+      //   children: [
+      //     Stack(
+      //       children: [
+      //         Align(
+      //           child: Container(
+      //             height: MediaQuery.of(context).size.height * .61,
+      //             width: MediaQuery.of(context).size.width - 40,
+      //           ),
+      //         ),
+      //         Positioned(
+      //           bottom: 0,
+      //           child: Container(
+      //             height: MediaQuery.of(context).size.height * .60,
+      //             width: MediaQuery.of(context).size.width - 40,
+      //             decoration: BoxDecoration(
+      //               border: Border.all(color: Colors.grey.shade300, width: 1),
+      //               borderRadius: BorderRadius.circular(10),
+      //             ),
+      //             child: Row(
+      //               children: [
+      //                 Padding(
+      //                   padding: EdgeInsets.only(left: 15, right: 20),
+      //                   child: Column(
+      //                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //                     crossAxisAlignment: CrossAxisAlignment.start,
+      //                     children: [
+      //                       txt("Name"),
+      //                       txt("Gender"),
+      //                       txt("Date of Birth"),
+      //                       txt("School Name"),
+      //                       txt("Grade"),
+      //                       txt("Academic Year"),
+      //                       txt("Nationality"),
+      //                       txt("Religion"),
+      //                       txt("Civil id"),
+      //                       txt("Civil id expiry date"),
+      //                       txt("Passport Number"),
+      //                       txt("Address"),
+      //                     ],
+      //                   ),
+      //                 ),
+      //                 SizedBox(width: 10),
+      //                 Flexible(
+      //                   child: Column(
+      //                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //                     crossAxisAlignment: CrossAxisAlignment.start,
+      //                     children: [
+      //                       Text(
+      //                         childrens.studentname,
+      //                       ),
+      //                       Text(childrens.gender),
+      //                       Text(childrens.birthdate.day.toString() +
+      //                           "/" +
+      //                           childrens.birthdate.month.toString() +
+      //                           "/" +
+      //                           childrens.birthdate.year.toString()),
+      //                       Text(childrens.schoolname),
+      //                       Text(childrens.grade),
+      //                       Text(childrens.academicyear),
+      //                       Text(childrens.nationality),
+      //                       Text(childrens.religion),
+      //                       Text(childrens.civilid.toString()),
+      //                       Text(childrens.studentcivilexpirydate.day
+      //                               .toString() +
+      //                           "/" +
+      //                           childrens.studentcivilexpirydate.month
+      //                               .toString() +
+      //                           "/" +
+      //                           childrens.studentcivilexpirydate.year
+      //                               .toString()),
+      //                       Text(childrens.passportnumber),
+      //                       Text(childrens.regionalarea)
+      //                     ],
+      //                   ),
+      //                 )
+      //               ],
+      //             ),
+      //           ),
+      //         ),
+      //         Positioned(
+      //           left: 15,
+      //           top: 0,
+      //           child: Padding(
+      //             padding: EdgeInsets.only(bottom: 8),
+      //             child: Container(
+      //               height: 20,
+      //               width: 83,
+      //               color: Colors.white,
+      //               child: Text(
+      //                 "Student info",
+      //                 style: TextStyle(color: kColorGreen),
+      //               ),
+      //             ),
+      //           ),
+      //         ),
+      //       ],
+      //     ),
+      //     ListView.builder(
+      //       itemCount: 2,
+      //       shrinkWrap: true,
+      //       physics: NeverScrollableScrollPhysics(),
+      //       itemBuilder: (context, int index) {
+      //         return Parentlist(parents, index);
+      //       },
+      //     ),
+      //   ],
+      // ),
     );
   }
 
@@ -541,20 +641,20 @@ class _StudentInfoListState extends State<StudentInfoList> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(widget.parents[index].name),
-                        Text(widget.parents[index].nationality),
-                        Text(widget.parents[index].civilid),
-                        Text(widget.parents[index].parentcivilexpirydate.day
+                        Text(parents[index].name),
+                        Text(parents[index].nationality),
+                        Text(parents[index].civilid),
+                        Text(parents[index].parentcivilexpirydate.day
                                 .toString() +
                             "/" +
-                            widget.parents[index].parentcivilexpirydate.month
+                            parents[index].parentcivilexpirydate.month
                                 .toString() +
                             "/" +
-                            widget.parents[index].parentcivilexpirydate.year
+                            parents[index].parentcivilexpirydate.year
                                 .toString()),
                         // Text(widget.parents[index].parentcivilexpirydate),
-                        Text(widget.parents[index].emailid),
-                        Text(widget.parents[index].regionalarea)
+                        Text(parents[index].emailid),
+                        Text(parents[index].regionalarea)
                       ],
                     )
                   ])),
@@ -569,7 +669,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                   width: 83,
                   color: Colors.white,
                   child: Text(
-                    widget.parents[index].type + " info",
+                    parents[index].type + " info",
                     style: TextStyle(color: kColorGreen),
                   ),
                 ),

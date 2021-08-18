@@ -4,7 +4,7 @@ import 'package:nurture/common/constants.dart';
 import 'package:nurture/model/paymenthistory.dart';
 import 'package:nurture/service/api.dart';
 import 'package:path_provider/path_provider.dart';
-
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 class PaymentHistory extends StatefulWidget {
   const PaymentHistory({Key key}) : super(key: key);
 
@@ -73,7 +73,8 @@ class _PaymentHistoryState extends State<PaymentHistory> {
                   // return Text("${snapshot.error}");
                   return Text("${snapshot.error}");
                 } else {
-                  return Center(child: LinearProgressIndicator());
+                  return Center(
+                    child: SpinKitWave(color: Colors.blue, type: SpinKitWaveType.center),);
                 }
 
                 // By default, show a loading spinner.

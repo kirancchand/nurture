@@ -1,6 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:nurture/config/controller.dart';
 import 'package:nurture/screen/PaymentWebPage.dart';
 import 'package:nurture/screen/confirmpayment.dart';
 import 'package:nurture/widget/actions.dart';
@@ -15,6 +14,7 @@ List<Widget> loginButtons(
   formKey,
   loginRequestModel,
 ) {
+  PendingDropDown con = Get.put(PendingDropDown());
   return <Widget>[
     GestureDetector(
       child: Container(
@@ -43,6 +43,7 @@ List<Widget> loginButtons(
           SharedPreferences prefs = await SharedPreferences.getInstance();
           prefs.setString('Username', "${data.response.Username}");
           prefs.setString('access_token', "${data.response.access_token}");
+          con.text.value = '';
           // print("DSFDS" + data.message);
           // print(data.response.access_token);
           Get.toNamed("/home");

@@ -9,10 +9,11 @@ import 'package:nurture/screen/paymentpending.dart';
 import 'package:nurture/screen/myhome.dart';
 import 'package:nurture/screen/notification.dart';
 import 'package:nurture/model/fee.dart';
+
 class Home extends StatefulWidget {
   Home({Key key, this.title, this.count}) : super(key: key);
-  Future<FeeResponseModel> getFee = Get.arguments[0];
-  List childrens  = Get.arguments[1];
+  // Future<FeeResponseModel> getFee = Get.arguments[0];
+  // List childrens  = Get.arguments[1];
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
   // how it looks.

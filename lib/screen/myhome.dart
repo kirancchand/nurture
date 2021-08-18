@@ -101,7 +101,7 @@ class _MyHomeState extends State<MyHome> {
                   Align(
                     alignment: Alignment.topRight,
                     child: Padding(
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
                       child: Icon(
                         Icons.settings,
                         color: Colors.white,

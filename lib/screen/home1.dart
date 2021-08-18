@@ -31,16 +31,22 @@ class _HomePage1State extends State<HomePage1> {
   ];
   String parentName;
   List childrens = [];
+  List<bool> selectCheck = [];
   bool selectedStudent = false;
   List _selectedStudent = [];
-  double total = 0.0;
+  double total;
+
   void _onCategorySelected(bool selected, student) {
     if (selected == true) {
+      print(student.studentid);
+      print(true);
       setState(() {
         _selectedStudent.add(student);
         total = total + student.dueamount;
       });
     } else {
+      print(student.studentid);
+      print(false);
       setState(() {
         total = total - student.dueamount;
         _selectedStudent.remove(student);
@@ -51,9 +57,11 @@ class _HomePage1State extends State<HomePage1> {
   @override
   void initState() {
     super.initState();
+    total = 0.0;
     getFee = api.getFee().then((fee) {
       con.year.value = fee.response.academicyear;
       childrens = fee.response.children;
+      selectCheck = List<bool>.filled(childrens.length, false);
       return fee;
     });
   }
@@ -70,7 +78,6 @@ class _HomePage1State extends State<HomePage1> {
               if (snapshot.hasData) {
                 var response = snapshot.data?.response;
                 return SingleChildScrollView(
-
                   child: Column(
                     children: [
                       Container(
@@ -197,8 +204,8 @@ class _HomePage1State extends State<HomePage1> {
                                         shrinkWrap: true,
                                         physics: ClampingScrollPhysics(),
                                         itemBuilder: (context, int index) {
-                                          print(response
-                                              .children[index].studentname);
+                                          // print(response
+                                          //     .children[index].studentname);
 
                                           return StudentList(
                                               data: response.children[index]);
@@ -240,14 +247,32 @@ class _HomePage1State extends State<HomePage1> {
                                             itemBuilder: (context, int index) {
                                               return ListTile(
                                                 leading: Checkbox(
-                                                  value: _selectedStudent
-                                                      .contains(response
-                                                          .children[index]),
-                                                  onChanged: (bool selected) {
-                                                    _onCategorySelected(
-                                                        selected,
-                                                        response
-                                                            .children[index]);
+                                                  value: selectCheck[index],
+                                                  onChanged: (val) {
+                                                    setState(() {
+                                                      selectCheck[index] = val;
+
+                                                      // print(selectCheck[index]);
+                                                      if (val == true) {
+                                                        print(true);
+                                                        _selectedStudent.add(
+                                                            response.children[
+                                                                index]);
+                                                        total = total +
+                                                            response
+                                                                .children[index]
+                                                                .dueamount;
+                                                      } else if (val == false) {
+                                                        print(false);
+                                                        total = total -
+                                                            response
+                                                                .children[index]
+                                                                .dueamount;
+                                                        // _selectedStudent.remove(
+                                                        //     response.children[
+                                                        //         index]);
+                                                      }
+                                                    });
                                                   },
                                                   side: BorderSide(
                                                       color: kColorGreen),
@@ -322,8 +347,8 @@ class _HomePage1State extends State<HomePage1> {
                               SizedBox(
                                 height: 15,
                               ),
-                              ContactUs(context, snapshot.data.response.children),
-
+                              ContactUs(
+                                  context, snapshot.data.response.children),
                             ],
                           ),
                         ),
@@ -337,7 +362,8 @@ class _HomePage1State extends State<HomePage1> {
                 );
               } else
                 return Center(
-                  child:SpinKitWave(color: Colors.blue, type: SpinKitWaveType.center),
+                  child: SpinKitWave(
+                      color: Colors.blue, type: SpinKitWaveType.center),
                 );
             }),
       ),

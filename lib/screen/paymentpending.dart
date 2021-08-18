@@ -46,7 +46,9 @@ class _PaymentPendingState extends State<PaymentPending> {
       setState(() {
         // _valueChoose = childrens[0].studentid.toString();
         controller.text.value = controller.text.value.isEmpty
-            ? childrens.length>0?childrens[0].studentid.toString():controller.text.value
+            ? childrens.length > 0
+                ? childrens[0].studentid.toString()
+                : controller.text.value
             : controller.text.value;
         print("bvcbb${controller.text.value}");
       });
@@ -121,7 +123,6 @@ class _PaymentPendingState extends State<PaymentPending> {
                                     // ignore: missing_return
                                     builder: (context, snapshot) {
                                       if (snapshot.hasData) {
-
                                         return Center(
                                             child: Column(children: [
                                           DropdownButton(
@@ -136,7 +137,6 @@ class _PaymentPendingState extends State<PaymentPending> {
                                               setState(() {
                                                 controller.text.value =
                                                     newValue;
-
                                               });
                                               Navigator.pushReplacement(
                                                 context,
@@ -148,7 +148,8 @@ class _PaymentPendingState extends State<PaymentPending> {
                                               );
                                             },
                                             items: childrens.map((valueItem) {
-                                              print("sdfsdf${valueItem.studentid}");
+                                              print(
+                                                  "sdfsdf${valueItem.studentid}");
                                               return DropdownMenuItem(
                                                 value: valueItem.studentid
                                                     .toString(),
@@ -170,7 +171,8 @@ class _PaymentPendingState extends State<PaymentPending> {
                                         return Text("${snapshot.error}");
                                       } else {
                                         return Center(
-                                          child: SpinKitThreeBounce(color: Colors.blue),
+                                          child: SpinKitThreeBounce(
+                                              color: Colors.blue),
                                         );
                                       }
                                     },
@@ -312,8 +314,9 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                     Padding(
                                                       padding:
                                                           EdgeInsets.symmetric(
-                                                              horizontal: 3,
-                                                              vertical: 10),
+                                                        horizontal: 3,
+                                                        vertical: 10,
+                                                      ),
                                                       child: Divider(),
                                                     ),
                                                     SizedBox(height: 20),

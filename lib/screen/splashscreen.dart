@@ -5,6 +5,7 @@ import 'package:nurture/model/fee.dart';
 import 'package:nurture/model/student.dart';
 import 'package:nurture/service/api.dart';
 import 'package:nurture/config/controller.dart';
+
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key key});
 
@@ -21,22 +22,18 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-
-
     Future.delayed(Duration(seconds: 3)).then((value) async {
       var pref = await SharedPreferences.getInstance();
       print(pref.getString('Username'));
-      if(pref.getString('Username') == null)
-        {
-          Get.toNamed('/login');
-        }
-      else{
-        getFee = api.getFee().then((fee) {
-          con.year.value = fee.response.academicyear;
-          childrens = fee.response.children;
-          return fee;
-        });
-        Get.toNamed("/home",arguments: [getFee,childrens]);
+      if (pref.getString('Username') == null) {
+        Get.toNamed('/login');
+      } else {
+        // getFee = api.getFee().then((fee) {
+        //   con.year.value = fee.response.academicyear;
+        //   childrens = fee.response.children;
+        //   return fee;
+        // });
+        Get.toNamed("/home", arguments: [getFee, childrens]);
       }
     });
 
@@ -48,7 +45,8 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        child: Image.asset('assets/images/splash.JPG',
+        child: Image.asset(
+          'assets/images/splash.JPG',
           fit: BoxFit.fill,
         ),
       ),

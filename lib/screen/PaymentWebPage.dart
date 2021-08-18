@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:nurture/screen/home.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -51,7 +52,7 @@ class _PaymentWebPageState extends State<PaymentWebPage> {
             javascriptMode: JavascriptMode.unrestricted,
             initialUrl: widget.link,
             onPageStarted: (String url) {
-              return Center(child: CircularProgressIndicator());
+              return Center(child: SpinKitWave(color: Colors.blue,));
             },
             onPageFinished: (String url) {
               print('Page finished loading: $url');

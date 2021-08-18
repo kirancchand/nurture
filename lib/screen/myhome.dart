@@ -147,7 +147,7 @@ class _MyHomeState extends State<MyHome> {
                           return Text("${snapshot.error}");
                         } else {
                           // return Container();
-                          return Center(child: LinearProgressIndicator());
+                          return Center(child: SpinKitChasingDots(color: Colors.blue,));
                         }
 
                         // By default, show a loading spinner.
@@ -224,7 +224,7 @@ class _MyHomeState extends State<MyHome> {
                                   return Text("${snapshot.error}");
                                 } else {
                                   return Center(
-                                      child: CircularProgressIndicator());
+                                      child: SpinKitWave(color: Colors.blue, type: SpinKitWaveType.center),);
                                 }
 
                                 // By default, show a loading spinner.

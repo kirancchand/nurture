@@ -8,6 +8,7 @@ import 'package:nurture/model/notification.dart';
 import 'package:nurture/model/paymenthistory.dart';
 import 'package:nurture/model/paymentpending.dart';
 import 'package:nurture/model/student.dart';
+import 'package:nurture/screen/modeldownload.dart';
 import 'package:nurture/screen/studentdetails.dart';
 import 'package:nurture/service/api.dart';
 
@@ -19,8 +20,6 @@ class StudentList extends StatefulWidget {
 }
 
 class _StudentListState extends State<StudentList> {
-
-
   // List<Response> data;
   @override
   Widget build(BuildContext context) {
@@ -30,8 +29,8 @@ class _StudentListState extends State<StudentList> {
           radius: 25,
           backgroundColor: Colors.pink.shade300,
           backgroundImage: AssetImage("assets/images/chil.png")
-        // backgroundImage: AssetImage(img),
-      ),
+          // backgroundImage: AssetImage(img),
+          ),
       title: Text(widget.data.studentname),
       isThreeLine: true,
       subtitle: Column(
@@ -41,8 +40,7 @@ class _StudentListState extends State<StudentList> {
             "Student Id ${widget.data.studentnumber}" ?? "",
             style: TextStyle(fontSize: 11),
           ),
-          Text(widget.data.schoolname ?? "",
-              style: TextStyle(fontSize: 11))
+          Text(widget.data.schoolname ?? "", style: TextStyle(fontSize: 11))
         ],
       ),
       trailing: IconButton(
@@ -165,10 +163,16 @@ class paymentHistoryList extends StatelessWidget {
                               //    MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  "Transaction Id",
-                                  style: TextStyle(
-                                      color: Colors.grey, fontSize: 12),
+                                GestureDetector(
+                                  child: Text(
+                                    "Transaction Id",
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 12),
+                                  ),
+                                  onTap: (){
+                                     Navigator.of(context).push(MaterialPageRoute(builder:( context)=>ModelDownload()));          
+                               
+                                  },
                                 ),
                                 SizedBox(
                                   height: 8,
@@ -264,7 +268,8 @@ class paymentHistoryList extends StatelessWidget {
                           //Icons.close_rounded,//lose_outlined,
                           //color: Colors.red,
                           // ),
-                          Container(
+                          GestureDetector(
+                            child: Container(
                               height: 20,
                               width: MediaQuery.of(context).size.width * .22,
                               decoration: BoxDecoration(
@@ -284,7 +289,12 @@ class paymentHistoryList extends StatelessWidget {
                                     color: data.result == "Success"
                                         ? kColorGreen
                                         : Colors.grey),
-                              )))
+                              )),
+                            ),
+                            onTap: () {
+                               Navigator.of(context).push(MaterialPageRoute(builder:( context)=>ModelDownload()));          
+                                                       },
+                          )
                         ],
                       ),
                     ),
@@ -336,7 +346,6 @@ class StudentInfoList extends StatefulWidget {
 }
 
 class _StudentInfoListState extends State<StudentInfoList> {
-
   List<ParentResponse> parents;
   StudentResponse childrens;
 
@@ -350,146 +359,147 @@ class _StudentInfoListState extends State<StudentInfoList> {
       parents = student.response.parents;
       for (var i = 0; i < student.response.childrens.length; i++) {
         if (student.response.childrens[i].studentid == widget.data.studentid) {
-          childrens=student.response.childrens[i];
+          childrens = student.response.childrens[i];
         }
       }
       return student;
     });
-
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(right: 20, left: 20, top: 20),
-        child:FutureBuilder<StudentResponseModel>(
-          future: getStudents,
-          builder: (BuildContext context,
-              AsyncSnapshot<StudentResponseModel> snapshot) {
-            if (snapshot.hasData) {
-              var response = snapshot.data?.response;
-              return ListView(
-                children: [
-                  Stack(
-                    children: [
-                      Align(
-                        child: Container(
-                          height: MediaQuery.of(context).size.height * .61,
-                          width: MediaQuery.of(context).size.width - 40,
-                        ),
+      child: FutureBuilder<StudentResponseModel>(
+        future: getStudents,
+        builder: (BuildContext context,
+            AsyncSnapshot<StudentResponseModel> snapshot) {
+          if (snapshot.hasData) {
+            var response = snapshot.data?.response;
+            return ListView(
+              children: [
+                Stack(
+                  children: [
+                    Align(
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * .61,
+                        width: MediaQuery.of(context).size.width - 40,
                       ),
-                      Positioned(
-                        bottom: 0,
-                        child: Container(
-                          height: MediaQuery.of(context).size.height * .60,
-                          width: MediaQuery.of(context).size.width - 40,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey.shade300, width: 1),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(left: 15, right: 20),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    txt("Name"),
-                                    txt("Gender"),
-                                    txt("Date of Birth"),
-                                    txt("School Name"),
-                                    txt("Grade"),
-                                    txt("Academic Year"),
-                                    txt("Nationality"),
-                                    txt("Religion"),
-                                    txt("Civil id"),
-                                    txt("Civil id expiry date"),
-                                    txt("Passport Number"),
-                                    txt("Address"),
-                                  ],
-                                ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * .60,
+                        width: MediaQuery.of(context).size.width - 40,
+                        decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Colors.grey.shade300, width: 1),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(left: 15, right: 20),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  txt("Name"),
+                                  txt("Gender"),
+                                  txt("Date of Birth"),
+                                  txt("School Name"),
+                                  txt("Grade"),
+                                  txt("Academic Year"),
+                                  txt("Nationality"),
+                                  txt("Religion"),
+                                  txt("Civil id"),
+                                  txt("Civil id expiry date"),
+                                  txt("Passport Number"),
+                                  txt("Address"),
+                                ],
                               ),
-                              SizedBox(width: 10),
-                              Flexible(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      childrens.studentname,
-                                    ),
-                                    Text(childrens.gender),
-                                    Text(childrens.birthdate.day.toString() +
-                                        "/" +
-                                        childrens.birthdate.month.toString() +
-                                        "/" +
-                                        childrens.birthdate.year.toString()),
-                                    Text(childrens.schoolname),
-                                    Text(childrens.grade),
-                                    Text(childrens.academicyear),
-                                    Text(childrens.nationality),
-                                    Text(childrens.religion),
-                                    Text(childrens.civilid.toString()),
-                                    Text(childrens.studentcivilexpirydate.day
-                                            .toString() +
-                                        "/" +
-                                        childrens.studentcivilexpirydate.month
-                                            .toString() +
-                                        "/" +
-                                        childrens.studentcivilexpirydate.year
-                                            .toString()),
-                                    Text(childrens.passportnumber),
-                                    Text(childrens.regionalarea)
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 15,
-                        top: 0,
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 8),
-                          child: Container(
-                            height: 20,
-                            width: 83,
-                            color: Colors.white,
-                            child: Text(
-                              "Student info",
-                              style: TextStyle(color: kColorGreen),
                             ),
+                            SizedBox(width: 10),
+                            Flexible(
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    childrens.studentname,
+                                  ),
+                                  Text(childrens.gender),
+                                  Text(childrens.birthdate.day.toString() +
+                                      "/" +
+                                      childrens.birthdate.month.toString() +
+                                      "/" +
+                                      childrens.birthdate.year.toString()),
+                                  Text(childrens.schoolname),
+                                  Text(childrens.grade),
+                                  Text(childrens.academicyear),
+                                  Text(childrens.nationality),
+                                  Text(childrens.religion),
+                                  Text(childrens.civilid.toString()),
+                                  Text(childrens.studentcivilexpirydate.day
+                                          .toString() +
+                                      "/" +
+                                      childrens.studentcivilexpirydate.month
+                                          .toString() +
+                                      "/" +
+                                      childrens.studentcivilexpirydate.year
+                                          .toString()),
+                                  Text(childrens.passportnumber),
+                                  Text(childrens.regionalarea)
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      left: 15,
+                      top: 0,
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 8),
+                        child: Container(
+                          height: 20,
+                          width: 83,
+                          color: Colors.white,
+                          child: Text(
+                            "Student info",
+                            style: TextStyle(color: kColorGreen),
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                  ListView.builder(
-                    itemCount: response.parents.length,
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, int index) {
-                      return Parentlist(parents, index);
-                    },
-                  ),
-                ],
-              );
-            } else if (snapshot.hasError) {
-              // return Text("${snapshot.error}");
-              return Text("${snapshot.error}");
-            } else {
-              return Center(
-                  child: SpinKitWave(color: Colors.blue,));
-            }
+                    ),
+                  ],
+                ),
+                ListView.builder(
+                  itemCount: response.parents.length,
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, int index) {
+                    return Parentlist(parents, index);
+                  },
+                ),
+              ],
+            );
+          } else if (snapshot.hasError) {
+            // return Text("${snapshot.error}");
+            return Text("${snapshot.error}");
+          } else {
+            return Center(
+                child: SpinKitWave(
+              color: Colors.blue,
+            ));
+          }
 
-            // By default, show a loading spinner.
-          },
-        ),
+          // By default, show a loading spinner.
+        },
+      ),
       // child: ListView(
       //   children: [
       //     Stack(
@@ -645,13 +655,19 @@ class _StudentInfoListState extends State<StudentInfoList> {
                         Text(parents[index].name),
                         Text(parents[index].nationality),
                         Text(parents[index].civilid),
-                        Text(parents[index].parentcivilexpirydate.day
+                        Text(parents[index]
+                                .parentcivilexpirydate
+                                .day
                                 .toString() +
                             "/" +
-                            parents[index].parentcivilexpirydate.month
+                            parents[index]
+                                .parentcivilexpirydate
+                                .month
                                 .toString() +
                             "/" +
-                            parents[index].parentcivilexpirydate.year
+                            parents[index]
+                                .parentcivilexpirydate
+                                .year
                                 .toString()),
                         // Text(widget.parents[index].parentcivilexpirydate),
                         Text(parents[index].emailid),

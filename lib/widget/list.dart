@@ -292,7 +292,9 @@ class paymentHistoryList extends StatelessWidget {
                               )),
                             ),
                             onTap: () {
-                               Navigator.of(context).push(MaterialPageRoute(builder:( context)=>ModelDownload()));          
+
+                              data.result=="Success"?Get.toNamed('/download',arguments: [data.paymentid,data.filepath]):Container();
+                               // Navigator.of(context).push(MaterialPageRoute(builder:( context)=>ModelDownload()));
                                                        },
                           )
                         ],

@@ -55,7 +55,7 @@ class Api {
     final response = await http.get(getUrl('GetAllDetailsSingle'), headers: {
       'Authorization': 'Bearer $token',
     });
-    // print(jsonDecode(response.body));
+    print(jsonDecode(response.body));
     if (response.statusCode == 200 || response.statusCode == 400) {
       return FeeResponseModel.fromJson(json.decode(response.body));
     } else {

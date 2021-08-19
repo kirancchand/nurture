@@ -8,10 +8,11 @@ import 'package:nurture/widget/list.dart';
 import 'package:nurture/screen/paymentpending.dart';
 import 'package:nurture/screen/myhome.dart';
 import 'package:nurture/screen/notification.dart';
-
+import 'package:nurture/model/fee.dart';
 class Home extends StatefulWidget {
-  Home({Key key, this.title, this.count}) : super(key: key);
-
+  Home({Key key, this.title, this.count,this.fee,this.childrens}) : super(key: key);
+  final FeeResponseModel fee;
+  final List childrens;
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
   // how it looks.
@@ -29,22 +30,29 @@ class Home extends StatefulWidget {
 }
 
 class _HomePageState extends State<Home> {
-  List<Widget> pages = [
+
+  List<Widget> _pages() => [
     // MyHome(),
-    HomePage1(),
+    HomePage1(fee:widget.fee,childrens:widget.childrens),
     PaymentPending(),
     PaymentHistory(),
     Notifications()
   ];
+
   int pageIndex;
+
   @override
   void initState() {
     widget.count == null ? pageIndex = 0 : pageIndex = widget.count;
+
     super.initState();
+
+    print(widget.fee);
   }
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> pages = _pages();
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //

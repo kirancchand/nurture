@@ -954,34 +954,27 @@ class Installment extends StatelessWidget {
       padding: const EdgeInsets.only(top: 5, bottom: 3),
       child: Column(
         children: [
-          Row(
+          data.tuitionfee!=0.0?Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               list_txt("Tution", isSelected: true),
               list_txt(data.tuitionfee.toString()),
             ],
-          ),
-          Row(
+          ):Container(),
+          data.transportfee!=0.0?Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               list_txt("Transportation", isSelected: true),
               list_txt(data.transportfee.toString())
             ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              list_txt("Enrollment", isSelected: true),
-              list_txt(data.enrollment.toString())
-            ],
-          ),
-          Row(
+          ):Container(),
+          data.others!=0.0?Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               list_txt("Others", isSelected: true),
               list_txt(data.others.toString())
             ],
-          ),
+          ):Container(),
         ],
       ),
     );

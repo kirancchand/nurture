@@ -10,11 +10,23 @@ import 'package:get/get.dart';
 import 'package:nurture/common/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:nurture/model/contact.dart';
+import 'package:nurture/service/api.dart';
+import 'package:nurture/config/controller.dart';
+import 'package:nurture/model/fee.dart';
+import 'package:nurture/screen/home.dart';
+Api api = new Api();
+Future<FeeResponseModel> getFee;
+
+
+List childrens = [];
 
 List<Widget> loginButtons(
   formKey,
   loginRequestModel,
 ) {
+  PendingDropDown con = Get.put(PendingDropDown());
+  YearController cont = Get.put(YearController());
+  StudentController students=Get.put(StudentController());
   return <Widget>[
     GestureDetector(
       child: Container(
@@ -41,11 +53,24 @@ List<Widget> loginButtons(
         if (data.statuscode == "200") {
           toastFn(comment: data.message);
           SharedPreferences prefs = await SharedPreferences.getInstance();
+          con.text.value = '';
+          // prefs.setString('Username', null);
+          // prefs.setString('access_token', "");
           prefs.setString('Username', "${data.response.Username}");
           prefs.setString('access_token', "${data.response.access_token}");
           // print("DSFDS" + data.message);
           // print(data.response.access_token);
-          Get.toNamed("/home");
+          showSpinner();
+          api.getFee().then((fee) {
+            cont.year.value = fee.response.academicyear;
+
+            childrens = fee.response.children;
+            students.student.value=fee;
+            // return fee;
+            hideSpinner();
+            Get.off(()=>Home(fee:fee,childrens:childrens));
+          });
+          // Get.toNamed("/home");
         } else {
           toastFn(comment: data.message);
         }

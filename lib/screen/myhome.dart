@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:nurture/config/controller.dart';
@@ -146,7 +147,7 @@ class _MyHomeState extends State<MyHome> {
                           return Text("${snapshot.error}");
                         } else {
                           // return Container();
-                          return Center(child: LinearProgressIndicator());
+                          return Center(child: SpinKitChasingDots(color: Colors.blue,));
                         }
 
                         // By default, show a loading spinner.
@@ -223,7 +224,7 @@ class _MyHomeState extends State<MyHome> {
                                   return Text("${snapshot.error}");
                                 } else {
                                   return Center(
-                                      child: CircularProgressIndicator());
+                                      child: SpinKitWave(color: Colors.blue, type: SpinKitWaveType.center),);
                                 }
 
                                 // By default, show a loading spinner.
@@ -351,7 +352,7 @@ class _MyHomeState extends State<MyHome> {
                     // return Text("${snapshot.error}");
                     return Text("${snapshot.error}");
                   } else {
-                    return Center(child: CircularProgressIndicator());
+                    return Center(child: SpinKitWave(color: Colors.blue,));
                   }
 
                   // By default, show a loading spinner.

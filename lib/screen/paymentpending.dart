@@ -170,7 +170,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                                         return Text("${snapshot.error}");
                                       } else {
                                         return Center(
-                                          child: SpinKitThreeBounce(color: Colors.blue),
+                                          child: SpinKitChasingDots(color: Colors.blue),
                                         );
                                       }
                                     },
@@ -351,7 +351,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                                         return Text("${snapshot.error}");
                                       } else {
                                         return Center(
-                                            child: CircularProgressIndicator());
+                                            child: SpinKitWave(color: Colors.blue,));
                                       }
                                     },
                                   ),

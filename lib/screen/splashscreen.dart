@@ -5,6 +5,8 @@ import 'package:nurture/model/fee.dart';
 import 'package:nurture/model/student.dart';
 import 'package:nurture/service/api.dart';
 import 'package:nurture/config/controller.dart';
+import 'package:nurture/screen/login.dart';
+import 'package:nurture/screen/home.dart';
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key key});
 
@@ -28,15 +30,18 @@ class _SplashScreenState extends State<SplashScreen> {
       print(pref.getString('Username'));
       if(pref.getString('Username') == null)
         {
-          Get.toNamed('/login');
+          Get.off(Login());
+          // Get.toNamed('/login');
         }
       else{
-        getFee = api.getFee().then((fee) {
+        api.getFee().then((fee) {
           con.year.value = fee.response.academicyear;
           childrens = fee.response.children;
-          return fee;
+          // return fee;
+          Get.off(Home(fee:fee,childrens:childrens));
         });
-        Get.toNamed("/home",arguments: [getFee,childrens]);
+
+        // Get.toNamed("/home",arguments: [getFee,childrens]);
       }
     });
 

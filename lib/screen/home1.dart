@@ -10,8 +10,9 @@ import 'package:nurture/widget/list.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class HomePage1 extends StatefulWidget {
-  HomePage1({Key key}) : super(key: key);
-
+  HomePage1({Key key,this.fee,this.childrens}) : super(key: key);
+  FeeResponseModel fee;
+  List childrens;
   @override
   _HomePage1State createState() => _HomePage1State();
 }

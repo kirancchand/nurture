@@ -19,6 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<StudentResponseModel> getStudents;
   Future<FeeResponseModel> getFee;
   YearController con = Get.put(YearController());
+  StudentController students=Get.put(StudentController());
   List childrens = [];
 
   @override
@@ -27,18 +28,21 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Future.delayed(Duration(seconds: 3)).then((value) async {
       var pref = await SharedPreferences.getInstance();
-      print(pref.getString('Username'));
-      if(pref.getString('Username') == null)
+
+      if(pref.getString('Username')==null)
         {
+          print("sdfsdfsdf${pref.getString('Username')}");
           Get.off(Login());
           // Get.toNamed('/login');
         }
       else{
+        print("sdfsdfsdfnmmmmmm");
         api.getFee().then((fee) {
           con.year.value = fee.response.academicyear;
           childrens = fee.response.children;
+          students.student.value=fee;
           // return fee;
-          Get.off(Home(fee:fee,childrens:childrens));
+          Get.off(()=>Home(fee:fee,childrens:childrens));
         });
 
         // Get.toNamed("/home",arguments: [getFee,childrens]);
@@ -53,7 +57,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        child: Image.asset('assets/images/splash.JPG',
+        child: Image.asset('assets/images/splash.png',
           fit: BoxFit.fill,
         ),
       ),

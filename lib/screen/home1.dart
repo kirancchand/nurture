@@ -22,6 +22,8 @@ class _HomePage1State extends State<HomePage1> {
   Future<StudentResponseModel> getStudents;
   Future<FeeResponseModel> getFee;
   YearController con = Get.put(YearController());
+  StudentController studentcon=Get.put(StudentController());
+
   List<String> _texts = [
     "InduceSmile.com",
     "Flutter.io",
@@ -52,295 +54,290 @@ class _HomePage1State extends State<HomePage1> {
   @override
   void initState() {
     super.initState();
-    getFee = api.getFee().then((fee) {
-      con.year.value = fee.response.academicyear;
-      childrens = fee.response.children;
-      return fee;
-    });
+    // getFee = api.getFee().then((fee) {
+    //   con.year.value = fee.response.academicyear;
+    //   childrens = fee.response.children;
+    //   return fee;
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
+    FeeResponseModel fee=studentcon.student.value;
+    List childrens=studentcon.student.value.response.children;
+    // con.year.value = fee.response.academicyear;
+    // print(con.year.value);
+    print(studentcon.student.value.response.academicyear);
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        child: FutureBuilder<FeeResponseModel>(
-            future: api.getFee(),
-            builder: (BuildContext context, snapshot) {
-              if (snapshot.hasData) {
-                var response = snapshot.data?.response;
-                return SingleChildScrollView(
+        child: SingleChildScrollView(
 
+          child: Column(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xff43CEA2),
+                      Color(0xff279DD4),
+                    ],
+                  ),
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Icon(
+                            Icons.settings,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                    CircleAvatar(
+                        radius: 30,
+                        backgroundColor: Colors.white,
+                        backgroundImage: AssetImage(
+                            "assets/images/arabian-vector-icon-260nw-445427119.png")),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    fee.response.parentnumber != ""
+                        ? Column(children: [
+                      Text(
+                        fee.response.parentname,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Text("Parent ID: ${fee.response.parentnumber}",
+                          style: TextStyle(
+                            color: Colors.white,
+                          )),
+                    ])
+                        : Center(child: Text("No Data")),
+                    SizedBox(
+                      height: 20,
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xff43CEA2),
+                      Color(0xff279DD4),
+                    ],
+                  ),
+                ),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade100,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(15),
+                      topLeft: Radius.circular(15),
+                    ), //circular(15),
+                    border: Border.all(
+                        color: Colors.grey.shade200, width: 1),
+                  ),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              Color(0xff43CEA2),
-                              Color(0xff279DD4),
-                            ],
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            topRight: Radius.circular(15),
                           ),
                         ),
-                        child: Column(
+                        padding: EdgeInsets.only(
+                            top: 20, left: 15, right: 15),
+                        child: Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment.spaceBetween,
                           children: [
+                            Text("Students"),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Padding(
-                                  padding: EdgeInsets.all(10),
-                                  child: Icon(
-                                    Icons.settings,
-                                    color: Colors.white,
+                                Text(
+                                  "Academic year:",
+                                  style: TextStyle(
+                                      color: Colors.grey, fontSize: 11),
+                                ),
+                                Obx(
+                                      () => Text(
+                                    con.year.value ?? "",
+                                    style: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 11),
                                   ),
                                 ),
                               ],
-                            ),
-                            CircleAvatar(
-                                radius: 30,
-                                backgroundColor: Colors.white,
-                                backgroundImage: AssetImage(
-                                    "assets/images/arabian-vector-icon-260nw-445427119.png")),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            response.parentnumber != ""
-                                ? Column(children: [
-                                    Text(
-                                      response.parentname,
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Text("Parent ID: ${response.parentnumber}",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                        )),
-                                  ])
-                                : Center(child: Text("No Data")),
-                            SizedBox(
-                              height: 20,
-                            ),
+                            )
                           ],
                         ),
                       ),
                       Container(
                         decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              Color(0xff43CEA2),
-                              Color(0xff279DD4),
-                            ],
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(15),
+                            bottomRight: Radius.circular(15),
                           ),
                         ),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            color: Colors.grey.shade100,
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(15),
-                              topLeft: Radius.circular(15),
-                            ), //circular(15),
-                            border: Border.all(
-                                color: Colors.grey.shade200, width: 1),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(15),
-                                    topRight: Radius.circular(15),
-                                  ),
-                                ),
-                                padding: EdgeInsets.only(
-                                    top: 20, left: 15, right: 15),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text("Students"),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Academic year:",
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 11),
-                                        ),
-                                        Obx(
-                                          () => Text(
-                                            con.year.value ?? "",
-                                            style: TextStyle(
-                                                color: Colors.grey,
-                                                fontSize: 11),
-                                          ),
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(15),
-                                    bottomRight: Radius.circular(15),
-                                  ),
-                                ),
-                                child: response.children.length > 0
-                                    ? ListView.builder(
-                                        itemCount: response.children.length,
-                                        shrinkWrap: true,
-                                        physics: ClampingScrollPhysics(),
-                                        itemBuilder: (context, int index) {
-                                          print(response
-                                              .children[index].studentname);
+                        child: fee.response.children.length > 0
+                            ? ListView.builder(
+                          itemCount: fee.response.children.length,
+                          shrinkWrap: true,
+                          physics: ClampingScrollPhysics(),
+                          itemBuilder: (context, int index) {
+                            print(fee.response
+                                .children[index].studentname);
 
-                                          return StudentList(
-                                              data: response.children[index]);
-                                        },
-                                      )
-                                    : Center(
-                                        child: Text("No Data"),
-                                      ),
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  // color: Colors.grey.shade200,
-                                  borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(15),
-                                    topLeft: Radius.circular(15),
-                                    bottomLeft: Radius.circular(15),
-                                    bottomRight: Radius.circular(15),
-                                  ), //circular(15),
-                                  border: Border.all(
-                                      color: Colors.grey.shade200, width: 1),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          top: 15, left: 15, right: 15),
-                                      child: Text("Total Fee Outstanding"),
-                                    ),
-                                    response.children.length > 0
-                                        ? ListView.builder(
-                                            itemCount: response.children.length,
-                                            shrinkWrap: true,
-                                            physics: ClampingScrollPhysics(),
-                                            itemBuilder: (context, int index) {
-                                              return ListTile(
-                                                leading: Checkbox(
-                                                  value: _selectedStudent
-                                                      .contains(response
-                                                          .children[index]),
-                                                  onChanged: (bool selected) {
-                                                    _onCategorySelected(
-                                                        selected,
-                                                        response
-                                                            .children[index]);
-                                                  },
-                                                  side: BorderSide(
-                                                      color: kColorGreen),
-                                                  shape: CircleBorder(),
-                                                  activeColor: kColorGreen,
-                                                ),
-                                                title: Text(
-                                                    response.children[index]
-                                                        .studentname,
-                                                    style: TextStyle(
-                                                        color: selectedStudent
-                                                            ? kColorGreen
-                                                            : Colors.grey)),
-                                                trailing: Text(
-                                                    response.children[index]
-                                                        .dueamount
-                                                        .toString(),
-                                                    style: TextStyle(
-                                                        color: selectedStudent
-                                                            ? kColorGreen
-                                                            : Colors.grey)),
-                                              );
-                                            },
-                                          )
-                                        : Center(child: Text("No Data")),
-                                    Padding(
-                                      padding: const EdgeInsets.all(15),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text("Total"),
-                                          Text(total.toString() + "KD")
-                                        ],
-                                      ),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        // print("dsfsd${_selectedStudent.length}");
-                                        _selectedStudent.length > 0
-                                            ? Get.toNamed('/confirmpayment',
-                                                arguments: [
-                                                    _selectedStudent,
-                                                    total
-                                                  ])
-                                            : Fluttertoast.showToast(
-                                                msg:
-                                                    'Please Select Atleast one student');
-                                      },
-                                      child: Container(
-                                        height: 50,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.vertical(
-                                                bottom: Radius.circular(
-                                                    15)), //circular(15),
-                                            color: kColorGreen),
-                                        child: Center(
-                                          child: Text(
-                                            "Pay Now",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              ContactUs(context, snapshot.data.response.children),
-
-                            ],
-                          ),
+                            return StudentList(
+                                data: fee.response.children[index]);
+                          },
+                        )
+                            : Center(
+                          child: Text("No Data"),
                         ),
                       ),
-                      // SizedBox(
-                      //   height: 10,
-                      // ),
-                      // ContactUs(context, snapshot.data.response.children),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          // color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(15),
+                            topLeft: Radius.circular(15),
+                            bottomLeft: Radius.circular(15),
+                            bottomRight: Radius.circular(15),
+                          ), //circular(15),
+                          border: Border.all(
+                              color: Colors.grey.shade200, width: 1),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  top: 15, left: 15, right: 15),
+                              child: Text("Total Fee Outstanding"),
+                            ),
+                            fee.response.children.length > 0
+                                ? ListView.builder(
+                              itemCount: fee.response.children.length,
+                              shrinkWrap: true,
+                              physics: ClampingScrollPhysics(),
+                              itemBuilder: (context, int index) {
+                                return ListTile(
+                                  leading: Checkbox(
+                                    value: _selectedStudent
+                                        .contains(fee.response
+                                        .children[index]),
+                                    onChanged: (bool selected) {
+                                      _onCategorySelected(
+                                          selected,
+                                          fee.response
+                                              .children[index]);
+                                    },
+                                    side: BorderSide(
+                                        color: kColorGreen),
+                                    shape: CircleBorder(),
+                                    activeColor: kColorGreen,
+                                  ),
+                                  title: Text(
+                                      fee.response.children[index]
+                                          .studentname,
+                                      style: TextStyle(
+                                          color: selectedStudent
+                                              ? kColorGreen
+                                              : Colors.grey)),
+                                  trailing: Text(
+                                      fee.response.children[index]
+                                          .dueamount
+                                          .toString(),
+                                      style: TextStyle(
+                                          color: selectedStudent
+                                              ? kColorGreen
+                                              : Colors.grey)),
+                                );
+                              },
+                            )
+                                : Center(child: Text("No Data")),
+                            Padding(
+                              padding: const EdgeInsets.all(15),
+                              child: Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("Total"),
+                                  Text(total.toString() + "KD")
+                                ],
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                // print("dsfsd${_selectedStudent.length}");
+                                _selectedStudent.length > 0
+                                    ? Get.toNamed('/confirmpayment',
+                                    arguments: [
+                                      _selectedStudent,
+                                      total
+                                    ])
+                                    : Fluttertoast.showToast(
+                                    msg:
+                                    'Please Select Atleast one student');
+                              },
+                              child: Container(
+                                height: 50,
+                                width:
+                                MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.vertical(
+                                        bottom: Radius.circular(
+                                            15)), //circular(15),
+                                    color: kColorGreen),
+                                child: Center(
+                                  child: Text(
+                                    "Pay Now",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      ContactUs(context, childrens),
+
                     ],
                   ),
-                );
-              } else
-                return Center(
-                  child:SpinKitWave(color: Colors.blue, type: SpinKitWaveType.center),
-                );
-            }),
+                ),
+              ),
+              // SizedBox(
+              //   height: 10,
+              // ),
+              // ContactUs(context, snapshot.data.response.children),
+            ],
+          ),
+        )
       ),
     );
   }
@@ -373,3 +370,291 @@ Widget ContactUs(context, List<FeeResponse> children) {
             : Fluttertoast.showToast(msg: 'Please Wait..!!And Try Again');
       });
 }
+
+
+
+// @override
+// Widget build(BuildContext context) {
+//   return Scaffold(
+//     body: Container(
+//       height: MediaQuery.of(context).size.height,
+//       width: MediaQuery.of(context).size.width,
+//       child: FutureBuilder<FeeResponseModel>(
+//           future: api.getFee(),
+//           builder: (BuildContext context, snapshot) {
+//             if (snapshot.hasData) {
+//               var response = snapshot.data?.response;
+//               return SingleChildScrollView(
+//
+//                 child: Column(
+//                   children: [
+//                     Container(
+//                       decoration: BoxDecoration(
+//                         gradient: LinearGradient(
+//                           colors: [
+//                             Color(0xff43CEA2),
+//                             Color(0xff279DD4),
+//                           ],
+//                         ),
+//                       ),
+//                       child: Column(
+//                         children: [
+//                           Row(
+//                             mainAxisAlignment: MainAxisAlignment.end,
+//                             children: [
+//                               Padding(
+//                                 padding: EdgeInsets.all(10),
+//                                 child: Icon(
+//                                   Icons.settings,
+//                                   color: Colors.white,
+//                                 ),
+//                               ),
+//                             ],
+//                           ),
+//                           CircleAvatar(
+//                               radius: 30,
+//                               backgroundColor: Colors.white,
+//                               backgroundImage: AssetImage(
+//                                   "assets/images/arabian-vector-icon-260nw-445427119.png")),
+//                           SizedBox(
+//                             height: 10,
+//                           ),
+//                           response.parentnumber != ""
+//                               ? Column(children: [
+//                             Text(
+//                               response.parentname,
+//                               style: TextStyle(
+//                                   color: Colors.white,
+//                                   fontSize: 25,
+//                                   fontWeight: FontWeight.bold),
+//                             ),
+//                             Text("Parent ID: ${response.parentnumber}",
+//                                 style: TextStyle(
+//                                   color: Colors.white,
+//                                 )),
+//                           ])
+//                               : Center(child: Text("No Data")),
+//                           SizedBox(
+//                             height: 20,
+//                           ),
+//                         ],
+//                       ),
+//                     ),
+//                     Container(
+//                       decoration: BoxDecoration(
+//                         gradient: LinearGradient(
+//                           colors: [
+//                             Color(0xff43CEA2),
+//                             Color(0xff279DD4),
+//                           ],
+//                         ),
+//                       ),
+//                       child: Container(
+//                         width: MediaQuery.of(context).size.width,
+//                         decoration: BoxDecoration(
+//                           color: Colors.grey.shade100,
+//                           borderRadius: BorderRadius.only(
+//                             topRight: Radius.circular(15),
+//                             topLeft: Radius.circular(15),
+//                           ), //circular(15),
+//                           border: Border.all(
+//                               color: Colors.grey.shade200, width: 1),
+//                         ),
+//                         child: Column(
+//                           crossAxisAlignment: CrossAxisAlignment.start,
+//                           children: [
+//                             Container(
+//                               decoration: BoxDecoration(
+//                                 color: Colors.white,
+//                                 borderRadius: BorderRadius.only(
+//                                   topLeft: Radius.circular(15),
+//                                   topRight: Radius.circular(15),
+//                                 ),
+//                               ),
+//                               padding: EdgeInsets.only(
+//                                   top: 20, left: 15, right: 15),
+//                               child: Row(
+//                                 mainAxisAlignment:
+//                                 MainAxisAlignment.spaceBetween,
+//                                 children: [
+//                                   Text("Students"),
+//                                   Row(
+//                                     children: [
+//                                       Text(
+//                                         "Academic year:",
+//                                         style: TextStyle(
+//                                             color: Colors.grey, fontSize: 11),
+//                                       ),
+//                                       Obx(
+//                                             () => Text(
+//                                           con.year.value ?? "",
+//                                           style: TextStyle(
+//                                               color: Colors.grey,
+//                                               fontSize: 11),
+//                                         ),
+//                                       ),
+//                                     ],
+//                                   )
+//                                 ],
+//                               ),
+//                             ),
+//                             Container(
+//                               decoration: BoxDecoration(
+//                                 color: Colors.white,
+//                                 borderRadius: BorderRadius.only(
+//                                   bottomLeft: Radius.circular(15),
+//                                   bottomRight: Radius.circular(15),
+//                                 ),
+//                               ),
+//                               child: response.children.length > 0
+//                                   ? ListView.builder(
+//                                 itemCount: response.children.length,
+//                                 shrinkWrap: true,
+//                                 physics: ClampingScrollPhysics(),
+//                                 itemBuilder: (context, int index) {
+//                                   print(response
+//                                       .children[index].studentname);
+//
+//                                   return StudentList(
+//                                       data: response.children[index]);
+//                                 },
+//                               )
+//                                   : Center(
+//                                 child: Text("No Data"),
+//                               ),
+//                             ),
+//                             SizedBox(
+//                               height: 15,
+//                             ),
+//                             Container(
+//                               decoration: BoxDecoration(
+//                                 color: Colors.white,
+//                                 // color: Colors.grey.shade200,
+//                                 borderRadius: BorderRadius.only(
+//                                   topRight: Radius.circular(15),
+//                                   topLeft: Radius.circular(15),
+//                                   bottomLeft: Radius.circular(15),
+//                                   bottomRight: Radius.circular(15),
+//                                 ), //circular(15),
+//                                 border: Border.all(
+//                                     color: Colors.grey.shade200, width: 1),
+//                               ),
+//                               child: Column(
+//                                 crossAxisAlignment: CrossAxisAlignment.start,
+//                                 children: [
+//                                   Padding(
+//                                     padding: EdgeInsets.only(
+//                                         top: 15, left: 15, right: 15),
+//                                     child: Text("Total Fee Outstanding"),
+//                                   ),
+//                                   response.children.length > 0
+//                                       ? ListView.builder(
+//                                     itemCount: response.children.length,
+//                                     shrinkWrap: true,
+//                                     physics: ClampingScrollPhysics(),
+//                                     itemBuilder: (context, int index) {
+//                                       return ListTile(
+//                                         leading: Checkbox(
+//                                           value: _selectedStudent
+//                                               .contains(response
+//                                               .children[index]),
+//                                           onChanged: (bool selected) {
+//                                             _onCategorySelected(
+//                                                 selected,
+//                                                 response
+//                                                     .children[index]);
+//                                           },
+//                                           side: BorderSide(
+//                                               color: kColorGreen),
+//                                           shape: CircleBorder(),
+//                                           activeColor: kColorGreen,
+//                                         ),
+//                                         title: Text(
+//                                             response.children[index]
+//                                                 .studentname,
+//                                             style: TextStyle(
+//                                                 color: selectedStudent
+//                                                     ? kColorGreen
+//                                                     : Colors.grey)),
+//                                         trailing: Text(
+//                                             response.children[index]
+//                                                 .dueamount
+//                                                 .toString(),
+//                                             style: TextStyle(
+//                                                 color: selectedStudent
+//                                                     ? kColorGreen
+//                                                     : Colors.grey)),
+//                                       );
+//                                     },
+//                                   )
+//                                       : Center(child: Text("No Data")),
+//                                   Padding(
+//                                     padding: const EdgeInsets.all(15),
+//                                     child: Row(
+//                                       mainAxisAlignment:
+//                                       MainAxisAlignment.spaceBetween,
+//                                       children: [
+//                                         Text("Total"),
+//                                         Text(total.toString() + "KD")
+//                                       ],
+//                                     ),
+//                                   ),
+//                                   GestureDetector(
+//                                     onTap: () {
+//                                       // print("dsfsd${_selectedStudent.length}");
+//                                       _selectedStudent.length > 0
+//                                           ? Get.toNamed('/confirmpayment',
+//                                           arguments: [
+//                                             _selectedStudent,
+//                                             total
+//                                           ])
+//                                           : Fluttertoast.showToast(
+//                                           msg:
+//                                           'Please Select Atleast one student');
+//                                     },
+//                                     child: Container(
+//                                       height: 50,
+//                                       width:
+//                                       MediaQuery.of(context).size.width,
+//                                       decoration: BoxDecoration(
+//                                           borderRadius: BorderRadius.vertical(
+//                                               bottom: Radius.circular(
+//                                                   15)), //circular(15),
+//                                           color: kColorGreen),
+//                                       child: Center(
+//                                         child: Text(
+//                                           "Pay Now",
+//                                           style: TextStyle(
+//                                               color: Colors.white,
+//                                               fontWeight: FontWeight.bold),
+//                                         ),
+//                                       ),
+//                                     ),
+//                                   )
+//                                 ],
+//                               ),
+//                             ),
+//                             SizedBox(
+//                               height: 15,
+//                             ),
+//                             ContactUs(context, snapshot.data.response.children),
+//
+//                           ],
+//                         ),
+//                       ),
+//                     ),
+//                     // SizedBox(
+//                     //   height: 10,
+//                     // ),
+//                     // ContactUs(context, snapshot.data.response.children),
+//                   ],
+//                 ),
+//               );
+//             } else
+//               return Center(
+//                 child:SpinKitWave(color: Colors.blue, type: SpinKitWaveType.center),
+//               );
+//           }),
+//     ),
+//   );
+// }

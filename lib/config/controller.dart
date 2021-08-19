@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-
+import 'package:nurture/model/fee.dart';
 class Controller extends GetxController {
   //Test
   RxInt log2 = 0.obs;
@@ -21,4 +21,8 @@ class PendingDropDown extends GetxController {
 
 class YearController extends GetxController {
   var year = ''.obs;
+}
+
+class StudentController extends GetxController {
+  Rx<FeeResponseModel> student = FeeResponseModel().obs;
 }

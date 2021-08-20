@@ -169,9 +169,11 @@ class paymentHistoryList extends StatelessWidget {
                                     style: TextStyle(
                                         color: Colors.grey, fontSize: 12),
                                   ),
-                                  onTap: (){
-                                     Navigator.of(context).push(MaterialPageRoute(builder:( context)=>ModelDownload()));          
-                               
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ModelDownload()));
                                   },
                                 ),
                                 SizedBox(
@@ -293,9 +295,11 @@ class paymentHistoryList extends StatelessWidget {
                             ),
                             onTap: () {
 
+
                               data.result=="Success"?Get.toNamed('/download',arguments: [data.paymentid,data.filepath]):Container();
                                // Navigator.of(context).push(MaterialPageRoute(builder:( context)=>ModelDownload()));
                                                        },
+
                           )
                         ],
                       ),
@@ -633,50 +637,71 @@ class _StudentInfoListState extends State<StudentInfoList> {
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey.shade300, width: 1),
                       borderRadius: BorderRadius.circular(10)),
-                  child: Row(children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: 15, right: 20),
-                      child: Column(
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(children: [
+                      Padding(
+                        padding: EdgeInsets.only(left: 15, right: 20),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            txt("Name"),
+                            txt("Nationality"),
+                            txt("Civil id"),
+                            txt("Civil id expiry date"),
+                            txt("Email address"),
+                            txt("Address"),
+                          ],
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          txt("Name"),
-                          txt("Nationality"),
-                          txt("Civil id"),
-                          txt("Civil id expiry date"),
-                          txt("Email address"),
-                          txt("Address"),
+                          Text(
+                            parents[index].name,
+                            maxLines: 2,
+                          ),
+                          Text(
+                            parents[index].nationality,
+                            maxLines: 2,
+                          ),
+                          Text(
+                            parents[index].civilid,
+                            maxLines: 2,
+                          ),
+                          Text(parents[index]
+                                  .parentcivilexpirydate
+                                  .day
+                                  .toString() +
+                              "/" +
+                              parents[index]
+                                  .parentcivilexpirydate
+                                  .month
+                                  .toString() +
+                              "/" +
+                              parents[index]
+                                  .parentcivilexpirydate
+                                  .year
+                                  .toString()),
+                          // Text(widget.parents[index].parentcivilexpirydate),
+
+                          Text(
+                            parents[index].emailid,
+                            maxLines: 2,
+                            overflow: TextOverflow.clip,
+                          ),
+
+                          Text(
+                            parents[index].regionalarea,
+                            maxLines: 2,
+                          )
                         ],
                       ),
-                    ),
-                    SizedBox(width: 10),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(parents[index].name),
-                        Text(parents[index].nationality),
-                        Text(parents[index].civilid),
-                        Text(parents[index]
-                                .parentcivilexpirydate
-                                .day
-                                .toString() +
-                            "/" +
-                            parents[index]
-                                .parentcivilexpirydate
-                                .month
-                                .toString() +
-                            "/" +
-                            parents[index]
-                                .parentcivilexpirydate
-                                .year
-                                .toString()),
-                        // Text(widget.parents[index].parentcivilexpirydate),
-                        Text(parents[index].emailid),
-                        Text(parents[index].regionalarea)
-                      ],
-                    )
-                  ])),
+                    ]),
+                  )),
             ),
             Positioned(
               left: 15,
@@ -956,27 +981,33 @@ class Installment extends StatelessWidget {
       padding: const EdgeInsets.only(top: 5, bottom: 3),
       child: Column(
         children: [
-          data.tuitionfee!=0.0?Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              list_txt("Tution", isSelected: true),
-              list_txt(data.tuitionfee.toString()),
-            ],
-          ):Container(),
-          data.transportfee!=0.0?Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              list_txt("Transportation", isSelected: true),
-              list_txt(data.transportfee.toString())
-            ],
-          ):Container(),
-          data.others!=0.0?Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              list_txt("Others", isSelected: true),
-              list_txt(data.others.toString())
-            ],
-          ):Container(),
+          data.tuitionfee != 0.0
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    list_txt("Tution", isSelected: true),
+                    list_txt(data.tuitionfee.toString()),
+                  ],
+                )
+              : Container(),
+          data.transportfee != 0.0
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    list_txt("Transportation", isSelected: true),
+                    list_txt(data.transportfee.toString())
+                  ],
+                )
+              : Container(),
+          data.others != 0.0
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    list_txt("Others", isSelected: true),
+                    list_txt(data.others.toString())
+                  ],
+                )
+              : Container(),
         ],
       ),
     );

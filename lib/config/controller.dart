@@ -26,3 +26,8 @@ class YearController extends GetxController {
 class StudentController extends GetxController {
   Rx<FeeResponseModel> student = FeeResponseModel().obs;
 }
+
+class ChildrenController extends GetxController {
+  List childrenlist = [].obs;
+}
+

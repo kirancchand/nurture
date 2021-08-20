@@ -34,6 +34,7 @@ Future<LoginResponseModel> validateAndLogin(formKey, loginRequestModel) async {
     hideSpinner();
     return data;
   } else {
+    hideSpinner();
     return LoginResponseModel();
   }
 
@@ -53,10 +54,11 @@ Future<StudentContactResponseModel> validateAndSubmitContactReq(
     showSpinner();
     StudentContactResponseModel data =
         await api.submitContactRequest(studentContactRequestModel, x);
-    // print("action${data.message}");
+
     hideSpinner();
     return data;
   } else {
+    hideSpinner();
     return StudentContactResponseModel();
   }
 

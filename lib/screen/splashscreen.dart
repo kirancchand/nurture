@@ -7,6 +7,7 @@ import 'package:nurture/service/api.dart';
 import 'package:nurture/config/controller.dart';
 import 'package:nurture/screen/login.dart';
 import 'package:nurture/screen/home.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key key});
 
@@ -20,8 +21,10 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<FeeResponseModel> getFee;
   YearController con = Get.put(YearController());
   StudentController students=Get.put(StudentController());
-  List childrens = [];
+  ChildrenController childlistcon=Get.put(ChildrenController());
 
+  List childrens = [];
+  FeeResponse childr;
   @override
   void initState() {
 
@@ -36,13 +39,23 @@ class _SplashScreenState extends State<SplashScreen> {
           // Get.toNamed('/login');
         }
       else{
-        print("sdfsdfsdfnmmmmmm");
         api.getFee().then((fee) {
-          con.year.value = fee.response.academicyear;
-          childrens = fee.response.children;
-          students.student.value=fee;
+          print(fee.statuscode);
+          if(fee.statuscode=="200")
+            {
+              con.year.value = fee.response.academicyear;
+              childrens = fee.response.children;
+              childlistcon.childrenlist=fee.response.children;
+              students.student.value=fee;
+              Get.off(()=>Home(fee:fee,childrens:childrens));
+            }
+          else{
+           Fluttertoast.showToast(msg: "Something went Wrong");
+          }
+
+
           // return fee;
-          Get.off(()=>Home(fee:fee,childrens:childrens));
+
         });
 
         // Get.toNamed("/home",arguments: [getFee,childrens]);

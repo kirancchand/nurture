@@ -29,6 +29,7 @@ class _PaymentPendingState extends State<PaymentPending> {
   Future<StudentResponseModel> getStudents;
   List childrens = [];
   PendingDropDown controller = Get.put(PendingDropDown());
+  ChildrenController childlistcon=Get.put(ChildrenController());
   double total;
   YearController con = Get.put(YearController());
 
@@ -36,9 +37,10 @@ class _PaymentPendingState extends State<PaymentPending> {
   void initState() {
     super.initState();
     total = 0.0;
+    childrens=childlistcon.childrenlist;
     // getPayment = api.getPendingPayment(_valueChoose);
     getStudents = api.getStudent().then((student) {
-      childrens = student.response.childrens;
+      // childrens = student.response.childrens;
       // print(student.response.childrens);
       // for (int i = 0; i < childrens.length; i++)
       //   print(childrens[i].studentname);
@@ -58,6 +60,7 @@ class _PaymentPendingState extends State<PaymentPending> {
 
   @override
   Widget build(BuildContext context) {
+    print("sdfsdf${childrens}");
     return Scaffold(
       body: ListView(
         children: [

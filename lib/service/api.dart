@@ -22,10 +22,11 @@ class Api {
     // String url = "https://run.mocky.io/v3/c0586d5b-47fd-4c1b-8eae-277796c80ec6";
     final response =
         await http.post(getUrl('login'), body: loginRequestModel.toJson());
+
     if (response.statusCode == 200 || response.statusCode == 400) {
       return LoginResponseModel.fromJson(json.decode(response.body));
     } else {
-      throw Exception('Failed to load data!');
+      return LoginResponseModel.fromJson(json.decode(response.body));
     }
   }
 

@@ -113,7 +113,6 @@ class paymentHistoryList extends StatefulWidget {
 }
 
 class _PaymentHistoryListState extends State<paymentHistoryList> {
-
   final Dio dio = Dio();
   bool loading = false;
   double progress = 0;
@@ -275,14 +274,26 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
                               )),
                             ),
                             onTap: () {
-                              
+                              print("donloading...");
+                              Center(
+                                child: loading
+                                    ? Container(
+                                        child: LinearProgressIndicator(
+                                          minHeight: 10,
+                                          value: progress,
+                                          color:Colors.blue,
+                                        ),
+                                      )
+                                    : Container(),
+                              );
                               // widget.data.result=="Success"?Get.toNamed('/download',arguments: [widget.data.paymentid,widget.data.filepath]):Container();
-                              widget.data.result=="Success"?downloadFile(widget.data.paymentid,widget.data.filepath):Container();
+                              widget.data.result == "Success"
+                                  ? downloadFile(widget.data.paymentid,
+                                      widget.data.filepath)
+                                  : Container();
 
-                               // Navigator.of(context).push(MaterialPageRoute(builder:( context)=>ModelDownload()));
-                                                       },
-
-
+                              // Navigator.of(context).push(MaterialPageRoute(builder:( context)=>ModelDownload()));
+                            },
                           )
                         ],
                       ),
@@ -297,18 +308,15 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
     );
   }
 
-  downloadFile(paymentid,filepath) async {
-
+  downloadFile(paymentid, filepath) async {
     setState(() {
       loading = true;
       progress = 0;
     });
     print(loading);
-    bool downloaded = await savePaymentFile(
-        filepath,
-        "${paymentid}.pdf");
+    bool downloaded = await savePaymentFile(filepath, "${paymentid}.pdf");
     if (downloaded) {
-      Fluttertoast.showToast(msg:"File Downloaded");
+      Fluttertoast.showToast(msg: "File Downloaded");
     } else {
       print("Problem Downloading File");
     }
@@ -353,11 +361,10 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
       if (await directory.exists()) {
         await dio.download(url, saveFile.path,
             onReceiveProgress: (value1, value2) {
-
-              setState(() {
-                progress = value1 / value2;
-              });
-            });
+          setState(() {
+            progress = value1 / value2;
+          });
+        });
         if (Platform.isIOS) {
           await ImageGallerySaver.saveFile(saveFile.path,
               isReturnPathOfIOS: true);
@@ -382,7 +389,6 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
     }
     return false;
   }
-
 }
 
 class NotificationList extends StatelessWidget {

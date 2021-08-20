@@ -196,11 +196,20 @@ class _NotificationsState extends State<Notifications> {
                                 )
                               : Center(child: Text("No Data"));
                         } else if (snapshot.hasError) {
-                          return Center(child: SpinKitWave(color: Colors.blue,));
-
+                          return Container(
+                                    width:MediaQuery.of(context).size.width,
+                                     height:MediaQuery.of(context).size.height,
+                                    child: Center(
+                                        child: SpinKitWave(color: Colors.blue,)),
+                                  );
                           //return Text("${snapshot.error}");
                         } else {
-                          return Center(child: SpinKitWave(color: Colors.blue,));
+                          return Container(
+                                    width:MediaQuery.of(context).size.width,
+                                     height:MediaQuery.of(context).size.height*.50,
+                                    child: Center(
+                                        child: SpinKitWave(color: Colors.blue,)),
+                                  );
                         }
 
                         // By default, show a loading spinner.
@@ -305,8 +314,12 @@ class _NotificationsState extends State<Notifications> {
                                   // return Text("${snapshot.error}");
                                   return Text("${snapshot.error}");
                                 } else {
-                                  return Center(
-                                      child: SpinKitWave(color: Colors.blue,));
+                                  return Container(
+                                    width:MediaQuery.of(context).size.width,
+                                     height:MediaQuery.of(context).size.height,
+                                    child: Center(
+                                        child: SpinKitWave(color: Colors.blue,)),
+                                  );
                                 }
                               },
                             ),

@@ -1,12 +1,17 @@
 import 'dart:io';
-
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 class ModelDownload extends StatefulWidget {
+  ModelDownload({Key key}) : super(key: key);
+  String paymentid=Get.arguments[0];
+  String filepath=Get.arguments[1];
+
   @override
   _ModelDownloadState createState() => _ModelDownloadState();
 }
@@ -15,8 +20,13 @@ class _ModelDownloadState extends State<ModelDownload> {
   final Dio dio = Dio();
   bool loading = false;
   double progress = 0;
+   String paymentid=Get.arguments[0];
+  String filepath=Get.arguments[1];
 
-  Future<bool> saveVideo(String url, String fileName) async {
+
+
+  Future<bool> savePaymentFile(String url, String fileName) async {
+    print("sdfdsf${Get.arguments[0]}");
     Directory directory;
     try {
       if (Platform.isAndroid) {
@@ -33,7 +43,7 @@ class _ModelDownloadState extends State<ModelDownload> {
               break;
             }
           }
-          newPath = newPath + "/RPSApp";
+          newPath = newPath + "/medrasaty";
           directory = Directory(newPath);
         } else {
           return false;
@@ -86,11 +96,11 @@ class _ModelDownloadState extends State<ModelDownload> {
       loading = true;
       progress = 0;
     });
-    bool downloaded = await saveVideo(
-        "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4",
-        "video.mp4");
+    bool downloaded = await savePaymentFile(
+        widget.filepath,
+        "${widget.paymentid}.pdf");
     if (downloaded) {
-      print("File Downloaded");
+      Fluttertoast.showToast(msg:"File Downloaded");
     } else {
       print("Problem Downloading File");
     }
@@ -102,30 +112,28 @@ class _ModelDownloadState extends State<ModelDownload> {
   @override
   Widget build(BuildContext context) {
     return 
-      Scaffold(
-        body: Center(
-          child: loading
-              ? Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: LinearProgressIndicator(
-              minHeight: 10,
-              value: progress,
-            ),
-          )
-              : TextButton.icon(
-              icon: Icon(
-                Icons.download_rounded,
-                color: Colors.red
-              ),
-             // color: Colors.blue,
-              onPressed: downloadFile,
-             // padding: const EdgeInsets.all(10),
-              label: Text(
-                "Download Video",
-                style: TextStyle(color: Colors.red,fontSize: 25),
-              )),
-        ),
+       Container(
+         child: Center(
+            child: loading
+                ? Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SpinKitWave(color: Colors.blue, type: SpinKitWaveType.center),)
+                : TextButton.icon(
+                icon: Icon(
+                  Icons.download_rounded,
+                  color: Colors.red
+                ),
+               // color: Colors.blue,
+                onPressed: downloadFile,
+               // padding: const EdgeInsets.all(10),
+                label: Text(
+                  "Download File",
+                  style: TextStyle(color: Colors.red,fontSize: 25),
+                )
+                ),
+          
       
-    );
+    ),
+       );
   }
 }

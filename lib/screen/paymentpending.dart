@@ -350,9 +350,12 @@ class _PaymentPendingState extends State<PaymentPending> {
                                         // return Text("${snapshot.error}");
                                         return Text("${snapshot.error}");
                                       } else {
-                                        return Center(
-                                            child: SpinKitWave(color: Colors.blue,));
-                                      }
+                                        return Container(
+                                    width:MediaQuery.of(context).size.width,
+                                     height:MediaQuery.of(context).size.height*.50,
+                                    child: Center(
+                                        child: SpinKitWave(color: Colors.blue,)),
+                                  ); }
                                     },
                                   ),
                                 ),

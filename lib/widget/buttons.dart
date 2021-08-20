@@ -27,6 +27,7 @@ List<Widget> loginButtons(
   PendingDropDown con = Get.put(PendingDropDown());
   YearController cont = Get.put(YearController());
   StudentController students=Get.put(StudentController());
+  ChildrenController childlistcon=Get.put(ChildrenController());
   return <Widget>[
     GestureDetector(
       child: Container(
@@ -63,7 +64,7 @@ List<Widget> loginButtons(
           showSpinner();
           api.getFee().then((fee) {
             cont.year.value = fee.response.academicyear;
-
+            childlistcon.childrenlist=fee.response.children;
             childrens = fee.response.children;
             students.student.value=fee;
             // return fee;

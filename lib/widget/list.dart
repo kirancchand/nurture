@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -11,6 +12,12 @@ import 'package:nurture/model/student.dart';
 import 'package:nurture/screen/modeldownload.dart';
 import 'package:nurture/screen/studentdetails.dart';
 import 'package:nurture/service/api.dart';
+import 'package:dio/dio.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:nurture/widget/spinner.dart';
 
 class StudentList extends StatefulWidget {
   StudentList({Key key, this.data}) : super(key: key);
@@ -94,40 +101,20 @@ class _OutstandingPaymentState extends State<OutstandingPayment> {
   }
 }
 
-/*
-class OutstandingPaymentm extends StatelessWidget {
-  OutstandingPaymentm({Key key, this.txt, this.data}) : super(key: key);
-  String txt;
-  FeeResponse data;
-  bool asim = true;
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: Checkbox(
-        value: false,
-        onChanged: (value) {
-          /* setState(() {
-                this.asim = value!;
-              });*/
-        },
-        side: BorderSide(color: Colors.green),
-        shape: CircleBorder(),
-        activeColor: Colors.green,
-      ),
-      title: Text(data.studentname, style: TextStyle(color: Colors.grey)),
-      selected: true,
-      horizontalTitleGap: 1,
-      trailing:
-          Text(data.dueamount.toString(), style: TextStyle(color: Colors.grey)),
-    );
-  }
-}
-*/
-class paymentHistoryList extends StatelessWidget {
+class paymentHistoryList extends StatefulWidget {
   paymentHistoryList({Key key, this.txt, this.data}) : super(key: key);
 
   String txt;
   PaymentHistoryResponse data;
+  @override
+  _PaymentHistoryListState createState() => _PaymentHistoryListState();
+}
+
+class _PaymentHistoryListState extends State<paymentHistoryList> {
+
+  final Dio dio = Dio();
+  bool loading = false;
+  double progress = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -209,31 +196,31 @@ class paymentHistoryList extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  data.knettransactionid,
+                                  widget.data.knettransactionid,
                                   style: TextStyle(fontSize: 12),
                                 ),
                                 SizedBox(
                                   height: 8,
                                 ),
                                 Text(
-                                  data.postdate,
+                                  widget.data.postdate,
                                   style: TextStyle(fontSize: 12),
                                 ),
                                 SizedBox(
                                   height: 8,
                                 ),
                                 Text(
-                                  data.paymentid,
+                                  widget.data.paymentid,
                                   style: TextStyle(fontSize: 12),
                                 ),
                                 SizedBox(
                                   height: 8,
                                 ),
                                 Text(
-                                  data.amount.toString(),
+                                  widget.data.amount.toString(),
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: data.result == "Success"
+                                    color: widget.data.result == "Success"
                                         ? kColorGreen
                                         : Colors.red,
                                     //failed?
@@ -259,10 +246,10 @@ class paymentHistoryList extends StatelessWidget {
                         children: [
                           // failed?
                           Icon(
-                            data.result == "Success"
+                            widget.data.result == "Success"
                                 ? Icons.check_circle_outline
                                 : Icons.cancel_outlined,
-                            color: data.result == "Success"
+                            color: widget.data.result == "Success"
                                 ? kColorGreen
                                 : Colors.red,
                           ),
@@ -275,20 +262,20 @@ class paymentHistoryList extends StatelessWidget {
                               height: 20,
                               width: MediaQuery.of(context).size.width * .22,
                               decoration: BoxDecoration(
-                                  color: data.result == "Success"
+                                  color: widget.data.result == "Success"
                                       ? Colors.green[50]
                                       : Colors.grey[100],
                                   borderRadius: BorderRadius.circular(10)),
                               child: Center(
                                   child: Text(
-                                data.result == "Success"
+                                widget.data.result == "Success"
                                     ? "Download Receipt"
-                                    : data.result == "Cancelled"
+                                    : widget.data.result == "Cancelled"
                                         ? "Cancelled"
                                         : "Failed Transaction",
                                 style: TextStyle(
                                     fontSize: 8.5,
-                                    color: data.result == "Success"
+                                    color: widget.data.result == "Success"
                                         ? kColorGreen
                                         : Colors.grey),
                               )),
@@ -296,7 +283,9 @@ class paymentHistoryList extends StatelessWidget {
                             onTap: () {
 
 
-                              data.result=="Success"?Get.toNamed('/download',arguments: [data.paymentid,data.filepath]):Container();
+                              // widget.data.result=="Success"?Get.toNamed('/download',arguments: [widget.data.paymentid,widget.data.filepath]):Container();
+                              widget.data.result=="Success"?downloadFile(widget.data.paymentid,widget.data.filepath):Container();
+
                                // Navigator.of(context).push(MaterialPageRoute(builder:( context)=>ModelDownload()));
                                                        },
 
@@ -313,6 +302,93 @@ class paymentHistoryList extends StatelessWidget {
       ),
     );
   }
+
+  downloadFile(paymentid,filepath) async {
+
+    setState(() {
+      loading = true;
+      progress = 0;
+    });
+    print(loading);
+    bool downloaded = await savePaymentFile(
+        filepath,
+        "${paymentid}.pdf");
+    if (downloaded) {
+      Fluttertoast.showToast(msg:"File Downloaded");
+    } else {
+      print("Problem Downloading File");
+    }
+    setState(() {
+      loading = false;
+    });
+  }
+
+  Future<bool> savePaymentFile(String url, String fileName) async {
+    Directory directory;
+    try {
+      if (Platform.isAndroid) {
+        if (await _requestPermission(Permission.storage)) {
+          directory = await getExternalStorageDirectory();
+          String newPath = "";
+          print(directory);
+          List<String> paths = directory.path.split("/");
+          for (int x = 1; x < paths.length; x++) {
+            String folder = paths[x];
+            if (folder != "Android") {
+              newPath += "/" + folder;
+            } else {
+              break;
+            }
+          }
+          newPath = newPath + "/medrasaty";
+          directory = Directory(newPath);
+        } else {
+          return false;
+        }
+      } else {
+        if (await _requestPermission(Permission.photos)) {
+          directory = await getTemporaryDirectory();
+        } else {
+          return false;
+        }
+      }
+      File saveFile = File(directory.path + "/$fileName");
+      if (!await directory.exists()) {
+        await directory.create(recursive: true);
+      }
+      if (await directory.exists()) {
+        await dio.download(url, saveFile.path,
+            onReceiveProgress: (value1, value2) {
+
+              setState(() {
+                progress = value1 / value2;
+              });
+            });
+        if (Platform.isIOS) {
+          await ImageGallerySaver.saveFile(saveFile.path,
+              isReturnPathOfIOS: true);
+        }
+        return true;
+      }
+      return false;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
+  Future<bool> _requestPermission(Permission permission) async {
+    if (await permission.isGranted) {
+      return true;
+    } else {
+      var result = await permission.request();
+      if (result == PermissionStatus.granted) {
+        return true;
+      }
+    }
+    return false;
+  }
+
 }
 
 class NotificationList extends StatelessWidget {

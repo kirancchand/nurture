@@ -24,6 +24,7 @@ class _NotificationsState extends State<Notifications> {
   List childrens = [];
   Future<StudentResponseModel> getStudents;
   DropDown controller = Get.put(DropDown());
+  ChildrenController childlistcon=Get.put(ChildrenController());
 
   // List listItem = ["All", "Asim Muhammad", "Dana Muhammad", "Dalal Muhammad"];
 
@@ -31,8 +32,9 @@ class _NotificationsState extends State<Notifications> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    childrens=childlistcon.childrenlist;
     getStudents = api.getStudent().then((student) {
-      childrens = student.response.childrens;
+      // childrens = student.response.childrens;
       // for (int i = 0; i < childrens.length; i++)
       //   print(childrens[i].studentname);
       // print('000');

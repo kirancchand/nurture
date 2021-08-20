@@ -10,7 +10,7 @@ class LoginResponseModel {
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) {
     return LoginResponseModel(
       statuscode: json["statuscode"],
-      response: LoginResponse.fromJson(json["response"]),
+      response: json["statuscode"]=="200"?LoginResponse.fromJson(json["response"]):null,
       message: json["message"],
     );
   }

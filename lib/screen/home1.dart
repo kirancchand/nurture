@@ -23,6 +23,7 @@ class _HomePage1State extends State<HomePage1> {
   Future<FeeResponseModel> getFee;
   YearController con = Get.put(YearController());
   StudentController studentcon=Get.put(StudentController());
+  ChildrenController childlistcon=Get.put(ChildrenController());
 
   List<String> _texts = [
     "InduceSmile.com",
@@ -64,10 +65,9 @@ class _HomePage1State extends State<HomePage1> {
   @override
   Widget build(BuildContext context) {
     FeeResponseModel fee=studentcon.student.value;
-    List childrens=studentcon.student.value.response.children;
+    List childrens=childlistcon.childrenlist;
     // con.year.value = fee.response.academicyear;
     // print(con.year.value);
-    print(studentcon.student.value.response.academicyear);
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,

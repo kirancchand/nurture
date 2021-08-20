@@ -195,7 +195,7 @@ List<Widget> contactReqInputs(studentContactRequestModel, context) {
                   ],
                 );
               },
-              initialSelection: '+62',
+              initialSelection: '+965',
               onChanged: (CountryCode code) {
                 print(code.name);
                 print(code.code);

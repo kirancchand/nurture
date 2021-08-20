@@ -29,7 +29,7 @@ class _PaymentPendingState extends State<PaymentPending> {
   Future<StudentResponseModel> getStudents;
   List childrens = [];
   PendingDropDown controller = Get.put(PendingDropDown());
-  ChildrenController childlistcon=Get.put(ChildrenController());
+  ChildrenController childlistcon = Get.put(ChildrenController());
   double total;
   YearController con = Get.put(YearController());
 
@@ -37,7 +37,7 @@ class _PaymentPendingState extends State<PaymentPending> {
   void initState() {
     super.initState();
     total = 0.0;
-    childrens=childlistcon.childrenlist;
+    childrens = childlistcon.childrenlist;
     // getPayment = api.getPendingPayment(_valueChoose);
     getStudents = api.getStudent().then((student) {
       // childrens = student.response.childrens;
@@ -48,7 +48,9 @@ class _PaymentPendingState extends State<PaymentPending> {
       setState(() {
         // _valueChoose = childrens[0].studentid.toString();
         controller.text.value = controller.text.value.isEmpty
-            ? childrens.length>0?childrens[0].studentid.toString():controller.text.value
+            ? childrens.length > 0
+                ? childrens[0].studentid.toString()
+                : controller.text.value
             : controller.text.value;
         print("bvcbb${controller.text.value}");
       });
@@ -124,7 +126,6 @@ class _PaymentPendingState extends State<PaymentPending> {
                                     // ignore: missing_return
                                     builder: (context, snapshot) {
                                       if (snapshot.hasData) {
-
                                         return Center(
                                             child: Column(children: [
                                           DropdownButton(
@@ -139,7 +140,6 @@ class _PaymentPendingState extends State<PaymentPending> {
                                               setState(() {
                                                 controller.text.value =
                                                     newValue;
-
                                               });
                                               Navigator.pushReplacement(
                                                 context,
@@ -151,7 +151,8 @@ class _PaymentPendingState extends State<PaymentPending> {
                                               );
                                             },
                                             items: childrens.map((valueItem) {
-                                              print("sdfsdf${valueItem.studentid}");
+                                              print(
+                                                  "sdfsdf${valueItem.studentid}");
                                               return DropdownMenuItem(
                                                 value: valueItem.studentid
                                                     .toString(),
@@ -173,7 +174,8 @@ class _PaymentPendingState extends State<PaymentPending> {
                                         return Text("${snapshot.error}");
                                       } else {
                                         return Center(
-                                          child: SpinKitChasingDots(color: Colors.blue),
+                                          child: SpinKitChasingDots(
+                                              color: Colors.blue),
                                         );
                                       }
                                     },
@@ -219,149 +221,189 @@ class _PaymentPendingState extends State<PaymentPending> {
                       SizedBox(
                         height: 5,
                       ),
-                      Container(
-                        // height: MediaQuery.of(context).size.height * .70,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: Colors.grey.shade300)),
-                        child: Padding(
-                            padding:
-                                EdgeInsets.only(left: 15, top: 15, right: 20),
-                            child: Column(
-                              children: [
-                                Container(
-                                  child: FutureBuilder<
-                                      PaymentPendingResponseModel>(
-                                    future: api.getPendingPayment(
-                                        controller.text.value),
-                                    builder: (BuildContext context,
-                                        AsyncSnapshot<
-                                                PaymentPendingResponseModel>
-                                            snapshot) {
-                                      if (snapshot.hasData) {
-                                        var statuscode =
-                                            snapshot.data?.statuscode;
 
-                                        // print(statuscode);
-                                        if (statuscode == "200") {
-                                          var response =
-                                              snapshot.data?.response;
-                                          total = 0.0;
-                                          for (int index = 0;
-                                              index <
-                                                      response
-                                                          .installment.length ??
-                                                  0;
-                                              index++)
-                                            total = total +
-                                                response.installment[index]
-                                                    .tuitionfee +
-                                                response.installment[index]
-                                                    .transportfee +
-                                                response
-                                                    .installment[index].others;
-                                          return response.installment.length > 0
-                                              ? Column(
-                                                  children: [
-                                                    ListView.builder(
-                                                      itemCount: response
-                                                          .installment.length,
-                                                      shrinkWrap: true,
-                                                      physics:
-                                                          ClampingScrollPhysics(),
-                                                      itemBuilder:
-                                                          (context, int index) {
-                                                        return Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                                'Installment ${index + 1}'),
-                                                            Divider(),
-                                                            Installment(
-                                                                data: response
-                                                                        .installment[
-                                                                    index]),
-                                                            SizedBox(
-                                                              height: 15,
-                                                            ),
-                                                          ],
-                                                        );
-                                                      },
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text(
-                                                          "Total",
-                                                          style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          "${total}",
-                                                          style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 3,
-                                                              vertical: 10),
-                                                      child: Divider(),
-                                                    ),
-                                                    SizedBox(height: 20),
-                                                    Center(
-                                                      child: Spinner(
-                                                        child: payNowButtons([
-                                                          {
-                                                            "AcademicPeriodId":
-                                                                "2020-2021",
-                                                            "GrandTotal": total,
-                                                            "IsIncludeEnrollment":
-                                                                false,
-                                                            "KnetpaymentAmount":
-                                                                total,
-                                                            "OffSet": -330,
-                                                            "OpeningBalance": 0,
-                                                            "StudentId":
-                                                                controller
-                                                                    .text.value,
-                                                            "Paymentid": 0
-                                                          }
-                                                        ], context),
+                      Container(
+                          // height: MediaQuery.of(context).size.height * .70,
+                          width: MediaQuery.of(context).size.width,
+                          // decoration: BoxDecoration(
+                          //     borderRadius: BorderRadius.circular(8),
+                          //     border: Border.all(color: Colors.grey.shade300)),
+                          /*  child: Padding(
+                            padding:
+                                EdgeInsets.only(left: 15, top: 15, right: 20),*/
+                          child: Column(
+                            children: [
+                              Container(
+                                child:
+                                    FutureBuilder<PaymentPendingResponseModel>(
+                                  future: api
+                                      .getPendingPayment(controller.text.value),
+                                  builder: (BuildContext context,
+                                      AsyncSnapshot<PaymentPendingResponseModel>
+                                          snapshot) {
+                                    if (snapshot.hasData) {
+                                      var statuscode =
+                                          snapshot.data?.statuscode;
+
+                                      // print(statuscode);
+                                      if (statuscode == "200") {
+                                        var response = snapshot.data?.response;
+                                        total = 0.0;
+                                        for (int index = 0;
+                                            index <
+                                                    response
+                                                        .installment.length ??
+                                                0;
+                                            index++)
+                                          total = total +
+                                              response.installment[index]
+                                                  .tuitionfee +
+                                              response.installment[index]
+                                                  .transportfee +
+                                              response
+                                                  .installment[index].others;
+                                        return response.installment.length > 0
+                                            ? Container(
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    border: Border.all(
+                                                        color: Colors
+                                                            .grey.shade300)),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 15,
+                                                          top: 15,
+                                                          right: 20),
+                                                  child: Column(
+                                                    children: [
+                                                      ListView.builder(
+                                                        itemCount: response
+                                                            .installment.length,
+                                                        shrinkWrap: true,
+                                                        physics:
+                                                            ClampingScrollPhysics(),
+                                                        itemBuilder: (context,
+                                                            int index) {
+                                                          return Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                  'Installment ${index + 1}'),
+                                                              Divider(),
+                                                              Installment(
+                                                                  data: response
+                                                                          .installment[
+                                                                      index]),
+                                                              SizedBox(
+                                                                height: 15,
+                                                              ),
+                                                            ],
+                                                          );
+                                                        },
                                                       ),
-                                                    ),
-                                                    SizedBox(height: 20)
-                                                  ],
-                                                )
-                                              : Center(child: Text("No Data"));
-                                        } else {
-                                          return Center(
-                                              child: Text("No Data Found"));
-                                        }
-                                      } else if (snapshot.hasError) {
-                                        // return Text("${snapshot.error}");
-                                        return Text("${snapshot.error}");
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text(
+                                                            "Total",
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            "${total}",
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Padding(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 3,
+                                                                vertical: 10),
+                                                        child: Divider(),
+                                                      ),
+                                                      SizedBox(height: 20),
+                                                      Center(
+                                                        child: Spinner(
+                                                          child: payNowButtons([
+                                                            {
+                                                              "AcademicPeriodId":
+                                                                  "2020-2021",
+                                                              "GrandTotal":
+                                                                  total,
+                                                              "IsIncludeEnrollment":
+                                                                  false,
+                                                              "KnetpaymentAmount":
+                                                                  total,
+                                                              "OffSet": -330,
+                                                              "OpeningBalance":
+                                                                  0,
+                                                              "StudentId":
+                                                                  controller
+                                                                      .text
+                                                                      .value,
+                                                              "Paymentid": 0
+                                                            }
+                                                          ], context),
+                                                        ),
+                                                      ),
+                                                      SizedBox(height: 20)
+                                                    ],
+                                                  ),
+                                                ),
+                                              )
+                                            : Center(child: Text("No Data"));
                                       } else {
-                                        return Center(
-                                            child: SpinKitWave(color: Colors.blue,));
+                                        return Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              .70,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          child: Center(
+                                              child: Text("No Data Found")),
+                                        );
                                       }
-                                    },
-                                  ),
+                                    } else if (snapshot.hasError) {
+                                      // return Text("${snapshot.error}");
+                                      return Text("${snapshot.error}");
+                                    } else {
+                                      return Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                .50,
+                                        child: Center(
+                                            child: SpinKitWave(
+                                          color: Colors.blue,
+                                        )),
+                                      );
+                                    }
+                                  },
                                 ),
-                              ],
-                            )),
-                      ),
+                              ),
+                            ],
+                          )),
+                      // ),
                     ],
                   ),
                 )

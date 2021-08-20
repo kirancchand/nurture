@@ -2,14 +2,16 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 import 'package:get/get.dart';
+
 import 'package:nurture/common/constants.dart';
 import 'package:nurture/model/fee.dart';
 import 'package:nurture/model/notification.dart';
 import 'package:nurture/model/paymenthistory.dart';
 import 'package:nurture/model/paymentpending.dart';
 import 'package:nurture/model/student.dart';
-import 'package:nurture/screen/modeldownload.dart';
+
 import 'package:nurture/screen/studentdetails.dart';
 import 'package:nurture/service/api.dart';
 import 'package:dio/dio.dart';
@@ -150,18 +152,10 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
                               //    MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                GestureDetector(
-                                  child: Text(
-                                    "Transaction Id",
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 12),
-                                  ),
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                ModelDownload()));
-                                  },
+                                Text(
+                                  "Transaction Id",
+                                  style: TextStyle(
+                                      color: Colors.grey, fontSize: 12),
                                 ),
                                 SizedBox(
                                   height: 8,
@@ -281,13 +275,13 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
                               )),
                             ),
                             onTap: () {
-
-
+                              
                               // widget.data.result=="Success"?Get.toNamed('/download',arguments: [widget.data.paymentid,widget.data.filepath]):Container();
                               widget.data.result=="Success"?downloadFile(widget.data.paymentid,widget.data.filepath):Container();
 
                                // Navigator.of(context).push(MaterialPageRoute(builder:( context)=>ModelDownload()));
                                                        },
+
 
                           )
                         ],

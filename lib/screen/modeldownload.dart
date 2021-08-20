@@ -20,6 +20,9 @@ class _ModelDownloadState extends State<ModelDownload> {
   final Dio dio = Dio();
   bool loading = false;
   double progress = 0;
+   String paymentid=Get.arguments[0];
+  String filepath=Get.arguments[1];
+
 
 
   Future<bool> savePaymentFile(String url, String fileName) async {
@@ -109,26 +112,28 @@ class _ModelDownloadState extends State<ModelDownload> {
   @override
   Widget build(BuildContext context) {
     return 
-      Scaffold(
-        body: Center(
-          child: loading
-              ? Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SpinKitWave(color: Colors.blue, type: SpinKitWaveType.center),)
-              : TextButton.icon(
-              icon: Icon(
-                Icons.download_rounded,
-                color: Colors.red
-              ),
-             // color: Colors.blue,
-              onPressed: downloadFile,
-             // padding: const EdgeInsets.all(10),
-              label: Text(
-                "Download File",
-                style: TextStyle(color: Colors.red,fontSize: 25),
-              )),
-        ),
+       Container(
+         child: Center(
+            child: loading
+                ? Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SpinKitWave(color: Colors.blue, type: SpinKitWaveType.center),)
+                : TextButton.icon(
+                icon: Icon(
+                  Icons.download_rounded,
+                  color: Colors.red
+                ),
+               // color: Colors.blue,
+                onPressed: downloadFile,
+               // padding: const EdgeInsets.all(10),
+                label: Text(
+                  "Download File",
+                  style: TextStyle(color: Colors.red,fontSize: 25),
+                )
+                ),
+          
       
-    );
+    ),
+       );
   }
 }

@@ -73,9 +73,12 @@ class _PaymentHistoryState extends State<PaymentHistory> {
                   // return Text("${snapshot.error}");
                   return Text("${snapshot.error}");
                 } else {
-                  return Center(
-                    child: SpinKitWave(color: Colors.blue, type: SpinKitWaveType.center),);
-                }
+                  return Container(
+                                    width:MediaQuery.of(context).size.width,
+                                     height:MediaQuery.of(context).size.height*.75,
+                                    child: Center(
+                                        child: SpinKitWave(color: Colors.blue,)),
+                                  );    }
 
                 // By default, show a loading spinner.
               },

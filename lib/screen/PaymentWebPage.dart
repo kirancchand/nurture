@@ -89,7 +89,42 @@ class _PaymentWebPageState extends State<PaymentWebPage> {
               return Center(child: SpinKitWave(color: Colors.blue,));
             },
             onPageFinished: (String url) {
+              
               print('Page finished loading: $url');
+              print(url.contains('paymentcancel'));
+              if(url.contains('paymentcancel'))
+                {
+                  api.getFee().then((fee) {
+                    print(fee.statuscode);
+                    // Fluttertoast.showToast(msg: "Something went Wrong");
+
+                    if(fee.statuscode=="200")
+                    {
+                      con.year.value = fee.response.academicyear;
+                      childrens = fee.response.children;
+                      childlistcon.childrenlist=fee.response.children;
+                      students.student.value=fee;
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Home(
+                            count: 2,
+                          ),
+                        ),
+                      );
+                    }
+                    else{
+
+                      Fluttertoast.showToast(msg: "Something went Wrong");
+                      Get.toNamed("/");
+                    }
+
+
+                    // return fee;
+
+                  });
+
+                }
             },
             gestureNavigationEnabled: true,
           ),

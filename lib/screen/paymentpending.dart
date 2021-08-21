@@ -174,7 +174,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                                         return Text("${snapshot.error}");
                                       } else {
                                         return Center(
-                                          child: SpinKitChasingDots(
+                                          child: SpinKitThreeBounce(
                                               color: Colors.blue),
                                         );
                                       }
@@ -194,7 +194,7 @@ class _PaymentPendingState extends State<PaymentPending> {
           controller.text.value.isEmpty
               ? Container(
                   child: Center(
-                    child: Text('Empty'),
+                    child: Text('Waiting..'),
                   ),
                 )
               : Padding(

@@ -128,7 +128,16 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
           border: Border.all(color: Colors.grey, width: .5),
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Padding(
+        child:
+        Center(
+          child: loading
+              ? Container(
+                  child: LinearProgressIndicator(
+                    minHeight: 10,
+                    value: progress,
+                    color:Colors.blue,
+                  ),
+                ):Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -274,18 +283,17 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
                               )),
                             ),
                             onTap: () {
-                              print("donloading...");
-                              Center(
-                                child: loading
-                                    ? Container(
-                                        child: LinearProgressIndicator(
-                                          minHeight: 10,
-                                          value: progress,
-                                          color:Colors.blue,
-                                        ),
-                                      )
-                                    : Container(),
-                              );
+                              // Center(
+                              //   child: loading
+                              //       ? Container(
+                              //           child: LinearProgressIndicator(
+                              //             minHeight: 10,
+                              //             value: progress,
+                              //             color:Colors.blue,
+                              //           ),
+                              //         )
+                              //       : Container(),
+                              // );
                               // widget.data.result=="Success"?Get.toNamed('/download',arguments: [widget.data.paymentid,widget.data.filepath]):Container();
                               widget.data.result == "Success"
                                   ? downloadFile(widget.data.paymentid,
@@ -305,7 +313,7 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
           ),
         ),
       ),
-    );
+    ));
   }
 
   downloadFile(paymentid, filepath) async {

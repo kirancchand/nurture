@@ -153,7 +153,7 @@ class _NotificationsState extends State<Notifications> {
                                           return Text("${snapshot.error}");
                                         } else {
                                           return Center(
-                                              child: SpinKitChasingDots(color: Colors.blue,));
+                                              child: SpinKitThreeBounce(color: Colors.blue,));
                                         }
                                       },
                                     ),
@@ -171,7 +171,7 @@ class _NotificationsState extends State<Notifications> {
             controller.text.value.isEmpty
                 ? Container(
                     child: Center(
-                      child: Text('Empty'),
+                      child: Text('Waiting..'),
                     ),
                   )
                 : Container(

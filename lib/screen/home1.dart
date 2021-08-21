@@ -261,7 +261,9 @@ class _HomePage1State extends State<HomePage1> {
                                       fee.response.children[index]
                                           .studentname,
                                       style: TextStyle(
-                                          color: selectedStudent
+                                          color: _selectedStudent
+                                    .contains(fee.response
+                                    .children[index])
                                               ? kColorGreen
                                               : Colors.grey)),
                                   trailing: Text(
@@ -269,7 +271,9 @@ class _HomePage1State extends State<HomePage1> {
                                           .dueamount
                                           .toString(),
                                       style: TextStyle(
-                                          color: selectedStudent
+                                          color: _selectedStudent
+                                              .contains(fee.response
+                                              .children[index])
                                               ? kColorGreen
                                               : Colors.grey)),
                                 );

@@ -87,8 +87,8 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
           child: ListView(
             children: [
               Container(
-                height: MediaQuery.of(context).size.height * .54,
-                width: MediaQuery.of(context).size.width,
+                // height: MediaQuery.of(context).size.height * .54,
+                //  width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: Colors.grey[200])),
@@ -123,7 +123,10 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(widget.childrens[index].studentname),
+                                      Expanded(
+                                          child: Text(
+                                        widget.childrens[index].studentname,
+                                      )),
                                       Text(
                                         widget.childrens[index].dueamount
                                             .toString(),

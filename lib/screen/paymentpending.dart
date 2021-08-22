@@ -328,6 +328,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold,
+                                                                    
                                                             ),
                                                           ),
                                                         ],
@@ -343,6 +344,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                       Center(
                                                         child: Spinner(
                                                           child: payNowButtons([
+                                                            
                                                             {
                                                               "AcademicPeriodId":
                                                                   "2020-2021",
@@ -359,7 +361,8 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                                   controller
                                                                       .text
                                                                       .value,
-                                                              "Paymentid": 0
+                                                              "Paymentid": 0,
+                                                              
                                                             }
                                                           ], context),
                                                         ),

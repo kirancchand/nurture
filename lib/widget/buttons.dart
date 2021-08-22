@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:nurture/model/paymentpending.dart';
 import 'package:nurture/screen/PaymentWebPage.dart';
 import 'package:nurture/screen/confirmpayment.dart';
 import 'package:nurture/widget/actions.dart';
@@ -81,6 +82,7 @@ List<Widget> loginButtons(
 }
 
 Widget payNowButtons(List<Map<String, dynamic>> stu, context) {
+  
   return GestureDetector(
     child: Container(
       height: 40,
@@ -95,6 +97,7 @@ Widget payNowButtons(List<Map<String, dynamic>> stu, context) {
       ),
     ),
     onTap: () async {
+      
        // showSpinner();
       var data = await submitConfirmPayment(stu);
       Navigator.push(

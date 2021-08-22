@@ -14,9 +14,9 @@ import 'package:nurture/service/api.dart';
 import 'package:nurture/config/controller.dart';
 import 'package:nurture/model/fee.dart';
 import 'package:nurture/screen/home.dart';
+
 Api api = new Api();
 Future<FeeResponseModel> getFee;
-
 
 List childrens = [];
 
@@ -26,8 +26,8 @@ List<Widget> loginButtons(
 ) {
   PendingDropDown con = Get.put(PendingDropDown());
   YearController cont = Get.put(YearController());
-  StudentController students=Get.put(StudentController());
-  ChildrenController childlistcon=Get.put(ChildrenController());
+  StudentController students = Get.put(StudentController());
+  ChildrenController childlistcon = Get.put(ChildrenController());
   return <Widget>[
     GestureDetector(
       child: Container(
@@ -64,12 +64,12 @@ List<Widget> loginButtons(
           showSpinner();
           api.getFee().then((fee) {
             cont.year.value = fee.response.academicyearid;
-            childlistcon.childrenlist=fee.response.children;
+            childlistcon.childrenlist = fee.response.children;
             childrens = fee.response.children;
-            students.student.value=fee;
+            students.student.value = fee;
             // return fee;
             hideSpinner();
-            Get.off(()=>Home(fee:fee,childrens:childrens));
+            Get.off(() => Home(fee: fee, childrens: childrens));
           });
           // Get.toNamed("/home");
         } else {
@@ -96,6 +96,18 @@ Widget payNowButtons(List<Map<String, dynamic>> stu, context,total) {
       ),
     ),
     onTap: () async {
+       // showSpinner();
+      var data = await submitConfirmPayment(stu);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>PaymentWebPage(
+            link: data.response ?? "",
+          )
+        ),
+      );
+    },
+    /*  onTap: () async {
       showSpinner();
       var data = await submitConfirmPayment(stu);
       hideSpinner();
@@ -112,7 +124,7 @@ Widget payNowButtons(List<Map<String, dynamic>> stu, context,total) {
         ),
       );
       // Get.toNamed("/confirmpayment");
-    },
+    },*/
   );
 }
 

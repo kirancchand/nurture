@@ -88,18 +88,18 @@ Future<StudentContactResponseModel> validateAndSubmitContact(
 
 Future<Payment> submitConfirmPayment(
     List<Map<String, dynamic>> paymentList) async {
-  showSpinner();
+  //showSpinner();
   Payment data = await submitPaymentRequest(paymentList);
   if (data.statuscode == '200') {
     Payment d = await paymentWeb(paymentList);
     if (d.statuscode == '200') {
-      hideSpinner();
+     // hideSpinner();
       return d;
     } else
-      hideSpinner();
+    //  hideSpinner();
     return Payment();
   } else {
-    hideSpinner();
+    //hideSpinner();
     return Payment();
   }
 

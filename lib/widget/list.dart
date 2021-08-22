@@ -317,6 +317,8 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
   }
 
   downloadFile(paymentid, filepath) async {
+    print("sdfsd${paymentid}");
+    print("filepath ${filepath}");
     setState(() {
       loading = true;
       progress = 0;

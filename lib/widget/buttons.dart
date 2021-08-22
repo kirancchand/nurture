@@ -80,7 +80,8 @@ List<Widget> loginButtons(
   ];
 }
 
-Widget payNowButtons(List<Map<String, dynamic>> stu, context) {
+Widget payNowButtons(List<Map<String, dynamic>> stu, context,total) {
+  print("total${total}");
   return GestureDetector(
     child: Container(
       height: 40,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 //import 'package:nurture/model/contact.dart';
 import 'package:nurture/model/student.dart';
@@ -361,8 +362,9 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                                       .value,
                                                               "Paymentid": 0
                                                             }
-                                                          ], context),
-                                                        ),
+                                                          ], context,total),
+                                                        )
+
                                                       ),
                                                       SizedBox(height: 20)
                                                     ],

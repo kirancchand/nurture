@@ -92,12 +92,12 @@ class _PaymentWebPageState extends State<PaymentWebPage> {
               
               print('Page finished loading: $url');
               print(url.contains('paymentcancel'));
-              if(url.contains('paymentcancel'))
+              if(url.contains('PaymentUrl'))
                 {
                   api.getFee().then((fee) {
                     print(fee.statuscode);
                     // Fluttertoast.showToast(msg: "Something went Wrong");
-
+                    // https://schbackend.azurewebsites.net/Controllers/PaymentUrl.html?Response=Data
                     if(fee.statuscode=="200")
                     {
                       con.year.value = fee.response.academicyear;

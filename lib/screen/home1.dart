@@ -8,6 +8,7 @@ import 'package:nurture/model/student.dart';
 import 'package:nurture/service/api.dart';
 import 'package:nurture/widget/list.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage1 extends StatefulWidget {
   HomePage1({Key key,this.fee,this.childrens}) : super(key: key);
@@ -92,10 +93,20 @@ class _HomePage1State extends State<HomePage1> {
                       children: [
                         Padding(
                           padding: EdgeInsets.all(10),
-                          child: Icon(
+                          child:IconButton(
+                                  padding: new EdgeInsets.all(0.0),
+                                  icon: new Icon(Icons.settings, color: Colors.white),
+                                  onPressed: ()async{
+                                        print("helo");
+                                        SharedPreferences prefs = await SharedPreferences.getInstance();
+                                        prefs.setString('Username', "");
+                                        prefs.setString('access_token', "");
+                                        Get.toNamed('/login');
+                                  })
+                          /* Icon(
                             Icons.settings,
                             color: Colors.white,
-                          ),
+                          ),*/
                         ),
                       ],
                     ),

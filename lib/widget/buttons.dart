@@ -63,7 +63,7 @@ List<Widget> loginButtons(
           // print(data.response.access_token);
           showSpinner();
           api.getFee().then((fee) {
-            cont.year.value = fee.response.academicyear;
+            cont.year.value = fee.response.academicyearid;
             childlistcon.childrenlist=fee.response.children;
             childrens = fee.response.children;
             students.student.value=fee;

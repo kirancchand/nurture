@@ -43,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
           print(fee.statuscode);
           if(fee.statuscode=="200")
             {
-              con.year.value = fee.response.academicyear;
+              con.year.value = fee.response.academicyearid;
               childrens = fee.response.children;
               childlistcon.childrenlist=fee.response.children;
               students.student.value=fee;

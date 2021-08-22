@@ -13,7 +13,7 @@ import 'package:nurture/common/constants.dart';
 import 'package:nurture/model/student.dart';
 import 'package:nurture/model/fee.dart';
 import 'package:nurture/service/api.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 class MyHome extends StatefulWidget {
   const MyHome({Key key}) : super(key: key);
 
@@ -69,7 +69,7 @@ class _MyHomeState extends State<MyHome> {
     //   return student;
     // });
     getFee = api.getFee().then((fee) {
-      con.year.value = fee.response.academicyear;
+      con.year.value = fee.response.academicyearid;
       childrens = fee.response.children;
       return fee;
     });
@@ -101,13 +101,27 @@ class _MyHomeState extends State<MyHome> {
                 Column(children: [
                   Align(
                     alignment: Alignment.topRight,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Icon(
-                        Icons.settings,
-                        color: Colors.white,
+                    child: GestureDetector(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                          child: new SizedBox(
+                              height: 18.0,
+                              width: 18.0,
+                              child: new IconButton(
+                                  padding: new EdgeInsets.all(0.0),
+                                  icon: new Icon(Icons.settings, color: Colors.white),
+                                  onPressed: ()async{
+                                        print("helo");
+                                        SharedPreferences prefs = await SharedPreferences.getInstance();
+                                        prefs.setString('Username', "");
+                                        prefs.setString('access_token', "");
+                                        Get.toNamed('/');
+                                  }
+                              )
+                          )
                       ),
-                    ),
+                    )
+
                   ),
                   CircleAvatar(
                       radius: 30,

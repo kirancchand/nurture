@@ -33,38 +33,40 @@ class _StudentListState extends State<StudentList> {
   @override
   Widget build(BuildContext context) {
     // debugPrint('parent civil id: ${parents[0].civilid}');
-    return ListTile(
-      leading: CircleAvatar(
-          radius: 25,
-          backgroundColor: Colors.pink.shade300,
-          backgroundImage: AssetImage("assets/images/chil.png")
-          // backgroundImage: AssetImage(img),
-          ),
-      title: Text(widget.data.studentname),
-      isThreeLine: true,
-      subtitle: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Student Id ${widget.data.studentnumber}" ?? "",
-            style: TextStyle(fontSize: 11),
-          ),
-          Text(widget.data.schoolname ?? "", style: TextStyle(fontSize: 11))
-        ],
-      ),
-      trailing: IconButton(
-        onPressed: () {
-          // print(childrens);
-          Get.to(StudentDetails(data: widget.data));
-        },
-        icon: Icon(
-          Icons.keyboard_arrow_right,
-          color: Colors.green,
+    return GestureDetector(
+      child: ListTile(
+        leading: CircleAvatar(
+            radius: 25,
+            backgroundColor: Colors.pink.shade300,
+            backgroundImage: AssetImage("assets/images/chil.png")
+            // backgroundImage: AssetImage(img),
+            ),
+        title: Text(widget.data.studentname),
+        isThreeLine: true,
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Student Id ${widget.data.studentnumber}" ?? "",
+              style: TextStyle(fontSize: 11),
+            ),
+            Text(widget.data.schoolname ?? "", style: TextStyle(fontSize: 11))
+          ],
         ),
+        trailing: IconButton(
+          onPressed: () {
+            // print(childrens);
+            Get.to(StudentDetails(data: widget.data));
+          },
+          icon: Icon(
+            Icons.keyboard_arrow_right,
+            color: Colors.green,
+          ),
+        ),
+         onTap: () {
+          Get.to(StudentDetails(data: widget.data));
+        }
       ),
-      // onTap: () {
-      //   Get.to(StudentDetails(data: data, parents: parents));
-      // }
     );
   }
 }

@@ -298,7 +298,7 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
                               // );
                               // widget.data.result=="Success"?Get.toNamed('/download',arguments: [widget.data.paymentid,widget.data.filepath]):Container();
                               widget.data.result == "Success"
-                                  ? downloadFile(widget.data.paymentid,
+                                  ? widget.data.filepath==null?Fluttertoast.showToast(msg: "Please wait for verify your payment!!"):downloadFile(widget.data.paymentid,
                                       widget.data.filepath)
                                   : Container();
 

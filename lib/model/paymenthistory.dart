@@ -45,7 +45,7 @@ class PaymentHistoryResponse {
     paymentid: json["paymentid"] ?? "",
     amount: json["amount"] ?? "",
     knettransactionid: json["knettransactionid"] ?? "",
-    filepath: json["filepath"] ?? "",
+    filepath: json["filepath"] ?? null,
     transactionid: json["transactionid"] ?? null,
     result: json["result"] ?? "",
     postdate: json["postdate"] ?? "",

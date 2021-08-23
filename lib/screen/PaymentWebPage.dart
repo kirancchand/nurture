@@ -92,7 +92,7 @@ class _PaymentWebPageState extends State<PaymentWebPage> {
               
               print('Page finished loading: $url');
               print(url.contains('paymentcancel'));
-              if(url.contains('PaymentUrl'))
+              if(url.contains('paymentrouter')||url.contains('paymentcancel'))
                 {
                   api.getFee().then((fee) {
                     print(fee.statuscode);
@@ -100,7 +100,7 @@ class _PaymentWebPageState extends State<PaymentWebPage> {
                     // https://schbackend.azurewebsites.net/Controllers/PaymentUrl.html?Response=Data
                     if(fee.statuscode=="200")
                     {
-                      con.year.value = fee.response.academicyear;
+                      con.year.value = fee.response.academicyearid;
                       childrens = fee.response.children;
                       childlistcon.childrenlist=fee.response.children;
                       students.student.value=fee;

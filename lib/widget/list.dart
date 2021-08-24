@@ -449,6 +449,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
   @override
   void initState() {
     // super.initState();
+    // print(widget.data.studentid);
     getStudents = api.getStudent().then((student) {
       parents = student.response.parents;
       for (var i = 0; i < student.response.childrens.length; i++) {

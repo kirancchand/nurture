@@ -3,7 +3,7 @@ List<Widget> indexHeader() {
 
   return <Widget>[
     Container(
-        child:Image.asset('assets/images/Group.png')
+        child:Image.asset('assets/images/background.png')
     ),
   ];
 }

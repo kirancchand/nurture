@@ -265,7 +265,8 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                   .transportfee +
                                               response
                                                   .installment[index].others;
-                                        return response.installment.length > 0
+                                        // return response.installment.length > 0
+                                        return response.dueamount!=0.0
                                             ? Container(
                                                 width: MediaQuery.of(context)
                                                     .size
@@ -293,19 +294,21 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                             ClampingScrollPhysics(),
                                                         itemBuilder: (context,
                                                             int index) {
-                                                          if (response
-                                                                      .installment[
-                                                                          index]
-                                                                      .tuitionfee +
-                                                                  response
-                                                                      .installment[
-                                                                          index]
-                                                                      .transportfee +
-                                                                  response
-                                                                      .installment[
-                                                                          index]
-                                                                      .others ==
-                                                              0.0) {
+                                                          // if (response
+                                                          //             .installment[
+                                                          //                 index]
+                                                          //             .tuitionfee +
+                                                          //         response
+                                                          //             .installment[
+                                                          //                 index]
+                                                          //             .transportfee +
+                                                          //         response
+                                                          //             .installment[
+                                                          //                 index]
+                                                          //             .others ==
+                                                          //     0.0)
+                                                          if(response.dueamount==0.0)
+                                                          {
                                                             return SizedBox();
                                                           } else {
                                                             return Column(
@@ -404,7 +407,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                   ),
                                                 ),
                                               )
-                                            : Center(child: Text("No Data"));
+                                            : Center(child: Text("No Pending Payment"));
                                       } else {
                                         return Container(
                                           height: MediaQuery.of(context)

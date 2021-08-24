@@ -92,7 +92,7 @@ class _HomePage1State extends State<HomePage1> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Padding(
-                          padding: EdgeInsets.all(10),
+                          padding: EdgeInsets.fromLTRB(5, 50, 50, 5),
                           child:IconButton(
                                   padding: new EdgeInsets.all(0.0),
                                   icon: new Icon(Icons.settings, color: Colors.white),

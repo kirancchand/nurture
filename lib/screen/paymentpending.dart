@@ -37,6 +37,7 @@ class _PaymentPendingState extends State<PaymentPending> {
   @override
   void initState() {
     super.initState();
+
     total = 0.0;
     childrens = childlistcon.childrenlist;
     // getPayment = api.getPendingPayment(_valueChoose);
@@ -250,6 +251,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                                       if (statuscode == "200") {
                                         var response = snapshot.data?.response;
                                         total = 0.0;
+
                                         for (int index = 0;
                                             index <
                                                     response
@@ -291,7 +293,41 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                             ClampingScrollPhysics(),
                                                         itemBuilder: (context,
                                                             int index) {
-                                                          return Column(
+                                                          if (response
+                                                                      .installment[
+                                                                          index]
+                                                                      .tuitionfee +
+                                                                  response
+                                                                      .installment[
+                                                                          index]
+                                                                      .transportfee +
+                                                                  response
+                                                                      .installment[
+                                                                          index]
+                                                                      .others ==
+                                                              0.0) {
+                                                            return SizedBox();
+                                                          } else {
+                                                            return Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                    'Installment ${index + 1}'),
+                                                                Divider(),
+                                                                Installment(
+                                                                    data: response
+                                                                            .installment[
+                                                                        index]),
+                                                                SizedBox(
+                                                                  height: 15,
+                                                                ),
+                                                              ],
+                                                            );
+                                                          }
+
+                                                          /* return Column(
                                                             crossAxisAlignment:
                                                                 CrossAxisAlignment
                                                                     .start,
@@ -299,6 +335,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                               Text(
                                                                   'Installment ${index + 1}'),
                                                               Divider(),
+                                                            //  if(){},
                                                               Installment(
                                                                   data: response
                                                                           .installment[
@@ -307,7 +344,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                                 height: 15,
                                                               ),
                                                             ],
-                                                          );
+                                                          );*/
                                                         },
                                                       ),
                                                       Row(
@@ -329,7 +366,6 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold,
-                                                                    
                                                             ),
                                                           ),
                                                         ],
@@ -343,32 +379,25 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                       ),
                                                       SizedBox(height: 20),
                                                       Center(
-                                                        child: Spinner(
-                                                          child: payNowButtons([
-                                                            
-                                                            {
-                                                              "AcademicPeriodId":
-                                                                  "2020-2021",
-                                                              "GrandTotal":
-                                                                  total,
-                                                              "IsIncludeEnrollment":
-                                                                  false,
-                                                              "KnetpaymentAmount":
-                                                                  total,
-                                                              "OffSet": -330,
-                                                              "OpeningBalance":
-                                                                  0,
-                                                              "StudentId":
-                                                                  controller
-                                                                      .text
-                                                                      .value,
-                                                              "Paymentid": 0,
-                                                              
-                                                            }
-                                                          ], context,total),
-                                                        )
-
-                                                      ),
+                                                          child: Spinner(
+                                                        child: payNowButtons([
+                                                          {
+                                                            "AcademicPeriodId":
+                                                                "2020-2021",
+                                                            "GrandTotal": total,
+                                                            "IsIncludeEnrollment":
+                                                                false,
+                                                            "KnetpaymentAmount":
+                                                                total,
+                                                            "OffSet": -330,
+                                                            "OpeningBalance": 0,
+                                                            "StudentId":
+                                                                controller
+                                                                    .text.value,
+                                                            "Paymentid": 0,
+                                                          }
+                                                        ], context, total),
+                                                      )),
                                                       SizedBox(height: 20)
                                                     ],
                                                   ),

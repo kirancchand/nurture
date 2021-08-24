@@ -490,68 +490,124 @@ class _StudentInfoListState extends State<StudentInfoList> {
                               Border.all(color: Colors.grey.shade300, width: 1),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(left: 15, right: 20),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                        child:Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Column(
+                            mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Row(
                                 children: [
-                                  txt("Name"),
-                                  txt("Gender"),
-                                  txt("Date of Birth"),
-                                  txt("School Name"),
-                                  txt("Grade"),
-                                  txt("Academic Year"),
-                                  txt("Nationality"),
-                                  txt("Religion"),
-                                  txt("Civil id"),
-                                  txt("Civil id expiry date"),
-                                  txt("Passport Number"),
-                                  txt("Address"),
+                                  SizedBox(
+                                    width: 150,
+                                    child: txt("Name")),
+                                    Expanded(child: Text(childrens.studentname,maxLines: 2,))
                                 ],
                               ),
-                            ),
-                            SizedBox(width: 10),
-                            Flexible(
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                               Row(
                                 children: [
-                                  Text(
-                                    childrens.studentname,
-                                  ),
-                                  Text(childrens.gender),
-                                  Text(childrens.birthdate.day.toString() +
-                                      "/" +
-                                      childrens.birthdate.month.toString() +
-                                      "/" +
-                                      childrens.birthdate.year.toString()),
-                                  Text(childrens.schoolname),
-                                  Text(childrens.grade),
-                                  Text(childrens.academicyear),
-                                  Text(childrens.nationality),
-                                  Text(childrens.religion),
-                                  Text(childrens.civilid.toString()),
-                                  Text(childrens.studentcivilexpirydate.day
-                                          .toString() +
-                                      "/" +
-                                      childrens.studentcivilexpirydate.month
-                                          .toString() +
-                                      "/" +
-                                      childrens.studentcivilexpirydate.year
-                                          .toString()),
-                                  Text(childrens.passportnumber),
-                                  Text(childrens.regionalarea)
+                                  SizedBox(
+                                    width: 150,
+                                    child: txt("Gender"),),
+                                    Expanded(child: Text(childrens.gender,maxLines: 2,))
                                 ],
                               ),
-                            )
-                          ],
-                        ),
-                      ),
+                               Row(
+                                children: [
+                                  SizedBox(
+                                    width: 150,
+                                    child: txt("Date of Birth"),),
+                                    Expanded(child: Text(childrens.birthdate.day.toString() +
+                                        "/" +
+                                        childrens.birthdate.month.toString() +
+                                        "/" +
+                                        childrens.birthdate.year.toString(),maxLines: 2,))
+                                ],
+                              ),
+                               Row(
+                                children: [
+                                  SizedBox(
+                                    width: 150,
+                                    child: txt("School Name"),),
+                                    Expanded(child: Text(childrens.schoolname,maxLines: 3,))
+                                ],
+                              ),
+                               Row(
+                                children: [
+                                  SizedBox(
+                                    width: 150,
+                                    child: txt("Grade"),),
+                                    Expanded(child: Text(childrens.grade,maxLines: 2,))
+                                ],
+                              ),
+                               Row(
+                                children: [
+                                  SizedBox(
+                                    width: 150,
+                                    child: txt("Academic Year"),),
+                                    Expanded(child: Text(childrens.academicyear,maxLines: 2,))
+                                ],
+                              ),
+                               Row(
+                                children: [
+                                  SizedBox(
+                                    width: 150,
+                                    child: txt("Nationality"),),
+                                    Expanded(child: Text(childrens.nationality,maxLines: 2,))
+                                ],
+                              ),
+                                Row(
+                                children: [
+                                  SizedBox(
+                                    width: 150,
+                                    child: txt("Religion"),),
+                                    Expanded(child: Text(childrens.religion,maxLines: 2,))
+                                ],
+                              ),
+                                Row(
+                                children: [
+                                  SizedBox(
+                                    width: 150,
+                                    child:   txt("Civil id"),),
+                                    Expanded(child: Text(childrens.civilid.toString(),maxLines: 2,))
+                                ],
+                              ),
+                                Row(
+                                children: [
+                                  SizedBox(
+                                    width: 150,
+                                    child: txt("Civil id expiry date"),),
+                                    Expanded(child: Text(childrens.studentcivilexpirydate.day
+                                            .toString() +
+                                        "/" +
+                                        childrens.studentcivilexpirydate.month
+                                            .toString() +
+                                        "/" +
+                                        childrens.studentcivilexpirydate.year
+                                            .toString(),maxLines: 2,))
+                                ],
+                              ),
+                                Row(
+                                children: [
+                                  SizedBox(
+                                    width: 150,
+                                    child:  txt("Passport Number"),),
+                                    Expanded(child: Text(childrens.passportnumber,maxLines: 2,))
+                                ],
+                              ),
+                                Row(
+                                children: [
+                                  SizedBox(
+                                    width: 150,
+                                    child: txt("Address"),),
+                                    Expanded(child: Text(childrens.regionalarea,maxLines: 10,))
+                                ],
+                              ),
+                               
+                            ],
+                          ),
+                        )
+                  ),
                     ),
                     Positioned(
                       left: 15,

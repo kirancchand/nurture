@@ -119,18 +119,32 @@ class _HomePage1State extends State<HomePage1> {
                       height: 10,
                     ),
                     fee.response.parentnumber != ""
-                        ? Column(children: [
-                      Text(
-                        fee.response.parentname,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold),
+                        ? Column(
+                         crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(0),
+                          child: Text(
+                             
+                            fee.response.parentname,
+                            style: TextStyle(
+                            
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center,
+                                
+                          ),
+                        ),
                       ),
-                      Text("Parent ID: ${fee.response.parentnumber}",
-                          style: TextStyle(
-                            color: Colors.white,
-                          )),
+                      Center(
+                        child: Text("Parent ID: ${fee.response.parentnumber}",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                            )),
+                      ),
                     ])
                         : Center(child: Text("No Data")),
                     SizedBox(

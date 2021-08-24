@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:nurture/model/paymentpending.dart';
 import 'package:nurture/screen/PaymentWebPage.dart';
 import 'package:nurture/screen/confirmpayment.dart';
@@ -81,8 +82,9 @@ List<Widget> loginButtons(
   ];
 }
 
-Widget payNowButtons(List<Map<String, dynamic>> stu, context,total) {
-  print("total${total}");
+Widget payNowButtons(List<Map<String, dynamic>> stu, context, total) {
+  print("total$total");
+
   return GestureDetector(
     child: Container(
       height: 40,
@@ -97,9 +99,21 @@ Widget payNowButtons(List<Map<String, dynamic>> stu, context,total) {
       ),
     ),
     onTap: () async {
-      
-       // showSpinner();
-      var data = await submitConfirmPayment(stu);
+     // print(total.length);
+      if (total > 0.0) {
+        var data = await submitConfirmPayment(stu);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => PaymentWebPage(
+                    link: data.response ?? "",
+                  )),
+        );
+      } else
+        Fluttertoast.showToast(msg: 'Please Select Atleast one student');
+
+      // showSpinner();
+      /* var data = await submitConfirmPayment(stu);
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -107,7 +121,7 @@ Widget payNowButtons(List<Map<String, dynamic>> stu, context,total) {
             link: data.response ?? "",
           )
         ),
-      );
+      );*/
     },
     /*  onTap: () async {
       showSpinner();

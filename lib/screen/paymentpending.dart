@@ -396,7 +396,8 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                                     .text.value,
                                                             "Paymentid": 0,
                                                           }
-                                                        ], context, total),
+                                                        ], context, total
+                                                        ),
                                                       )),
                                                       SizedBox(height: 20)
                                                     ],

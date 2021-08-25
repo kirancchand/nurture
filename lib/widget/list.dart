@@ -450,7 +450,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
   void initState() {
     // super.initState();
     // print(widget.data.studentid);
-    getStudents = api.getStudent().then((student) {
+    getStudents = api.getStudentByid(widget.data.studentid).then((student) {
       parents = student.response.parents;
       for (var i = 0; i < student.response.childrens.length; i++) {
         if (student.response.childrens[i].studentid == widget.data.studentid) {
@@ -459,6 +459,16 @@ class _StudentInfoListState extends State<StudentInfoList> {
       }
       return student;
     });
+
+    // getStudents = api.getStudent().then((student) {
+    //   parents = student.response.parents;
+    //   for (var i = 0; i < student.response.childrens.length; i++) {
+    //     if (student.response.childrens[i].studentid == widget.data.studentid) {
+    //       childrens = student.response.childrens[i];
+    //     }
+    //   }
+    //   return student;
+    // });
   }
 
   @override

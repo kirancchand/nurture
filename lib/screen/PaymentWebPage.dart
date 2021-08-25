@@ -100,6 +100,7 @@ class _PaymentWebPageState extends State<PaymentWebPage> {
                     // https://schbackend.azurewebsites.net/Controllers/PaymentUrl.html?Response=Data
                     if(fee.statuscode=="200")
                     {
+                      print("duem child ${fee.response.children[1].dueamount}");
                       con.year.value = fee.response.academicyearid;
                       childrens = fee.response.children;
                       childlistcon.childrenlist=fee.response.children;

@@ -317,7 +317,9 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                                       .start,
                                                               children: [
                                                                 Text(
-                                                                    'Installment ${index + 1}'),
+                                                                    'Installment ${response
+                                                                        .installment[
+                                                                    index].id}'),
                                                                 Divider(),
                                                                 Installment(
                                                                     data: response

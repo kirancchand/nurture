@@ -107,14 +107,15 @@ class _PaymentWebPageState extends State<PaymentWebPage> {
                       childrens = fee.response.children;
                       childlistcon.childrenlist=fee.response.children;
                       students.student.value=fee;
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Home(
-                            count: 2,
-                          ),
-                        ),
-                      );
+                      Get.offAll(Home(count: 2));
+                      // Navigator.pushReplacement(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => Home(
+                      //       count: 2,
+                      //     ),
+                      //   ),
+                      // );
                     }
                     else{
 

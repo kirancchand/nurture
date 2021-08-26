@@ -37,6 +37,7 @@ class _ContactInformationState extends State<ContactInformation> {
   }
 
   List<PlatformFile> x;
+ // String dropdownError;
 
   @override
   void initState() {
@@ -159,7 +160,7 @@ class _ContactInformationState extends State<ContactInformation> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      DropdownButton(
+                      DropdownButtonFormField(
                         isExpanded: true,
                         icon: Icon(
                           Icons.keyboard_arrow_down_outlined,
@@ -179,6 +180,8 @@ class _ContactInformationState extends State<ContactInformation> {
                             studentContactRequestModel.studentid = newValue;
                           });
                         },
+                        validator: (value) =>
+                            value == null ? "Please select a student" : null,
                         items: widget.childrens.map((valueItem) {
                           return DropdownMenuItem(
                             value: valueItem.studentid,
@@ -186,6 +189,7 @@ class _ContactInformationState extends State<ContactInformation> {
                           );
                         }).toList(),
                       ),
+                     
                       SizedBox(
                         height: 20,
                       ),

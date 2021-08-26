@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:nurture/screen/home.dart';
+import 'package:nurture/widget/spinner.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:nurture/service/api.dart';
@@ -92,7 +93,8 @@ class _PaymentWebPageState extends State<PaymentWebPage> {
               
               print('Page finished loading: $url');
               print(url.contains('paymentcancel'));
-              if(url.contains('paymentrouter')||url.contains('paymentcancel'))
+
+              if(url.contains('PaymentUrl')||url.contains('paymentcancel'))
                 {
                   api.getFee().then((fee) {
                     print(fee.statuscode);
@@ -100,6 +102,7 @@ class _PaymentWebPageState extends State<PaymentWebPage> {
                     // https://schbackend.azurewebsites.net/Controllers/PaymentUrl.html?Response=Data
                     if(fee.statuscode=="200")
                     {
+                      print("duem child ${fee.response.children[1].dueamount}");
                       con.year.value = fee.response.academicyearid;
                       childrens = fee.response.children;
                       childlistcon.childrenlist=fee.response.children;

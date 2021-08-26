@@ -87,12 +87,13 @@ class PaymentPendingResponse {
 
 class InstallmentResponse {
   InstallmentResponse({
+    this.id,
     this.tuitionfee,
     this.transportfee,
     this.enrollment,
     this.others,
   });
-
+  String id;
   double tuitionfee;
   double transportfee;
   double enrollment;
@@ -100,6 +101,7 @@ class InstallmentResponse {
 
   factory InstallmentResponse.fromJson(Map<String, dynamic> json) =>
       InstallmentResponse(
+        id: json["\u0024id"],
         tuitionfee: json["tuitionfee"],
         transportfee: json["transportfee"],
         enrollment: json["enrollment"],
@@ -107,6 +109,7 @@ class InstallmentResponse {
       );
 
   Map<String, dynamic> toJson() => {
+        "\u0024id": id,
         "tuitionfee": tuitionfee,
         "transportfee": transportfee,
         "enrollment": enrollment,

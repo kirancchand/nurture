@@ -21,7 +21,7 @@ List<Widget> loginInputs(loginRequestModel) {
           enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey[300])),
           labelStyle: TextStyle(color: Colors.grey[400])),
-      validator: EmailFieldValidator.validate,
+      validator: NameFieldValidator.validate,
       initialValue: "G-0000001085",
       onSaved: (String value) => loginRequestModel.Username = value,
     ),
@@ -158,7 +158,7 @@ List<Widget> contactReqInputs(studentContactRequestModel, context) {
       padding: EdgeInsets.only(top: 8, bottom: 8),
       child: Container(
         padding: EdgeInsets.only(left: 10),
-       // height: 50,
+        // height: 50,
         decoration: BoxDecoration(
             border: Border.all(color: Colors.grey),
             borderRadius: BorderRadius.circular(8)),
@@ -212,8 +212,7 @@ List<Widget> contactReqInputs(studentContactRequestModel, context) {
               width: 8,
             ),
             Expanded(
-              child: 
-              TextFormField(
+              child: TextFormField(
                 key: Key('studentphonenumber'),
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
@@ -224,7 +223,7 @@ List<Widget> contactReqInputs(studentContactRequestModel, context) {
                 onSaved: (String value) =>
                     studentContactRequestModel.studentphonenumber = value,
               ),
-           ),
+            ),
           ],
         ),
       ),

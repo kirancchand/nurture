@@ -130,7 +130,7 @@ class FeeResponseModel {
       FeeResponseModel(
         id: json["\u0024id"],
         statuscode: json["statuscode"],
-        response: Response.fromJson(json["response"]),
+        response: Response.fromJson(json["response"])??"",
         message: json["message"],
       );
 

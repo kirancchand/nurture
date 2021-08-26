@@ -31,14 +31,15 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Future.delayed(Duration(seconds: 3)).then((value) async {
       var pref = await SharedPreferences.getInstance();
-
+      print("sdfsdfsdf${pref.getString('Username')}");
       if(pref.getString('Username')==null)
         {
           print("sdfsdfsdf${pref.getString('Username')}");
-          Get.off(Login());
+          Get.offAll(Login());
           // Get.toNamed('/login');
         }
       else{
+        print("helo");
         api.getFee().then((fee) {
           print(fee.statuscode);
           if(fee.statuscode=="200")
@@ -50,7 +51,9 @@ class _SplashScreenState extends State<SplashScreen> {
               Get.off(()=>Home(fee:fee,childrens:childrens));
             }
           else{
+
            Fluttertoast.showToast(msg: "Something went Wrong");
+           Get.offAll(Login());
           }
 
 

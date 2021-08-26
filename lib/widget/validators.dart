@@ -1,7 +1,7 @@
 class EmailFieldValidator {
   static String validate(value) {
-    return value.isEmpty ? 'Email can\'t be emptyyy' : null;
-/*
+    // return value.isEmpty ? 'Email can\'t be emptyyy' : null;
+
     if (value.isEmpty) {
       return 'Email can\'t be empty';
     }
@@ -10,7 +10,7 @@ class EmailFieldValidator {
         .hasMatch(value)) {
       return 'Enter a valid Email address';
     }
-    return null;*/
+    return null;
   }
 }
 

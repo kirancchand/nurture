@@ -78,7 +78,8 @@ class Api {
     if (response.statusCode == 200 || response.statusCode == 400) {
       return FeeResponseModel.fromJson(json.decode(response.body));
     } else {
-      throw Exception('Failed to load data!');
+      return FeeResponseModel();
+      // throw Exception('Failed to load data!');
     }
   }
 
@@ -91,7 +92,8 @@ class Api {
     if (response.statusCode == 200 || response.statusCode == 400) {
       return PaymentHistoryResponseModel.fromJson(json.decode(response.body));
     } else {
-      throw Exception('Failed to load data!');
+      return PaymentHistoryResponseModel();
+      // throw Exception('Failed to load data!');
     }
   }
 
@@ -115,7 +117,8 @@ class Api {
       // print(valueChoose);
       return PaymentPendingResponseModel.fromJson(json.decode(response.body));
     } else {
-      throw Exception('Failed to load data!');
+      return PaymentPendingResponseModel();
+      // throw Exception('Failed to load data!');
     }
   }
 
@@ -138,7 +141,8 @@ class Api {
       // return StudentContactResponseModel.fromJson(json.decode(response.body));
       return StudentContactResponseModel.fromJson(json.decode(response.body));
     } else {
-      throw Exception('Failed to load data!');
+      return StudentContactResponseModel();
+      // throw Exception('Failed to load data!');
     }
   }
 
@@ -152,7 +156,8 @@ class Api {
     if (response.statusCode == 200 || response.statusCode == 400) {
       return NotificationResponseModel.fromJson(json.decode(response.body));
     } else {
-      throw Exception('Failed to load data!');
+      return NotificationResponseModel();
+      // throw Exception('Failed to load data!');
     }
   }
 }

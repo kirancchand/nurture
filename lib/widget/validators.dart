@@ -1,6 +1,16 @@
 class EmailFieldValidator {
   static String validate(value) {
-    return value.isEmpty ? 'Email can\'t be empty' : null;
+    return value.isEmpty ? 'Email can\'t be emptyyy' : null;
+/*
+    if (value.isEmpty) {
+      return 'Email can\'t be empty';
+    }
+    if (!RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(value)) {
+      return 'Enter a valid Email address';
+    }
+    return null;*/
   }
 }
 

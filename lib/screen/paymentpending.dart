@@ -249,6 +249,7 @@ class _PaymentPendingState extends State<PaymentPending> {
 
                                       // print(statuscode);
                                       if (statuscode == "200") {
+                                        
                                         var response = snapshot.data?.response;
                                         total = 0.0;
 
@@ -265,8 +266,10 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                   .transportfee +
                                               response
                                                   .installment[index].others;
+                                                  
                                         // return response.installment.length > 0
-                                        return response.dueamount!=0.0
+                                        return response.installment.length > 0
+                                            //response.dueamount!=0.0
                                             ? Container(
                                                 width: MediaQuery.of(context)
                                                     .size
@@ -287,31 +290,33 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                   child: Column(
                                                     children: [
                                                       ListView.builder(
-                                                        itemCount: response
-                                                            .installment.length,
-                                                        shrinkWrap: true,
-                                                        physics:
-                                                            ClampingScrollPhysics(),
-                                                        itemBuilder: (context,
-                                                            int index) {
-                                                          // if (response
-                                                          //             .installment[
-                                                          //                 index]
-                                                          //             .tuitionfee +
-                                                          //         response
-                                                          //             .installment[
-                                                          //                 index]
-                                                          //             .transportfee +
-                                                          //         response
-                                                          //             .installment[
-                                                          //                 index]
-                                                          //             .others ==
-                                                          //     0.0)
-                                                          if(response.dueamount==0.0)
+                                                          itemCount: response
+                                                              .installment
+                                                              .length,
+                                                          shrinkWrap: true,
+                                                          physics:
+                                                              ClampingScrollPhysics(),
+                                                          itemBuilder: (context,
+                                                              int index) {
+                                                            // if (response
+                                                            //             .installment[
+                                                            //                 index]
+                                                            //             .tuitionfee +
+                                                            //         response
+                                                            //             .installment[
+                                                            //                 index]
+                                                            //             .transportfee +
+                                                            //         response
+                                                            //             .installment[
+                                                            //                 index]
+                                                            //             .others ==
+                                                            //     0.0)
+                                                            /* if(response.dueamount==0.0)
                                                           {
                                                             return SizedBox();
-                                                          } else {
-                                                            return Column(
+                                                          } else { */
+                                                           /*  return 
+                                                            Column(
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment
                                                                       .start,
@@ -330,28 +335,29 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                                 ),
                                                               ],
                                                             );
-                                                          }
+                                                            
+                                                          }),*/
 
-                                                          /* return Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Text(
-                                                                  'Installment ${index + 1}'),
-                                                              Divider(),
-                                                            //  if(){},
-                                                              Installment(
-                                                                  data: response
-                                                                          .installment[
-                                                                      index]),
-                                                              SizedBox(
-                                                                height: 15,
-                                                              ),
-                                                            ],
-                                                          );*/
-                                                        },
-                                                      ),
+                                                            return Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                    'Installment ${index + 1}'),
+                                                                Divider(),
+                                                                //  if(){},
+                                                                Installment(
+                                                                    data: response
+                                                                            .installment[
+                                                                        index]),
+                                                                SizedBox(
+                                                                  height: 15,
+                                                                ),
+                                                              ],
+                                                            );
+                                                          }),
+                                                      Divider(),
                                                       Row(
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
@@ -380,10 +386,10 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                             .symmetric(
                                                                 horizontal: 3,
                                                                 vertical: 10),
-                                                        child: Divider(),
+                                                        // child: Divider(),
                                                       ),
                                                       SizedBox(height: 20),
-                                                      Center(
+                                                      /*Center(
                                                           child: Spinner(
                                                         child: payNowButtons([
                                                           {
@@ -401,15 +407,19 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                                     .text.value,
                                                             "Paymentid": 0,
                                                           }
-                                                        ], context, total),
-                                                      )),
+                                                        ], context, total
+                                                        ),
+                                                      )),*/
                                                       SizedBox(height: 20)
                                                     ],
                                                   ),
                                                 ),
                                               )
-                                            : Center(child: Text("No Pending Payment"));
+                                            : Center(
+                                                child:
+                                                    Text("No Pending Payment"));
                                       } else {
+                                        
                                         return Container(
                                           height: MediaQuery.of(context)
                                                   .size

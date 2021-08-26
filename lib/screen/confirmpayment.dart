@@ -267,14 +267,15 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                         Payment data = await submitConfirmPayment(lists);
                         hideSpinner();
                         // print(data.response);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => PaymentWebPage(
-                              link: data.response ?? "",
-                            ),
-                          ),
-                        );
+                        Get.offAll(()=>PaymentWebPage(link: data.response ?? ""));
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => PaymentWebPage(
+                        //       link: data.response ?? "",
+                        //     ),
+                        //   ),
+                        // );
                         print(data);
                       },
                     )

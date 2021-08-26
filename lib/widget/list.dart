@@ -1144,7 +1144,13 @@ class Installment extends StatelessWidget {
                     list_txt(data.tuitionfee.toString()),
                   ],
                 )
-              : Container(),
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    list_txt("Tution", isSelected: false),
+                    list_txt(data.tuitionfee.toString()),
+                  ],
+                ),
           data.transportfee != 0.0
               ? Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1153,7 +1159,13 @@ class Installment extends StatelessWidget {
                     list_txt(data.transportfee.toString())
                   ],
                 )
-              : Container(),
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    list_txt("Transportation", isSelected: false),
+                    list_txt(data.transportfee.toString())
+                  ],
+                ),
           data.others != 0.0
               ? Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1162,7 +1174,13 @@ class Installment extends StatelessWidget {
                     list_txt(data.others.toString())
                   ],
                 )
-              : Container(),
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    list_txt("Others", isSelected: false),
+                    list_txt(data.others.toString())
+                  ],
+                ),
         ],
       ),
     );

@@ -1,4 +1,4 @@
-package com.example.nurture
+package com.nurture.app
 
 import io.flutter.embedding.android.FlutterActivity
 

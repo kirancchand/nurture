@@ -104,6 +104,7 @@ List<Widget> pinInputs(loginRequestModel) {
 }
 
 List<Widget> contactReqInputs(studentContactRequestModel, context) {
+  bool hasPhoneNumber=false;
   return <Widget>[
     Row(
       children: [
@@ -157,77 +158,241 @@ List<Widget> contactReqInputs(studentContactRequestModel, context) {
     Padding(
       padding: EdgeInsets.only(top: 8, bottom: 8),
       child: Container(
-        padding: EdgeInsets.only(left: 10),
-        // height: 50,
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
-            borderRadius: BorderRadius.circular(8)),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CountryListPick(
-              // if you need custom picker use this
-              pickerBuilder: (context, CountryCode countryCode) {
-                return Row(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(5),
-                      child: Image.asset(
-                        countryCode.flagUri,
-                        package: 'country_list_pick',
-                        width: 25,
-                        height: 25,
+        height: 70,
+        child: TextFormField(
+          key: Key('studentphonenumber'),
+          keyboardType: TextInputType.number,
+          decoration: InputDecoration(
+                      prefixIcon:SizedBox(
+                      height: 60.0,
+                      width: 120.0,
+                      child: IconButton(
+                        icon: CountryListPick(
+                          // if you need custom picker use this
+                          pickerBuilder: (context, CountryCode countryCode) {
+                            return Row(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(5),
+                                  child: Image.asset(
+                                    countryCode.flagUri,
+                                    package: 'country_list_pick',
+                                    width: 25,
+                                    height: 25,
+                                  ),
+                                ),
+                                // SizedBox(
+                                //   width: 8,
+                                // ),
+                                Text(
+                                  countryCode.dialCode,
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                Icon(
+                                  Icons.keyboard_arrow_down_outlined,
+                                  color: Colors.black,
+                                ),
+                                // Text(countryCode.code),
+                              ],
+                            );
+                          },
+                          initialSelection: '+965',
+                          onChanged: (CountryCode code) {
+                            print(code.name);
+                            print(code.code);
+                            print(code.dialCode);
+                            print(code.flagUri);
+                          },
+                        ),
+                        // onPressed: (),
                       ),
-                    ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Text(
-                      countryCode.dialCode,
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    Icon(
-                      Icons.keyboard_arrow_down_outlined,
-                      color: Colors.black,
-                    ),
-                    // Text(countryCode.code),
-                  ],
-                );
-              },
-              initialSelection: '+965',
-              onChanged: (CountryCode code) {
-                print(code.name);
-                print(code.code);
-                print(code.dialCode);
-                print(code.flagUri);
-              },
-            ),
-            Container(
-              height: 25,
-              width: 3,
-              color: Colors.grey[300],
-            ),
-            SizedBox(
-              width: 8,
-            ),
-            Expanded(
-              child: TextFormField(
-                key: Key('studentphonenumber'),
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: "  Phone number",
-                    hintStyle: TextStyle(color: Colors.grey)),
-                validator: NameFieldValidator.validate,
-                onSaved: (String value) =>
-                    studentContactRequestModel.studentphonenumber = value,
+                      ),
+
+              hintText: "Phone number",
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(color: Colors.grey[300]),
               ),
-            ),
-          ],
+              labelStyle: TextStyle(color: Colors.grey[400])),
+            validator: NameFieldValidator.validate,
+            onSaved: (String value) =>
+            studentContactRequestModel.studentphonenumber = value,
         ),
       ),
     ),
+    // Padding(
+    //   padding: EdgeInsets.only(top: 8, bottom: 8),
+    //   child: Container(
+    //     height: 70,
+    //     child: TextFormField(
+    //       key: Key('studentphonenumber'),
+    //       keyboardType: TextInputType.number,
+    //       decoration: InputDecoration(
+    //           prefixIcon: IconButton(
+    //             icon: CountryListPick(
+    //               // if you need custom picker use this
+    //               pickerBuilder: (context, CountryCode countryCode) {
+    //                 return Row(
+    //                   children: [
+    //                     ClipRRect(
+    //                       borderRadius: BorderRadius.circular(5),
+    //                       child: Image.asset(
+    //                         countryCode.flagUri,
+    //                         package: 'country_list_pick',
+    //                         width: 25,
+    //                         height: 25,
+    //                       ),
+    //                     ),
+    //                     SizedBox(
+    //                       width: 8,
+    //                     ),
+    //                     Text(
+    //                       countryCode.dialCode,
+    //                       style: TextStyle(color: Colors.black),
+    //                     ),
+    //                     Icon(
+    //                       Icons.keyboard_arrow_down_outlined,
+    //                       color: Colors.black,
+    //                     ),
+    //                     // Text(countryCode.code),
+    //                   ],
+    //                 );
+    //               },
+    //               initialSelection: '+965',
+    //               onChanged: (CountryCode code) {
+    //                 print(code.name);
+    //                 print(code.code);
+    //                 print(code.dialCode);
+    //                 print(code.flagUri);
+    //               },
+    //             ),
+    //             // onPressed: (),
+    //           ),
+    //           border: InputBorder.none,
+    //           hintText: "  Phone number",
+    //           hintStyle: TextStyle(color: Colors.grey)),
+    //       validator: NameFieldValidator.validate,
+    //       onSaved: (String value) =>
+    //       studentContactRequestModel.studentphonenumber = value,
+    //     ),
+    //   ),
+    // ),
+
+    // Padding(
+    //   padding: EdgeInsets.only(top: 8, bottom: 8),
+    //   child: Container(
+    //     padding: EdgeInsets.only(left: 10),
+    //     // height: 50,
+    //     decoration: BoxDecoration(
+    //         border: Border.all(color: hasPhoneNumber?Colors.red:Colors.grey),
+    //         borderRadius: BorderRadius.circular(8)),
+    //     child: Row(
+    //       mainAxisAlignment: MainAxisAlignment.center,
+    //       crossAxisAlignment: CrossAxisAlignment.center,
+    //       children: [
+    //
+    //         CountryListPick(
+    //           // if you need custom picker use this
+    //           pickerBuilder: (context, CountryCode countryCode) {
+    //             return Row(
+    //               children: [
+    //                 ClipRRect(
+    //                   borderRadius: BorderRadius.circular(5),
+    //                   child: Image.asset(
+    //                     countryCode.flagUri,
+    //                     package: 'country_list_pick',
+    //                     width: 25,
+    //                     height: 25,
+    //                   ),
+    //                 ),
+    //                 SizedBox(
+    //                   width: 8,
+    //                 ),
+    //                 Text(
+    //                   countryCode.dialCode,
+    //                   style: TextStyle(color: Colors.black),
+    //                 ),
+    //                 Icon(
+    //                   Icons.keyboard_arrow_down_outlined,
+    //                   color: Colors.black,
+    //                 ),
+    //                 // Text(countryCode.code),
+    //               ],
+    //             );
+    //           },
+    //           initialSelection: '+965',
+    //           onChanged: (CountryCode code) {
+    //             print(code.name);
+    //             print(code.code);
+    //             print(code.dialCode);
+    //             print(code.flagUri);
+    //           },
+    //         ),
+    //         Container(
+    //           height: 25,
+    //           width: 3,
+    //           color: Colors.grey[300],
+    //         ),
+    //         SizedBox(
+    //           width: 8,
+    //         ),
+    //         Expanded(
+    //           child: TextFormField(
+    //             key: Key('studentphonenumber'),
+    //             keyboardType: TextInputType.number,
+    //             decoration: InputDecoration(
+    //               prefixIcon: IconButton(
+    //                 icon: CountryListPick(
+    //                   // if you need custom picker use this
+    //                   pickerBuilder: (context, CountryCode countryCode) {
+    //                     return Row(
+    //                       children: [
+    //                         ClipRRect(
+    //                           borderRadius: BorderRadius.circular(5),
+    //                           child: Image.asset(
+    //                             countryCode.flagUri,
+    //                             package: 'country_list_pick',
+    //                             width: 25,
+    //                             height: 25,
+    //                           ),
+    //                         ),
+    //                         SizedBox(
+    //                           width: 8,
+    //                         ),
+    //                         Text(
+    //                           countryCode.dialCode,
+    //                           style: TextStyle(color: Colors.black),
+    //                         ),
+    //                         Icon(
+    //                           Icons.keyboard_arrow_down_outlined,
+    //                           color: Colors.black,
+    //                         ),
+    //                         // Text(countryCode.code),
+    //                       ],
+    //                     );
+    //                   },
+    //                   initialSelection: '+965',
+    //                   onChanged: (CountryCode code) {
+    //                     print(code.name);
+    //                     print(code.code);
+    //                     print(code.dialCode);
+    //                     print(code.flagUri);
+    //                   },
+    //                 ),
+    //                 // onPressed: (),
+    //               ),
+    //                 border: InputBorder.none,
+    //                 hintText: "  Phone number",
+    //                 hintStyle: TextStyle(color: Colors.grey)),
+    //                 validator: NameFieldValidator.validate,
+    //                 onSaved: (String value) =>
+    //                     studentContactRequestModel.studentphonenumber = value,
+    //               ),
+    //         ),
+    //       ],
+    //     ),
+    //   ),
+    // ),
     SizedBox(
       height: 10,
     ),

@@ -372,11 +372,35 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                             ),
                                                           ),
                                                           Text(
-                                                            "${total}",
+                                                            "${total} KD",
                                                             style: TextStyle(
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Divider(),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                        children: [
+                                                          Text(
+                                                            "Total Due",
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                              FontWeight
+                                                                  .bold,
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            "${response.duenow} KD",
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                              FontWeight
+                                                                  .bold,
                                                             ),
                                                           ),
                                                         ],

@@ -22,7 +22,7 @@ List<Widget> loginInputs(loginRequestModel) {
               borderSide: BorderSide(color: Colors.grey[300])),
           labelStyle: TextStyle(color: Colors.grey[400])),
       validator: NameFieldValidator.validate,
-      initialValue: "G-0000001085",
+      initialValue: "",
       onSaved: (String value) => loginRequestModel.Username = value,
     ),
     TextFormField(
@@ -33,7 +33,7 @@ List<Widget> loginInputs(loginRequestModel) {
               borderSide: BorderSide(color: Colors.grey[300])),
           labelStyle: TextStyle(color: Colors.grey[400])),
       obscureText: true,
-      initialValue: "P@ssword1",
+      initialValue: "",
       validator: PasswordFieldValidator.validate,
       onSaved: (String value) => loginRequestModel.Password = value,
     ),

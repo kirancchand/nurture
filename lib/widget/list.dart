@@ -19,6 +19,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:nurture/screen/ReceiptView.dart';
 import 'package:nurture/widget/spinner.dart';
 
 class StudentList extends StatefulWidget {
@@ -298,8 +299,9 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
                               // );
                               // widget.data.result=="Success"?Get.toNamed('/download',arguments: [widget.data.paymentid,widget.data.filepath]):Container();
                               widget.data.result == "Success"
-                                  ? widget.data.filepath==null?Fluttertoast.showToast(msg: "Please wait for verify your payment!!"):downloadFile(widget.data.paymentid,
-                                      widget.data.filepath)
+                               ? widget.data.filepath==null?Fluttertoast.showToast(msg: "Please wait for verify your payment!!"):showPdfView(widget.data.paymentid,widget.data.filepath)
+                                  // ? widget.data.filepath==null?Fluttertoast.showToast(msg: "Please wait for verify your payment!!"):downloadFile(widget.data.paymentid,
+                                  //     widget.data.filepath)
                                   : Container();
 
                               // Navigator.of(context).push(MaterialPageRoute(builder:( context)=>ModelDownload()));
@@ -316,6 +318,10 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
         ),
       ),
     ));
+  }
+
+  showPdfView(paymentid,filepath) async {
+    Get.offAll(()=>ReceiptView(link: filepath ?? ""));
   }
 
   downloadFile(paymentid, filepath) async {
@@ -1136,51 +1142,28 @@ class Installment extends StatelessWidget {
       padding: const EdgeInsets.only(top: 5, bottom: 3),
       child: Column(
         children: [
-          data.tuitionfee != 0.0
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    list_txt("Tution", isSelected: true),
-                    list_txt(data.tuitionfee.toString()),
-                  ],
-                )
-              : Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    list_txt("Tution", isSelected: false),
-                    list_txt(data.tuitionfee.toString()),
-                  ],
-                ),
-          data.transportfee != 0.0
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    list_txt("Transportation", isSelected: true),
-                    list_txt(data.transportfee.toString())
-                  ],
-                )
-              : Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    list_txt("Transportation", isSelected: false),
-                    list_txt(data.transportfee.toString())
-                  ],
-                ),
-          data.others != 0.0
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    list_txt("Others", isSelected: true),
-                    list_txt(data.others.toString())
-                  ],
-                )
-              : Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    list_txt("Others", isSelected: false),
-                    list_txt(data.others.toString())
-                  ],
-                ),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              list_txt("Tution", isSelected: false),
+              list_txt("${data.tuitionfee.toString()} KD"),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              list_txt("Transportation", isSelected: false),
+              list_txt("${data.transportfee.toString()} KD")
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              list_txt("Others", isSelected: false),//true
+              list_txt("${data.others.toString()} KD")
+            ],
+          )
         ],
       ),
     );

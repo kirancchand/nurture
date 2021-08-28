@@ -146,6 +146,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                                                 Checkbox(
                                                   value: enrollment[index],
                                                   onChanged: (value) {
+                                                    print("asdasda${widget.total}");
                                                     setState(() {
                                                       enrollment[index] = value;
                                                       if (value == true) {
@@ -254,10 +255,11 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                         for (int i = 0; i < widget.childrens.length; i++) {
                           addPaymentlist(
                             isEnroll: enrollment[i],
-                            total: enrollment[i] == false
-                                ? widget.childrens[i].dueamount
-                                : widget.childrens[i].dueamount +
-                                    widget.childrens[i].enrollmentamount,
+                            total: widget.total,
+                            // total: enrollment[i] == false
+                            //     ? widget.childrens[i].dueamount
+                            //     : widget.childrens[i].dueamount +
+                            //         widget.childrens[i].enrollmentamount,
                             sid1: widget.childrens[i].studentid,
                           );
                         }

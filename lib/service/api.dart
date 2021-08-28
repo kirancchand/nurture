@@ -198,6 +198,7 @@ Future<Payment> submitPaymentRequest(
     'Cookie':
         'ARRAffinity=94a36c26088811151a0293b8f949eda23429828ef41743d274d54f411258035d'
   };
+  print(enc);
   final response =
       await http.post(getUrl('PostPayment'), body: enc, headers: headers);
   // print(response.body);

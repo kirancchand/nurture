@@ -3,13 +3,14 @@ import 'package:flutter/rendering.dart';
 import 'package:nurture/widget/validators.dart';
 import 'package:nurture/common/constants.dart';
 import 'package:country_list_pick/country_list_pick.dart';
-
+import 'package:get/get.dart';
+import 'package:nurture/localization.dart';
 List<Widget> loginInputs(loginRequestModel) {
   return <Widget>[
     Row(
       children: [
         Text(
-          "Sign in",
+          "signin".tr,
           style: TextStyle(fontSize: 25),
         ),
       ],

@@ -321,7 +321,7 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
   }
 
   showPdfView(paymentid,filepath) async {
-    Get.offAll(()=>ReceiptView(link: filepath ?? ""));
+    Get.to(()=>ReceiptView(link: filepath ?? ""));
   }
 
   downloadFile(paymentid, filepath) async {

@@ -364,7 +364,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                                 .spaceBetween,
                                                         children: [
                                                           Text(
-                                                            "Total",
+                                                            "Total Due",
                                                             style: TextStyle(
                                                               fontWeight:
                                                                   FontWeight
@@ -388,7 +388,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                             .spaceBetween,
                                                         children: [
                                                           Text(
-                                                            "Total Due",
+                                                            "Due Now",
                                                             style: TextStyle(
                                                               fontWeight:
                                                               FontWeight

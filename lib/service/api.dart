@@ -193,8 +193,8 @@ class Api {
 Future<Payment> submitPaymentRequest(
     List<Map<String, dynamic>> paymentBody) async {
   var enc = jsonEncode(paymentBody);
-  print("enccccccccc");
-  print(enc);
+  
+
   var token = await getToken();
   var headers = {
     'Content-Type': 'application/json',

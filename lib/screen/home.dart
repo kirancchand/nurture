@@ -4,6 +4,7 @@ import 'package:nurture/common/constants.dart';
 import 'package:nurture/config/controller.dart';
 import 'package:nurture/screen/home1.dart';
 import 'package:nurture/screen/paymenthistory.dart';
+import 'package:nurture/screen/settingspage.dart';
 import 'package:nurture/widget/list.dart';
 import 'package:nurture/screen/paymentpending.dart';
 import 'package:nurture/screen/myhome.dart';
@@ -36,7 +37,8 @@ class _HomePageState extends State<Home> {
     HomePage1(fee:widget.fee,childrens:widget.childrens),
     PaymentPending(),
     PaymentHistory(),
-    Notifications()
+    //Notifications()
+    SettingsPage()
   ];
 
   int pageIndex;
@@ -155,7 +157,8 @@ class _HomePageState extends State<Home> {
                     label: ""),
                 BottomNavigationBarItem(
                     icon: Icon(
-                      Icons.notifications_none_outlined,
+                      Icons.settings,
+                      //notifications_none_outlined,
                       size: 30,
                     ),
                     /* icon: Image.asset(

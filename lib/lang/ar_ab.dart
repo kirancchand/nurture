@@ -1,7 +1,7 @@
-// English Translations
-const Map<String, String> enUS = {
-  'hello': 'Hello!',
-  'signin':'Sign in',
+// Turkish Translations
+const Map<String, String> trTR = {
+  'hello': 'Merhaba!',
+  'signin':'Sign up',
   'Tell us more': 'اخبرنا بالمزيد',
   'Add attachment':'إضافة مرفق',
   'Select Student':'اختيار اسم الطالب',
@@ -54,5 +54,4 @@ const Map<String, String> enUS = {
   'Father info':'بيانات الأب',
   'Mother info':'بيانات الأم',
   'Student Info':'بيانات الطالب',
-
 };

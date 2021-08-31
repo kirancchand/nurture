@@ -8,6 +8,7 @@ import 'package:nurture/config/controller.dart';
 import 'package:nurture/screen/login.dart';
 import 'package:nurture/screen/home.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:nurture/screen/test.dart';
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key key});
 
@@ -32,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(Duration(seconds: 3)).then((value) async {
       var pref = await SharedPreferences.getInstance();
       print("sdfsdfsdf${pref.getString('Username')}");
-      if(pref.getString('Username')==null)
+      if(pref.getString('Username')==null||pref.getString('Username')=="")
         {
           print("sdfsdfsdf${pref.getString('Username')}");
           Get.offAll(Login());

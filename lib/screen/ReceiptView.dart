@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:nurture/common/constants.dart';
 import 'package:nurture/screen/home.dart';
 import 'package:nurture/widget/spinner.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -71,6 +72,14 @@ class _ReceiptViewState extends State<ReceiptView> {
             gestureNavigationEnabled: true,
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Add your onPressed code here!
+          Fluttertoast.showToast(msg: "Download Feature will Update Soon");
+        },
+        child: const Icon(Icons.download),
+        backgroundColor: kColorGreen,
       ),
     );
   }

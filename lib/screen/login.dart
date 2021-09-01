@@ -74,7 +74,7 @@ class LoginPage extends State<Login>{
                               child:Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                      Text('hello'.tr),
+                                      // Text('hello'.tr),
                                       Text(
                                         "Language:  ",
                                         style: TextStyle(color: Colors.grey),
@@ -112,7 +112,7 @@ class LoginPage extends State<Login>{
                               height: 10,
                             ),
                             Text(
-                              " AL JEEL AL JADEED EDUCATIONAL INST.",
+                              "Al_Jeel_Al_Jadeed_Educational_Institution".tr,
                               style: TextStyle(fontSize: 12),
                             )
                           ],

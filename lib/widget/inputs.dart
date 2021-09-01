@@ -10,7 +10,7 @@ List<Widget> loginInputs(loginRequestModel) {
     Row(
       children: [
         Text(
-          "signin".tr,
+          "Sign_in".tr,
           style: TextStyle(fontSize: 25),
         ),
       ],
@@ -18,7 +18,7 @@ List<Widget> loginInputs(loginRequestModel) {
     TextFormField(
       key: Key('username'),
       decoration: InputDecoration(
-          labelText: ' Enter Username',
+          labelText: "Enter_Username".tr,
           enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey[300])),
           labelStyle: TextStyle(color: Colors.grey[400])),
@@ -29,7 +29,7 @@ List<Widget> loginInputs(loginRequestModel) {
     TextFormField(
       key: Key('password'),
       decoration: InputDecoration(
-          labelText: 'Enter Password',
+          labelText: "Enter_Password".tr,
           enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey[300])),
           labelStyle: TextStyle(color: Colors.grey[400])),

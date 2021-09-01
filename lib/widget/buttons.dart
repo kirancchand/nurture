@@ -43,7 +43,7 @@ List<Widget> loginButtons(
           ),
           child: Center(
             child: Text(
-              "Sign In",
+              "Sign_in".tr,
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,

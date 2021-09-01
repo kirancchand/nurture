@@ -1,7 +1,7 @@
 // Turkish Translations
-const Map<String, String> trTR = {
+const Map<String, String> arAB = {
   'hello': 'Merhaba!',
-  'sign_in':'Sign up',
+  'sign_in':'Sign in',
   'Tell_us_more': 'اخبرنا بالمزيد',
   'Add_attachment':'إضافة مرفق',
   'Select_Student':'اختيار اسم الطالب',

@@ -6,7 +6,7 @@ const Map<String, String> enUS = {
   'Add_attachment':'Add attachment',
   'Select_Student':'Select Student',
   'Submit ':'Submit',
-  'Enter Password':'Enter Password',
+  'Enter_Password':'Enter Password',
   'Al_Jeel_Al_Jadeed_Educational_Institution':'Al Jeel Al Jadeed Educational Institution',
   'Total_Fee_Outstanding ':'Total Fee Outstanding ',
   'Total':'Total',

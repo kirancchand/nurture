@@ -10,7 +10,7 @@ const Map<String, String> arAB = {
   'Al_Jeel_Al_Jadeed_Educational_Institution':'مؤسسة الجيل الجديد التعليمة',
   'Total_Fee_Outstanding ':'إجمالي الرسوم المستحقة',
   'Total':'المجموع',
-  'Contact Us':'التواصل معنا',
+  'Contact_Us':'التواصل معنا',
   'Student_Details':'بيانات الطالب',
   'Male/female':'ذكر / أنثى',
   'Confirm_payment':'تأكيد الدفع ',

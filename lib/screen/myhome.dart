@@ -189,7 +189,7 @@ class _MyHomeState extends State<MyHome> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Students"),
+                                Text("Student".tr),
                                 Row(
                                   children: [
                                     Text(

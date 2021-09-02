@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nurture/widget/list.dart';
+import 'package:get/get.dart';
 
 class Student extends StatefulWidget {
   const Student({Key key}) : super(key: key);
@@ -73,9 +74,9 @@ class _StudentState extends State<Student> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Students"),
+                            Text("Student".tr),
                             Text(
-                              "Academic year: 2021-2022",
+                              "Academic_year_AY_2020-2021".tr,
                               style:
                               TextStyle(color: Colors.grey, fontSize: 11),
                             )

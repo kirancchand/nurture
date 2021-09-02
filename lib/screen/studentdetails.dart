@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nurture/widget/list.dart';
 import 'package:nurture/model/student.dart';
 import 'package:nurture/model/fee.dart';
+import 'package:get/get.dart';
 
 
 class StudentDetails extends StatelessWidget {
@@ -25,7 +26,7 @@ class StudentDetails extends StatelessWidget {
             ),
           ),
           toolbarHeight: 80,
-          title: Text("Student Details",
+          title: Text("Student_Details".tr,
               style: TextStyle(
                 color: Colors.white,
               )),

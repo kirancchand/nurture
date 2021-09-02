@@ -8,7 +8,7 @@ const Map<String, String> enUS = {
   'Submit ':'Submit',
   'Enter_Password':'Enter Password',
   'Al_Jeel_Al_Jadeed_Educational_Institution':'Al Jeel Al Jadeed Educational Institution',
-  'Total_Fee_Outstanding ':'Total Fee Outstanding ',
+  'Total_Fee_Outstanding':'Total Fee Outstanding',
   'Total':'Total',
   'Contact_Us':'Contact Us',
   'Student_Details':'Student Details',

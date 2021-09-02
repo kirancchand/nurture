@@ -94,7 +94,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                   padding: EdgeInsets.only(top: 40),
                   child: Column(
                     children: [
-                      Text("Payment Pending",
+                      Text("Payment_Pending".tr,
                           style: TextStyle(color: Colors.white, fontSize: 18)),
                       SizedBox(
                         height: 17,
@@ -119,7 +119,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Student",
+                                  "Student".tr,
                                   style: TextStyle(color: kColorGreen),
                                 ),
                                 Center(
@@ -208,7 +208,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
-                            "Academic year: ",
+                            "Academic_Year".tr+":",
                             style: TextStyle(color: Colors.grey),
                           ),
                           Obx(
@@ -452,7 +452,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                                           width:
                                               MediaQuery.of(context).size.width,
                                           child: Center(
-                                              child: Text("No Data Found")),
+                                              child: Text("No_Data_Found".tr)),
                                         );
                                       }
                                     } else if (snapshot.hasError) {

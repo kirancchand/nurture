@@ -69,7 +69,7 @@ class _ContactInformationState extends State<ContactInformation> {
           ),
         ),
         toolbarHeight: 80,
-        title: Text("Contact Us",
+        title: Text("Contact_Us".tr,
             style: TextStyle(
               color: Colors.white,
             )),
@@ -170,7 +170,7 @@ class _ContactInformationState extends State<ContactInformation> {
                         hint: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            "Select Student",
+                            "Select_Student".tr,
                             style: TextStyle(color: Colors.grey),
                           ),
                         ),
@@ -205,7 +205,7 @@ class _ContactInformationState extends State<ContactInformation> {
                               // print(x);
                             },
                             child: Text(
-                              "Add Attachment",
+                              "Add_Attachment".tr,
                               style: TextStyle(
                                 decoration: (TextDecoration.underline),
                                 color: kColorGreen,

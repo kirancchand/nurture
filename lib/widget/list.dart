@@ -164,7 +164,7 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Transaction Id",
+                                  "Transaction Id".tr,
                                   style: TextStyle(
                                       color: Colors.grey, fontSize: 12),
                                 ),
@@ -172,7 +172,7 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
                                   height: 8,
                                 ),
                                 Text(
-                                  "DateTime",
+                                  "Date/Time".tr,
                                   style: TextStyle(
                                       color: Colors.grey, fontSize: 12),
                                 ),
@@ -180,7 +180,7 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
                                   height: 8,
                                 ),
                                 Text(
-                                  "Payment Id",
+                                  "Payment id".tr,
                                   style: TextStyle(
                                       color: Colors.grey, fontSize: 12),
                                 ),
@@ -188,7 +188,7 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
                                   height: 8,
                                 ),
                                 Text(
-                                  "Amount",
+                                  "Amount".tr,
                                   style: TextStyle(
                                       color: Colors.grey, fontSize: 12),
                                 ),
@@ -517,7 +517,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                 children: [
                                   SizedBox(
                                     width: 150,
-                                    child: txt("Name")),
+                                    child: txt("Name".tr)),
                                     Expanded(child: Text(childrens.studentname,maxLines: 2,))
                                 ],
                               ),
@@ -525,7 +525,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                 children: [
                                   SizedBox(
                                     width: 150,
-                                    child: txt("Gender"),),
+                                    child: txt("Gender".tr),),
                                     Expanded(child: Text(childrens.gender,maxLines: 2,))
                                 ],
                               ),
@@ -533,7 +533,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                 children: [
                                   SizedBox(
                                     width: 150,
-                                    child: txt("Date of Birth"),),
+                                    child: txt("Date of Birth".tr),),
                                     Expanded(child: Text(childrens.birthdate.day.toString() +
                                         "/" +
                                         childrens.birthdate.month.toString() +
@@ -545,7 +545,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                 children: [
                                   SizedBox(
                                     width: 150,
-                                    child: txt("School Name"),),
+                                    child: txt("School Name".tr),),
                                     Expanded(child: Text(childrens.schoolname,maxLines: 3,))
                                 ],
                               ),
@@ -553,7 +553,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                 children: [
                                   SizedBox(
                                     width: 150,
-                                    child: txt("Grade"),),
+                                    child: txt("Grade".tr),),
                                     Expanded(child: Text(childrens.grade,maxLines: 2,))
                                 ],
                               ),
@@ -561,7 +561,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                 children: [
                                   SizedBox(
                                     width: 150,
-                                    child: txt("Academic Year"),),
+                                    child: txt("Academic Year".tr),),
                                     Expanded(child: Text(childrens.academicyear,maxLines: 2,))
                                 ],
                               ),
@@ -569,7 +569,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                 children: [
                                   SizedBox(
                                     width: 150,
-                                    child: txt("Nationality"),),
+                                    child: txt("Nationality".tr),),
                                     Expanded(child: Text(childrens.nationality,maxLines: 2,))
                                 ],
                               ),
@@ -577,7 +577,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                 children: [
                                   SizedBox(
                                     width: 150,
-                                    child: txt("Religion"),),
+                                    child: txt("Religion".tr),),
                                     Expanded(child: Text(childrens.religion,maxLines: 2,))
                                 ],
                               ),
@@ -585,7 +585,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                 children: [
                                   SizedBox(
                                     width: 150,
-                                    child:   txt("Civil id"),),
+                                    child:   txt("Civil ID".tr),),
                                     Expanded(child: Text(childrens.civilid.toString(),maxLines: 2,))
                                 ],
                               ),
@@ -593,7 +593,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                 children: [
                                   SizedBox(
                                     width: 150,
-                                    child: txt("Civil id expiry date"),),
+                                    child: txt("Civil id Expiry Date".tr),),
                                     Expanded(child: Text(childrens.studentcivilexpirydate.day
                                             .toString() +
                                         "/" +
@@ -608,7 +608,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                 children: [
                                   SizedBox(
                                     width: 150,
-                                    child:  txt("Passport Number"),),
+                                    child:  txt("Passport Number".tr),),
                                     Expanded(child: Text(childrens.passportnumber,maxLines: 2,))
                                 ],
                               ),
@@ -616,7 +616,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                 children: [
                                   SizedBox(
                                     width: 150,
-                                    child: txt("Address"),),
+                                    child: txt("Address".tr),),
                                     Expanded(child: Text(childrens.regionalarea,maxLines: 10,))
                                 ],
                               ),
@@ -636,7 +636,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                           width: 83,
                           color: Colors.white,
                           child: Text(
-                            "Student info",
+                            "Student info".tr,
                             style: TextStyle(color: kColorGreen),
                           ),
                         ),
@@ -807,12 +807,12 @@ class _StudentInfoListState extends State<StudentInfoList> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            txt("Name"),
-                            txt("Nationality"),
-                            txt("Civil id"),
-                            txt("Civil id expiry date"),
-                            txt("Email address"),
-                            txt("Address"),
+                            txt("Name".tr),
+                            txt("Nationality".tr),
+                            txt("Civil ID".tr),
+                            txt("Civil id Expiry Date".tr),
+                            txt("Email address".tr),
+                            txt("Address".tr),
                           ],
                         ),
                       ),
@@ -1040,18 +1040,18 @@ class ParentsInfoList extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            txt("Name"),
-                            txt("Gender"),
-                            txt("Date of Birth"),
-                            txt("School Name"),
-                            txt("Grade"),
-                            txt("Academic Year"),
-                            txt("Nationality"),
-                            txt("Religion"),
-                            txt("Civil id"),
-                            txt("Civil idExpiry date"),
-                            txt("Passport Number"),
-                            txt("Address"),
+                            txt("Name".tr),
+                            txt("Gender".tr),
+                            txt("Date_of_Birth".tr),
+                            txt("School_Name".tr),
+                            txt("Grade".tr),
+                            txt("Academic_Year".tr),
+                            txt("Nationality".tr),
+                            txt("Religion".tr),
+                            txt("Civil_ID".tr),
+                            txt("Civil_id_Expiry_Date".tr),
+                            txt("Passport_Number".tr),
+                            txt("Address".tr),
                           ],
                         ),
                       ),
@@ -1086,7 +1086,7 @@ class ParentsInfoList extends StatelessWidget {
                     width: 83,
                     color: Colors.white,
                     child: Text(
-                      " Mother info",
+                      " Mother_info".tr,
                       style: TextStyle(color: kColorGreen),
                     ),
                   ),
@@ -1218,7 +1218,7 @@ class _paymentListState extends State<paymentList> {
                     activeColor: Colors.green,
                   ),
                   Text(
-                    "  Enrollment",
+                    "  Enrollment".tr,
                     style: TextStyle(color: Colors.grey),
                   ),
                 ],

@@ -9,7 +9,8 @@ import 'package:nurture/common/constants.dart';
 import 'package:nurture/model/fee.dart';
 import 'package:nurture/model/notification.dart';
 import 'package:nurture/model/paymenthistory.dart';
-import 'package:nurture/model/paymentpending.dart';
+// import 'package:nurture/model/paymentpending.dart';
+import 'package:nurture/model/feestructure.dart';
 import 'package:nurture/model/student.dart';
 
 import 'package:nurture/screen/studentdetails.dart';

@@ -27,13 +27,7 @@ class _PaymentPendingState extends State<PaymentPending> {
   // value: studentContactRequestModel.studentid,
   // StudentContactRequestModel studentContactRequestModel;
   Api api = new Api();
-  Future<PaymentPendingResponseModel> getPayment;
   Future<FeeStructureModel> getFeeStructure;
-  Future<StudentResponseModel> getStudents;
-  List childrens = [];
-  PendingDropDown controller = Get.put(PendingDropDown());
-  ChildrenController childlistcon = Get.put(ChildrenController());
-  double total;
   YearController con = Get.put(YearController());
 
   @override
@@ -88,13 +82,7 @@ class _PaymentPendingState extends State<PaymentPending> {
               ),
             ],
           ),
-          controller.text.value.isEmpty
-              ? Container(
-                  child: Center(
-                    child: Text('Waiting..'),
-                  ),
-                )
-              : Padding(
+          Padding(
                   padding: EdgeInsets.all(20),
                   child: Column(
                     children: [

@@ -79,7 +79,7 @@ class _NotificationsState extends State<Notifications> {
                     padding: const EdgeInsets.only(top: 40),
                     child: Column(
                       children: [
-                        Text("Notifications",
+                        Text("Notifications".tr,
                             style:
                                 TextStyle(color: Colors.white, fontSize: 18)),
                         SizedBox(
@@ -105,7 +105,7 @@ class _NotificationsState extends State<Notifications> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Student",
+                                    "Student".tr,
                                     style: TextStyle(color: kColorGreen),
                                   ),
 
@@ -147,7 +147,7 @@ class _NotificationsState extends State<Notifications> {
                                                     Text(valueItem.studentname),
                                               );
                                             }).toList(),
-                                          ):Center(child:Text("No Data Found"));
+                                          ):Center(child:Text("No_Data_Found".tr));
                                         } else if (snapshot.hasError) {
                                           // return Text("${snapshot.error}");
                                           return Text("${snapshot.error}");
@@ -257,7 +257,7 @@ class _NotificationsState extends State<Notifications> {
             padding: const EdgeInsets.only(top: 40),
             child: Column(
               children: [
-                Text("Notifications",
+                Text("Notifications".tr,
                     style: TextStyle(color: Colors.white, fontSize: 18)),
                 SizedBox(
                   height: 17,
@@ -282,7 +282,7 @@ class _NotificationsState extends State<Notifications> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Student",
+                            "Student".tr,
                             style: TextStyle(color: kColorGreen),
                           ),
 

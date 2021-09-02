@@ -139,7 +139,7 @@ class _HomePage1State extends State<HomePage1> {
                         ),
                       ),
                       Center(
-                        child: Text("Parent ID: ${fee.response.parentnumber}",
+                        child: Text("Parent_ID".tr + ": ${fee.response.parentnumber}",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 15,
@@ -194,7 +194,7 @@ class _HomePage1State extends State<HomePage1> {
                             Row(
                               children: [
                                 Text(
-                                  "Academic year:",
+                                  "Academic_Year".tr +" :",
                                   style: TextStyle(
                                       color: Colors.grey, fontSize: 11),
                                 ),
@@ -311,7 +311,7 @@ class _HomePage1State extends State<HomePage1> {
                                 mainAxisAlignment:
                                 MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text("Total"),
+                                  Text("Total".tr),
                                   Text(total.toString() + "KD")
                                 ],
                               ),
@@ -340,7 +340,7 @@ class _HomePage1State extends State<HomePage1> {
                                     color: kColorGreen),
                                 child: Center(
                                   child: Text(
-                                    "Pay Now",
+                                    "Pay_now".tr,
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold),
@@ -388,7 +388,7 @@ Widget ContactUs(context, List<FeeResponse> children) {
                   Icons.mail,
                   color: kColorGreen,
                 ),
-                title: Text("Contact Us"),
+                title: Text("Contact_Us".tr),
                 trailing: Icon(Icons.keyboard_arrow_right_outlined,
                     color: kColorGreen)),
           )),

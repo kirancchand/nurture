@@ -5,6 +5,7 @@ import 'package:nurture/model/paymenthistory.dart';
 import 'package:nurture/service/api.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
 class PaymentHistory extends StatefulWidget {
   const PaymentHistory({Key key}) : super(key: key);
 
@@ -32,7 +33,7 @@ class _PaymentHistoryState extends State<PaymentHistory> {
           ),
         ),*/
         toolbarHeight: 80,
-        title: Text("Payment history ",
+        title: Text("Payment_History".tr,
             style: TextStyle(
               color: Colors.white,
             )),

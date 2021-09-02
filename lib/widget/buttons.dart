@@ -93,7 +93,7 @@ Widget payNowButtons(List<Map<String, dynamic>> stu, context, total) {
           borderRadius: BorderRadius.circular(16), color: kColorGreen),
       child: Center(
         child: Text(
-          "Pay Now",
+          "Pay_Now".tr,
           style: TextStyle(color: Colors.white),
         ),
       ),
@@ -143,7 +143,7 @@ Widget submitButtons(formKey, studentContactRequestModel, x) {
           borderRadius: BorderRadius.circular(16), color: kColorGreen),
       child: Center(
           child: Text(
-        "Submit",
+        "Submit".tr,
         style: TextStyle(color: Colors.white),
       )),
     ),
@@ -183,7 +183,7 @@ List<Widget> contactReqButton(
           ),
           child: Center(
             child: Text(
-              "Submit",
+              "Submit".tr,
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,

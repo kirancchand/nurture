@@ -123,7 +123,7 @@ List<Widget> contactReqInputs(studentContactRequestModel, context) {
           key: Key('studentname'),
           keyboardType: TextInputType.name,
           decoration: InputDecoration(
-              hintText: "Full name",
+              hintText: "Full_name".tr,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(color: Colors.grey[300]),
@@ -217,7 +217,7 @@ List<Widget> contactReqInputs(studentContactRequestModel, context) {
                   // onPressed: (),
                 ),
               ),
-              hintText: "Phone number",
+              hintText: "Phone_number".tr,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(color: Colors.grey[300]),
@@ -408,7 +408,7 @@ List<Widget> contactReqInputs(studentContactRequestModel, context) {
     Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text("  Tell us more..."),
+        Text("Tell_us_more".tr+"..."),
         Text(
           "0/1500",
           style: TextStyle(color: Colors.grey),
@@ -431,7 +431,7 @@ List<Widget> contactReqInputs(studentContactRequestModel, context) {
                   borderRadius: BorderRadius.circular(8),
                   borderSide: BorderSide(color: Colors.grey[300]),
                 ),
-                hintText: "Please enter your inquiry.....",
+                hintText: "Please_enter_your_inquiry".tr+".....",
                 hintStyle: TextStyle(color: Colors.grey)),
             validator: NameFieldValidator.validate,
             onSaved: (String value) =>

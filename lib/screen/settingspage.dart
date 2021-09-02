@@ -32,7 +32,7 @@ class SettingsPage extends StatelessWidget {
             height: 50,
           ),
          ListTile(
-            title: Text("Notification"),
+            title: Text("Notifications".tr),
              onTap: () {
                 Get.to(Notifications());
               },

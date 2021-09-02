@@ -67,7 +67,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
             ),
           ),
           toolbarHeight: 80,
-          title: Text("Confirm Payment",
+          title: Text("Confirm Payment".tr,
               style: TextStyle(
                 color: Colors.white,
               )),
@@ -100,9 +100,9 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Student",
+                            Text("Student".tr,
                                 style: TextStyle(color: Colors.grey)),
-                            Text("Amount",
+                            Text("Amount".tr,
                                 style: TextStyle(color: Colors.grey)),
                           ],
                         ),
@@ -172,7 +172,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                                                   activeColor: Colors.green,
                                                 ),
                                                 Text(
-                                                  "  Enrollment",
+                                                  "  Enrollment".tr,
                                                   style: TextStyle(
                                                       color: Colors.grey),
                                                 ),
@@ -213,7 +213,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
               //  child:
               Center(
                 child:
-                    Text("Add enrollment fee for confirming next academic year",
+                    Text("Add_enrollment_fee_for_confirming_next_academic_year".tr,
                         style: TextStyle(
                           color: Colors.grey,
                           fontSize: 11,
@@ -226,7 +226,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Total Amount"),
+                  Text("Total_Amount".tr),
                   Text(
                     "${widget.total} KD",
                     style: TextStyle(fontWeight: FontWeight.bold),
@@ -246,7 +246,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                             color: kColorGreen),
                         child: Center(
                             child: Text(
-                          "Confirm Payment",
+                          "Confirm_Payment".tr,
                           style: TextStyle(color: Colors.white),
                         )),
                       ),
@@ -290,7 +290,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                             color: kColorGreen),
                         child: Center(
                             child: Text(
-                          "Confirm Payment",
+                          "Confirm_Payment".tr,
                           style: TextStyle(color: Colors.white),
                         )),
                       ),
@@ -311,13 +311,14 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Confirming payment will take you",
+                        "Confirming_payment_will_take_you_to_payment_gateway".tr,
+                        textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.grey),
                       ),
-                      Text(
-                        "to payment gateway",
-                        style: TextStyle(color: Colors.grey),
-                      ),
+                     // Text(
+                     //   "to payment gateway",
+                     //   style: TextStyle(color: Colors.grey),
+                     // ),
                     ],
                   )),
               SizedBox(height: 20)

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nurture/screen/notification.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:nurture/screen/login.dart';
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key key}) : super(key: key);
 
@@ -50,7 +50,7 @@ class SettingsPage extends StatelessWidget {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.setString('Username', "");
                 prefs.setString('access_token', "");
-                Get.toNamed('/login');
+                Get.offAll(Login());
                 // Get.to();
               },
             

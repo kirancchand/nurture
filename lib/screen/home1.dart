@@ -9,7 +9,7 @@ import 'package:nurture/service/api.dart';
 import 'package:nurture/widget/list.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:nurture/screen/login.dart';
 class HomePage1 extends StatefulWidget {
   HomePage1({Key key,this.fee,this.childrens}) : super(key: key);
   FeeResponseModel fee;
@@ -101,7 +101,7 @@ class _HomePage1State extends State<HomePage1> {
                                         SharedPreferences prefs = await SharedPreferences.getInstance();
                                         prefs.setString('Username', "");
                                         prefs.setString('access_token', "");
-                                        Get.toNamed('/login');
+                                        Get.offAll(Login());
                                   })
                           /* Icon(
                             Icons.settings,
@@ -190,7 +190,7 @@ class _HomePage1State extends State<HomePage1> {
                           mainAxisAlignment:
                           MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Students"),
+                            Text("Student".tr),
                             Row(
                               children: [
                                 Text(

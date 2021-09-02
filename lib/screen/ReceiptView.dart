@@ -11,6 +11,7 @@ import 'package:nurture/service/api.dart';
 import 'package:nurture/model/fee.dart';
 import 'package:get/get.dart';
 import 'package:nurture/config/controller.dart';
+import 'package:nurture/screen/Pdf.dart';
 class ReceiptView extends StatefulWidget {
   ReceiptView({Key key, this.link}) : super(key: key);
   String link;
@@ -77,6 +78,14 @@ class _ReceiptViewState extends State<ReceiptView> {
         onPressed: () {
           // Add your onPressed code here!
           Fluttertoast.showToast(msg: "Download Feature will Update Soon");
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PDFScreen(
+                link: widget.link
+              ),
+            ),
+          );
         },
         child: const Icon(Icons.download),
         backgroundColor: kColorGreen,

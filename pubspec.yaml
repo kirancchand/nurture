@@ -37,6 +37,7 @@ dependencies:
   webview_flutter: ^2.0.12
   flutter_spinkit: ^3.1.0
   image_gallery_saver: ^1.6.9
+  flutter_pdfview: ^1.1.0
   permission_handler: ^8.1.4+2
 dev_dependencies:
   flutter_test:

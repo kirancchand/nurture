@@ -42,6 +42,7 @@ class _PaymentPendingState extends State<PaymentPending> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       backgroundColor: Colors.white,
       body: ListView(
         children: [
           // _header(),
@@ -75,7 +76,6 @@ class _PaymentPendingState extends State<PaymentPending> {
                       SizedBox(
                         height: 17,
                       ),
-
                     ],
                   ),
                 ),
@@ -83,68 +83,497 @@ class _PaymentPendingState extends State<PaymentPending> {
             ],
           ),
           Padding(
-                  padding: EdgeInsets.all(20),
-                  child: Column(
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text(
-                            "Academic_Year".tr+":",
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          Obx(
-                            () => Text(
-                              con.year.value ?? "",
-                              style:
-                                  TextStyle(color: Colors.grey, fontSize: 11),
-                            ),
-                          ),
-                        ],
+            padding: EdgeInsets.all(20),
+            child: Column(
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      "Academic_Year".tr + ":",
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    Obx(
+                      () => Text(
+                        con.year.value ?? "",
+                        style: TextStyle(color: Colors.grey, fontSize: 11),
                       ),
-                      SizedBox(
-                        height: 5,
-                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 5,
+                ),
 
-                      Container(
-                          // height: MediaQuery.of(context).size.height * .70,
-                          width: MediaQuery.of(context).size.width,
-                          // decoration: BoxDecoration(
-                          //     borderRadius: BorderRadius.circular(8),
-                          //     border: Border.all(color: Colors.grey.shade300)),
-                          /*  child: Padding(
+                Container(
+                    // height: MediaQuery.of(context).size.height * .70,
+                    width: MediaQuery.of(context).size.width,
+                    // decoration: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(8),
+                    //     border: Border.all(color: Colors.grey.shade300)),
+                    /*  child: Padding(
                             padding:
                                 EdgeInsets.only(left: 15, top: 15, right: 20),*/
-                          child: Column(
-                            children: [
-                              Container(
-                                child: FutureBuilder<FeeStructureModel>(
-                                  future: api.getFeeStructure(),
-                                  builder: (BuildContext context,
-                                      AsyncSnapshot<FeeStructureModel>
-                                      snapshot) {
-                                    if (snapshot.hasData) {
-                                      var statuscode =
-                                          snapshot.data?.statuscode;
-                                      // print(statuscode);
-                                      if (statuscode == "200") {
-
-                                        var response = snapshot.data?.response;
-                                        print(response.length);
-                                            return response.length>0?  ListView.builder(
-                                                itemCount: response.length,
-                                                shrinkWrap: true,
-                                                physics:
-                                                ClampingScrollPhysics(),
-                                                itemBuilder: (context,
-                                                    int index) {
-                                                  return Column(
-                                                    crossAxisAlignment:
-                                                    CrossAxisAlignment
-                                                        .start,
+                    child: Column(
+                      children: [
+                        Container(
+                          child: FutureBuilder<FeeStructureModel>(
+                            future: api.getFeeStructure(),
+                            builder: (BuildContext context,
+                                AsyncSnapshot<FeeStructureModel> snapshot) {
+                              if (snapshot.hasData) {
+                                var statuscode = snapshot.data?.statuscode;
+                                // print(statuscode);
+                                if (statuscode == "200") {
+                                  var response = snapshot.data?.response;
+                                  print(response.length);
+                                  return response.length > 0
+                                      ? ListView.builder(
+                                          itemCount: response.length,
+                                          shrinkWrap: true,
+                                          physics: ClampingScrollPhysics(),
+                                          itemBuilder: (context, int index) {
+                                            return Padding(
+                                              padding: const EdgeInsets.only(top: 10,bottom: 10),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Stack(
                                                     children: [
-                                                            Text(
+                                                      Align(
+                                                        child: Container(
+                                                          height: 354,
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width -
+                                                              40,
+                                                              
+                                                        ),
+                                                      ),
+                                                      Positioned(
+                                                        bottom: 0,
+                                                        child: Container(
+                                                            height:345,
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width -
+                                                                40,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                                 // color: Colors.white,
+                                                              border: Border.all(
+                                                                  color: Colors
+                                                                      .grey
+                                                                      .shade300,
+                                                                  width: 1),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10),
+
+                                                            ),
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(15),
+                                                              child: Column(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceEvenly,
+                                                                children: [
+                                                                //  Text(response[index] .studentname),
+                                                                 // Divider(),
+                                                                  Container(
+                                                                    child: ListView
+                                                                        .builder(
+                                                                            itemCount: response[index]
+                                                                                .installment
+                                                                                .length,
+                                                                            shrinkWrap:
+                                                                                true,
+                                                                            physics:
+                                                                                ClampingScrollPhysics(),
+                                                                            itemBuilder:
+                                                                                (context, int i) {
+                                                                              print(response[index].installment[i]);
+                                                                              return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                                                                                Text('Installment ${i + 1}',style: TextStyle(fontWeight: FontWeight.bold),),
+                                                                                Installment(data: response[index].installment[i]),
+                                                                              ]);
+                                                                            }),
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height: 15,
+                                                                  ),
+                                                                  Divider(),
+                                                                  Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceBetween,
+                                                                    children: [
+                                                                      Text(
+                                                                        "Total Due",
+                                                                        style:
+                                                                            TextStyle(
+                                                                          fontWeight:
+                                                                              FontWeight.bold,
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        "${response[index].dueamount} KD",
+                                                                        style:
+                                                                            TextStyle(
+                                                                          fontWeight:
+                                                                              FontWeight.bold,
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  Divider(),
+                                                                  Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceBetween,
+                                                                    children: [
+                                                                      Text(
+                                                                        "Due Now",
+                                                                        style:
+                                                                            TextStyle(
+                                                                          fontWeight:
+                                                                              FontWeight.bold,
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        "${response[index].duenow} KD",
+                                                                        style:
+                                                                            TextStyle(
+                                                                          fontWeight:
+                                                                              FontWeight.bold,
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: EdgeInsets
+                                                                        .symmetric(
+                                                                            horizontal:
+                                                                                3,
+                                                                            vertical:
+                                                                                5),
+                                                                    // child: Divider(),
+                                                                  ),
+                                                                 
+                                                                ],
+                                                              ),
+                                                            )),
+                                                      ),
+                                                      Positioned(
+                                                        left: 15,
+                                                        top: 0,
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  bottom: 8),
+                                                          child: Container(
+                                                           // height: 20,
+                                                          //  width: 83,
+                                                            color: Colors.white,
+                                                            child:  Text(response[
+                                                                          index]
+                                                                      .studentname,
+                                                              style: TextStyle(
+                                                                  color:
+                                                                      kColorGreen),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          })
+                                      : Center(
+                                          child: Text("No Pending Payment"));
+                                } else {
+                                  return Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        .70,
+                                    width: MediaQuery.of(context).size.width,
+                                    child:
+                                        Center(child: Text("No_Data_Found".tr)),
+                                  );
+                                }
+                              } else if (snapshot.hasError) {
+                                // return Text("${snapshot.error}");
+                                return Text("${snapshot.error}");
+                              } else {
+                                return Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  height:
+                                      MediaQuery.of(context).size.height * .50,
+                                  child: Center(
+                                      child: SpinKitWave(
+                                    color: Colors.blue,
+                                  )),
+                                );
+                              }
+                            },
+                          ),
+                          //     FutureBuilder<PaymentPendingResponseModel>(
+                          //   future: api
+                          //       .getPendingPayment(controller.text.value),
+                          //   builder: (BuildContext context,
+                          //       AsyncSnapshot<PaymentPendingResponseModel>
+                          //           snapshot) {
+                          //     if (snapshot.hasData) {
+                          //       var statuscode =
+                          //           snapshot.data?.statuscode;
+                          //
+                          //       // print(statuscode);
+                          //       if (statuscode == "200") {
+                          //
+                          //         var response = snapshot.data?.response;
+                          //         total = 0.0;
+                          //
+                          //         for (int index = 0;
+                          //             index <
+                          //                     response
+                          //                         .installment.length ??
+                          //                 0;
+                          //             index++)
+                          //           total = total +
+                          //               response.installment[index]
+                          //                   .tuitionfee +
+                          //               response.installment[index]
+                          //                   .transportfee +
+                          //               response
+                          //                   .installment[index].others;
+                          //
+                          //         // return response.installment.length > 0
+                          //         return response.installment.length > 0
+                          //             //response.dueamount!=0.0
+                          //             ? Container(
+                          //                 width: MediaQuery.of(context)
+                          //                     .size
+                          //                     .width,
+                          //                 decoration: BoxDecoration(
+                          //                     borderRadius:
+                          //                         BorderRadius.circular(
+                          //                             8),
+                          //                     border: Border.all(
+                          //                         color: Colors
+                          //                             .grey.shade300)),
+                          //                 child: Padding(
+                          //                   padding:
+                          //                       const EdgeInsets.only(
+                          //                           left: 15,
+                          //                           top: 15,
+                          //                           right: 20),
+                          //                   child: Column(
+                          //                     children: [
+                          //                       ListView.builder(
+                          //                           itemCount: response
+                          //                               .installment
+                          //                               .length,
+                          //                           shrinkWrap: true,
+                          //                           physics:
+                          //                               ClampingScrollPhysics(),
+                          //                           itemBuilder: (context,
+                          //                               int index) {
+                          //                             // if (response
+                          //                             //             .installment[
+                          //                             //                 index]
+                          //                             //             .tuitionfee +
+                          //                             //         response
+                          //                             //             .installment[
+                          //                             //                 index]
+                          //                             //             .transportfee +
+                          //                             //         response
+                          //                             //             .installment[
+                          //                             //                 index]
+                          //                             //             .others ==
+                          //                             //     0.0)
+                          //                             /* if(response.dueamount==0.0)
+                          //                           {
+                          //                             return SizedBox();
+                          //                           } else { */
+                          //                            /*  return
+                          //                             Column(
+                          //                               crossAxisAlignment:
+                          //                                   CrossAxisAlignment
+                          //                                       .start,
+                          //                               children: [
+                          //                                 Text(
+                          //                                     'Installment ${response
+                          //                                         .installment[
+                          //                                     index].id}'),
+                          //                                 Divider(),
+                          //                                 Installment(
+                          //                                     data: response
+                          //                                             .installment[
+                          //                                         index]),
+                          //                                 SizedBox(
+                          //                                   height: 15,
+                          //                                 ),
+                          //                               ],
+                          //                             );
+                          //
+                          //                           }),*/
+                          //
+                          //                             return Column(
+                          //                               crossAxisAlignment:
+                          //                                   CrossAxisAlignment
+                          //                                       .start,
+                          //                               children: [
+                          //                                 Text(
+                          //                                     'Installment ${index + 1}'),
+                          //                                 Divider(),
+                          //                                 //  if(){},
+                          //                                 Installment(
+                          //                                     data: response
+                          //                                             .installment[
+                          //                                         index]),
+                          //                                 SizedBox(
+                          //                                   height: 15,
+                          //                                 ),
+                          //                               ],
+                          //                             );
+                          //                           }),
+                          //                       Divider(),
+                          //                       Row(
+                          //                         mainAxisAlignment:
+                          //                             MainAxisAlignment
+                          //                                 .spaceBetween,
+                          //                         children: [
+                          //                           Text(
+                          //                             "Total Due",
+                          //                             style: TextStyle(
+                          //                               fontWeight:
+                          //                                   FontWeight
+                          //                                       .bold,
+                          //                             ),
+                          //                           ),
+                          //                           Text(
+                          //                             "${total} KD",
+                          //                             style: TextStyle(
+                          //                               fontWeight:
+                          //                                   FontWeight
+                          //                                       .bold,
+                          //                             ),
+                          //                           ),
+                          //                         ],
+                          //                       ),
+                          //                       Divider(),
+                          //                       Row(
+                          //                         mainAxisAlignment:
+                          //                         MainAxisAlignment
+                          //                             .spaceBetween,
+                          //                         children: [
+                          //                           Text(
+                          //                             "Due Now",
+                          //                             style: TextStyle(
+                          //                               fontWeight:
+                          //                               FontWeight
+                          //                                   .bold,
+                          //                             ),
+                          //                           ),
+                          //                           Text(
+                          //                             "${response.duenow} KD",
+                          //                             style: TextStyle(
+                          //                               fontWeight:
+                          //                               FontWeight
+                          //                                   .bold,
+                          //                             ),
+                          //                           ),
+                          //                         ],
+                          //                       ),
+                          //                       Padding(
+                          //                         padding: EdgeInsets
+                          //                             .symmetric(
+                          //                                 horizontal: 3,
+                          //                                 vertical: 10),
+                          //                         // child: Divider(),
+                          //                       ),
+                          //                       SizedBox(height: 20),
+                          //                       /*Center(
+                          //                           child: Spinner(
+                          //                         child: payNowButtons([
+                          //                           {
+                          //                             "AcademicPeriodId":
+                          //                                 "2020-2021",
+                          //                             "GrandTotal": total,
+                          //                             "IsIncludeEnrollment":
+                          //                                 false,
+                          //                             "KnetpaymentAmount":
+                          //                                 total,
+                          //                             "OffSet": -330,
+                          //                             "OpeningBalance": 0,
+                          //                             "StudentId":
+                          //                                 controller
+                          //                                     .text.value,
+                          //                             "Paymentid": 0,
+                          //                           }
+                          //                         ], context, total
+                          //                         ),
+                          //                       )),*/
+                          //                       SizedBox(height: 20)
+                          //                     ],
+                          //                   ),
+                          //                 ),
+                          //               )
+                          //             : Center(
+                          //                 child:
+                          //                     Text("No Pending Payment"));
+                          //       } else {
+                          //
+                          //         return Container(
+                          //           height: MediaQuery.of(context)
+                          //                   .size
+                          //                   .height *
+                          //               .70,
+                          //           width:
+                          //               MediaQuery.of(context).size.width,
+                          //           child: Center(
+                          //               child: Text("No_Data_Found".tr)),
+                          //         );
+                          //       }
+                          //     } else if (snapshot.hasError) {
+                          //       // return Text("${snapshot.error}");
+                          //       return Text("${snapshot.error}");
+                          //     } else {
+                          //       return Container(
+                          //         width:
+                          //             MediaQuery.of(context).size.width,
+                          //         height:
+                          //             MediaQuery.of(context).size.height *
+                          //                 .50,
+                          //         child: Center(
+                          //             child: SpinKitWave(
+                          //           color: Colors.blue,
+                          //         )),
+                          //       );
+                          //     }
+                          //   },
+                          // ),
+                        ),
+                      ],
+                    )),
+                // ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+/* Text(
                                                                 response[index].studentname),
                                                       Divider(),
                                                       Container(
@@ -230,289 +659,5 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                         // child: Divider(),
                                                       ),
                                                       SizedBox(height: 20),
-                                                    ],
-
-                                                  );
-                                                })
-                                            : Center(
-                                            child:
-                                            Text("No Pending Payment"));
-                                      } else {
-
-                                        return Container(
-                                          height: MediaQuery.of(context)
-                                              .size
-                                              .height *
-                                              .70,
-                                          width:
-                                          MediaQuery.of(context).size.width,
-                                          child: Center(
-                                              child: Text("No_Data_Found".tr)),
-                                        );
-                                      }
-                                    } else if (snapshot.hasError) {
-                                      // return Text("${snapshot.error}");
-                                      return Text("${snapshot.error}");
-                                    } else {
-                                      return Container(
-                                        width:
-                                        MediaQuery.of(context).size.width,
-                                        height:
-                                        MediaQuery.of(context).size.height *
-                                            .50,
-                                        child: Center(
-                                            child: SpinKitWave(
-                                              color: Colors.blue,
-                                            )),
-                                      );
-                                    }
-                                  },
-                                ),
-                                //     FutureBuilder<PaymentPendingResponseModel>(
-                                //   future: api
-                                //       .getPendingPayment(controller.text.value),
-                                //   builder: (BuildContext context,
-                                //       AsyncSnapshot<PaymentPendingResponseModel>
-                                //           snapshot) {
-                                //     if (snapshot.hasData) {
-                                //       var statuscode =
-                                //           snapshot.data?.statuscode;
-                                //
-                                //       // print(statuscode);
-                                //       if (statuscode == "200") {
-                                //
-                                //         var response = snapshot.data?.response;
-                                //         total = 0.0;
-                                //
-                                //         for (int index = 0;
-                                //             index <
-                                //                     response
-                                //                         .installment.length ??
-                                //                 0;
-                                //             index++)
-                                //           total = total +
-                                //               response.installment[index]
-                                //                   .tuitionfee +
-                                //               response.installment[index]
-                                //                   .transportfee +
-                                //               response
-                                //                   .installment[index].others;
-                                //
-                                //         // return response.installment.length > 0
-                                //         return response.installment.length > 0
-                                //             //response.dueamount!=0.0
-                                //             ? Container(
-                                //                 width: MediaQuery.of(context)
-                                //                     .size
-                                //                     .width,
-                                //                 decoration: BoxDecoration(
-                                //                     borderRadius:
-                                //                         BorderRadius.circular(
-                                //                             8),
-                                //                     border: Border.all(
-                                //                         color: Colors
-                                //                             .grey.shade300)),
-                                //                 child: Padding(
-                                //                   padding:
-                                //                       const EdgeInsets.only(
-                                //                           left: 15,
-                                //                           top: 15,
-                                //                           right: 20),
-                                //                   child: Column(
-                                //                     children: [
-                                //                       ListView.builder(
-                                //                           itemCount: response
-                                //                               .installment
-                                //                               .length,
-                                //                           shrinkWrap: true,
-                                //                           physics:
-                                //                               ClampingScrollPhysics(),
-                                //                           itemBuilder: (context,
-                                //                               int index) {
-                                //                             // if (response
-                                //                             //             .installment[
-                                //                             //                 index]
-                                //                             //             .tuitionfee +
-                                //                             //         response
-                                //                             //             .installment[
-                                //                             //                 index]
-                                //                             //             .transportfee +
-                                //                             //         response
-                                //                             //             .installment[
-                                //                             //                 index]
-                                //                             //             .others ==
-                                //                             //     0.0)
-                                //                             /* if(response.dueamount==0.0)
-                                //                           {
-                                //                             return SizedBox();
-                                //                           } else { */
-                                //                            /*  return
-                                //                             Column(
-                                //                               crossAxisAlignment:
-                                //                                   CrossAxisAlignment
-                                //                                       .start,
-                                //                               children: [
-                                //                                 Text(
-                                //                                     'Installment ${response
-                                //                                         .installment[
-                                //                                     index].id}'),
-                                //                                 Divider(),
-                                //                                 Installment(
-                                //                                     data: response
-                                //                                             .installment[
-                                //                                         index]),
-                                //                                 SizedBox(
-                                //                                   height: 15,
-                                //                                 ),
-                                //                               ],
-                                //                             );
-                                //
-                                //                           }),*/
-                                //
-                                //                             return Column(
-                                //                               crossAxisAlignment:
-                                //                                   CrossAxisAlignment
-                                //                                       .start,
-                                //                               children: [
-                                //                                 Text(
-                                //                                     'Installment ${index + 1}'),
-                                //                                 Divider(),
-                                //                                 //  if(){},
-                                //                                 Installment(
-                                //                                     data: response
-                                //                                             .installment[
-                                //                                         index]),
-                                //                                 SizedBox(
-                                //                                   height: 15,
-                                //                                 ),
-                                //                               ],
-                                //                             );
-                                //                           }),
-                                //                       Divider(),
-                                //                       Row(
-                                //                         mainAxisAlignment:
-                                //                             MainAxisAlignment
-                                //                                 .spaceBetween,
-                                //                         children: [
-                                //                           Text(
-                                //                             "Total Due",
-                                //                             style: TextStyle(
-                                //                               fontWeight:
-                                //                                   FontWeight
-                                //                                       .bold,
-                                //                             ),
-                                //                           ),
-                                //                           Text(
-                                //                             "${total} KD",
-                                //                             style: TextStyle(
-                                //                               fontWeight:
-                                //                                   FontWeight
-                                //                                       .bold,
-                                //                             ),
-                                //                           ),
-                                //                         ],
-                                //                       ),
-                                //                       Divider(),
-                                //                       Row(
-                                //                         mainAxisAlignment:
-                                //                         MainAxisAlignment
-                                //                             .spaceBetween,
-                                //                         children: [
-                                //                           Text(
-                                //                             "Due Now",
-                                //                             style: TextStyle(
-                                //                               fontWeight:
-                                //                               FontWeight
-                                //                                   .bold,
-                                //                             ),
-                                //                           ),
-                                //                           Text(
-                                //                             "${response.duenow} KD",
-                                //                             style: TextStyle(
-                                //                               fontWeight:
-                                //                               FontWeight
-                                //                                   .bold,
-                                //                             ),
-                                //                           ),
-                                //                         ],
-                                //                       ),
-                                //                       Padding(
-                                //                         padding: EdgeInsets
-                                //                             .symmetric(
-                                //                                 horizontal: 3,
-                                //                                 vertical: 10),
-                                //                         // child: Divider(),
-                                //                       ),
-                                //                       SizedBox(height: 20),
-                                //                       /*Center(
-                                //                           child: Spinner(
-                                //                         child: payNowButtons([
-                                //                           {
-                                //                             "AcademicPeriodId":
-                                //                                 "2020-2021",
-                                //                             "GrandTotal": total,
-                                //                             "IsIncludeEnrollment":
-                                //                                 false,
-                                //                             "KnetpaymentAmount":
-                                //                                 total,
-                                //                             "OffSet": -330,
-                                //                             "OpeningBalance": 0,
-                                //                             "StudentId":
-                                //                                 controller
-                                //                                     .text.value,
-                                //                             "Paymentid": 0,
-                                //                           }
-                                //                         ], context, total
-                                //                         ),
-                                //                       )),*/
-                                //                       SizedBox(height: 20)
-                                //                     ],
-                                //                   ),
-                                //                 ),
-                                //               )
-                                //             : Center(
-                                //                 child:
-                                //                     Text("No Pending Payment"));
-                                //       } else {
-                                //
-                                //         return Container(
-                                //           height: MediaQuery.of(context)
-                                //                   .size
-                                //                   .height *
-                                //               .70,
-                                //           width:
-                                //               MediaQuery.of(context).size.width,
-                                //           child: Center(
-                                //               child: Text("No_Data_Found".tr)),
-                                //         );
-                                //       }
-                                //     } else if (snapshot.hasError) {
-                                //       // return Text("${snapshot.error}");
-                                //       return Text("${snapshot.error}");
-                                //     } else {
-                                //       return Container(
-                                //         width:
-                                //             MediaQuery.of(context).size.width,
-                                //         height:
-                                //             MediaQuery.of(context).size.height *
-                                //                 .50,
-                                //         child: Center(
-                                //             child: SpinKitWave(
-                                //           color: Colors.blue,
-                                //         )),
-                                //       );
-                                //     }
-                                //   },
-                                // ),
-                              ),
-                            ],
-                          )),
-                      // ),
-                    ],
-                  ),
-                )
-        ],
-      ),
-    );
-  }
-}
+                                    
+*/

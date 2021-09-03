@@ -1171,6 +1171,7 @@ class Installment extends StatelessWidget {
   }
 }
 
+
 Widget list_txt(String txt, {bool isSelected = false}) {
   return Text(
     txt,

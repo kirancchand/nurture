@@ -89,11 +89,13 @@ class _HomePage1State extends State<HomePage1> {
                 ),
                 child: Column(
                   children: [
+                    
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Padding(
                           padding: EdgeInsets.fromLTRB(5, 50, 50, 5),
+                         /*
                           child:IconButton(
                                   padding: new EdgeInsets.all(0.0),
                                   icon: new Icon(Icons.settings, color: Colors.white),
@@ -104,6 +106,7 @@ class _HomePage1State extends State<HomePage1> {
                                         prefs.setString('access_token', "");
                                         Get.offAll(Login());
                                   })
+                          */
                           /* Icon(
                             Icons.settings,
                             color: Colors.white,
@@ -111,6 +114,7 @@ class _HomePage1State extends State<HomePage1> {
                         ),
                       ],
                     ),
+                    
                     CircleAvatar(
                         radius: 30,
                         backgroundColor: Colors.white,

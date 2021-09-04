@@ -526,7 +526,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                               Row(
                                 children: [
                                   SizedBox(
-                                    width: 150,
+                                    width: 200,
                                     child: txt("Name".tr)),
                                     Expanded(child: Text(childrens.studentname,maxLines: 2,))
                                 ],
@@ -534,7 +534,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                Row(
                                 children: [
                                   SizedBox(
-                                    width: 150,
+                                    width: 200,
                                     child: txt("Gender".tr),),
                                     Expanded(child: Text(childrens.gender,maxLines: 2,))
                                 ],
@@ -542,7 +542,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                Row(
                                 children: [
                                   SizedBox(
-                                    width: 150,
+                                    width: 200,
                                     child: txt("Date of Birth".tr),),
                                     Expanded(child: Text(childrens.birthdate.day.toString() +
                                         "/" +
@@ -554,7 +554,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                Row(
                                 children: [
                                   SizedBox(
-                                    width: 150,
+                                    width: 200,
                                     child: txt("School_Name".tr),),
                                     Expanded(child: Text(childrens.schoolname,maxLines: 3,))
                                 ],
@@ -562,7 +562,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                Row(
                                 children: [
                                   SizedBox(
-                                    width: 150,
+                                    width: 200,
                                     child: txt("Grade".tr),),
                                     Expanded(child: Text(childrens.grade,maxLines: 2,))
                                 ],
@@ -570,7 +570,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                Row(
                                 children: [
                                   SizedBox(
-                                    width: 150,
+                                    width: 200,
                                     child: txt("Academic_Year".tr),),
                                     Expanded(child: Text(childrens.academicyear,maxLines: 2,))
                                 ],
@@ -578,7 +578,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                Row(
                                 children: [
                                   SizedBox(
-                                    width: 150,
+                                    width: 200,
                                     child: txt("Nationality".tr),),
                                     Expanded(child: Text(childrens.nationality,maxLines: 2,))
                                 ],
@@ -586,7 +586,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                 Row(
                                 children: [
                                   SizedBox(
-                                    width: 150,
+                                    width: 200,
                                     child: txt("Religion".tr),),
                                     Expanded(child: Text(childrens.religion,maxLines: 2,))
                                 ],
@@ -594,7 +594,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                 Row(
                                 children: [
                                   SizedBox(
-                                    width: 150,
+                                    width: 200,
                                     child:   txt("Civil_ID".tr),),
                                     Expanded(child: Text(childrens.civilid.toString(),maxLines: 2,))
                                 ],
@@ -602,7 +602,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                 Row(
                                 children: [
                                   SizedBox(
-                                    width: 150,
+                                    width: 200,
                                     child: txt("Civil_id_Expiry_Date".tr),),
                                     Expanded(child: Text(childrens.studentcivilexpirydate.day
                                             .toString() +
@@ -617,7 +617,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                 Row(
                                 children: [
                                   SizedBox(
-                                    width: 150,
+                                    width: 200,
                                     child:  txt("Passport_Number".tr),),
                                     Expanded(child: Text(childrens.passportnumber,maxLines: 2,))
                                 ],
@@ -625,7 +625,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                 Row(
                                 children: [
                                   SizedBox(
-                                    width: 150,
+                                    width: 200,
                                     child: txt("Address".tr),),
                                     Expanded(child: Text(childrens.regionalarea,maxLines: 10,))
                                 ],

@@ -94,16 +94,16 @@ class _HomePage1State extends State<HomePage1> {
                       children: [
                         Padding(
                           padding: EdgeInsets.fromLTRB(5, 50, 50, 5),
-                          child:IconButton(
-                                  padding: new EdgeInsets.all(0.0),
-                                  icon: new Icon(Icons.settings, color: Colors.white),
-                                  onPressed: ()async{
-                                        print("helo");
-                                        SharedPreferences prefs = await SharedPreferences.getInstance();
-                                        prefs.setString('Username', "");
-                                        prefs.setString('access_token', "");
-                                        Get.offAll(Login());
-                                  })
+                          // child:IconButton(
+                          //         padding: new EdgeInsets.all(0.0),
+                          //         icon: new Icon(Icons.settings, color: Colors.white),
+                          //         onPressed: ()async{
+                          //               print("helo");
+                          //               SharedPreferences prefs = await SharedPreferences.getInstance();
+                          //               prefs.setString('Username', "");
+                          //               prefs.setString('access_token', "");
+                          //               Get.offAll(Login());
+                          //         })
                           /* Icon(
                             Icons.settings,
                             color: Colors.white,

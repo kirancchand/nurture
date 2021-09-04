@@ -151,6 +151,8 @@ class Api {
     //   "image": await MultipartFile.fromFile(file[0].path, filename: fileName),
     // });
 
+    // FormData formData = new FormData.fromMap();
+
     final response = await http.post(
       getUrl(
           'sendenquiry?studentid=${studentContactRequestModel.toJson()["studentid"]}&Name=${studentContactRequestModel.toJson()["studentname"]}&Email=${studentContactRequestModel.toJson()["studentemail"]}&PhoneNumber=${studentContactRequestModel.toJson()["studentphonenumber"]}&Query=${studentContactRequestModel.toJson()["studentinquiry"]}'),

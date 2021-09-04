@@ -67,7 +67,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
             ),
           ),
           toolbarHeight: 80,
-          title: Text("Confirm Payment".tr,
+          title: Text("Confirm_payment".tr,
               style: TextStyle(
                 color: Colors.white,
               )),
@@ -226,7 +226,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Total_Amount".tr),
+                  Text("Total_amount".tr),
                   Text(
                     "${widget.total} KD",
                     style: TextStyle(fontWeight: FontWeight.bold),
@@ -246,7 +246,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                             color: kColorGreen),
                         child: Center(
                             child: Text(
-                          "Confirm_Payment".tr,
+                          "Confirm_payment".tr,
                           style: TextStyle(color: Colors.white),
                         )),
                       ),
@@ -290,7 +290,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                             color: kColorGreen),
                         child: Center(
                             child: Text(
-                          "Confirm_Payment".tr,
+                          "Confirm_payment".tr,
                           style: TextStyle(color: Colors.white),
                         )),
                       ),

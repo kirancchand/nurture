@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
 import 'package:nurture/common/constants.dart';
 import 'package:nurture/config/controller.dart';
 import 'package:nurture/model/fee.dart';
@@ -10,6 +9,8 @@ import 'package:nurture/widget/list.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:nurture/screen/login.dart';
+import 'package:get/get.dart';
+import 'package:flutter/rendering.dart';
 class HomePage1 extends StatefulWidget {
   HomePage1({Key key,this.fee,this.childrens}) : super(key: key);
   FeeResponseModel fee;
@@ -258,7 +259,7 @@ class _HomePage1State extends State<HomePage1> {
                             Padding(
                               padding: EdgeInsets.only(
                                   top: 15, left: 15, right: 15),
-                              child: Text("Total Fee Outstanding"),
+                              child:  Text("Total_Fee_Outstanding".tr),
                             ),
                             fee.response.children.length > 0
                                 ? ListView.builder(

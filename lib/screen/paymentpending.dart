@@ -90,13 +90,13 @@ class _PaymentPendingState extends State<PaymentPending> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Text(
-                            "Academic_Year".tr+":",
-                            style: TextStyle(color: Colors.grey),
-                          ),
+                          // Text(
+                          //   "Academic_Year".tr+":",
+                          //   style: TextStyle(color: Colors.grey),
+                          // ),
                           Obx(
                             () => Text(
-                              con.year.value ?? "",
+                                "Academic_Year".tr+ ":" + con.year.value ?? "",
                               style:
                                   TextStyle(color: Colors.grey, fontSize: 11),
                             ),

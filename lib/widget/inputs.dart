@@ -144,7 +144,7 @@ List<Widget> contactReqInputs(studentContactRequestModel, context) {
           key: Key('studentemail'),
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-              hintText: "Email",
+              hintText: "Email_address".tr,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(color: Colors.grey[300]),

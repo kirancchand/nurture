@@ -22,7 +22,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:nurture/screen/ReceiptView.dart';
 import 'package:nurture/widget/spinner.dart';
-
+import 'package:nurture/screen/Pdf.dart';
 class StudentList extends StatefulWidget {
   StudentList({Key key, this.data}) : super(key: key);
   FeeResponse data;
@@ -165,7 +165,7 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Transaction Id".tr,
+                                  "Transaction_id".tr,
                                   style: TextStyle(
                                       color: Colors.grey, fontSize: 12),
                                 ),
@@ -181,7 +181,7 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
                                   height: 8,
                                 ),
                                 Text(
-                                  "Payment id".tr,
+                                  "Payment_id".tr,
                                   style: TextStyle(
                                       color: Colors.grey, fontSize: 12),
                                 ),
@@ -278,7 +278,7 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
                                     ? "Download Receipt"
                                     : widget.data.result == "Cancelled"
                                         ? "Cancelled"
-                                        : "Failed Transaction",
+                                        : "Failed_transaction".tr,
                                 style: TextStyle(
                                     fontSize: 8.5,
                                     color: widget.data.result == "Success"
@@ -300,7 +300,7 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
                               // );
                               // widget.data.result=="Success"?Get.toNamed('/download',arguments: [widget.data.paymentid,widget.data.filepath]):Container();
                               widget.data.result == "Success"
-                               ? widget.data.filepath==null?Fluttertoast.showToast(msg: "Please wait for verify your payment!!"):showPdfView(widget.data.paymentid,widget.data.filepath)
+                               ? widget.data.filepath==null?Fluttertoast.showToast(msg: "Receipt will be available to download soon!!"):showPdfView(widget.data.paymentid,widget.data.filepath)
                                   // ? widget.data.filepath==null?Fluttertoast.showToast(msg: "Please wait for verify your payment!!"):downloadFile(widget.data.paymentid,
                                   //     widget.data.filepath)
                                   : Container();
@@ -322,7 +322,16 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
   }
 
   showPdfView(paymentid,filepath) async {
-    Get.to(()=>ReceiptView(link: filepath ?? ""));
+    downloadFile(paymentid, filepath);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PDFScreen(
+            link: filepath
+        ),
+      ),
+    );
+    // Get.to(()=>ReceiptView(link: filepath ?? ""));
   }
 
   downloadFile(paymentid, filepath) async {
@@ -546,7 +555,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                 children: [
                                   SizedBox(
                                     width: 150,
-                                    child: txt("School Name".tr),),
+                                    child: txt("School_Name".tr),),
                                     Expanded(child: Text(childrens.schoolname,maxLines: 3,))
                                 ],
                               ),
@@ -562,7 +571,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                 children: [
                                   SizedBox(
                                     width: 150,
-                                    child: txt("Academic Year".tr),),
+                                    child: txt("Academic_Year".tr),),
                                     Expanded(child: Text(childrens.academicyear,maxLines: 2,))
                                 ],
                               ),
@@ -586,7 +595,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                 children: [
                                   SizedBox(
                                     width: 150,
-                                    child:   txt("Civil ID".tr),),
+                                    child:   txt("Civil_ID".tr),),
                                     Expanded(child: Text(childrens.civilid.toString(),maxLines: 2,))
                                 ],
                               ),
@@ -594,7 +603,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                 children: [
                                   SizedBox(
                                     width: 150,
-                                    child: txt("Civil id Expiry Date".tr),),
+                                    child: txt("Civil_id_Expiry_Date".tr),),
                                     Expanded(child: Text(childrens.studentcivilexpirydate.day
                                             .toString() +
                                         "/" +
@@ -609,7 +618,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                 children: [
                                   SizedBox(
                                     width: 150,
-                                    child:  txt("Passport Number".tr),),
+                                    child:  txt("Passport_Number".tr),),
                                     Expanded(child: Text(childrens.passportnumber,maxLines: 2,))
                                 ],
                               ),
@@ -637,7 +646,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                           width: 83,
                           color: Colors.white,
                           child: Text(
-                            "Student info".tr,
+                            "Student_Info".tr,
                             style: TextStyle(color: kColorGreen),
                           ),
                         ),
@@ -810,9 +819,9 @@ class _StudentInfoListState extends State<StudentInfoList> {
                           children: [
                             txt("Name".tr),
                             txt("Nationality".tr),
-                            txt("Civil ID".tr),
-                            txt("Civil id Expiry Date".tr),
-                            txt("Email address".tr),
+                            txt("Civil_ID".tr),
+                            txt("Civil_id_Expiry_Date".tr),
+                            txt("Email_address".tr),
                             txt("Address".tr),
                           ],
                         ),
@@ -875,7 +884,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                   width: 83,
                   color: Colors.white,
                   child: Text(
-                    parents[index].type + " info",
+                      "${parents[index].type}_info".tr,
                     style: TextStyle(color: kColorGreen),
                   ),
                 ),

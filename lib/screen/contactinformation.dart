@@ -205,7 +205,7 @@ class _ContactInformationState extends State<ContactInformation> {
                               // print(x);
                             },
                             child: Text(
-                              "Add_Attachment".tr,
+                              "Add_attachment".tr,
                               style: TextStyle(
                                 decoration: (TextDecoration.underline),
                                 color: kColorGreen,

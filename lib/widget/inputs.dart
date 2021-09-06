@@ -166,7 +166,7 @@ List<Widget> contactReqInputs(studentContactRequestModel, context) {
           decoration: InputDecoration(
               prefixIcon: SizedBox(
                 height: 60.0,
-                width: 120.0,
+                width: 130.0,
                 child: IconButton(
                   icon: CountryListPick(
                     // if you need custom picker use this

@@ -148,10 +148,12 @@ class Api {
   ) async {
     var token = await getToken();
     //    FormData formData = FormData.fromMap({
-    //   "image": await MultipartFile.fromFile(file[0].path, filename: fileName),
+    //   "image": await MultipartFile.fromFile(file.first.path, filename: file.first.name),
     // });
-
-    // FormData formData = new FormData.fromMap();
+    // print("hy");
+    // print(file.first.name);
+    // final response = await Dio().post('http://schbackend.azurewebsites.net/api/apps/sendenquiry?studentid=${studentContactRequestModel.toJson()["studentid"]}&Name=${studentContactRequestModel.toJson()["studentname"]}&Email=${studentContactRequestModel.toJson()["studentemail"]}&PhoneNumber=${studentContactRequestModel.toJson()["studentphonenumber"]}&Query=${studentContactRequestModel.toJson()["studentinquiry"]}', data: formData);
+    // FormData formData = new FormData();
 
     final response = await http.post(
       getUrl(

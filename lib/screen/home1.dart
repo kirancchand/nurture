@@ -89,6 +89,7 @@ class _HomePage1State extends State<HomePage1> {
                 ),
                 child: Column(
                   children: [
+                    
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -111,6 +112,7 @@ class _HomePage1State extends State<HomePage1> {
                         ),
                       ],
                     ),
+                    
                     CircleAvatar(
                         radius: 30,
                         backgroundColor: Colors.white,

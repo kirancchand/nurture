@@ -322,7 +322,7 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
   }
 
   showPdfView(paymentid,filepath) async {
-    downloadFile(paymentid, filepath);
+    // downloadFile(paymentid, filepath);
     Navigator.push(
       context,
       MaterialPageRoute(

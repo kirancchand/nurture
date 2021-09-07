@@ -37,7 +37,7 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
   String errorMessage = '';
   Directory directory;
   File pdf;
-  // bool spin = true;
+  bool spin = true;
   Future<File> downloadPdf(String url) async {
     Completer<File> completer = Completer();
     print("Start download file from internet!");
@@ -72,14 +72,14 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
   @override
   void initState() {
     // TODO: implement initState
-    // downloadPdf(
-    //          widget.link)
-    //     .then((value) {
-    //   setState(() {
-    //     spin = false;
-    //   });
-    // });
-    // _bytesImage = Base64Decoder().convert(_base64);
+    downloadPdf(
+             widget.link)
+        .then((value) {
+      setState(() {
+        spin = false;
+      });
+    });
+    _bytesImage = Base64Decoder().convert(_base64);
     super.initState();
 
     // Base64Decoder().convert(_imgString);
@@ -87,6 +87,64 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
   }
 
 
+  // Future<String> _findLocalPath() async {
+  //   final directory = await getApplicationDocumentsDirectory();
+  //   return directory.path;
+  // }
+  //
+  // Future<String> _findLocalPathandroid() async {
+  //   final directory = await getExternalStorageDirectory();
+  //   return directory.path;
+  // }
+  //
+  // openDonloaded(taskId) {
+  //   print('opennnn');
+  //   print(taskId);
+  //   // FlutterDownloader.open(taskId: taskId);
+  // }
+  //
+  // checkDonloads() async {
+  //   final tasks = await FlutterDownloader.loadTasks();
+  //   print(tasks);
+  //   // int i;
+  //   // for(i=0; i<tasks.length; i++) {
+  //   //   FlutterDownloader.remove(taskId: tasks[i].taskId, shouldDeleteContent:true);
+  //   // }
+  //
+  //   openDonloaded(tasks[0].taskId);
+  //   //FlutterDownloader.cancelAll();
+  // }
+
+  // downloadAction() async {
+  //   String localPath = '';
+  //
+  //   if (Platform.isIOS) {
+  //     localPath =
+  //         (await _findLocalPath()) + Platform.pathSeparator + 'Download';
+  //     print(localPath);
+  //   } else {
+  //     localPath =
+  //         (await _findLocalPathandroid()) + Platform.pathSeparator + 'Download';
+  //   }
+  //   final savedDir = Directory(localPath);
+  //   print(savedDir);
+  //   bool hasExisted = await savedDir.exists();
+  //   if (!hasExisted) {
+  //     savedDir.create();
+  //   }
+  //   await FlutterDownloader.enqueue(
+  //     url: widget.link,
+  //     savedDir: localPath,
+  //     showNotification:
+  //     true, // show download progress in status bar (for Android)
+  //     openFileFromNotification:
+  //     true, // click on notification to open downloaded file (for Android)
+  //   );
+  //
+  //   final tasks = await FlutterDownloader.loadTasks();
+  //   print(tasks);
+  //   // openDonloaded(taskId);
+  // }
 
   Future<Uint8List> _capturePng() async {
 
@@ -108,7 +166,7 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
       setState(() {
 
       });
-      Fluttertoast.showToast(msg: "File downloaded Successfully");
+      
       return pngBytes;
     } catch (e) {
       print(e);
@@ -132,13 +190,11 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
     return RepaintBoundary(
         key: _globalKey,
         child: new Scaffold(
-      body:
-      // spin
-      //     ? Center(
-      //         child: CircularProgressIndicator(),
-      //       )
-      //     :
-      Stack(
+      body: spin
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : Stack(
               children: <Widget>[
                 Container(
                   child:Stack(
@@ -198,7 +254,7 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
                       //   child: Text(errorMessage),
                       // )
                       SfPdfViewer.network(
-                        widget.link,
+                        'https://livereceipts.blob.core.windows.net/receipts/FeeReceipt_RCT-002524101202014970655914.PDF',
                       ),
                     ]
                   )

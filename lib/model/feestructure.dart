@@ -54,6 +54,7 @@ class Response {
     this.parentnumber,
     this.installment,
     this.parentid,
+    this.totaldue
   });
 
   String id;
@@ -72,6 +73,7 @@ class Response {
   String parentnumber;
   List<InstallmentResponse> installment;
   int parentid;
+  double totaldue;
 
   factory Response.fromJson(Map<String, dynamic> json) => Response(
     id: json["\u0024id"],
@@ -90,6 +92,7 @@ class Response {
     parentnumber: json["parentnumber"],
     installment: List<InstallmentResponse>.from(json["installment"].map((x) => InstallmentResponse.fromJson(x))),
     parentid: json["parentid"],
+    totaldue: json["totaldue"] ?? "",
   );
 
   Map<String, dynamic> toJson() => {
@@ -109,6 +112,7 @@ class Response {
     "parentnumber": parentnumber,
     "installment": List<dynamic>.from(installment.map((x) => x.toJson())),
     "parentid": parentid,
+    "totaldue": totaldue,
   };
 }
 

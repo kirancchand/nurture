@@ -1,4 +1,4 @@
-import 'package:file_picker/file_picker.dart';
+  import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:nurture/model/student.dart';
 import 'package:nurture/model/fee.dart';
@@ -28,15 +28,30 @@ class _ContactInformationState extends State<ContactInformation> {
   LoginRequestModel loginRequestModel;
   bool choose = false;
   FilePickerResult resultpdf;
+  PlatformFile file;
   Future getPdf() async {
     resultpdf = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['pdf', 'doc'],
     );
-    return resultpdf.files;
+    if(resultpdf != null) {
+      setState(() {
+        file = resultpdf.files.first;
+      });
+
+
+      // print(file.name);
+      // print(file.bytes);
+      // print(file.size);
+      // print(file.extension);
+      // print(file.path);
+    } else {
+      // User canceled the picker
+    }
+    return resultpdf.files.first;
   }
 
-  List<PlatformFile> x;
+  PlatformFile x;
  // String dropdownError;
 
   @override
@@ -202,7 +217,7 @@ class _ContactInformationState extends State<ContactInformation> {
                           GestureDetector(
                             onTap: () async {
                               x = await getPdf();
-                              // print(x);
+
                             },
                             child: Text(
                               "Add_attachment".tr,
@@ -212,14 +227,30 @@ class _ContactInformationState extends State<ContactInformation> {
                               ),
                             ),
                           ),
+
                         ],
+
                       ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            "${file!=null?file.name:""}",
+                            style: TextStyle(
+                              color: kColorGreen,
+                            ),
+                          )
+                        ],
+
+                      ),
+
                       SizedBox(
                         height: 30,
                       ),
                       Column(
-                          children: contactReqButton(
-                              formKey, studentContactRequestModel, x))
+                          children: contactReqButton(context,
+                              formKey, studentContactRequestModel, x)),
+
                     ],
                   ),
                 ),

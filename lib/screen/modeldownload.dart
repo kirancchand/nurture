@@ -7,10 +7,11 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 class ModelDownload extends StatefulWidget {
   ModelDownload({Key key}) : super(key: key);
-  String paymentid=Get.arguments[0];
-  String filepath=Get.arguments[1];
+  String paymentid = Get.arguments[0];
+  String filepath = Get.arguments[1];
 
   @override
   _ModelDownloadState createState() => _ModelDownloadState();
@@ -20,20 +21,18 @@ class _ModelDownloadState extends State<ModelDownload> {
   final Dio dio = Dio();
   bool loading = false;
   double progress = 0;
-   String paymentid=Get.arguments[0];
-  String filepath=Get.arguments[1];
-
-
+  String paymentid = Get.arguments[0];
+  String filepath = Get.arguments[1];
 
   Future<bool> savePaymentFile(String url, String fileName) async {
-    print("sdfdsf${Get.arguments[0]}");
+    //print("sdfdsf${Get.arguments[0]}");
     Directory directory;
     try {
       if (Platform.isAndroid) {
         if (await _requestPermission(Permission.storage)) {
           directory = await getExternalStorageDirectory();
           String newPath = "";
-          print(directory);
+          //  print(directory);
           List<String> paths = directory.path.split("/");
           for (int x = 1; x < paths.length; x++) {
             String folder = paths[x];
@@ -62,10 +61,10 @@ class _ModelDownloadState extends State<ModelDownload> {
       if (await directory.exists()) {
         await dio.download(url, saveFile.path,
             onReceiveProgress: (value1, value2) {
-              setState(() {
-                progress = value1 / value2;
-              });
-            });
+          setState(() {
+            progress = value1 / value2;
+          });
+        });
         if (Platform.isIOS) {
           await ImageGallerySaver.saveFile(saveFile.path,
               isReturnPathOfIOS: true);
@@ -74,7 +73,7 @@ class _ModelDownloadState extends State<ModelDownload> {
       }
       return false;
     } catch (e) {
-      print(e);
+      // print(e);
       return false;
     }
   }
@@ -96,13 +95,12 @@ class _ModelDownloadState extends State<ModelDownload> {
       loading = true;
       progress = 0;
     });
-    bool downloaded = await savePaymentFile(
-        widget.filepath,
-        "${widget.paymentid}.pdf");
+    bool downloaded =
+        await savePaymentFile(widget.filepath, "${widget.paymentid}.pdf");
     if (downloaded) {
-      Fluttertoast.showToast(msg:"File Downloaded");
+      Fluttertoast.showToast(msg: "File Downloaded");
     } else {
-      print("Problem Downloading File");
+      //  print("Problem Downloading File");
     }
     setState(() {
       loading = false;
@@ -111,29 +109,24 @@ class _ModelDownloadState extends State<ModelDownload> {
 
   @override
   Widget build(BuildContext context) {
-    return 
-       Container(
-         child: Center(
-            child: loading
-                ? Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SpinKitWave(color: Colors.blue, type: SpinKitWaveType.center),)
-                : TextButton.icon(
-                icon: Icon(
-                  Icons.download_rounded,
-                  color: Colors.red
-                ),
-               // color: Colors.blue,
+    return Container(
+      child: Center(
+        child: loading
+            ? Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SpinKitWave(
+                    color: Colors.blue, type: SpinKitWaveType.center),
+              )
+            : TextButton.icon(
+                icon: Icon(Icons.download_rounded, color: Colors.red),
+                // color: Colors.blue,
                 onPressed: downloadFile,
-               // padding: const EdgeInsets.all(10),
+                // padding: const EdgeInsets.all(10),
                 label: Text(
                   "Download File",
-                  style: TextStyle(color: Colors.red,fontSize: 25),
-                )
-                ),
-          
-      
-    ),
-       );
+                  style: TextStyle(color: Colors.red, fontSize: 25),
+                )),
+      ),
+    );
   }
 }

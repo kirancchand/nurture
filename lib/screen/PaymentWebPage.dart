@@ -10,6 +10,7 @@ import 'package:nurture/service/api.dart';
 import 'package:nurture/model/fee.dart';
 import 'package:get/get.dart';
 import 'package:nurture/config/controller.dart';
+
 class PaymentWebPage extends StatefulWidget {
   PaymentWebPage({Key key, this.link}) : super(key: key);
   String link;
@@ -24,8 +25,8 @@ class _PaymentWebPageState extends State<PaymentWebPage> {
 
   Future<FeeResponseModel> getFee;
   YearController con = Get.put(YearController());
-  StudentController students=Get.put(StudentController());
-  ChildrenController childlistcon=Get.put(ChildrenController());
+  StudentController students = Get.put(StudentController());
+  ChildrenController childlistcon = Get.put(ChildrenController());
   List childrens = [];
   @override
   void initState() {
@@ -41,17 +42,15 @@ class _PaymentWebPageState extends State<PaymentWebPage> {
         backgroundColor: Colors.grey.shade200,
         leading: InkWell(
             onTap: () {
-
               api.getFee().then((fee) {
-                print(fee.statuscode);
+                //print(fee.statuscode);
                 // Fluttertoast.showToast(msg: "Something went Wrong");
 
-                if(fee.statuscode=="200")
-                {
+                if (fee.statuscode == "200") {
                   con.year.value = fee.response.academicyear;
                   childrens = fee.response.children;
-                  childlistcon.childrenlist=fee.response.children;
-                  students.student.value=fee;
+                  childlistcon.childrenlist = fee.response.children;
+                  students.student.value = fee;
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
@@ -60,19 +59,13 @@ class _PaymentWebPageState extends State<PaymentWebPage> {
                       ),
                     ),
                   );
-                }
-                else{
-
+                } else {
                   Fluttertoast.showToast(msg: "Something went Wrong");
                   Get.toNamed("/");
                 }
 
-
                 // return fee;
-
               });
-
-
             },
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
@@ -87,48 +80,43 @@ class _PaymentWebPageState extends State<PaymentWebPage> {
             javascriptMode: JavascriptMode.unrestricted,
             initialUrl: widget.link,
             onPageStarted: (String url) {
-              return Center(child: SpinKitWave(color: Colors.blue,));
+              return Center(
+                  child: SpinKitWave(
+                color: Colors.blue,
+              ));
             },
             onPageFinished: (String url) {
-              
-              print('Page finished loading: $url');
-              print(url.contains('paymentcancel'));
+              //print('Page finished loading: $url');
+              /// print(url.contains('paymentcancel'));
 
-              if(url.contains('PaymentUrl')||url.contains('paymentcancel'))
-                {
-                  api.getFee().then((fee) {
-                    print(fee.statuscode);
-                    // Fluttertoast.showToast(msg: "Something went Wrong");
-                    // https://schbackend.azurewebsites.net/Controllers/PaymentUrl.html?Response=Data
-                    if(fee.statuscode=="200")
-                    {
-                      print("duem child ${fee.response.children[1].dueamount}");
-                      con.year.value = fee.response.academicyearid;
-                      childrens = fee.response.children;
-                      childlistcon.childrenlist=fee.response.children;
-                      students.student.value=fee;
-                      Get.offAll(()=>Home(count: 2));
-                      // Navigator.pushReplacement(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => Home(
-                      //       count: 2,
-                      //     ),
-                      //   ),
-                      // );
-                    }
-                    else{
+              if (url.contains('PaymentUrl') || url.contains('paymentcancel')) {
+                api.getFee().then((fee) {
+                  //print(fee.statuscode);
+                  // Fluttertoast.showToast(msg: "Something went Wrong");
+                  // https://schbackend.azurewebsites.net/Controllers/PaymentUrl.html?Response=Data
+                  if (fee.statuscode == "200") {
+                    //  print("duem child ${fee.response.children[1].dueamount}");
+                    con.year.value = fee.response.academicyearid;
+                    childrens = fee.response.children;
+                    childlistcon.childrenlist = fee.response.children;
+                    students.student.value = fee;
+                    Get.offAll(() => Home(count: 2));
+                    // Navigator.pushReplacement(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => Home(
+                    //       count: 2,
+                    //     ),
+                    //   ),
+                    // );
+                  } else {
+                    Fluttertoast.showToast(msg: "Something went Wrong");
+                    Get.toNamed("/");
+                  }
 
-                      Fluttertoast.showToast(msg: "Something went Wrong");
-                      Get.toNamed("/");
-                    }
-
-
-                    // return fee;
-
-                  });
-
-                }
+                  // return fee;
+                });
+              }
             },
             gestureNavigationEnabled: true,
           ),

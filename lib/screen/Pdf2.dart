@@ -17,6 +17,7 @@ import 'package:http/http.dart' as http;
 import 'dart:io' as Io;
 import 'package:dio/dio.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+
 class PDFScreen extends StatefulWidget {
   final String link;
 
@@ -26,9 +27,8 @@ class PDFScreen extends StatefulWidget {
 }
 
 class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
-
   GlobalKey _globalKey = GlobalKey();
-  String _base64="";
+  String _base64 = "";
   final Completer<PDFViewController> _controller =
       Completer<PDFViewController>();
   int pages = 0;
@@ -40,7 +40,7 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
   bool spin = true;
   Future<File> downloadPdf(String url) async {
     Completer<File> completer = Completer();
-    print("Start download file from internet!");
+    //print("Start download file from internet!");
     try {
       // "https://berlin2017.droidcon.cod.newthinking.net/sites/global.droidcon.cod.newthinking.net/files/media/documents/Flutter%20-%2060FPS%20UI%20of%20the%20future%20%20-%20DroidconDE%2017.pdf";
       // final url = "https://pdfkit.org/docs/guide.pdf";
@@ -51,7 +51,7 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
       var bytes = await consolidateHttpClientResponseBytes(response);
       var dir = await getApplicationDocumentsDirectory();
       directory = await getExternalStorageDirectory();
-      print("Download files");
+      // print("Download files");
       // /${DateTime.now().toString()}
       print("${dir.path}/$filename");
       File file = File("${dir.path}/$filename.pdf");
@@ -68,13 +68,12 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
 
     pdf = await completer.future;
   }
+
   Uint8List _bytesImage;
   @override
   void initState() {
     // TODO: implement initState
-    downloadPdf(
-             widget.link)
-        .then((value) {
+    downloadPdf(widget.link).then((value) {
       setState(() {
         spin = false;
       });
@@ -83,9 +82,7 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
     super.initState();
 
     // Base64Decoder().convert(_imgString);
-
   }
-
 
   // Future<String> _findLocalPath() async {
   //   final directory = await getApplicationDocumentsDirectory();
@@ -147,32 +144,25 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
   // }
 
   Future<Uint8List> _capturePng() async {
-
-
     try {
-      print('inside');
+      // print('inside');
       RenderRepaintBoundary boundary =
-      _globalKey.currentContext.findRenderObject();
+          _globalKey.currentContext.findRenderObject();
       ui.Image image = await boundary.toImage(pixelRatio: 3.0);
       ByteData byteData =
-      await image.toByteData(format: ui.ImageByteFormat.png);
+          await image.toByteData(format: ui.ImageByteFormat.png);
       var pngBytes = byteData.buffer.asUint8List();
       var bs64 = base64Encode(pngBytes);
-      final result =
-      await ImageGallerySaver.saveImage(pngBytes);
-      print(pngBytes);
-      print(bs64);
-      print(result);
-      setState(() {
+      final result = await ImageGallerySaver.saveImage(pngBytes);
+      // print(pngBytes);
+      //print(bs64);
+      //print(result);
+      setState(() {});
 
-      });
-      
       return pngBytes;
     } catch (e) {
       print(e);
     }
-
-
 
     // RenderRepaintBoundary boundary =
     // _globalKey.currentContext.findRenderObject() as RenderRepaintBoundary;
@@ -190,15 +180,14 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
     return RepaintBoundary(
         key: _globalKey,
         child: new Scaffold(
-      body: spin
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : Stack(
-              children: <Widget>[
-                Container(
-                  child:Stack(
-                    children:[
+          body: spin
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Stack(
+                  children: <Widget>[
+                    Container(
+                        child: Stack(children: [
                       // PDFView(
                       //   filePath: pdf.path,
                       //   enableSwipe: true,
@@ -256,34 +245,29 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
                       SfPdfViewer.network(
                         'https://livereceipts.blob.core.windows.net/receipts/FeeReceipt_RCT-002524101202014970655914.PDF',
                       ),
-                    ]
-                  )
+                    ])),
+                  ],
                 ),
-
-
-              ],
-            ),
           floatingActionButton: FloatingActionButton(
             onPressed: _capturePng,
             child: const Icon(Icons.download),
             backgroundColor: kColorGreen,
           ),
-      // floatingActionButton: FutureBuilder<PDFViewController>(
-      //   future: _controller.future,
-      //   builder: (context, AsyncSnapshot<PDFViewController> snapshot) {
-      //     if (snapshot.hasData) {
-      //       return FloatingActionButton.extended(
-      //         label: Text("Go to ${pages ~/ 2}"),
-      //         onPressed: () async {
-      //           await snapshot.data.setPage(pages ~/ 2);
-      //         },
-      //       );
-      //     }
+          // floatingActionButton: FutureBuilder<PDFViewController>(
+          //   future: _controller.future,
+          //   builder: (context, AsyncSnapshot<PDFViewController> snapshot) {
+          //     if (snapshot.hasData) {
+          //       return FloatingActionButton.extended(
+          //         label: Text("Go to ${pages ~/ 2}"),
+          //         onPressed: () async {
+          //           await snapshot.data.setPage(pages ~/ 2);
+          //         },
+          //       );
+          //     }
 
-      //     return Container();
-      //   },
-      // ),
-    )
-    );
+          //     return Container();
+          //   },
+          // ),
+        ));
   }
 }

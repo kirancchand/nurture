@@ -94,7 +94,7 @@ class _DownloadState extends State<Download> {
     ].request();
 
     final info = statuses[Permission.storage].toString();
-    print(info);
+    // print(info);
     _toastInfo(info);
   }
 
@@ -106,7 +106,7 @@ class _DownloadState extends State<Download> {
     if (byteData != null) {
       final result =
       await ImageGallerySaver.saveImage(byteData.buffer.asUint8List());
-      print(result);
+      // print(result);
       _toastInfo(result.toString());
     }
   }
@@ -119,7 +119,7 @@ class _DownloadState extends State<Download> {
         Uint8List.fromList(response.data),
         quality: 60,
         name: "hello");
-    print(result);
+    // print(result);
     _toastInfo("$result");
   }
 
@@ -130,7 +130,7 @@ class _DownloadState extends State<Download> {
         "https://hyjdoc.oss-cn-beijing.aliyuncs.com/hyj-doc-flutter-demo-run.gif";
     await Dio().download(fileUrl, savePath);
     final result = await ImageGallerySaver.saveFile(savePath);
-    print(result);
+    // print(result);
     _toastInfo("$result");
   }
 
@@ -140,10 +140,10 @@ class _DownloadState extends State<Download> {
     String fileUrl =
         "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4";
     await Dio().download(fileUrl, savePath, onReceiveProgress: (count, total) {
-      print((count / total * 100).toStringAsFixed(0) + "%");
+      // print((count / total * 100).toStringAsFixed(0) + "%");
     });
     final result = await ImageGallerySaver.saveFile(savePath);
-    print(result);
+    // print(result);
     _toastInfo("$result");
   }
 

@@ -12,6 +12,7 @@ import 'package:nurture/model/fee.dart';
 import 'package:get/get.dart';
 import 'package:nurture/config/controller.dart';
 import 'package:nurture/screen/Pdf.dart';
+
 class ReceiptView extends StatefulWidget {
   ReceiptView({Key key, this.link}) : super(key: key);
   String link;
@@ -31,14 +32,13 @@ class _ReceiptViewState extends State<ReceiptView> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.link);
+    //  print(widget.link);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.grey.shade200,
         leading: InkWell(
             onTap: () {
-
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
@@ -47,8 +47,6 @@ class _ReceiptViewState extends State<ReceiptView> {
                   ),
                 ),
               );
-
-
             },
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
@@ -59,17 +57,18 @@ class _ReceiptViewState extends State<ReceiptView> {
         child: Container(
           height: double.infinity,
           width: double.infinity,
-
           child: WebView(
             javascriptMode: JavascriptMode.unrestricted,
-            initialUrl: ('https://docs.google.com/gview?embedded=true&url=${widget.link}'),
+            initialUrl:
+                ('https://docs.google.com/gview?embedded=true&url=${widget.link}'),
             // initialUrl: widget.link,
             onPageStarted: (String url) {
-              return Center(child: SpinKitWave(color: Colors.blue,));
+              return Center(
+                  child: SpinKitWave(
+                color: Colors.blue,
+              ));
             },
-            onPageFinished: (String url) {
-
-            },
+            onPageFinished: (String url) {},
             gestureNavigationEnabled: true,
           ),
         ),
@@ -81,9 +80,7 @@ class _ReceiptViewState extends State<ReceiptView> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => PDFScreen(
-                link: widget.link
-              ),
+              builder: (context) => PDFScreen(link: widget.link),
             ),
           );
         },

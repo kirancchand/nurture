@@ -11,8 +11,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:nurture/screen/login.dart';
 import 'package:get/get.dart';
 import 'package:flutter/rendering.dart';
+
 class HomePage1 extends StatefulWidget {
-  HomePage1({Key key,this.fee,this.childrens}) : super(key: key);
+  HomePage1({Key key, this.fee, this.childrens}) : super(key: key);
   FeeResponseModel fee;
   List childrens;
   @override
@@ -24,8 +25,8 @@ class _HomePage1State extends State<HomePage1> {
   Future<StudentResponseModel> getStudents;
   Future<FeeResponseModel> getFee;
   YearController con = Get.put(YearController());
-  StudentController studentcon=Get.put(StudentController());
-  ChildrenController childlistcon=Get.put(ChildrenController());
+  StudentController studentcon = Get.put(StudentController());
+  ChildrenController childlistcon = Get.put(ChildrenController());
 
   List<String> _texts = [
     "InduceSmile.com",
@@ -66,311 +67,294 @@ class _HomePage1State extends State<HomePage1> {
 
   @override
   Widget build(BuildContext context) {
-    FeeResponseModel fee=studentcon.student.value;
-    List childrens=childlistcon.childrenlist;
+    FeeResponseModel fee = studentcon.student.value;
+    List childrens = childlistcon.childrenlist;
     // con.year.value = fee.response.academicyear;
     // print(con.year.value);
     return Scaffold(
       body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: SingleChildScrollView(
-
-          child: Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Color(0xff43CEA2),
-                      Color(0xff279DD4),
-                    ],
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Color(0xff43CEA2),
+                        Color(0xff279DD4),
+                      ],
+                    ),
                   ),
-                ),
-                child: Column(
-                  children: [
-                    
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(5, 50, 50, 5),
-                          // child:IconButton(
-                          //         padding: new EdgeInsets.all(0.0),
-                          //         icon: new Icon(Icons.settings, color: Colors.white),
-                          //         onPressed: ()async{
-                          //               print("helo");
-                          //               SharedPreferences prefs = await SharedPreferences.getInstance();
-                          //               prefs.setString('Username', "");
-                          //               prefs.setString('access_token', "");
-                          //               Get.offAll(Login());
-                          //         })
-                          /* Icon(
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(5, 50, 50, 5),
+                            // child:IconButton(
+                            //         padding: new EdgeInsets.all(0.0),
+                            //         icon: new Icon(Icons.settings, color: Colors.white),
+                            //         onPressed: ()async{
+                            //               print("helo");
+                            //               SharedPreferences prefs = await SharedPreferences.getInstance();
+                            //               prefs.setString('Username', "");
+                            //               prefs.setString('access_token', "");
+                            //               Get.offAll(Login());
+                            //         })
+                            /* Icon(
                             Icons.settings,
                             color: Colors.white,
                           ),*/
-                        ),
+                          ),
+                        ],
+                      ),
+                      CircleAvatar(
+                          radius: 30,
+                          backgroundColor: Colors.white,
+                          backgroundImage: AssetImage(
+                              "assets/images/arabian-vector-icon-260nw-445427119.png")),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      fee.response.parentnumber != ""
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(0),
+                                      child: Text(
+                                        fee.response.parentname,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.bold),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Text(
+                                        "Parent_ID".tr +
+                                            ": ${fee.response.parentnumber}",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                        )),
+                                  ),
+                                ])
+                          : Center(child: Text("No Data")),
+                      SizedBox(
+                        height: 20,
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Color(0xff43CEA2),
+                        Color(0xff279DD4),
                       ],
                     ),
-                    
-                    CircleAvatar(
-                        radius: 30,
-                        backgroundColor: Colors.white,
-                        backgroundImage: AssetImage(
-                            "assets/images/arabian-vector-icon-260nw-445427119.png")),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    fee.response.parentnumber != ""
-                        ? Column(
-                         crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                      Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(0),
-                          child: Text(
-                             
-                            fee.response.parentname,
-                            style: TextStyle(
-                            
-                                color: Colors.white,
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold),
-                                textAlign: TextAlign.center,
-                                
-                          ),
-                        ),
-                      ),
-                      Center(
-                        child: Text("Parent_ID".tr + ": ${fee.response.parentnumber}",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                            )),
-                      ),
-                    ])
-                        : Center(child: Text("No Data")),
-                    SizedBox(
-                      height: 20,
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Color(0xff43CEA2),
-                      Color(0xff279DD4),
-                    ],
                   ),
-                ),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade100,
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(15),
-                      topLeft: Radius.circular(15),
-                    ), //circular(15),
-                    border: Border.all(
-                        color: Colors.grey.shade200, width: 1),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(15),
-                            topRight: Radius.circular(15),
-                          ),
-                        ),
-                        padding: EdgeInsets.only(
-                            top: 20, left: 15, right: 15),
-                        child: Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Student".tr),
-                            Row(
-                              children: [
-                                Text(
-                                  "Academic_Year".tr +" :",
-                                  style: TextStyle(
-                                      color: Colors.grey, fontSize: 11),
-                                ),
-                                Obx(
-                                      () => Text(
-                                    con.year.value ?? "",
-                                    style: TextStyle(
-                                        color: Colors.grey,
-                                        fontSize: 11),
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(15),
-                            bottomRight: Radius.circular(15),
-                          ),
-                        ),
-                        child: fee.response.children.length > 0
-                            ? ListView.builder(
-                          itemCount: fee.response.children.length,
-                          shrinkWrap: true,
-                          physics: ClampingScrollPhysics(),
-                          itemBuilder: (context, int index) {
-                            print(fee.response
-                                .children[index].studentname);
-
-                            return StudentList(
-                                data: fee.response.children[index]);
-                          },
-                        )
-                            : Center(
-                          child: Text("No Data"),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          // color: Colors.grey.shade200,
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(15),
-                            topLeft: Radius.circular(15),
-                            bottomLeft: Radius.circular(15),
-                            bottomRight: Radius.circular(15),
-                          ), //circular(15),
-                          border: Border.all(
-                              color: Colors.grey.shade200, width: 1),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  top: 15, left: 15, right: 15),
-                              child:  Text("Total_Fee_Outstanding".tr),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade100,
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(15),
+                        topLeft: Radius.circular(15),
+                      ), //circular(15),
+                      border: Border.all(color: Colors.grey.shade200, width: 1),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(15),
+                              topRight: Radius.circular(15),
                             ),
-                            fee.response.children.length > 0
-                                ? ListView.builder(
-                              itemCount: fee.response.children.length,
-                              shrinkWrap: true,
-                              physics: ClampingScrollPhysics(),
-                              itemBuilder: (context, int index) {
-                                return ListTile(
-                                  leading: Checkbox(
-                                    value: _selectedStudent
-                                        .contains(fee.response
-                                        .children[index]),
-                                    onChanged: (bool selected) {
-                                      _onCategorySelected(
-                                          selected,
-                                          fee.response
-                                              .children[index]);
-                                    },
-                                    side: BorderSide(
-                                        color: kColorGreen),
-                                    shape: CircleBorder(),
-                                    activeColor: kColorGreen,
-                                  ),
-                                  title: Text(
-                                      fee.response.children[index]
-                                          .studentname,
-                                      style: TextStyle(
-                                          color: _selectedStudent
-                                    .contains(fee.response
-                                    .children[index])
-                                              ? kColorGreen
-                                              : Colors.grey)),
-                                  trailing: Text(
-                                      fee.response.children[index]
-                                          .dueamount
-                                          .toString(),
-                                      style: TextStyle(
-                                          color: _selectedStudent
-                                              .contains(fee.response
-                                              .children[index])
-                                              ? kColorGreen
-                                              : Colors.grey)),
-                                );
-                              },
-                            )
-                                : Center(child: Text("No Data")),
-                            Padding(
-                              padding: const EdgeInsets.all(15),
-                              child: Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                          ),
+                          padding:
+                              EdgeInsets.only(top: 20, left: 15, right: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("Student".tr),
+                              Row(
                                 children: [
-                                  Text("Total".tr),
-                                  Text(total.toString() + "KD")
-                                ],
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                // print("dsfsd${_selectedStudent.length}");
-                                _selectedStudent.length > 0
-                                    ? Get.toNamed('/confirmpayment',
-                                    arguments: [
-                                      _selectedStudent,
-                                      total
-                                    ])
-                                    : Fluttertoast.showToast(
-                                    msg:
-                                    'Please Select Atleast one student');
-                              },
-                              child: Container(
-                                height: 50,
-                                width:
-                                MediaQuery.of(context).size.width,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.vertical(
-                                        bottom: Radius.circular(
-                                            15)), //circular(15),
-                                    color: kColorGreen),
-                                child: Center(
-                                  child: Text(
-                                    "Pay_now".tr,
+                                  Text(
+                                    "Academic_Year".tr + " :",
                                     style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
+                                        color: Colors.grey, fontSize: 11),
                                   ),
+                                  Obx(
+                                    () => Text(
+                                      con.year.value ?? "",
+                                      style: TextStyle(
+                                          color: Colors.grey, fontSize: 11),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(15),
+                              bottomRight: Radius.circular(15),
+                            ),
+                          ),
+                          child: fee.response.children.length > 0
+                              ? ListView.builder(
+                                  itemCount: fee.response.children.length,
+                                  shrinkWrap: true,
+                                  physics: ClampingScrollPhysics(),
+                                  itemBuilder: (context, int index) {
+                                    // print(fee.response.children[index].studentname);
+
+                                    return StudentList(
+                                        data: fee.response.children[index]);
+                                  },
+                                )
+                              : Center(
+                                  child: Text("No Data"),
+                                ),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            // color: Colors.grey.shade200,
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(15),
+                              topLeft: Radius.circular(15),
+                              bottomLeft: Radius.circular(15),
+                              bottomRight: Radius.circular(15),
+                            ), //circular(15),
+                            border: Border.all(
+                                color: Colors.grey.shade200, width: 1),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    top: 15, left: 15, right: 15),
+                                child: Text("Total_Fee_Outstanding".tr),
+                              ),
+                              fee.response.children.length > 0
+                                  ? ListView.builder(
+                                      itemCount: fee.response.children.length,
+                                      shrinkWrap: true,
+                                      physics: ClampingScrollPhysics(),
+                                      itemBuilder: (context, int index) {
+                                        return ListTile(
+                                          leading: Checkbox(
+                                            value: _selectedStudent.contains(
+                                                fee.response.children[index]),
+                                            onChanged: (bool selected) {
+                                              _onCategorySelected(selected,
+                                                  fee.response.children[index]);
+                                            },
+                                            side:
+                                                BorderSide(color: kColorGreen),
+                                            shape: CircleBorder(),
+                                            activeColor: kColorGreen,
+                                          ),
+                                          title: Text(
+                                              fee.response.children[index]
+                                                  .studentname,
+                                              style: TextStyle(
+                                                  color: _selectedStudent
+                                                          .contains(fee.response
+                                                              .children[index])
+                                                      ? kColorGreen
+                                                      : Colors.grey)),
+                                          trailing: Text(
+                                              fee.response.children[index]
+                                                  .dueamount
+                                                  .toString(),
+                                              style: TextStyle(
+                                                  color: _selectedStudent
+                                                          .contains(fee.response
+                                                              .children[index])
+                                                      ? kColorGreen
+                                                      : Colors.grey)),
+                                        );
+                                      },
+                                    )
+                                  : Center(child: Text("No Data")),
+                              Padding(
+                                padding: const EdgeInsets.all(15),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text("Total".tr),
+                                    Text(total.toString() + "KD")
+                                  ],
                                 ),
                               ),
-                            )
-                          ],
+                              GestureDetector(
+                                onTap: () {
+                                  // print("dsfsd${_selectedStudent.length}");
+                                  _selectedStudent.length > 0
+                                      ? Get.toNamed('/confirmpayment',
+                                          arguments: [_selectedStudent, total])
+                                      : Fluttertoast.showToast(
+                                          msg:
+                                              'Please Select Atleast one student');
+                                },
+                                child: Container(
+                                  height: 50,
+                                  width: MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.vertical(
+                                          bottom: Radius.circular(
+                                              15)), //circular(15),
+                                      color: kColorGreen),
+                                  child: Center(
+                                    child: Text(
+                                      "Pay_now".tr,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      ContactUs(context, childrens),
-
-                    ],
+                        SizedBox(
+                          height: 15,
+                        ),
+                        ContactUs(context, childrens),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              // SizedBox(
-              //   height: 10,
-              // ),
-              // ContactUs(context, snapshot.data.response.children),
-            ],
-          ),
-        )
-      ),
+                // SizedBox(
+                //   height: 10,
+                // ),
+                // ContactUs(context, snapshot.data.response.children),
+              ],
+            ),
+          )),
     );
   }
 }

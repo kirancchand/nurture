@@ -14,6 +14,7 @@ import 'package:nurture/model/student.dart';
 import 'package:nurture/model/fee.dart';
 import 'package:nurture/service/api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 class MyHome extends StatefulWidget {
   const MyHome({Key key}) : super(key: key);
 
@@ -100,29 +101,26 @@ class _MyHomeState extends State<MyHome> {
                 ),
                 Column(children: [
                   Align(
-                    alignment: Alignment.topRight,
-                    child: GestureDetector(
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                          child: new SizedBox(
-                              height: 18.0,
-                              width: 18.0,
-                              child: new IconButton(
-                                  padding: new EdgeInsets.all(0.0),
-                                  icon: new Icon(Icons.settings, color: Colors.white),
-                                  onPressed: ()async{
-                                        print("helo");
-                                        SharedPreferences prefs = await SharedPreferences.getInstance();
-                                        prefs.setString('Username', "");
-                                        prefs.setString('access_token', "");
-                                        Get.toNamed('/');
-                                  }
-                              )
-                          )
-                      ),
-                    )
-
-                  ),
+                      alignment: Alignment.topRight,
+                      child: GestureDetector(
+                        child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: new SizedBox(
+                                height: 18.0,
+                                width: 18.0,
+                                child: new IconButton(
+                                    padding: new EdgeInsets.all(0.0),
+                                    icon: new Icon(Icons.settings,
+                                        color: Colors.white),
+                                    onPressed: () async {
+                                      // print("helo");
+                                      SharedPreferences prefs =
+                                          await SharedPreferences.getInstance();
+                                      prefs.setString('Username', "");
+                                      prefs.setString('access_token', "");
+                                      Get.toNamed('/');
+                                    }))),
+                      )),
                   CircleAvatar(
                       radius: 30,
                       backgroundColor: Colors.white,
@@ -161,7 +159,10 @@ class _MyHomeState extends State<MyHome> {
                           return Text("${snapshot.error}");
                         } else {
                           // return Container();
-                          return Center(child: SpinKitChasingDots(color: Colors.blue,));
+                          return Center(
+                              child: SpinKitChasingDots(
+                            color: Colors.blue,
+                          ));
                         }
 
                         // By default, show a loading spinner.
@@ -225,8 +226,7 @@ class _MyHomeState extends State<MyHome> {
                                           shrinkWrap: true,
                                           physics: ClampingScrollPhysics(),
                                           itemBuilder: (context, int index) {
-                                            print(response
-                                                .children[index].studentname);
+                                            //print(response.children[index].studentname);
 
                                             return StudentList(
                                                 data: response.children[index]);
@@ -238,7 +238,10 @@ class _MyHomeState extends State<MyHome> {
                                   return Text("${snapshot.error}");
                                 } else {
                                   return Center(
-                                      child: SpinKitWave(color: Colors.blue, type: SpinKitWaveType.center),);
+                                    child: SpinKitWave(
+                                        color: Colors.blue,
+                                        type: SpinKitWaveType.center),
+                                  );
                                 }
 
                                 // By default, show a loading spinner.
@@ -299,7 +302,7 @@ class _MyHomeState extends State<MyHome> {
                     AsyncSnapshot<FeeResponseModel> snapshot) {
                   if (snapshot.hasData) {
                     var response = snapshot.data?.response;
-                    print(response.children.length);
+                    //print(response.children.length);
                     // // data.response.length>0?
                     // var response=[];
                     return response.children.length > 0
@@ -366,7 +369,10 @@ class _MyHomeState extends State<MyHome> {
                     // return Text("${snapshot.error}");
                     return Text("${snapshot.error}");
                   } else {
-                    return Center(child: SpinKitWave(color: Colors.blue,));
+                    return Center(
+                        child: SpinKitWave(
+                      color: Colors.blue,
+                    ));
                   }
 
                   // By default, show a loading spinner.

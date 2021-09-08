@@ -83,7 +83,7 @@ List<Widget> loginButtons(
 }
 
 Widget payNowButtons(List<Map<String, dynamic>> stu, context, total) {
-  print("total$total");
+  // print("total$total");
 
   return GestureDetector(
     child: Container(
@@ -99,17 +99,16 @@ Widget payNowButtons(List<Map<String, dynamic>> stu, context, total) {
       ),
     ),
     onTap: () async {
-     // print(total.length);
-     
+      // print(total.length);
+
       // showSpinner();
-       var data = await submitConfirmPayment(stu);
+      var data = await submitConfirmPayment(stu);
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) =>PaymentWebPage(
-            link: data.response ?? "",
-          )
-        ),
+            builder: (context) => PaymentWebPage(
+                  link: data.response ?? "",
+                )),
       );
     },
     /*  onTap: () async {
@@ -166,6 +165,7 @@ Widget submitButtons(formKey, studentContactRequestModel, x) {
 }
 
 List<Widget> contactReqButton(
+  context,
   formKey,
   studentContactRequestModel,
   x,
@@ -191,8 +191,9 @@ List<Widget> contactReqButton(
             ),
           )),
       onTap: () async {
+        // print("dsfddsdfsds${x.name}");
         StudentContactResponseModel data = await validateAndSubmitContactReq(
-            formKey, studentContactRequestModel, x);
+            context, formKey, studentContactRequestModel, x);
         if (data.statuscode == "200") {
           toastFn(comment: data.message);
           Get.toNamed("/home");

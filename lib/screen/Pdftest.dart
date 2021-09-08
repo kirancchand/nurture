@@ -27,8 +27,6 @@ class PDFScreen extends StatefulWidget {
 }
 
 class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
-
-
   final Completer<PDFViewController> _controller =
       Completer<PDFViewController>();
   int pages = 0;
@@ -40,7 +38,7 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
   bool spin = true;
   Future<File> downloadPdf(String url) async {
     Completer<File> completer = Completer();
-    print("Start download file from internet!");
+    // print("Start download file from internet!");
     try {
       // "https://berlin2017.droidcon.cod.newthinking.net/sites/global.droidcon.cod.newthinking.net/files/media/documents/Flutter%20-%2060FPS%20UI%20of%20the%20future%20%20-%20DroidconDE%2017.pdf";
       // final url = "https://pdfkit.org/docs/guide.pdf";
@@ -51,9 +49,9 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
       var bytes = await consolidateHttpClientResponseBytes(response);
       var dir = await getApplicationDocumentsDirectory();
       directory = await getExternalStorageDirectory();
-      print("Download files");
+      //print("Download files");
       // /${DateTime.now().toString()}
-      print("${dir.path}/$filename");
+      // print("${dir.path}/$filename");
       File file = File("${dir.path}/$filename.pdf");
 
       await file.writeAsBytes(bytes, flush: true);
@@ -68,13 +66,10 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
   GlobalKey _globalKey = GlobalKey();
   Completer<WebViewController> _controllerweb = Completer<WebViewController>();
 
-
   @override
   void initState() {
     // TODO: implement initState
-    downloadPdf(
-             widget.link)
-        .then((value) {
+    downloadPdf(widget.link).then((value) {
       setState(() {
         spin = false;
       });
@@ -91,18 +86,19 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
     ].request();
 
     final info = statuses[Permission.storage].toString();
-    print(info);
+    //print(info);
   }
 
   _saveScreen() async {
     RenderRepaintBoundary boundary =
-    _globalKey.currentContext.findRenderObject() as RenderRepaintBoundary;
+        _globalKey.currentContext.findRenderObject() as RenderRepaintBoundary;
     ui.Image image = await boundary.toImage();
-    ByteData byteData = await (image.toByteData(format: ui.ImageByteFormat.png) as FutureOr<ByteData>);
+    ByteData byteData = await (image.toByteData(format: ui.ImageByteFormat.png)
+        as FutureOr<ByteData>);
     if (byteData != null) {
       final result =
-      await ImageGallerySaver.saveImage(byteData.buffer.asUint8List());
-      print(result);
+          await ImageGallerySaver.saveImage(byteData.buffer.asUint8List());
+      //print(result);
     }
   }
 
@@ -114,8 +110,7 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
         Uint8List.fromList(response.data),
         quality: 60,
         name: "hello");
-    print(result);
-
+    // print(result);
   }
 
   _saveGif() async {
@@ -125,8 +120,7 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
         "https://hyjdoc.oss-cn-beijing.aliyuncs.com/hyj-doc-flutter-demo-run.gif";
     await Dio().download(fileUrl, savePath);
     final result = await ImageGallerySaver.saveFile(savePath);
-    print(result);
-
+    //print(result);
   }
 
   _saveVideo() async {
@@ -135,11 +129,10 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
     String fileUrl =
         "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4";
     await Dio().download(fileUrl, savePath, onReceiveProgress: (count, total) {
-      print((count / total * 100).toStringAsFixed(0) + "%");
+      // print((count / total * 100).toStringAsFixed(0) + "%");
     });
     final result = await ImageGallerySaver.saveFile(savePath);
-    print(result);
-
+    //  print(result);
   }
   // _saveScreen() async {
   //   RenderRepaintBoundary boundary =
@@ -184,22 +177,22 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
                     setState(() {
                       errorMessage = error.toString();
                     });
-                    print(error.toString());
+                    // print(error.toString());
                   },
                   onPageError: (page, error) {
                     setState(() {
                       errorMessage = '$page: ${error.toString()}';
                     });
-                    print('$page: ${error.toString()}');
+                    // print('$page: ${error.toString()}');
                   },
                   onViewCreated: (PDFViewController pdfViewController) {
                     _controller.complete(pdfViewController);
                   },
                   onLinkHandler: (String uri) {
-                    print('goto uri: $uri');
+                    //print('goto uri: $uri');
                   },
                   onPageChanged: (int page, int total) {
-                    print('page change: $page/$total');
+                    //print('page change: $page/$total');
                     setState(() {
                       currentPage = page;
                     });
@@ -217,27 +210,26 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
                 Column(
                   children: <Widget>[
                     RepaintBoundary(
-                      key: _globalKey,
-                      child:Column(
-                        children: [
-                          WebView(
-                            javascriptMode: JavascriptMode.unrestricted,
-                            initialUrl: widget.link,
-                            onPageStarted: (String url) {
-                              return Center(child: SpinKitWave(color: Colors.blue,));
-                            },
-                            onPageFinished: (String url) {
-
-                              print('Page finished loading: $url');
-                              print(url.contains('paymentcancel'));
-
-
-                            },
-                            gestureNavigationEnabled: true,
-                          ),
-                        ],
-                      )
-                    ),
+                        key: _globalKey,
+                        child: Column(
+                          children: [
+                            WebView(
+                              javascriptMode: JavascriptMode.unrestricted,
+                              initialUrl: widget.link,
+                              onPageStarted: (String url) {
+                                return Center(
+                                    child: SpinKitWave(
+                                  color: Colors.blue,
+                                ));
+                              },
+                              onPageFinished: (String url) {
+                                //print('Page finished loading: $url');
+                                //print(url.contains('paymentcancel'));
+                              },
+                              gestureNavigationEnabled: true,
+                            ),
+                          ],
+                        )),
                     Container(
                       padding: EdgeInsets.only(top: 15),
                       child: RaisedButton(
@@ -276,17 +268,16 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
                     ),
                   ],
                 ),
-
               ],
             ),
-              floatingActionButton: FloatingActionButton(
-                onPressed: () {
-                  // Add your onPressed code here!
-                  // _saveScreen
-                },
-                child: const Icon(Icons.download),
-                backgroundColor: kColorGreen,
-              ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Add your onPressed code here!
+          // _saveScreen
+        },
+        child: const Icon(Icons.download),
+        backgroundColor: kColorGreen,
+      ),
       // floatingActionButton: FutureBuilder<PDFViewController>(
       //   future: _controller.future,
       //   builder: (context, AsyncSnapshot<PDFViewController> snapshot) {

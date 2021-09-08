@@ -17,6 +17,7 @@ import 'package:http/http.dart' as http;
 import 'dart:io' as Io;
 import 'package:dio/dio.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+
 class PDFScreen extends StatefulWidget {
   final String link;
 
@@ -26,9 +27,8 @@ class PDFScreen extends StatefulWidget {
 }
 
 class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
-
   GlobalKey _globalKey = GlobalKey();
-  String _base64="";
+  String _base64 = "";
   final Completer<PDFViewController> _controller =
       Completer<PDFViewController>();
   int pages = 0;
@@ -40,7 +40,7 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
   // bool spin = true;
   Future<File> downloadPdf(String url) async {
     Completer<File> completer = Completer();
-    print("Start download file from internet!");
+    // print("Start download file from internet!");
     try {
       // "https://berlin2017.droidcon.cod.newthinking.net/sites/global.droidcon.cod.newthinking.net/files/media/documents/Flutter%20-%2060FPS%20UI%20of%20the%20future%20%20-%20DroidconDE%2017.pdf";
       // final url = "https://pdfkit.org/docs/guide.pdf";
@@ -51,9 +51,9 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
       var bytes = await consolidateHttpClientResponseBytes(response);
       var dir = await getApplicationDocumentsDirectory();
       directory = await getExternalStorageDirectory();
-      print("Download files");
+      //print("Download files");
       // /${DateTime.now().toString()}
-      print("${dir.path}/$filename");
+      // print("${dir.path}/$filename");
       File file = File("${dir.path}/$filename.pdf");
 
       await file.writeAsBytes(bytes, flush: true);
@@ -68,6 +68,7 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
 
     pdf = await completer.future;
   }
+
   Uint8List _bytesImage;
   @override
   void initState() {
@@ -83,38 +84,28 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
     super.initState();
 
     // Base64Decoder().convert(_imgString);
-
   }
 
-
-
   Future<Uint8List> _capturePng() async {
-
-
     try {
-      print('inside');
+      // print('inside');
       RenderRepaintBoundary boundary =
-      _globalKey.currentContext.findRenderObject();
+          _globalKey.currentContext.findRenderObject();
       ui.Image image = await boundary.toImage(pixelRatio: 3.0);
       ByteData byteData =
-      await image.toByteData(format: ui.ImageByteFormat.png);
+          await image.toByteData(format: ui.ImageByteFormat.png);
       var pngBytes = byteData.buffer.asUint8List();
       var bs64 = base64Encode(pngBytes);
-      final result =
-      await ImageGallerySaver.saveImage(pngBytes);
-      print(pngBytes);
-      print(bs64);
-      print(result);
-      setState(() {
-
-      });
+      final result = await ImageGallerySaver.saveImage(pngBytes);
+      // print(pngBytes);
+      // print(bs64);
+      // print(result);
+      setState(() {});
       Fluttertoast.showToast(msg: "File downloaded Successfully");
       return pngBytes;
     } catch (e) {
       print(e);
     }
-
-
 
     // RenderRepaintBoundary boundary =
     // _globalKey.currentContext.findRenderObject() as RenderRepaintBoundary;
@@ -129,89 +120,85 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return RepaintBoundary(
-        key: _globalKey,
-        child: new Scaffold(
+    return new Scaffold(
       body:
-      // spin
-      //     ? Center(
-      //         child: CircularProgressIndicator(),
-      //       )
-      //     :
-      Stack(
-              children: <Widget>[
-                Container(
-                  child:Stack(
-                    children:[
-                      // PDFView(
-                      //   filePath: pdf.path,
-                      //   enableSwipe: true,
-                      //   swipeHorizontal: true,
-                      //   autoSpacing: false,
-                      //   pageFling: true,
-                      //   pageSnap: true,
-                      //   defaultPage: currentPage,
-                      //   fitPolicy: FitPolicy.BOTH,
-                      //   preventLinkNavigation:
-                      //   false, // if set to true the link is handled in flutter
-                      //   onRender: (_pages) {
-                      //     setState(() {
-                      //       pages = _pages;
-                      //       isReady = true;
-                      //     });
-                      //   },
-                      //   onError: (error) {
-                      //     setState(() {
-                      //       errorMessage = error.toString();
-                      //     });
-                      //     print(error.toString());
-                      //   },
-                      //   onPageError: (page, error) {
-                      //     setState(() {
-                      //       errorMessage = '$page: ${error.toString()}';
-                      //     });
-                      //     print('$page: ${error.toString()}');
-                      //   },
-                      //   onViewCreated: (PDFViewController pdfViewController) {
-                      //     _controller.complete(pdfViewController);
-                      //   },
-                      //   onLinkHandler: (String uri) {
-                      //     print('goto uri: $uri');
-                      //   },
-                      //   onPageChanged: (int page, int total) {
-                      //     print('page change: $page/$total');
-                      //     setState(() {
-                      //       currentPage = page;
-                      //     });
-                      //   },
-                      // ),
-                      // SfPdfViewer.network(
-                      //   'https://livereceipts.blob.core.windows.net/receipts/FeeReceipt_RCT-002524101202014970655914.PDF',
-                      // ),
-                      // errorMessage.isEmpty
-                      //     ? !isReady
-                      //     ? Center(
-                      //   child: CircularProgressIndicator(),
-                      // )
-                      //     : Container()
-                      //     : Center(
-                      //   child: Text(errorMessage),
-                      // )
-                      SfPdfViewer.network(
-                        widget.link,
-                      ),
-                    ]
-                  )
-                ),
-
-
-              ],
-            ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: _capturePng,
-            child: const Icon(Icons.download),
-            backgroundColor: kColorGreen,
-          ),
+          // spin
+          //     ? Center(
+          //         child: CircularProgressIndicator(),
+          //       )
+          //     :
+          Stack(
+        children: <Widget>[
+          Container(
+              child: Stack(children: [
+            // PDFView(
+            //   filePath: pdf.path,
+            //   enableSwipe: true,
+            //   swipeHorizontal: true,
+            //   autoSpacing: false,
+            //   pageFling: true,
+            //   pageSnap: true,
+            //   defaultPage: currentPage,
+            //   fitPolicy: FitPolicy.BOTH,
+            //   preventLinkNavigation:
+            //   false, // if set to true the link is handled in flutter
+            //   onRender: (_pages) {
+            //     setState(() {
+            //       pages = _pages;
+            //       isReady = true;
+            //     });
+            //   },
+            //   onError: (error) {
+            //     setState(() {
+            //       errorMessage = error.toString();
+            //     });
+            //     print(error.toString());
+            //   },
+            //   onPageError: (page, error) {
+            //     setState(() {
+            //       errorMessage = '$page: ${error.toString()}';
+            //     });
+            //     print('$page: ${error.toString()}');
+            //   },
+            //   onViewCreated: (PDFViewController pdfViewController) {
+            //     _controller.complete(pdfViewController);
+            //   },
+            //   onLinkHandler: (String uri) {
+            //     print('goto uri: $uri');
+            //   },
+            //   onPageChanged: (int page, int total) {
+            //     print('page change: $page/$total');
+            //     setState(() {
+            //       currentPage = page;
+            //     });
+            //   },
+            // ),
+            // SfPdfViewer.network(
+            //   'https://livereceipts.blob.core.windows.net/receipts/FeeReceipt_RCT-002524101202014970655914.PDF',
+            // ),
+            // errorMessage.isEmpty
+            //     ? !isReady
+            //     ? Center(
+            //   child: CircularProgressIndicator(),
+            // )
+            //     : Container()
+            //     : Center(
+            //   child: Text(errorMessage),
+            // )
+            RepaintBoundary(
+              key: _globalKey,
+              child: SfPdfViewer.network(
+                widget.link,
+              ),
+            )
+          ])),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _capturePng,
+        child: const Icon(Icons.download),
+        backgroundColor: kColorGreen,
+      ),
       // floatingActionButton: FutureBuilder<PDFViewController>(
       //   future: _controller.future,
       //   builder: (context, AsyncSnapshot<PDFViewController> snapshot) {
@@ -227,7 +214,6 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
       //     return Container();
       //   },
       // ),
-    )
     );
   }
 }

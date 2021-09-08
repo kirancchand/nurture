@@ -83,6 +83,9 @@ class LoginPage extends State<Login>{
                                         child: DropdownButton(
                                           // Not necessary for Option 1
                                           value: _selectedLang,
+                                          underline: Container(
+                                            height: 0,
+                                          ),
                                           onChanged: (String newValue) {
                                             // print(newValue);
                                             setState(() => _selectedLang = newValue);
@@ -90,7 +93,7 @@ class LoginPage extends State<Login>{
                                             // setState(() => _selectedLang = newValue);
                                           },
                                           items: Localization.langs.map((String lang) {
-                                            return DropdownMenuItem(value: lang, child: Text(lang));
+                                            return DropdownMenuItem(value: lang, child: Text(lang,style: TextStyle(color: kColorGreen)));
                                           }).toList(),
                                         ),
                                       ),
@@ -113,7 +116,7 @@ class LoginPage extends State<Login>{
                             ),
                             Text(
                               "Al_Jeel_Al_Jadeed_Educational_Institution".tr,
-                              style: TextStyle(fontSize: 12),
+                              style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),
                             )
                           ],
                         ),

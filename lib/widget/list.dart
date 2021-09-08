@@ -23,6 +23,7 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:nurture/screen/ReceiptView.dart';
 import 'package:nurture/widget/spinner.dart';
 import 'package:nurture/screen/Pdf.dart';
+
 class StudentList extends StatefulWidget {
   StudentList({Key key, this.data}) : super(key: key);
   FeeResponse data;
@@ -37,38 +38,37 @@ class _StudentListState extends State<StudentList> {
     // debugPrint('parent civil id: ${parents[0].civilid}');
     return GestureDetector(
       child: ListTile(
-        leading: CircleAvatar(
-            radius: 25,
-            backgroundColor: Colors.pink.shade300,
-            backgroundImage: AssetImage("assets/images/chil.png")
-            // backgroundImage: AssetImage(img),
-            ),
-        title: Text(widget.data.studentname),
-        isThreeLine: true,
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Student Id ${widget.data.studentnumber}" ?? "",
-              style: TextStyle(fontSize: 11),
-            ),
-            Text(widget.data.schoolname ?? "", style: TextStyle(fontSize: 11))
-          ],
-        ),
-        trailing: IconButton(
-          onPressed: () {
-            // print(childrens);
-            Get.to(StudentDetails(data: widget.data));
-          },
-          icon: Icon(
-            Icons.keyboard_arrow_right,
-            color: Colors.green,
+          leading: CircleAvatar(
+              radius: 25,
+              backgroundColor: Colors.pink.shade300,
+              backgroundImage: AssetImage("assets/images/chil.png")
+              // backgroundImage: AssetImage(img),
+              ),
+          title: Text(widget.data.studentname),
+          isThreeLine: true,
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Student Id ${widget.data.studentnumber}" ?? "",
+                style: TextStyle(fontSize: 11),
+              ),
+              Text(widget.data.schoolname ?? "", style: TextStyle(fontSize: 11))
+            ],
           ),
-        ),
-         onTap: () {
-          Get.to(StudentDetails(data: widget.data));
-        }
-      ),
+          trailing: IconButton(
+            onPressed: () {
+              // print(childrens);
+              Get.to(StudentDetails(data: widget.data));
+            },
+            icon: Icon(
+              Icons.keyboard_arrow_right,
+              color: Colors.green,
+            ),
+          ),
+          onTap: () {
+            Get.to(StudentDetails(data: widget.data));
+          }),
     );
   }
 }
@@ -124,224 +124,242 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
-      child: Container(
-        // height:  MediaQuery.of(context).size.height*.19,
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey, width: .5),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child:
-        Center(
-          child: loading
-              ? Container(
-                  child: LinearProgressIndicator(
-                    minHeight: 10,
-                    value: progress,
-                    color:Colors.blue,
-                  ),
-                ):Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Container(
-                      // height: 99,
-                      // width: MediaQuery.of(context).size.width ,
-                      child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          // crossAxisAlignment: CrossAxisAlignment.,
-                          children: [
-                            Column(
-                              //  mainAxisAlignment:
-                              //    MainAxisAlignment.spaceAround,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Transaction_id".tr,
-                                  style: TextStyle(
-                                      color: Colors.grey, fontSize: 12),
-                                ),
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                Text(
-                                  "Date/Time".tr,
-                                  style: TextStyle(
-                                      color: Colors.grey, fontSize: 12),
-                                ),
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                Text(
-                                  "Payment_id".tr,
-                                  style: TextStyle(
-                                      color: Colors.grey, fontSize: 12),
-                                ),
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                Text(
-                                  "Amount".tr,
-                                  style: TextStyle(
-                                      color: Colors.grey, fontSize: 12),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  widget.data.knettransactionid,
-                                  style: TextStyle(fontSize: 12),
-                                ),
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                Text(
-                                  widget.data.postdate,
-                                  style: TextStyle(fontSize: 12),
-                                ),
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                Text(
-                                  widget.data.paymentid,
-                                  style: TextStyle(fontSize: 12),
-                                ),
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                Text(
-                                  widget.data.amount.toString(),
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: widget.data.result == "Success"
-                                        ? kColorGreen
-                                        : Colors.red,
-                                    //failed?
-
-                                    //:Colors.red,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  )),
-                  Expanded(
-                    child: SizedBox(
-                      height: 83,
-                      width: MediaQuery.of(context).size.width * .22,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          // failed?
-                          Icon(
-                            widget.data.result == "Success"
-                                ? Icons.check_circle_outline
-                                : Icons.cancel_outlined,
-                            color: widget.data.result == "Success"
-                                ? kColorGreen
-                                : Colors.red,
-                          ),
-                          //:Icon(
-                          //Icons.close_rounded,//lose_outlined,
-                          //color: Colors.red,
-                          // ),
-                          GestureDetector(
-                            child: Container(
-                              height: 20,
-                              width: MediaQuery.of(context).size.width * .22,
-                              decoration: BoxDecoration(
-                                  color: widget.data.result == "Success"
-                                      ? Colors.green[50]
-                                      : Colors.grey[100],
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Center(
-                                  child: Text(
-                                widget.data.result == "Success"
-                                    ? "Download Receipt"
-                                    : widget.data.result == "Cancelled"
-                                        ? "Cancelled"
-                                        : "Failed_transaction".tr,
-                                style: TextStyle(
-                                    fontSize: 8.5,
-                                    color: widget.data.result == "Success"
-                                        ? kColorGreen
-                                        : Colors.grey),
-                              )),
-                            ),
-                            onTap: () {
-                              // Center(
-                              //   child: loading
-                              //       ? Container(
-                              //           child: LinearProgressIndicator(
-                              //             minHeight: 10,
-                              //             value: progress,
-                              //             color:Colors.blue,
-                              //           ),
-                              //         )
-                              //       : Container(),
-                              // );
-                              // widget.data.result=="Success"?Get.toNamed('/download',arguments: [widget.data.paymentid,widget.data.filepath]):Container();
-                              widget.data.result == "Success"
-                               ? widget.data.filepath==null?Fluttertoast.showToast(msg: "Receipt will be available to download soon!!"):showPdfView(widget.data.paymentid,widget.data.filepath)
-                                  // ? widget.data.filepath==null?Fluttertoast.showToast(msg: "Please wait for verify your payment!!"):downloadFile(widget.data.paymentid,
-                                  //     widget.data.filepath)
-                                  : Container();
-
-                              // Navigator.of(context).push(MaterialPageRoute(builder:( context)=>ModelDownload()));
-                            },
-                          )
-                        ],
-                      ),
+        padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
+        child: Container(
+          // height:  MediaQuery.of(context).size.height*.19,
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey, width: .5),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Center(
+            child: loading
+                ? Container(
+                    child: LinearProgressIndicator(
+                      minHeight: 10,
+                      value: progress,
+                      color: Colors.blue,
                     ),
                   )
-                ],
-              ),
-            ],
+                : Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                                // height: 99,
+                                // width: MediaQuery.of(context).size.width ,
+                                child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    // crossAxisAlignment: CrossAxisAlignment.,
+                                    children: [
+                                      Column(
+                                        //  mainAxisAlignment:
+                                        //    MainAxisAlignment.spaceAround,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Transaction_id".tr,
+                                            style: TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 12),
+                                          ),
+                                          SizedBox(
+                                            height: 8,
+                                          ),
+                                          Text(
+                                            "Date/Time".tr,
+                                            style: TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 12),
+                                          ),
+                                          SizedBox(
+                                            height: 8,
+                                          ),
+                                          Text(
+                                            "Payment_id".tr,
+                                            style: TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 12),
+                                          ),
+                                          SizedBox(
+                                            height: 8,
+                                          ),
+                                          Text(
+                                            "Amount".tr,
+                                            style: TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 12),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            widget.data.knettransactionid,
+                                            style: TextStyle(fontSize: 12),
+                                          ),
+                                          SizedBox(
+                                            height: 8,
+                                          ),
+                                          Text(
+                                            widget.data.postdate,
+                                            style: TextStyle(fontSize: 12),
+                                          ),
+                                          SizedBox(
+                                            height: 8,
+                                          ),
+                                          Text(
+                                            widget.data.paymentid,
+                                            style: TextStyle(fontSize: 12),
+                                          ),
+                                          SizedBox(
+                                            height: 8,
+                                          ),
+                                          Text(
+                                            widget.data.amount.toString(),
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              color: widget.data.result ==
+                                                      "Success"
+                                                  ? kColorGreen
+                                                  : Colors.red,
+                                              //failed?
+
+                                              //:Colors.red,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            )),
+                            Expanded(
+                              child: SizedBox(
+                                height: 83,
+                                width: MediaQuery.of(context).size.width * .22,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    // failed?
+                                    Icon(
+                                      widget.data.result == "Success"
+                                          ? Icons.check_circle_outline
+                                          : Icons.cancel_outlined,
+                                      color: widget.data.result == "Success"
+                                          ? kColorGreen
+                                          : Colors.red,
+                                    ),
+                                    //:Icon(
+                                    //Icons.close_rounded,//lose_outlined,
+                                    //color: Colors.red,
+                                    // ),
+                                    GestureDetector(
+                                      child: Container(
+                                        height: 20,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                .22,
+                                        decoration: BoxDecoration(
+                                            color:
+                                                widget.data.result == "Success"
+                                                    ? Colors.green[50]
+                                                    : Colors.grey[100],
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        child: Center(
+                                            child: Text(
+                                          widget.data.result == "Success"
+                                              ? "Download_receipt".tr
+                                              : widget.data.result ==
+                                                      "Cancelled"
+                                                  ? "Cancelled".tr
+                                                  : "Failed_transaction".tr,
+                                          style: TextStyle(
+                                              fontSize: 8.5,
+                                              color: widget.data.result ==
+                                                      "Success"
+                                                  ? kColorGreen
+                                                  : Colors.grey),
+                                        )),
+                                      ),
+                                      onTap: () {
+                                        // Center(
+                                        //   child: loading
+                                        //       ? Container(
+                                        //           child: LinearProgressIndicator(
+                                        //             minHeight: 10,
+                                        //             value: progress,
+                                        //             color:Colors.blue,
+                                        //           ),
+                                        //         )
+                                        //       : Container(),
+                                        // );
+                                        // widget.data.result=="Success"?Get.toNamed('/download',arguments: [widget.data.paymentid,widget.data.filepath]):Container();
+                                        widget.data.result == "Success"
+                                            ? widget.data.filepath == null
+                                                ? Fluttertoast.showToast(
+                                                    msg:
+                                                        "Receipt will be available to download soon!!")
+                                                : showPdfView(
+                                                    widget.data.paymentid,
+                                                    widget.data.filepath)
+                                            // ? widget.data.filepath==null?Fluttertoast.showToast(msg: "Please wait for verify your payment!!"):downloadFile(widget.data.paymentid,
+                                            //     widget.data.filepath)
+                                            : Container();
+
+                                        // Navigator.of(context).push(MaterialPageRoute(builder:( context)=>ModelDownload()));
+                                      },
+                                    )
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
           ),
-        ),
-      ),
-    ));
+        ));
   }
 
-  showPdfView(paymentid,filepath) async {
+  showPdfView(paymentid, filepath) async {
     // downloadFile(paymentid, filepath);
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => PDFScreen(
-            link: filepath
-        ),
+        builder: (context) => PDFScreen(link: filepath),
       ),
     );
     // Get.to(()=>ReceiptView(link: filepath ?? ""));
   }
 
   downloadFile(paymentid, filepath) async {
-    print("sdfsd${paymentid}");
-    print("filepath ${filepath}");
+    //print("sdfsd${paymentid}");
+    //print("filepath ${filepath}");
     setState(() {
       loading = true;
       progress = 0;
     });
-    print(loading);
+    // print(loading);
     bool downloaded = await savePaymentFile(filepath, "${paymentid}.pdf");
     if (downloaded) {
       Fluttertoast.showToast(msg: "File Downloaded");
@@ -360,7 +378,7 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
         if (await _requestPermission(Permission.storage)) {
           directory = await getExternalStorageDirectory();
           String newPath = "";
-          print(directory);
+          //   print(directory);
           List<String> paths = directory.path.split("/");
           for (int x = 1; x < paths.length; x++) {
             String folder = paths[x];
@@ -510,131 +528,185 @@ class _StudentInfoListState extends State<StudentInfoList> {
                     Positioned(
                       bottom: 0,
                       child: Container(
-                        height: MediaQuery.of(context).size.height * .60,
-                        width: MediaQuery.of(context).size.width - 40,
-                        decoration: BoxDecoration(
-                          border:
-                              Border.all(color: Colors.grey.shade300, width: 1),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child:Padding(
-                          padding: const EdgeInsets.all(15),
-                          child: Column(
-                            mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    width: 200,
-                                    child: txt("Name".tr)),
-                                    Expanded(child: Text(childrens.studentname,maxLines: 2,))
-                                ],
-                              ),
-                               Row(
-                                children: [
-                                  SizedBox(
-                                    width: 200,
-                                    child: txt("Gender".tr),),
-                                    Expanded(child: Text(childrens.gender,maxLines: 2,))
-                                ],
-                              ),
-                               Row(
-                                children: [
-                                  SizedBox(
-                                    width: 200,
-                                    child: txt("Date of Birth".tr),),
-                                    Expanded(child: Text(childrens.birthdate.day.toString() +
-                                        "/" +
-                                        childrens.birthdate.month.toString() +
-                                        "/" +
-                                        childrens.birthdate.year.toString(),maxLines: 2,))
-                                ],
-                              ),
-                               Row(
-                                children: [
-                                  SizedBox(
-                                    width: 200,
-                                    child: txt("School_Name".tr),),
-                                    Expanded(child: Text(childrens.schoolname,maxLines: 3,))
-                                ],
-                              ),
-                               Row(
-                                children: [
-                                  SizedBox(
-                                    width: 200,
-                                    child: txt("Grade".tr),),
-                                    Expanded(child: Text(childrens.grade,maxLines: 2,))
-                                ],
-                              ),
-                               Row(
-                                children: [
-                                  SizedBox(
-                                    width: 200,
-                                    child: txt("Academic_Year".tr),),
-                                    Expanded(child: Text(childrens.academicyear,maxLines: 2,))
-                                ],
-                              ),
-                               Row(
-                                children: [
-                                  SizedBox(
-                                    width: 200,
-                                    child: txt("Nationality".tr),),
-                                    Expanded(child: Text(childrens.nationality,maxLines: 2,))
-                                ],
-                              ),
-                                Row(
-                                children: [
-                                  SizedBox(
-                                    width: 200,
-                                    child: txt("Religion".tr),),
-                                    Expanded(child: Text(childrens.religion,maxLines: 2,))
-                                ],
-                              ),
-                                Row(
-                                children: [
-                                  SizedBox(
-                                    width: 200,
-                                    child:   txt("Civil_ID".tr),),
-                                    Expanded(child: Text(childrens.civilid.toString(),maxLines: 2,))
-                                ],
-                              ),
-                                Row(
-                                children: [
-                                  SizedBox(
-                                    width: 200,
-                                    child: txt("Civil_id_Expiry_Date".tr),),
-                                    Expanded(child: Text(childrens.studentcivilexpirydate.day
-                                            .toString() +
-                                        "/" +
-                                        childrens.studentcivilexpirydate.month
-                                            .toString() +
-                                        "/" +
-                                        childrens.studentcivilexpirydate.year
-                                            .toString(),maxLines: 2,))
-                                ],
-                              ),
-                                Row(
-                                children: [
-                                  SizedBox(
-                                    width: 200,
-                                    child:  txt("Passport_Number".tr),),
-                                    Expanded(child: Text(childrens.passportnumber,maxLines: 2,))
-                                ],
-                              ),
-                                Row(
-                                children: [
-                                  SizedBox(
-                                    width: 200,
-                                    child: txt("Address".tr),),
-                                    Expanded(child: Text(childrens.regionalarea,maxLines: 10,))
-                                ],
-                              ),
-                               
-                            ],
+                          height: MediaQuery.of(context).size.height * .60,
+                          width: MediaQuery.of(context).size.width - 40,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                color: Colors.grey.shade300, width: 1),
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                        )
-                  ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(15),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Row(
+                                  children: [
+                                    SizedBox(width: 200, child: txt("Name".tr)),
+                                    Expanded(
+                                        child: Text(
+                                      childrens.studentname,
+                                      maxLines: 2,
+                                    ))
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 200,
+                                      child: txt("Gender".tr),
+                                    ),
+                                    Expanded(
+                                        child: Text(
+                                      childrens.gender,
+                                      maxLines: 2,
+                                    ))
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 200,
+                                      child: txt("Date_of_Birth".tr),
+                                    ),
+                                    Expanded(
+                                        child: Text(
+                                      childrens.birthdate.day.toString() +
+                                          "/" +
+                                          childrens.birthdate.month.toString() +
+                                          "/" +
+                                          childrens.birthdate.year.toString(),
+                                      maxLines: 2,
+                                    ))
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 200,
+                                      child: txt("School_Name".tr),
+                                    ),
+                                    Expanded(
+                                        child: Text(
+                                      childrens.schoolname,
+                                      maxLines: 3,
+                                    ))
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 200,
+                                      child: txt("Grade".tr),
+                                    ),
+                                    Expanded(
+                                        child: Text(
+                                      childrens.grade,
+                                      maxLines: 2,
+                                    ))
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 200,
+                                      child: txt("Academic_Year".tr),
+                                    ),
+                                    Expanded(
+                                        child: Text(
+                                      childrens.academicyear,
+                                      maxLines: 2,
+                                    ))
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 200,
+                                      child: txt("Nationality".tr),
+                                    ),
+                                    Expanded(
+                                        child: Text(
+                                      childrens.nationality,
+                                      maxLines: 2,
+                                    ))
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 200,
+                                      child: txt("Religion".tr),
+                                    ),
+                                    Expanded(
+                                        child: Text(
+                                      childrens.religion,
+                                      maxLines: 2,
+                                    ))
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 200,
+                                      child: txt("Civil_ID".tr),
+                                    ),
+                                    Expanded(
+                                        child: Text(
+                                      childrens.civilid.toString(),
+                                      maxLines: 2,
+                                    ))
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 200,
+                                      child: txt("Civil_id_Expiry_Date".tr),
+                                    ),
+                                    Expanded(
+                                        child: Text(
+                                      childrens.studentcivilexpirydate.day
+                                              .toString() +
+                                          "/" +
+                                          childrens.studentcivilexpirydate.month
+                                              .toString() +
+                                          "/" +
+                                          childrens.studentcivilexpirydate.year
+                                              .toString(),
+                                      maxLines: 2,
+                                    ))
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 200,
+                                      child: txt("Passport_Number".tr),
+                                    ),
+                                    Expanded(
+                                        child: Text(
+                                      childrens.passportnumber,
+                                      maxLines: 2,
+                                    ))
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 200,
+                                      child: txt("Address".tr),
+                                    ),
+                                    Expanded(
+                                        child: Text(
+                                      childrens.regionalarea,
+                                      maxLines: 10,
+                                    ))
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )),
                     ),
                     Positioned(
                       left: 15,
@@ -884,7 +956,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                   width: 83,
                   color: Colors.white,
                   child: Text(
-                      "${parents[index].type}_info".tr,
+                    "${parents[index].type}_info".tr,
                     style: TextStyle(color: kColorGreen),
                   ),
                 ),
@@ -1152,25 +1224,24 @@ class Installment extends StatelessWidget {
       padding: const EdgeInsets.only(top: 5, bottom: 3),
       child: Column(
         children: [
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              list_txt("Tution", isSelected: false),
+              list_txt("Tuition_fees".tr, isSelected: false),
               list_txt("${data.tuitionfee.toString()} KD"),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              list_txt("Transportation", isSelected: false),
+              list_txt("Transportation_Fee".tr, isSelected: false),
               list_txt("${data.transportfee.toString()} KD")
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              list_txt("Others", isSelected: false),//true
+              list_txt("Other".tr, isSelected: false), //true
               list_txt("${data.others.toString()} KD")
             ],
           )
@@ -1179,7 +1250,6 @@ class Installment extends StatelessWidget {
     );
   }
 }
-
 
 Widget list_txt(String txt, {bool isSelected = false}) {
   return Text(

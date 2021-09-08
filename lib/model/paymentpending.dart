@@ -34,6 +34,7 @@ class PaymentPendingResponse {
     this.dueamount,
     this.academicyear,
     this.parentnumber,
+    this.totaldue
   });
 
   int paymentid;
@@ -49,6 +50,7 @@ class PaymentPendingResponse {
   double dueamount;
   String academicyear;
   String parentnumber;
+  double totaldue;
 
   factory PaymentPendingResponse.fromJson(Map<String, dynamic> json) =>
       PaymentPendingResponse(
@@ -66,6 +68,7 @@ class PaymentPendingResponse {
         dueamount: json["dueamount"] ?? "",
         academicyear: json["academicyear"] ?? "",
         parentnumber: json["parentnumber"] ?? "",
+        totaldue: json["totaldue"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -82,6 +85,7 @@ class PaymentPendingResponse {
         "dueamount": dueamount,
         "academicyear": academicyear,
         "parentnumber": parentnumber,
+        "totaldue": totaldue,
       };
 }
 

@@ -1,5 +1,5 @@
 // Turkish Translations
-const Map<String, String> arAB = {
+const Map<String, String> arAE = {
   'hello': 'Merhaba!',
   'sign_in':'Sign in',
   'Tell_us_more': 'اخبرنا بالمزيد',
@@ -54,18 +54,4 @@ const Map<String, String> arAB = {
   'Father_info':'بيانات الأب',
   'Mother_info':'بيانات الأم',
   'Student_Info':'بيانات الطالب',
-  'Contact_School': 'اتصل بنا',
-  'Application_version':'الاصدار للتطبيق ',
-  'Log_off':	'تسجيل الخروج',
-  'Transportation_Fee':	'رسوم المواصلات',
-  'Total_Due':	'اجمالي المستحق',
-  'Tuition_fees':'رسوم دراسية',
-  'Other':'اخرى',
-  'Installment':'لقسط',
-  'Due_now':'الدفعة المستحقة حالياً',
-  'Download_receipt':'تحميل الايصال',
-  'Cancelled':'الغاء العملية',
-  'Settings':'إعدادات',
 };
-
-

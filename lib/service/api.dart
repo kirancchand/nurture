@@ -77,7 +77,7 @@ class Api {
     final response = await http.get(getUrl('GetAllDetailsSingle'), headers: {
       'Authorization': 'Bearer $token',
     });
-    print(jsonDecode(response.body));
+    //  print(jsonDecode(response.body));
     if (response.statusCode == 200 || response.statusCode == 400) {
       return FeeResponseModel.fromJson(json.decode(response.body));
     } else {
@@ -124,7 +124,7 @@ class Api {
     // String url = "https://run.mocky.io/v3/c0586d5b-47fd-4c1b-8eae-277796c80ec6";
     // String url = "https://run.mocky.io/v3/cdadde32-9982-459b-8d5d-8f1d687a9455";
     var token = await getToken();
-    print("valueChoose${valueChoose}");
+    //print("valueChoose${valueChoose}");
     final queryParameters = valueChoose;
     final response = await http.get(
         getUrl("getstudentfeedetails?studentId=${queryParameters}"),
@@ -144,9 +144,23 @@ class Api {
 
   Future<StudentContactResponseModel> submitContactRequest(
     StudentContactRequestModel studentContactRequestModel,
-    List<PlatformFile> file,
+    PlatformFile file,
   ) async {
     var token = await getToken();
+    Dio dio = new Dio();
+    dio.options.headers["Authorization"] = "Bearer ${token}";
+    // print(file);
+    var formData = FormData.fromMap({
+      'Studentid': studentContactRequestModel.toJson()["studentid"],
+      'Name': studentContactRequestModel.toJson()["studentname"],
+      'Email': studentContactRequestModel.toJson()["studentemail"],
+      'PhoneNumber': studentContactRequestModel.toJson()["studentphonenumber"],
+      'Query': studentContactRequestModel.toJson()["studentinquiry"],
+      'fileid': await MultipartFile.fromFile(file.path, filename: file.path),
+    });
+    var response = await dio.post(
+        'http://schbackend.azurewebsites.net/api/apps/sendenquiry',
+        data: formData);
     //    FormData formData = FormData.fromMap({
     //   "image": await MultipartFile.fromFile(file.first.path, filename: file.first.name),
     // });
@@ -155,15 +169,17 @@ class Api {
     // final response = await Dio().post('http://schbackend.azurewebsites.net/api/apps/sendenquiry?studentid=${studentContactRequestModel.toJson()["studentid"]}&Name=${studentContactRequestModel.toJson()["studentname"]}&Email=${studentContactRequestModel.toJson()["studentemail"]}&PhoneNumber=${studentContactRequestModel.toJson()["studentphonenumber"]}&Query=${studentContactRequestModel.toJson()["studentinquiry"]}', data: formData);
     // FormData formData = new FormData();
 
-    final response = await http.post(
-      getUrl(
-          'sendenquiry?studentid=${studentContactRequestModel.toJson()["studentid"]}&Name=${studentContactRequestModel.toJson()["studentname"]}&Email=${studentContactRequestModel.toJson()["studentemail"]}&PhoneNumber=${studentContactRequestModel.toJson()["studentphonenumber"]}&Query=${studentContactRequestModel.toJson()["studentinquiry"]}'),
-      headers: {'Authorization': 'Bearer $token'},
-    );
+    // final response = await http.post(
+    //   getUrl(
+    //       'sendenquiry?studentid=${studentContactRequestModel.toJson()["studentid"]}&Name=${studentContactRequestModel.toJson()["studentname"]}&Email=${studentContactRequestModel.toJson()["studentemail"]}&PhoneNumber=${studentContactRequestModel.toJson()["studentphonenumber"]}&Query=${studentContactRequestModel.toJson()["studentinquiry"]}'),
+    //   headers: {'Authorization': 'Bearer $token'},
+    // );
     // print("sdsdsd ${json.decode(response.body)}");
     if (response.statusCode == 200 || response.statusCode == 400) {
+      //  print("json.decode(response.data)");
+      // print(json.decode(response.data));
       // return StudentContactResponseModel.fromJson(json.decode(response.body));
-      return StudentContactResponseModel.fromJson(json.decode(response.body));
+      return StudentContactResponseModel.fromJson(response.data);
     } else {
       return StudentContactResponseModel();
       // throw Exception('Failed to load data!');
@@ -215,7 +231,6 @@ class Api {
 Future<Payment> submitPaymentRequest(
     List<Map<String, dynamic>> paymentBody) async {
   var enc = jsonEncode(paymentBody);
-  
 
   var token = await getToken();
   var headers = {
@@ -224,7 +239,7 @@ Future<Payment> submitPaymentRequest(
     'Cookie':
         'ARRAffinity=94a36c26088811151a0293b8f949eda23429828ef41743d274d54f411258035d'
   };
-  print(enc);
+  // print(enc);
   final response =
       await http.post(getUrl('PostPayment'), body: enc, headers: headers);
   // print(response.body);

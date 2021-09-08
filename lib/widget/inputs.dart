@@ -5,6 +5,7 @@ import 'package:nurture/common/constants.dart';
 import 'package:country_list_pick/country_list_pick.dart';
 import 'package:get/get.dart';
 import 'package:nurture/localization.dart';
+
 List<Widget> loginInputs(loginRequestModel) {
   return <Widget>[
     Row(
@@ -208,10 +209,10 @@ List<Widget> contactReqInputs(studentContactRequestModel, context) {
                     },
                     initialSelection: '+965',
                     onChanged: (CountryCode code) {
-                      print(code.name);
-                      print(code.code);
-                      print(code.dialCode);
-                      print(code.flagUri);
+                      // print(code.name);
+                      // print(code.code);
+                      // print(code.dialCode);
+                      // print(code.flagUri);
                     },
                   ),
                   // onPressed: (),
@@ -408,7 +409,7 @@ List<Widget> contactReqInputs(studentContactRequestModel, context) {
     Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text("Tell_us_more".tr+"..."),
+        Text("Tell_us_more".tr + "..."),
         Text(
           "0/1500",
           style: TextStyle(color: Colors.grey),
@@ -431,7 +432,7 @@ List<Widget> contactReqInputs(studentContactRequestModel, context) {
                   borderRadius: BorderRadius.circular(8),
                   borderSide: BorderSide(color: Colors.grey[300]),
                 ),
-                hintText: "Please_enter_your_inquiry".tr+".....",
+                hintText: "Please_enter_your_inquiry".tr + ".....",
                 hintStyle: TextStyle(color: Colors.grey)),
             validator: NameFieldValidator.validate,
             onSaved: (String value) =>

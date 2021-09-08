@@ -106,7 +106,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                                 // print(statuscode);
                                 if (statuscode == "200") {
                                   var response = snapshot.data?.response;
-                                  print(response.length);
+                                  //print(response.length);
                                   return response.length > 0
                                       ? ListView.builder(
                                           itemCount: response.length,
@@ -124,108 +124,123 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                     child: Stack(
                                                       children: [
                                                         Align(
-                                                          child: Container(
-                                                              margin: EdgeInsets
-                                                                  .only(top: 6),
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                // color: Colors.white,
-                                                                border: Border.all(
-                                                                    color: Colors
-                                                                        .grey
-                                                                        .shade300,
-                                                                    width: 1),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            10),
-                                                              ),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .all(15),
-                                                                //child:
-                                                                   // SingleChildScrollView(
-                                                                  child: Column(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .spaceEvenly,
-                                                                    children: [
-                                                                      Container(
-                                                                        child: ListView.builder(
-                                                                            itemCount: response[index].installment.length,
-                                                                            shrinkWrap: true,
-                                                                            physics: ClampingScrollPhysics(),
-                                                                            itemBuilder: (context, int i) {
-                                                                              print(response[index].installment[i]);
-                                                                              return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                                                                                Text(
-                                                                                  'Installment ${i + 1}',
-                                                                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                                                                ),
-                                                                                Installment(data: response[index].installment[i]),
-                                                                              ]);
-                                                                            }),
-                                                                      ),
-                                                                      SizedBox(
-                                                                        height:
-                                                                            15,
-                                                                      ),
-                                                                      Divider(),
-                                                                      Row(
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.spaceBetween,
-                                                                        children: [
-                                                                          Text(
-                                                                            "Total Due",
-                                                                            style:
-                                                                                TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                            ),
-                                                                          ),
-                                                                          Text(
-                                                                            "${response[index].dueamount} KD",
-                                                                            style:
-                                                                                TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                            ),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                      Divider(),
-                                                                      Row(
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.spaceBetween,
-                                                                        children: [
-                                                                          Text(
-                                                                            "Due Now",
-                                                                            style:
-                                                                                TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                            ),
-                                                                          ),
-                                                                          Text(
-                                                                            "${response[index].duenow} KD",
-                                                                            style:
-                                                                                TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                            ),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                      Padding(
-                                                                        padding: EdgeInsets.symmetric(
-                                                                            horizontal:
-                                                                                3,
-                                                                            vertical:
-                                                                                2),
-                                                                        // child: Divider(),
-                                                                      ),
-                                                                    ],
-                                                                  ),
+                                                            child: Container(
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  top: 6),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            // color: Colors.white,
+                                                            border: Border.all(
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade300,
+                                                                width: 1),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10),
+                                                          ),
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(15),
+                                                            //child:
+                                                            // SingleChildScrollView(
+                                                            child: Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceEvenly,
+                                                              children: [
+                                                                Container(
+                                                                  child: ListView
+                                                                      .builder(
+                                                                          itemCount: response[index]
+                                                                              .installment
+                                                                              .length,
+                                                                          shrinkWrap:
+                                                                              true,
+                                                                          physics:
+                                                                              ClampingScrollPhysics(),
+                                                                          itemBuilder:
+                                                                              (context, int i) {
+                                                                            //print(response[index].installment[i]);
+                                                                            return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                                                                              Text(
+                                                                                'Installment'.tr + '${i + 1}',
+                                                                                style: TextStyle(fontWeight: FontWeight.bold),
+                                                                              ),
+                                                                              Installment(data: response[index].installment[i]),
+                                                                            ]);
+                                                                          }),
                                                                 ),
-                                                              )),
-                                                       // ),
+                                                                SizedBox(
+                                                                  height: 15,
+                                                                ),
+                                                                Divider(),
+                                                                Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceBetween,
+                                                                  children: [
+                                                                    Text(
+                                                                      "Total_Due"
+                                                                          .tr,
+                                                                      style:
+                                                                          TextStyle(
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                      ),
+                                                                    ),
+                                                                    Text(
+                                                                      "${response[index].totaldue} KD",
+                                                                      style:
+                                                                          TextStyle(
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Divider(),
+                                                                Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceBetween,
+                                                                  children: [
+                                                                    Text(
+                                                                      "Due_now"
+                                                                          .tr,
+                                                                      style:
+                                                                          TextStyle(
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                      ),
+                                                                    ),
+                                                                    Text(
+                                                                      "${response[index].duenow} KD",
+                                                                      style:
+                                                                          TextStyle(
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Padding(
+                                                                  padding: EdgeInsets
+                                                                      .symmetric(
+                                                                          horizontal:
+                                                                              3,
+                                                                          vertical:
+                                                                              2),
+                                                                  // child: Divider(),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        )),
+                                                        // ),
                                                         Positioned(
                                                           left: 15,
                                                           top: 0,

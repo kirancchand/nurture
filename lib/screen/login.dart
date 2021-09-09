@@ -108,16 +108,19 @@ class LoginPage extends State<Login>{
                                     size: 15,
                                   )
                                 ],
-                        )
+                              )
 
                             ),
                             SizedBox(
                               height: 10,
                             ),
-                            Text(
-                              "Al_Jeel_Al_Jadeed_Educational_Institution".tr,
-                              style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),
-                            )
+                              Center(
+                                child: Text(
+                                  "Al_Jeel_Al_Jadeed_Educational_Institution".tr,
+                                  style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),
+                                )
+                              )
+
                           ],
                         ),
                       ),

@@ -65,13 +65,21 @@ List<Widget> loginButtons(
           // print(data.response.access_token);
           showSpinner();
           api.getFee().then((fee) {
-            cont.year.value = fee.response.academicyearid;
-            childlistcon.childrenlist = fee.response.children;
-            childrens = fee.response.children;
-            students.student.value = fee;
-            // return fee;
             hideSpinner();
-            Get.off(() => Home(fee: fee, childrens: childrens));
+            print(fee.statuscode);
+            if(fee.statuscode=="200")
+              {
+                cont.year.value = fee.response.academicyearid;
+                childlistcon.childrenlist = fee.response.children;
+                childrens = fee.response.children;
+                students.student.value = fee;
+                // return fee;
+                Get.off(() => Home(fee: fee, childrens: childrens));
+              }
+              else{
+              toastFn(comment: "User Details not found");
+            }
+
           });
           // Get.toNamed("/home");
         } else {

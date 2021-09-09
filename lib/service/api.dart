@@ -159,7 +159,7 @@ class Api {
       'fileid': await MultipartFile.fromFile(file.path, filename: file.path),
     });
     var response = await dio.post(
-        'http://schbackend.azurewebsites.net/api/apps/sendenquiry',
+        'https://schoolbackendliveapp.azurewebsites.net/api/apps/sendenquiry',
         data: formData);
     //    FormData formData = FormData.fromMap({
     //   "image": await MultipartFile.fromFile(file.first.path, filename: file.first.name),

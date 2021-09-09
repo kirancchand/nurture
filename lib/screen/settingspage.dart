@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:nurture/screen/login.dart';
 import 'package:nurture/localization.dart';
 import 'package:nurture/common/constants.dart';
-
+import 'package:nurture/config/controller.dart';
 class SettingsPage extends StatefulWidget {
   SettingsPage({Key key}) : super(key: key);
   Settings createState() => Settings();
@@ -13,7 +13,8 @@ class SettingsPage extends StatefulWidget {
 
 class Settings extends State<SettingsPage> {
   String _selectedLang = Get.locale == "en_US" ? "English" : "Arabic";
-
+  ChildrenController childlistcon = Get.put(ChildrenController());
+  List childrens = [];
   @override
   void initState() {
     // TODO: implement initState
@@ -26,6 +27,7 @@ class Settings extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
+    List childrens = childlistcon.childrenlist;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -58,7 +60,9 @@ class Settings extends State<SettingsPage> {
           Divider(),
           ListTile(
             title: Text("Contact_School".tr),
-            onTap: () {},
+            onTap: () {
+              Get.toNamed('/contactinformation', arguments: childrens);
+            },
           ),
           Divider(),
           ListTile(

@@ -12,7 +12,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class Settings extends State<SettingsPage> {
-  String _selectedLang = Get.locale == "en_US" ? "English" : "Arabic";
+  String _selectedLang = Get.locale == "en_US" ? "English" : "عربي";
   ChildrenController childlistcon = Get.put(ChildrenController());
   List childrens = [];
   @override
@@ -20,7 +20,7 @@ class Settings extends State<SettingsPage> {
     // TODO: implement initState
     super.initState();
     setState(() {
-      _selectedLang = _selectedLang == "English" ? "Arabic" : "English";
+      _selectedLang = _selectedLang == "English" ? "عربي" : "English";
     });
 //print(_selectedLang);
   }
@@ -66,13 +66,13 @@ class Settings extends State<SettingsPage> {
           ),
           Divider(),
           ListTile(
-            title: Text(_selectedLang == "English" ? "Arabic" : "English"),
+            title: Text(_selectedLang == "English" ? "عربي" : "English"),
             onTap: () {
               Localization().changeLocale(
-                  _selectedLang == "English" ? "Arabic" : "English");
+                  _selectedLang == "English" ? "عربي" : "English");
               setState(() {
                 _selectedLang =
-                    _selectedLang == "English" ? "Arabic" : "English";
+                    _selectedLang == "English" ? "عربي" : "English";
               });
             },
           ),

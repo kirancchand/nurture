@@ -50,7 +50,7 @@ class _StudentListState extends State<StudentList> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Student Id ${widget.data.studentnumber}" ?? "",
+                "Student_id".tr+" "+"${widget.data.studentnumber}" ?? "",
                 style: TextStyle(fontSize: 11),
               ),
               Text(widget.data.schoolname ?? "", style: TextStyle(fontSize: 11))

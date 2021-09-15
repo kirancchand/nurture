@@ -18,7 +18,7 @@ class Localization extends Translations {
     'English',
     // 'Türkçe',
     // '日本語',
-    'Arabic'
+    'عربي'
   ];
 
   // Supported locales

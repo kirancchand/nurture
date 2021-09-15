@@ -66,6 +66,8 @@ const Map<String, String> arAB = {
   'Download_receipt':'تحميل الايصال',
   'Cancelled':'الغاء العملية',
   'Settings':'إعدادات',
+  'Language':'عربي',
+  'Student_id':'رقم الطالب'
 };
 
 

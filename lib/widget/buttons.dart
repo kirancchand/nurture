@@ -199,15 +199,20 @@ List<Widget> contactReqButton(
             ),
           )),
       onTap: () async {
-        // print("dsfddsdfsds${x.name}");
-        StudentContactResponseModel data = await validateAndSubmitContactReq(
-            context, formKey, studentContactRequestModel, x);
-        if (data.statuscode == "200") {
-          toastFn(comment: data.message);
-          Get.toNamed("/home");
-        } else {
-          toastFn(comment: data.message);
+        if(x!=null){
+          StudentContactResponseModel data = await validateAndSubmitContactReq(
+              context, formKey, studentContactRequestModel, x);
+          if (data.statuscode == "200") {
+            toastFn(comment: data.message);
+            Get.toNamed("/home");
+          } else {
+            toastFn(comment: data.message);
+          }
         }
+        else{
+          toastFn(comment: "Please Add Attachment File");
+        }
+
       },
     ),
   ];

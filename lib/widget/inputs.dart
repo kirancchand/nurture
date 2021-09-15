@@ -111,7 +111,7 @@ List<Widget> contactReqInputs(studentContactRequestModel, context) {
     Row(
       children: [
         Text(
-          " Contact Information",
+          " Contact Information"+"*",
           //  style: TextStyle(fontSize: 25),
         ),
       ],
@@ -409,7 +409,7 @@ List<Widget> contactReqInputs(studentContactRequestModel, context) {
     Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text("Tell_us_more".tr + "..."),
+        Text("Tell_us_more".tr+ "*" + "..."),
         Text(
           "0/1500",
           style: TextStyle(color: Colors.grey),

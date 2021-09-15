@@ -185,7 +185,7 @@ class _ContactInformationState extends State<ContactInformation> {
                         hint: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            "Select_Student".tr,
+                            "Select_Student".tr+"*",
                             style: TextStyle(color: Colors.grey),
                           ),
                         ),
@@ -220,7 +220,7 @@ class _ContactInformationState extends State<ContactInformation> {
 
                             },
                             child: Text(
-                              "Add_attachment".tr,
+                              "Add_attachment".tr+"*",
                               style: TextStyle(
                                 decoration: (TextDecoration.underline),
                                 color: kColorGreen,
@@ -234,12 +234,14 @@ class _ContactInformationState extends State<ContactInformation> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Text(
-                            "${file!=null?file.name:""}",
+                          file!=null?Text(
+                            file.name,
                             style: TextStyle(
                               color: kColorGreen,
                             ),
-                          )
+                          ):Text("Please Add Attachment", style: TextStyle(
+                            color: Colors.red,
+                          ))
                         ],
 
                       ),

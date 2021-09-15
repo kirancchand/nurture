@@ -17,7 +17,7 @@ import 'package:http/http.dart' as http;
 import 'dart:io' as Io;
 import 'package:dio/dio.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-
+import 'package:nurture/screen/home.dart';
 class PDFScreen extends StatefulWidget {
   final String link;
 
@@ -99,7 +99,7 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
       final result = await ImageGallerySaver.saveImage(pngBytes);
       // print(pngBytes);
       // print(bs64);
-      // print(result);
+      print(result);
       setState(() {});
       Fluttertoast.showToast(msg: "File downloaded Successfully");
       return pngBytes;
@@ -121,6 +121,39 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        centerTitle: true,
+        titleSpacing: 60,
+        // backgroundColor: Colors.grey.shade200,
+        leading: InkWell(
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Home(
+                    count: 2,
+                  ),
+                ),
+              );
+            },
+            child: Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: Colors.black,
+            )),
+        toolbarHeight: 80,
+        title: Text("View File",
+            style: TextStyle(
+              color: Colors.white,
+            )),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(colors: [
+                Color(0xff43CEA2),
+                Color(0xff279DD4),
+              ])),
+        ),
+      ),
       body:
           // spin
           //     ? Center(

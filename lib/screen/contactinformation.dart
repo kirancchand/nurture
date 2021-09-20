@@ -12,7 +12,7 @@ import 'package:nurture/widget/validators.dart';
 import 'package:nurture/widget/inputs.dart';
 import 'package:nurture/model/login_model.dart';
 import 'package:nurture/widget/spinner.dart';
-
+import 'package:nurture/localization.dart';
 class ContactInformation extends StatefulWidget {
   ContactInformation({Key key}) : super(key: key);
   List<FeeResponse> childrens = Get.arguments;
@@ -26,13 +26,14 @@ class _ContactInformationState extends State<ContactInformation> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   StudentContactRequestModel studentContactRequestModel;
   LoginRequestModel loginRequestModel;
+  String selectedLang=(Get.locale.toString() == "en_US")?"en_US":"ar_AB";
   bool choose = false;
   FilePickerResult resultpdf;
   PlatformFile file;
   Future getPdf() async {
     resultpdf = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowedExtensions: ['pdf', 'doc'],
+      allowedExtensions: ['pdf', 'doc','png','jpeg'],
     );
     if(resultpdf != null) {
       setState(() {
@@ -79,7 +80,7 @@ class _ContactInformationState extends State<ContactInformation> {
             Navigator.pop(context);
           },
           icon: Icon(
-            Icons.keyboard_arrow_left,
+            selectedLang=="en_US"?Icons.keyboard_arrow_left:Icons.keyboard_arrow_right,
             color: Colors.white,
           ),
         ),
@@ -185,7 +186,7 @@ class _ContactInformationState extends State<ContactInformation> {
                         hint: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            "Select_Student".tr+"*",
+                            "Select_Student".tr,
                             style: TextStyle(color: Colors.grey),
                           ),
                         ),
@@ -220,7 +221,7 @@ class _ContactInformationState extends State<ContactInformation> {
 
                             },
                             child: Text(
-                              "Add_attachment".tr+"*",
+                              "Add_attachment".tr,
                               style: TextStyle(
                                 decoration: (TextDecoration.underline),
                                 color: kColorGreen,
@@ -239,9 +240,17 @@ class _ContactInformationState extends State<ContactInformation> {
                             style: TextStyle(
                               color: kColorGreen,
                             ),
-                          ):Text("Please Add Attachment", style: TextStyle(
-                            color: Colors.red,
-                          ))
+                          ):Text("", style: TextStyle(
+                              color: Colors.red,
+                            ))
+                          // file!=null?Text(
+                          //   file.name,
+                          //   style: TextStyle(
+                          //     color: kColorGreen,
+                          //   ),
+                          // ):Text("Please Add Attachment", style: TextStyle(
+                          //   color: Colors.red,
+                          // ))
                         ],
 
                       ),

@@ -67,7 +67,9 @@ const Map<String, String> arAB = {
   'Cancelled':'الغاء العملية',
   'Settings':'إعدادات',
   'Language':'عربي',
-  'Student_id':'رقم الطالب'
+  'Student_id':'رقم الطالب',
+  'Contact_information':'معلومات للتواصل',
+  'Please_add_attachment':'الرجاء إضافة المرفقات'
 };
 
 

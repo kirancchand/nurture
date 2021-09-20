@@ -11,7 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:nurture/screen/login.dart';
 import 'package:get/get.dart';
 import 'package:flutter/rendering.dart';
-
+import 'package:nurture/localization.dart';
 class HomePage1 extends StatefulWidget {
   HomePage1({Key key, this.fee, this.childrens}) : super(key: key);
   FeeResponseModel fee;
@@ -54,10 +54,18 @@ class _HomePage1State extends State<HomePage1> {
       });
     }
   }
-
+  String selectedLang=(Get.locale.toString() == "en_US")?"en_US":"ar_AB";
   @override
   void initState() {
     super.initState();
+    // Future<void> langFunc() async {
+    //   var pref = await SharedPreferences.getInstance();
+    //   print("list${pref.getString('lang')}");
+    //   setState(() {
+    //     selectedLang = pref.getString('lang');
+    //   });
+    // }
+    // langFunc();
     // getFee = api.getFee().then((fee) {
     //   con.year.value = fee.response.academicyear;
     //   childrens = fee.response.children;
@@ -127,7 +135,9 @@ class _HomePage1State extends State<HomePage1> {
                                     child: Padding(
                                       padding: const EdgeInsets.all(0),
                                       child: Text(
-                                        fee.response.parentname,
+                                        selectedLang== "en_US"?fee.response.parentname:fee.response.arabparentname,
+                                        // fee.response.parentname,
+                                          // arabparentname
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 25,
@@ -276,8 +286,9 @@ class _HomePage1State extends State<HomePage1> {
                                             activeColor: kColorGreen,
                                           ),
                                           title: Text(
-                                              fee.response.children[index]
-                                                  .studentname,
+                                              selectedLang== "en_US"?fee.response.children[index]
+                                                  .studentname:fee.response.children[index]
+                                                  .arabstudentname,
                                               style: TextStyle(
                                                   color: _selectedStudent
                                                           .contains(fee.response
@@ -343,7 +354,7 @@ class _HomePage1State extends State<HomePage1> {
                         SizedBox(
                           height: 15,
                         ),
-                        ContactUs(context, childrens),
+                        ContactUs(context, childrens,selectedLang),
                       ],
                     ),
                   ),
@@ -359,7 +370,7 @@ class _HomePage1State extends State<HomePage1> {
   }
 }
 
-Widget ContactUs(context, List<FeeResponse> children) {
+Widget ContactUs(context, List<FeeResponse> children,String selectedLang) {
   return GestureDetector(
       child: Container(
           // height: 45,
@@ -376,7 +387,7 @@ Widget ContactUs(context, List<FeeResponse> children) {
                   color: kColorGreen,
                 ),
                 title: Text("Contact_Us".tr),
-                trailing: Icon(Icons.keyboard_arrow_right_outlined,
+                trailing: Icon(selectedLang== "en_US"?Icons.keyboard_arrow_right_outlined:Icons.keyboard_arrow_left_outlined,
                     color: kColorGreen)),
           )),
       onTap: () {

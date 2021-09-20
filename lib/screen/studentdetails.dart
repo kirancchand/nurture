@@ -3,14 +3,16 @@ import 'package:nurture/widget/list.dart';
 import 'package:nurture/model/student.dart';
 import 'package:nurture/model/fee.dart';
 import 'package:get/get.dart';
-
+import 'package:nurture/localization.dart';
 
 class StudentDetails extends StatelessWidget {
   StudentDetails({Key key, this.data}) : super(key: key);
   FeeResponse data;
+  String selectedLang=(Get.locale.toString() == "en_US")?"en_US":"ar_AB";
 
   @override
   Widget build(BuildContext context) {
+    print("sdsd${selectedLang}");
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -21,7 +23,7 @@ class StudentDetails extends StatelessWidget {
               Navigator.pop(context);
             },
             icon: Icon(
-              Icons.keyboard_arrow_left,
+              selectedLang== "en_US"?Icons.keyboard_arrow_left:Icons.keyboard_arrow_right,
               color: Colors.white,
             ),
           ),

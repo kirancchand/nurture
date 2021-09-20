@@ -13,7 +13,7 @@ import 'package:nurture/config/controller.dart';
 import 'package:nurture/screen/home.dart';
 import 'package:nurture/widget/spinner.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 class PaymentPending extends StatefulWidget {
   PaymentPending({Key key}) : super(key: key);
   // List<StudentResponse> childrens = Get.arguments;
@@ -29,13 +29,21 @@ class _PaymentPendingState extends State<PaymentPending> {
   Api api = new Api();
   Future<FeeStructureModel> getFeeStructure;
   YearController con = Get.put(YearController());
-
+  String selectedLang=(Get.locale.toString() == "en_US")?"en_US":"ar_AB";
   @override
   void initState() {
     super.initState();
     getFeeStructure = api.getFeeStructure().then((feestructure) {
       return feestructure;
     });
+    // Future<void> langFunc() async {
+    //   var pref = await SharedPreferences.getInstance();
+    //   print("list${pref.getString('lang')}");
+    //   setState(() {
+    //     selectedLang = pref.getString('lang');
+    //   });
+    // }
+    // langFunc();
     //studentContactRequestModel = new StudentContactRequestModel();
   }
 
@@ -254,11 +262,9 @@ class _PaymentPendingState extends State<PaymentPending> {
                                                               color:
                                                                   Colors.white,
                                                               child: Text(
-                                                                response[index]
-                                                                    .studentname,
-                                                                style: TextStyle(
-                                                                    color:
-                                                                        kColorGreen),
+                                                                selectedLang== "en_US"?response[index]
+                                                                      .studentname:response[index].arabstudentname,
+                                                                style: TextStyle(color: kColorGreen),
                                                               ),
                                                             ),
                                                           ),

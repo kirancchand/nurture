@@ -7,7 +7,7 @@ import 'package:nurture/screen/PaymentWebPage.dart';
 import 'package:nurture/widget/actions.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:nurture/widget/spinner.dart';
-
+import 'package:nurture/localization.dart';
 class ConfirmPayment extends StatefulWidget {
   ConfirmPayment({Key key}) : super(key: key);
   List childrens = Get.arguments[0];
@@ -30,6 +30,8 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
   List<Map<String, dynamic>> convert() {
     return paymentlist.map((e) => e.toMap()).toList();
   }
+
+  String selectedLang=(Get.locale.toString() == "en_US")?"en_US":"ar_AB";
 
   addPaymentlist({int sid1, double total, bool isEnroll}) {
     // x = paymentlist.map((e) => e.index).toList();
@@ -62,7 +64,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
               Navigator.pop(context);
             },
             icon: Icon(
-              Icons.keyboard_arrow_left,
+              selectedLang== "en_US"?Icons.keyboard_arrow_left:Icons.keyboard_arrow_right,
               color: Colors.white,
             ),
           ),
@@ -125,7 +127,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                                     children: [
                                       Expanded(
                                           child: Text(
-                                        widget.childrens[index].studentname,
+                                            selectedLang== "en_US"?widget.childrens[index].studentname:widget.childrens[index].arabstudentname,
                                       )),
                                       Text(
                                         widget.childrens[index].dueamount

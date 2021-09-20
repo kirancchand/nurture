@@ -16,7 +16,7 @@ import 'package:nurture/service/api.dart';
 import 'package:nurture/config/controller.dart';
 import 'package:nurture/model/fee.dart';
 import 'package:nurture/screen/home.dart';
-
+import 'package:nurture/localization.dart';
 Api api = new Api();
 Future<FeeResponseModel> getFee;
 
@@ -61,6 +61,8 @@ List<Widget> loginButtons(
           // prefs.setString('access_token', "");
           prefs.setString('Username', "${data.response.Username}");
           prefs.setString('access_token', "${data.response.access_token}");
+          prefs.setString('lang', "${Get.locale}");
+          print(prefs.getString('lang'));
           // print("DSFDS" + data.message);
           // print(data.response.access_token);
           showSpinner();
@@ -199,19 +201,19 @@ List<Widget> contactReqButton(
             ),
           )),
       onTap: () async {
-        if(x!=null){
-          StudentContactResponseModel data = await validateAndSubmitContactReq(
-              context, formKey, studentContactRequestModel, x);
+
+        StudentContactResponseModel data = await validateAndSubmitContactReq(
+            context, formKey, studentContactRequestModel, x);
+        hideSpinner();
           if (data.statuscode == "200") {
             toastFn(comment: data.message);
             Get.toNamed("/home");
           } else {
             toastFn(comment: data.message);
           }
-        }
-        else{
-          toastFn(comment: "Please Add Attachment File");
-        }
+
+
+
 
       },
     ),

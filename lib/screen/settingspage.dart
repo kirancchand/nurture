@@ -9,19 +9,37 @@ import 'package:nurture/config/controller.dart';
 class SettingsPage extends StatefulWidget {
   SettingsPage({Key key}) : super(key: key);
   Settings createState() => Settings();
+
 }
 
 class Settings extends State<SettingsPage> {
-  String _selectedLang = Get.locale == "en_US" ? "English" : "عربي";
+
+  String _selectedLang;
+  String _showLang = Get.locale == "en_US" ? "عربي" : "English";
   ChildrenController childlistcon = Get.put(ChildrenController());
   List childrens = [];
+
   @override
   void initState() {
     // TODO: implement initState
+    print("ADSAD${Get.locale}");
     super.initState();
-    setState(() {
-      _selectedLang = _selectedLang == "English" ? "عربي" : "English";
-    });
+    Future<void> langFunc() async {
+      var pref = await SharedPreferences.getInstance();
+      print("adasdas${pref.getString('lang')}");
+      setState(() {
+        _showLang = pref.getString('lang') == "en_US" ? "عربي" : "English";
+        _selectedLang = pref.getString('lang') == "en_US" ? "English" : "عربي";
+        // _selectedLang = pref.getString('lang') == "en_US" ? "عربي" : "English";
+      });
+    }
+    langFunc();
+    // Future.delayed(Duration(seconds: 3)).then((value) async {
+    //   var pref = await SharedPreferences.getInstance();
+    //   print("adasdas${pref.getString('lang')}");
+    // });
+
+
 //print(_selectedLang);
   }
 
@@ -64,18 +82,26 @@ class Settings extends State<SettingsPage> {
               Get.toNamed('/contactinformation', arguments: childrens);
             },
           ),
-          Divider(),
-          ListTile(
-            title: Text(_selectedLang == "English" ? "عربي" : "English"),
-            onTap: () {
-              Localization().changeLocale(
-                  _selectedLang == "English" ? "عربي" : "English");
-              setState(() {
-                _selectedLang =
-                    _selectedLang == "English" ? "عربي" : "English";
-              });
-            },
-          ),
+          // Divider(),
+          // ListTile(
+          //   title: Text(_showLang),
+          //   onTap: () {
+          //     Future<void> changelangFunc(_showLang) async {
+          //       var pref = await SharedPreferences.getInstance();
+          //       pref.setString('lang',_showLang );
+          //       print("adasdas${pref.getString('lang')}");
+          //     }
+          //     changelangFunc(_showLang== "English"?"en_US":"ar_AB");
+          //     Localization().changeLocale(_showLang);
+          //     setState(() {
+          //       _selectedLang = _showLang;
+          //       _showLang=(_showLang== "English") ? "عربي" : "English";
+          //     });
+          //
+          //
+          //
+          //   },
+          // ),
           Divider(),
           ListTile(
             title: Text("Log_off".tr),
@@ -90,7 +116,7 @@ class Settings extends State<SettingsPage> {
           ),
           Divider(),
           ListTile(
-            title: Text("Application_version".tr + "v1.0.0"),
+            title: Text("Application_version".tr + "v2.0.1"),
             onTap: () {},
           ),
           Divider(),

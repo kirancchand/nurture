@@ -8,7 +8,7 @@ import 'package:nurture/config/controller.dart';
 import 'package:nurture/screen/login.dart';
 import 'package:nurture/screen/home.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
+import 'package:nurture/localization.dart';
 // import 'package:nurture/screen/test.dart';
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key key});
@@ -38,7 +38,9 @@ class _SplashScreenState extends State<SplashScreen> {
         Get.offAll(Login());
         // Get.toNamed('/login');
       } else {
-        //  print("helo");
+         print(pref.getString('lang'));
+
+
         api.getFee().then((fee) {
           //   print(fee.statuscode);
           if (fee.statuscode == "200") {
@@ -46,7 +48,8 @@ class _SplashScreenState extends State<SplashScreen> {
             childrens = fee.response.children;
             childlistcon.childrenlist = fee.response.children;
             students.student.value = fee;
-            Get.off(() => Home(fee: fee, childrens: childrens));
+            // Localization().changeLocale(pref.getString('lang'));
+              Get.off(() => Home(fee: fee, childrens: childrens));
           } else {
             Fluttertoast.showToast(msg: "Something went Wrong");
             Get.offAll(Login());

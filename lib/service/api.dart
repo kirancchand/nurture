@@ -149,15 +149,17 @@ class Api {
     var token = await getToken();
     Dio dio = new Dio();
     dio.options.headers["Authorization"] = "Bearer ${token}";
-    // print(file);
+    // print("dsfsd${file.extension}");
     var formData = FormData.fromMap({
       'Studentid': studentContactRequestModel.toJson()["studentid"],
       'Name': studentContactRequestModel.toJson()["studentname"],
       'Email': studentContactRequestModel.toJson()["studentemail"],
       'PhoneNumber': studentContactRequestModel.toJson()["studentphonenumber"],
       'Query': studentContactRequestModel.toJson()["studentinquiry"],
-      'fileid': await MultipartFile.fromFile(file.path, filename: file.path),
+      'fileid': file!=null?await MultipartFile.fromFile(file.path, filename: file.path):"",
+      'extension':file!=null?file.extension:""
     });
+    // print(formData);
     var response = await dio.post(
         'https://schoolbackendliveapp.azurewebsites.net/api/apps/sendenquiry',
         data: formData);
@@ -174,13 +176,15 @@ class Api {
     //       'sendenquiry?studentid=${studentContactRequestModel.toJson()["studentid"]}&Name=${studentContactRequestModel.toJson()["studentname"]}&Email=${studentContactRequestModel.toJson()["studentemail"]}&PhoneNumber=${studentContactRequestModel.toJson()["studentphonenumber"]}&Query=${studentContactRequestModel.toJson()["studentinquiry"]}'),
     //   headers: {'Authorization': 'Bearer $token'},
     // );
-    // print("sdsdsd ${json.decode(response.body)}");
+
     if (response.statusCode == 200 || response.statusCode == 400) {
+      // print("sdsd222sd ${json.decode(response.data)}");
       //  print("json.decode(response.data)");
       // print(json.decode(response.data));
       // return StudentContactResponseModel.fromJson(json.decode(response.body));
       return StudentContactResponseModel.fromJson(response.data);
     } else {
+      // print("sdsd555sd ${json.decode(response.data)}");
       return StudentContactResponseModel();
       // throw Exception('Failed to load data!');
     }

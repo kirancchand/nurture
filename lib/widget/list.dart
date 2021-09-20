@@ -23,19 +23,37 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:nurture/screen/ReceiptView.dart';
 import 'package:nurture/widget/spinner.dart';
 import 'package:nurture/screen/Pdf.dart';
-
+import 'package:nurture/localization.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class StudentList extends StatefulWidget {
   StudentList({Key key, this.data}) : super(key: key);
   FeeResponse data;
+
   @override
   _StudentListState createState() => _StudentListState();
+
 }
 
 class _StudentListState extends State<StudentList> {
   // List<Response> data;
+  String selectedLang=(Get.locale.toString() == "en_US")?"en_US":"ar_AB";
+  @override
+  void initState() {
+    super.initState();
+    // Future<void> langFunc() async {
+    //   var pref = await SharedPreferences.getInstance();
+    //   print("list${pref.getString('lang')}");
+    //   setState(() {
+    //     selectedLang = pref.getString('lang');
+    //   });
+    // }
+    // langFunc();
+  }
+
   @override
   Widget build(BuildContext context) {
     // debugPrint('parent civil id: ${parents[0].civilid}');
+    print(Get.locale);
     return GestureDetector(
       child: ListTile(
           leading: CircleAvatar(
@@ -44,7 +62,7 @@ class _StudentListState extends State<StudentList> {
               backgroundImage: AssetImage("assets/images/chil.png")
               // backgroundImage: AssetImage(img),
               ),
-          title: Text(widget.data.studentname),
+          title: Text( selectedLang== "en_US"?widget.data.studentname:widget.data.arabstudentname),
           isThreeLine: true,
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +80,7 @@ class _StudentListState extends State<StudentList> {
               Get.to(StudentDetails(data: widget.data));
             },
             icon: Icon(
-              Icons.keyboard_arrow_right,
+              selectedLang== "en_US"?Icons.keyboard_arrow_right:Icons.keyboard_arrow_left,
               color: Colors.green,
             ),
           ),
@@ -479,6 +497,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
 
   Api api = new Api();
   Future<StudentResponseModel> getStudents;
+  String selectedLang=(Get.locale.toString() == "en_US")?"en_US":"ar_AB";
 
   @override
   void initState() {
@@ -503,10 +522,21 @@ class _StudentInfoListState extends State<StudentInfoList> {
     //   }
     //   return student;
     // });
+    // Future<void> langFunc() async {
+    //   var pref = await SharedPreferences.getInstance();
+    //   print("adasdas${pref.getString('lang')}");
+    //   setState(() {
+    //     selectedLang = pref.getString('lang');
+    //   });
+    // }
+    // langFunc();
   }
+
+
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       margin: EdgeInsets.only(right: 20, left: 20, top: 20),
       child: FutureBuilder<StudentResponseModel>(
@@ -514,6 +544,8 @@ class _StudentInfoListState extends State<StudentInfoList> {
         builder: (BuildContext context,
             AsyncSnapshot<StudentResponseModel> snapshot) {
           if (snapshot.hasData) {
+            print("ddfdf${selectedLang}");
+            print(childrens.studentname);
             var response = snapshot.data?.response;
             return ListView(
               children: [
@@ -545,7 +577,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                     SizedBox(width: 200, child: txt("Name".tr)),
                                     Expanded(
                                         child: Text(
-                                      childrens.studentname,
+                                          selectedLang == "en_US"?childrens.studentname:childrens.arabstudentname,
                                       maxLines: 2,
                                     ))
                                   ],
@@ -904,7 +936,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            parents[index].name,
+                            selectedLang == "en_US"?parents[index].name:parents[index].arabicname,
                             maxLines: 2,
                           ),
                           Text(

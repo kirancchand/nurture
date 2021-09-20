@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:get/get.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'lang/en_us.dart';
 import 'lang/ja_jp.dart';
 import 'lang/tr_tr.dart';
@@ -8,6 +8,7 @@ import 'lang/ar_ab.dart';
 class Localization extends Translations {
   // Default locale
   static final locale = Locale('en', 'US');
+ 
 
   // fallbackLocale saves the day when the locale gets in trouble
   // static final fallbackLocale = Locale('tr', 'TR');
@@ -43,6 +44,7 @@ class Localization extends Translations {
   // Gets locale from language, and updates the locale
   void changeLocale(String lang) {
     final locale = _getLocaleFromLanguage(lang);
+    print("lang${lang}");
     Get.updateLocale(locale);
   }
 

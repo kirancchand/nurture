@@ -8,7 +8,7 @@ import 'package:nurture/model/student.dart';
 import 'package:nurture/service/api.dart';
 import 'package:nurture/widget/list.dart';
 import 'package:nurture/widget/spinner.dart';
-
+import 'package:nurture/localization.dart';
 import 'home.dart';
 
 class Notifications extends StatefulWidget {
@@ -28,7 +28,7 @@ class _NotificationsState extends State<Notifications> {
   ChildrenController childlistcon = Get.put(ChildrenController());
 
   // List listItem = ["All", "Asim Muhammad", "Dana Muhammad", "Dalal Muhammad"];
-
+  String selectedLang=(Get.locale.toString() == "en_US")?"en_US":"ar_AB";
   @override
   void initState() {
     // TODO: implement initState
@@ -109,12 +109,24 @@ class _NotificationsState extends State<Notifications> {
                     padding: const EdgeInsets.only(top: 40),
                     child: Column(
                       children: [
+                        // Row(
+                        //   children: [
+                        //     Text("Notifications".tr,
+                        //         style: TextStyle(color: Colors.white, fontSize: 18)),
+                        //     Icon(
+                        //       selectedLang== "en_US"?Icons.keyboard_arrow_left:Icons.keyboard_arrow_right,
+                        //       color: Colors.white,
+                        //     ),
+                        //     SizedBox(
+                        //       height: 17,
+                        //     ),
+                        //   ],
+                        // ),
                         Text("Notifications".tr,
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 18)),
-                        SizedBox(
-                          height: 17,
-                        ),
+                            style: TextStyle(color: Colors.white, fontSize: 18)),
+                            SizedBox(
+                              height: 17,
+                            ),
                         Container(
                           // height: MediaQuery.of(context).size.height * .137,
                           width: MediaQuery.of(context).size.width * .85,
@@ -270,6 +282,14 @@ class _NotificationsState extends State<Notifications> {
             //                },
             //              ),
           ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            // Add your onPressed code here!
+            Navigator.pop(context);
+          },
+          child: const Icon(Icons.arrow_left),
+          backgroundColor: kColorGreen,
         ),
       ),
     );

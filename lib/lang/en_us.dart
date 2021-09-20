@@ -67,6 +67,8 @@ const Map<String, String> enUS = {
   'Download_receipt':'Download Receipt',
   'Cancelled':'Cancelled',
   'Language':'English',
-  'Student_id':"Student Id"
+  'Student_id':"Student Id",
+  'Contact_information':'Contact information',
+  'Please_add_attachment':'Please add attachment'
 
 };

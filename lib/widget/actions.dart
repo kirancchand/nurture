@@ -49,18 +49,16 @@ Future<LoginResponseModel> validateAndLogin(formKey, loginRequestModel) async {
 
 Future<StudentContactResponseModel> validateAndSubmitContactReq(context,
     formKey, studentContactRequestModel, x) async {
-  Api api = new Api();
-  if (validateAndSave(formKey)) {
-    showSpinner();
-    StudentContactResponseModel data =
-        await api.submitContactRequest(studentContactRequestModel, x);
-
-    hideSpinner();
-    return data;
-  } else {
-    hideSpinner();
-    return StudentContactResponseModel();
-  }
+      Api api = new Api();
+      if (validateAndSave(formKey)) {
+        showSpinner();
+        StudentContactResponseModel data = await api.submitContactRequest(studentContactRequestModel, x);
+        hideSpinner();
+        return data;
+      } else {
+        hideSpinner();
+        return StudentContactResponseModel();
+      }
 
   // if (validateAndSave(formKey)) {
   //   final String userId = await api.signInWithEmailAndPassword(email,password);

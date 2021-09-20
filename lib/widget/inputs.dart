@@ -111,7 +111,7 @@ List<Widget> contactReqInputs(studentContactRequestModel, context) {
     Row(
       children: [
         Text(
-          " Contact Information"+"*",
+          "Contact_information".tr,
           //  style: TextStyle(fontSize: 25),
         ),
       ],
@@ -130,7 +130,7 @@ List<Widget> contactReqInputs(studentContactRequestModel, context) {
                 borderSide: BorderSide(color: Colors.grey[300]),
               ),
               labelStyle: TextStyle(color: Colors.grey[400])),
-          validator: NameFieldValidator.validate,
+          // validator: NameFieldValidator.validate,
           // initialValue: "G-0000001085",
           onSaved: (String value) =>
               studentContactRequestModel.studentname = value,
@@ -151,7 +151,7 @@ List<Widget> contactReqInputs(studentContactRequestModel, context) {
                 borderSide: BorderSide(color: Colors.grey[300]),
               ),
               labelStyle: TextStyle(color: Colors.grey[400])),
-          validator: EmailFieldValidator.validate,
+          // validator: EmailFieldValidator.validate,
           onSaved: (String value) =>
               studentContactRequestModel.studentemail = value,
         ),
@@ -224,7 +224,7 @@ List<Widget> contactReqInputs(studentContactRequestModel, context) {
                 borderSide: BorderSide(color: Colors.grey[300]),
               ),
               labelStyle: TextStyle(color: Colors.grey[400])),
-          validator: NameFieldValidator.validate,
+          // validator: NameFieldValidator.validate,
           onSaved: (String value) =>
               studentContactRequestModel.studentphonenumber = value,
         ),

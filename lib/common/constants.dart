@@ -9,6 +9,7 @@ const kColorGradiant = [Color(0xff43CEA2), Color(0xff279DD4)];
 // getUrl(String s) =>
 //     Uri.parse("http://schbackend.azurewebsites.net/api/apps/$s");
 getUrl(String s) =>
+    // Uri.parse("http://schbackend.azurewebsites.net/api/apps/$s");
     Uri.parse("https://schoolbackendliveapp.azurewebsites.net/api/apps/$s");
 height(context) {
   return MediaQuery.of(context).size.height;

@@ -284,7 +284,7 @@ class _PaymentPendingState extends State<PaymentPending> {
                                         .70,
                                     width: MediaQuery.of(context).size.width,
                                     child:
-                                        Center(child: Text("No_Data_Found".tr)),
+                                        Center(child: Text("No_Data_found".tr)),
                                   );
                                 }
                               } else if (snapshot.hasError) {

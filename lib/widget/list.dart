@@ -25,18 +25,19 @@ import 'package:nurture/widget/spinner.dart';
 import 'package:nurture/screen/Pdf.dart';
 import 'package:nurture/localization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 class StudentList extends StatefulWidget {
-  StudentList({Key key, this.data}) : super(key: key);
+  StudentList({Key key, this.data, this.index}) : super(key: key);
   FeeResponse data;
+  int index;
 
   @override
   _StudentListState createState() => _StudentListState();
-
 }
 
 class _StudentListState extends State<StudentList> {
   // List<Response> data;
-  String selectedLang=(Get.locale.toString() == "en_US")?"en_US":"ar_AB";
+  String selectedLang = (Get.locale.toString() == "en_US") ? "en_US" : "ar_AB";
   @override
   void initState() {
     super.initState();
@@ -57,18 +58,20 @@ class _StudentListState extends State<StudentList> {
     return GestureDetector(
       child: ListTile(
           leading: CircleAvatar(
-              radius: 25,
-              backgroundColor: Colors.pink.shade300,
-              backgroundImage: AssetImage("assets/images/chil.png")
-              // backgroundImage: AssetImage(img),
-              ),
-          title: Text( selectedLang== "en_US"?widget.data.studentname:widget.data.arabstudentname),
+            radius: 25,
+            backgroundColor: Colors.pink.shade300,
+            // backgroundImage: AssetImage(widget.index==0?"assets/images/p2.png":"assets/images/p1.png")
+            backgroundImage: AssetImage("assets/images/chil.png"),
+          ),
+          title: Text(selectedLang == "en_US"
+              ? widget.data.studentname
+              : widget.data.arabstudentname),
           isThreeLine: true,
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Student_id".tr+" "+"${widget.data.studentnumber}" ?? "",
+                "Student_id".tr + " " + "${widget.data.studentnumber}" ?? "",
                 style: TextStyle(fontSize: 11),
               ),
               Text(widget.data.schoolname ?? "", style: TextStyle(fontSize: 11))
@@ -80,7 +83,9 @@ class _StudentListState extends State<StudentList> {
               Get.to(StudentDetails(data: widget.data));
             },
             icon: Icon(
-              selectedLang== "en_US"?Icons.keyboard_arrow_right:Icons.keyboard_arrow_left,
+              selectedLang == "en_US"
+                  ? Icons.keyboard_arrow_right
+                  : Icons.keyboard_arrow_left,
               color: Colors.green,
             ),
           ),
@@ -291,10 +296,10 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
                                     // ),
                                     GestureDetector(
                                       child: Container(
-                                        height: 20,
+                                        height: 30,
                                         width:
                                             MediaQuery.of(context).size.width *
-                                                .22,
+                                                .24,
                                         decoration: BoxDecoration(
                                             color:
                                                 widget.data.result == "Success"
@@ -311,7 +316,7 @@ class _PaymentHistoryListState extends State<paymentHistoryList> {
                                                   ? "Cancelled".tr
                                                   : "Failed_transaction".tr,
                                           style: TextStyle(
-                                              fontSize: 8.5,
+                                              fontSize: 10,
                                               color: widget.data.result ==
                                                       "Success"
                                                   ? kColorGreen
@@ -497,7 +502,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
 
   Api api = new Api();
   Future<StudentResponseModel> getStudents;
-  String selectedLang=(Get.locale.toString() == "en_US")?"en_US":"ar_AB";
+  String selectedLang = (Get.locale.toString() == "en_US") ? "en_US" : "ar_AB";
 
   @override
   void initState() {
@@ -532,11 +537,8 @@ class _StudentInfoListState extends State<StudentInfoList> {
     // langFunc();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
-
     return Container(
       margin: EdgeInsets.only(right: 20, left: 20, top: 20),
       child: FutureBuilder<StudentResponseModel>(
@@ -577,7 +579,9 @@ class _StudentInfoListState extends State<StudentInfoList> {
                                     SizedBox(width: 200, child: txt("Name".tr)),
                                     Expanded(
                                         child: Text(
-                                          selectedLang == "en_US"?childrens.studentname:childrens.arabstudentname,
+                                      selectedLang == "en_US"
+                                          ? childrens.studentname
+                                          : childrens.arabstudentname,
                                       maxLines: 2,
                                     ))
                                   ],
@@ -894,7 +898,7 @@ class _StudentInfoListState extends State<StudentInfoList> {
 
   Widget Parentlist(List<ParentResponse> parents, int index) {
     return Container(
-      margin: EdgeInsets.only(top: 30),
+      margin: EdgeInsets.only(top: 10),
       child: Column(
         children: [
           Stack(children: [
@@ -904,78 +908,188 @@ class _StudentInfoListState extends State<StudentInfoList> {
                 // height: MediaQuery.of(context).size.height * .61,
               ),
             ),
+            // Positioned(
+            //   bottom: 0,
+            //   child: Container(
+            //       height: 200,
+            //       width: MediaQuery.of(context).size.width - 40,
+            //       decoration: BoxDecoration(
+            //           border: Border.all(color: Colors.grey.shade300, width: 1),
+            //           borderRadius: BorderRadius.circular(10)),
+            //       child: SingleChildScrollView(
+            //         scrollDirection: Axis.horizontal,
+            //         child: Row(
+            //             children: [
+            //           Padding(
+            //             padding: EdgeInsets.only(left: 15, right: 20),
+            //             child: Column(
+            //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //               crossAxisAlignment: CrossAxisAlignment.start,
+            //               children: [
+            //
+            //                 txt("Name".tr),
+            //                 txt("Nationality".tr),
+            //                 txt("Civil_ID".tr),
+            //                 txt("Civil_id_Expiry_Date".tr),
+            //                 txt("Email_address".tr),
+            //                 txt("Address".tr),
+            //               ],
+            //             ),
+            //           ),
+            //           SizedBox(width: 10),
+            //           Column(
+            //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //             crossAxisAlignment: CrossAxisAlignment.start,
+            //             children: [
+            //               Text(
+            //                 selectedLang == "en_US"
+            //                     ? parents[index].name
+            //                     : parents[index].arabicname,
+            //                 maxLines: 2,
+            //               ),
+            //               Text(
+            //                 parents[index].nationality,
+            //                 maxLines: 2,
+            //               ),
+            //               Text(
+            //                 parents[index].civilid,
+            //                 maxLines: 2,
+            //               ),
+            //               Text(parents[index]
+            //                       .parentcivilexpirydate
+            //                       .day
+            //                       .toString() +
+            //                   "/" +
+            //                   parents[index]
+            //                       .parentcivilexpirydate
+            //                       .month
+            //                       .toString() +
+            //                   "/" +
+            //                   parents[index]
+            //                       .parentcivilexpirydate
+            //                       .year
+            //                       .toString()),
+            //               // Text(widget.parents[index].parentcivilexpirydate),
+            //
+            //               Text(
+            //                 parents[index].emailid,
+            //                 maxLines: 2,
+            //                 overflow: TextOverflow.clip,
+            //               ),
+            //
+            //               Text(
+            //                 parents[index].regionalarea,
+            //                 maxLines: 2,
+            //               )
+            //             ],
+            //           ),
+            //         ]),
+            //       )),
+            // ),
             Positioned(
               bottom: 0,
               child: Container(
                   height: 200,
                   width: MediaQuery.of(context).size.width - 40,
                   decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.shade300, width: 1),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(children: [
-                      Padding(
-                        padding: EdgeInsets.only(left: 15, right: 20),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                    border: Border.all(
+                        color: Colors.grey.shade300, width: 1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Row(
                           children: [
-                            txt("Name".tr),
-                            txt("Nationality".tr),
-                            txt("Civil_ID".tr),
-                            txt("Civil_id_Expiry_Date".tr),
-                            txt("Email_address".tr),
-                            txt("Address".tr),
+                            SizedBox(width: 200, child: txt("Name".tr)),
+                            Expanded(
+                                child: Text(
+                                  selectedLang == "en_US"
+                                      ? parents[index].name
+                                      : parents[index].arabicname,
+                                  maxLines: 2,
+                                ))
                           ],
                         ),
-                      ),
-                      SizedBox(width: 10),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            selectedLang == "en_US"?parents[index].name:parents[index].arabicname,
-                            maxLines: 2,
-                          ),
-                          Text(
-                            parents[index].nationality,
-                            maxLines: 2,
-                          ),
-                          Text(
-                            parents[index].civilid,
-                            maxLines: 2,
-                          ),
-                          Text(parents[index]
-                                  .parentcivilexpirydate
-                                  .day
-                                  .toString() +
-                              "/" +
-                              parents[index]
-                                  .parentcivilexpirydate
-                                  .month
-                                  .toString() +
-                              "/" +
-                              parents[index]
-                                  .parentcivilexpirydate
-                                  .year
-                                  .toString()),
-                          // Text(widget.parents[index].parentcivilexpirydate),
-
-                          Text(
-                            parents[index].emailid,
-                            maxLines: 2,
-                            overflow: TextOverflow.clip,
-                          ),
-
-                          Text(
-                            parents[index].regionalarea,
-                            maxLines: 2,
-                          )
-                        ],
-                      ),
-                    ]),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 200,
+                              child: txt("Nationality".tr),
+                            ),
+                            Expanded(
+                                child: Text(
+                                  parents[index].nationality,
+                                  maxLines: 2,
+                                ))
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 200,
+                              child: txt("Civil_ID".tr),
+                            ),
+                            Expanded(
+                                child: Text(
+                                  parents[index].civilid,
+                                  maxLines: 2,
+                                ))
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 200,
+                              child: txt("Civil_id_Expiry_Date".tr),
+                            ),
+                            Expanded(
+                                child:  Text(parents[index]
+                                            .parentcivilexpirydate
+                                            .day
+                                            .toString() +
+                                        "/" +
+                                        parents[index]
+                                            .parentcivilexpirydate
+                                            .month
+                                            .toString() +
+                                        "/" +
+                                        parents[index]
+                                            .parentcivilexpirydate
+                                            .year
+                                            .toString()),)
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 200,
+                              child: txt("Email_address".tr),
+                            ),
+                            Expanded(
+                                child: Text(
+                                  parents[index].emailid,
+                                  maxLines: 2,
+                                ))
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 200,
+                              child: txt("Address".tr),
+                            ),
+                            Expanded(
+                                child: Text(
+                                  parents[index].regionalarea,
+                                  maxLines: 2,
+                                ))
+                          ],
+                        ),
+                      ],
+                    ),
                   )),
             ),
             Positioned(

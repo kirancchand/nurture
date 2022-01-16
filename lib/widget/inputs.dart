@@ -422,7 +422,7 @@ List<Widget> contactReqInputs(studentContactRequestModel, context) {
     Container(
         height: 200,
         child: Padding(
-          padding: EdgeInsets.all(8),
+          padding: EdgeInsets.all(0),
           child: TextFormField(
             maxLines: 10,
             keyboardType: TextInputType.multiline,

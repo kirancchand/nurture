@@ -15,25 +15,26 @@ class SettingsPage extends StatefulWidget {
 class Settings extends State<SettingsPage> {
 
   String _selectedLang;
-  String _showLang = Get.locale == "en_US" ? "عربي" : "English";
+  // String selectedLang=(Get.locale.toString() == "en_US")?"en_US":"ar_AB";
+  String _showLang = Get.locale.toString() == "en_US" ? "عربي" : "English";
   ChildrenController childlistcon = Get.put(ChildrenController());
   List childrens = [];
 
   @override
   void initState() {
     // TODO: implement initState
-    print("ADSAD${Get.locale}");
+    //print("ADSAD${Get.locale}");
     super.initState();
-    Future<void> langFunc() async {
-      var pref = await SharedPreferences.getInstance();
-      print("adasdas${pref.getString('lang')}");
-      setState(() {
-        _showLang = pref.getString('lang') == "en_US" ? "عربي" : "English";
-        _selectedLang = pref.getString('lang') == "en_US" ? "English" : "عربي";
-        // _selectedLang = pref.getString('lang') == "en_US" ? "عربي" : "English";
-      });
-    }
-    langFunc();
+    // Future<void> langFunc() async {
+    //   var pref = await SharedPreferences.getInstance();
+    //   print("adasdas${pref.getString('lang')}");
+    //   setState(() {
+    //     _showLang = pref.getString('lang') == "en_US" ? "عربي" : "English";
+    //     _selectedLang = pref.getString('lang') == "en_US" ? "English" : "عربي";
+    //     // _selectedLang = pref.getString('lang') == "en_US" ? "عربي" : "English";
+    //   });
+    // }
+    // langFunc();
     // Future.delayed(Duration(seconds: 3)).then((value) async {
     //   var pref = await SharedPreferences.getInstance();
     //   print("adasdas${pref.getString('lang')}");
@@ -82,26 +83,29 @@ class Settings extends State<SettingsPage> {
               Get.toNamed('/contactinformation', arguments: childrens);
             },
           ),
-          // Divider(),
-          // ListTile(
-          //   title: Text(_showLang),
-          //   onTap: () {
-          //     Future<void> changelangFunc(_showLang) async {
-          //       var pref = await SharedPreferences.getInstance();
-          //       pref.setString('lang',_showLang );
-          //       print("adasdas${pref.getString('lang')}");
-          //     }
-          //     changelangFunc(_showLang== "English"?"en_US":"ar_AB");
-          //     Localization().changeLocale(_showLang);
-          //     setState(() {
-          //       _selectedLang = _showLang;
-          //       _showLang=(_showLang== "English") ? "عربي" : "English";
-          //     });
-          //
-          //
-          //
-          //   },
-          // ),
+          Divider(),
+          ListTile(
+            title: Text(_showLang),
+            onTap: () {
+              Future<void> changelangFunc(_showLang) async {
+                print("changelangFunc"+_showLang);
+                var pref = await SharedPreferences.getInstance();
+                pref.setString('lang',_showLang );
+                print("adasdassettng${pref.getString('lang')}");
+              }
+              print("showlanguage"+_showLang);
+              changelangFunc(_showLang);
+              Localization().changeLocale(_showLang);
+              // Localization().changeLocale(_showLang== "English"?"ar_AB":"en_US");
+              setState(() {
+                // _selectedLang = _showLang;
+                _showLang=(_showLang=="English") ? "عربي" : "English";
+              });
+
+
+
+            },
+          ),
           Divider(),
           ListTile(
             title: Text("Log_off".tr),

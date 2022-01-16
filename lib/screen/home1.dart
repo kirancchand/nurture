@@ -123,7 +123,7 @@ class _HomePage1State extends State<HomePage1> {
                           radius: 30,
                           backgroundColor: Colors.white,
                           backgroundImage: AssetImage(
-                              "assets/images/arabian-vector-icon-260nw-445427119.png")),
+                              "assets/images/arabian-vector-icon-260nw-445427119.png")),//arabian-vector-icon-260nw-445427119.png
                       SizedBox(
                         height: 10,
                       ),
@@ -198,7 +198,7 @@ class _HomePage1State extends State<HomePage1> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Student".tr),
+                              Text("Student".tr,style: TextStyle(fontWeight: FontWeight.bold),),
                               Row(
                                 children: [
                                   Text(
@@ -235,7 +235,7 @@ class _HomePage1State extends State<HomePage1> {
                                     // print(fee.response.children[index].studentname);
 
                                     return StudentList(
-                                        data: fee.response.children[index]);
+                                        data: fee.response.children[index],index:index);
                                   },
                                 )
                               : Center(
@@ -264,7 +264,7 @@ class _HomePage1State extends State<HomePage1> {
                               Padding(
                                 padding: EdgeInsets.only(
                                     top: 15, left: 15, right: 15),
-                                child: Text("Total_Fee_Outstanding".tr),
+                                child: Text("Total_Fee_Outstanding".tr,style: TextStyle(fontWeight: FontWeight.bold),),
                               ),
                               fee.response.children.length > 0
                                   ? ListView.builder(
@@ -386,7 +386,7 @@ Widget ContactUs(context, List<FeeResponse> children,String selectedLang) {
                   Icons.mail,
                   color: kColorGreen,
                 ),
-                title: Text("Contact_Us".tr),
+                title: Text("Contact_Us".tr,style: TextStyle(fontWeight: FontWeight.bold),),
                 trailing: Icon(selectedLang== "en_US"?Icons.keyboard_arrow_right_outlined:Icons.keyboard_arrow_left_outlined,
                     color: kColorGreen)),
           )),

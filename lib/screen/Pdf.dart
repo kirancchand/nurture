@@ -99,7 +99,7 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
       final result = await ImageGallerySaver.saveImage(pngBytes);
       // print(pngBytes);
       // print(bs64);
-      print(result);
+     //print(result);
       setState(() {});
       Fluttertoast.showToast(msg: "File downloaded Successfully");
       return pngBytes;
@@ -139,7 +139,7 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
             },
             child: Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: Colors.black,
+              color: Colors.white,
             )),
         toolbarHeight: 80,
         title: Text("View File",
@@ -227,11 +227,16 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
           ])),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _capturePng,
-        child: const Icon(Icons.download),
-        backgroundColor: kColorGreen,
-      ),
+      floatingActionButton: SizedBox(
+        width: 75.0,
+        height: 75.0,
+        child: FloatingActionButton(
+          onPressed: _capturePng,
+          child: const Icon(Icons.download,size:34),
+          backgroundColor: kColorGreen,
+        ),
+      )
+
       // floatingActionButton: FutureBuilder<PDFViewController>(
       //   future: _controller.future,
       //   builder: (context, AsyncSnapshot<PDFViewController> snapshot) {

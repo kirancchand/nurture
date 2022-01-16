@@ -124,8 +124,9 @@ class Api {
     // String url = "https://run.mocky.io/v3/c0586d5b-47fd-4c1b-8eae-277796c80ec6";
     // String url = "https://run.mocky.io/v3/cdadde32-9982-459b-8d5d-8f1d687a9455";
     var token = await getToken();
-    //print("valueChoose${valueChoose}");
+    print("valueChoose${valueChoose}");
     final queryParameters = valueChoose;
+
     final response = await http.get(
         getUrl("getstudentfeedetails?studentId=${queryParameters}"),
         headers: {'Authorization': 'Bearer $token'});
@@ -235,7 +236,7 @@ class Api {
 Future<Payment> submitPaymentRequest(
     List<Map<String, dynamic>> paymentBody) async {
   var enc = jsonEncode(paymentBody);
-
+  print("ddsfds"+enc);
   var token = await getToken();
   var headers = {
     'Content-Type': 'application/json',

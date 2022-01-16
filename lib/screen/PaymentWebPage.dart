@@ -47,7 +47,7 @@ class _PaymentWebPageState extends State<PaymentWebPage> {
                 // Fluttertoast.showToast(msg: "Something went Wrong");
 
                 if (fee.statuscode == "200") {
-                  con.year.value = fee.response.academicyear;
+                  con.year.value = fee.response.academicyearid;
                   childrens = fee.response.children;
                   childlistcon.childrenlist = fee.response.children;
                   students.student.value = fee;
@@ -87,10 +87,12 @@ class _PaymentWebPageState extends State<PaymentWebPage> {
             },
             onPageFinished: (String url) {
               //print('Page finished loading: $url');
-              /// print(url.contains('paymentcancel'));
+              // print(url);
 
               if (url.contains('PaymentUrl') || url.contains('paymentcancel')) {
+                showSpinner();
                 api.getFee().then((fee) {
+
                   //print(fee.statuscode);
                   // Fluttertoast.showToast(msg: "Something went Wrong");
                   // https://schbackend.azurewebsites.net/Controllers/PaymentUrl.html?Response=Data
@@ -100,6 +102,7 @@ class _PaymentWebPageState extends State<PaymentWebPage> {
                     childrens = fee.response.children;
                     childlistcon.childrenlist = fee.response.children;
                     students.student.value = fee;
+                    hideSpinner();
                     Get.offAll(() => Home(count: 2));
                     // Navigator.pushReplacement(
                     //   context,
@@ -111,6 +114,7 @@ class _PaymentWebPageState extends State<PaymentWebPage> {
                     // );
                   } else {
                     Fluttertoast.showToast(msg: "Something went Wrong");
+                    hideSpinner();
                     Get.toNamed("/");
                   }
 

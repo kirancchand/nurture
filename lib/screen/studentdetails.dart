@@ -24,8 +24,9 @@ class StudentDetails extends StatelessWidget {
             },
             icon: Icon(
               selectedLang== "en_US"?Icons.keyboard_arrow_left:Icons.keyboard_arrow_right,
-              color: Colors.white,
+              color: Colors.white
             ),
+            iconSize: 36,
           ),
           toolbarHeight: 80,
           title: Text("Student_Details".tr,

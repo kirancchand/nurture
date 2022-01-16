@@ -8,6 +8,7 @@ import 'package:nurture/widget/indexfooter.dart';
 import 'package:nurture/localization.dart';
 import 'package:nurture/common/constants.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class Login extends StatefulWidget{
   LoginPage createState()=> LoginPage();
 }
@@ -17,10 +18,18 @@ class LoginPage extends State<Login>{
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   LoginRequestModel loginRequestModel;
   String _selectedLang = Localization.langs.first;
+
   @override
   void initState() {
     super.initState();
     loginRequestModel = new LoginRequestModel(Username: '', Password: '');
+    Future.delayed(Duration(seconds: 3)).then((value) async {
+      var pref = await SharedPreferences.getInstance();
+      print("selected${_selectedLang}");
+      pref.setString('lang',_selectedLang );
+      // print("getlang${pref.getString('lang')}");
+     // print("adasdas${pref.getString('lang')}");
+    });
   }
 
 
@@ -87,7 +96,15 @@ class LoginPage extends State<Login>{
                                             height: 0,
                                           ),
                                           onChanged: (String newValue) {
-                                            // print(newValue);
+                                           print("loginvalue"+newValue);
+                                            Future<void> changelangFunc(_showLang) async {
+                                              var pref = await SharedPreferences.getInstance();
+                                              print("adasdas${_showLang}");
+                                              pref.setString('lang',_showLang );
+                                              print("getlang${pref.getString('lang')}");
+                                            }
+                                            changelangFunc(newValue);
+                                            // pref.setString('lang',_showLang );
                                             setState(() => _selectedLang = newValue);
                                             Localization().changeLocale(newValue);
                                             // setState(() => _selectedLang = newValue);
@@ -102,11 +119,11 @@ class LoginPage extends State<Login>{
                                   //   "English  ",
                                   //   style: TextStyle(color: kColorGreen),
                                   // ),
-                                  Icon(
-                                    Icons.check_circle,
-                                    color: kColorGreen,
-                                    size: 15,
-                                  )
+                                  // Icon(
+                                  //   Icons.check_circle,
+                                  //   color: kColorGreen,
+                                  //   size: 15,
+                                  // )
                                 ],
                               )
 

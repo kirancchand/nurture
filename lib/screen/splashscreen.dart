@@ -38,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Get.offAll(Login());
         // Get.toNamed('/login');
       } else {
-         print(pref.getString('lang'));
+         //print("mylang"+pref.getString('lang'));
 
 
         api.getFee().then((fee) {
@@ -48,7 +48,8 @@ class _SplashScreenState extends State<SplashScreen> {
             childrens = fee.response.children;
             childlistcon.childrenlist = fee.response.children;
             students.student.value = fee;
-            // Localization().changeLocale(pref.getString('lang'));
+            print("cache${pref.getString('lang')}");
+            Localization().changeLocale(pref.getString('lang'));
               Get.off(() => Home(fee: fee, childrens: childrens));
           } else {
             Fluttertoast.showToast(msg: "Something went Wrong");

@@ -44,7 +44,7 @@ class Localization extends Translations {
   // Gets locale from language, and updates the locale
   void changeLocale(String lang) {
     final locale = _getLocaleFromLanguage(lang);
-    print("lang${lang}");
+    print("changelang${lang}");
     Get.updateLocale(locale);
   }
 

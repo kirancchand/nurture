@@ -158,7 +158,9 @@ class _NotificationsState extends State<Notifications> {
                                       items: childrens.map((valueItem) {
                                         return DropdownMenuItem(
                                           value: valueItem.studentid.toString(),
-                                          child: Text(valueItem.studentname),
+                                          child: Text(
+                                              valueItem.studentname
+                                          ),
                                         );
                                       }).toList(),
                                       onChanged: onStateChange,

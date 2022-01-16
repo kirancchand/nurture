@@ -24,7 +24,8 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
   void initState() {
     super.initState();
     enrollment = List<bool>.filled(widget.childrens.length, false);
-    print(enrollment);
+    YearController con = Get.put(YearController());
+    print("reaar${con.year.value}");
   }
 
   List<Map<String, dynamic>> convert() {
@@ -67,6 +68,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
               selectedLang== "en_US"?Icons.keyboard_arrow_left:Icons.keyboard_arrow_right,
               color: Colors.white,
             ),
+            iconSize: 36,
           ),
           toolbarHeight: 80,
           title: Text("Confirm_payment".tr,
@@ -148,7 +150,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                                                 Checkbox(
                                                   value: enrollment[index],
                                                   onChanged: (value) {
-                                                    print("asdasda${widget.total}");
+                                                   // print("asdasda${widget.total}");
                                                     setState(() {
                                                       enrollment[index] = value;
                                                       if (value == true) {
@@ -266,11 +268,11 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                           );
                         }
                         var lists = await convert();
-                        print(lists);
+                        //print(lists);
                         showSpinner();
                         Payment data = await submitConfirmPayment(lists);
                         hideSpinner();
-                        // print(data.response);
+
                         Get.offAll(()=>PaymentWebPage(link: data.response ?? ""));
                         // Navigator.push(
                         //   context,
@@ -280,7 +282,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
                         //     ),
                         //   ),
                         // );
-                        print(data);
+                        //print(data);
                       },
                     )
                   : GestureDetector(

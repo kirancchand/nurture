@@ -82,7 +82,9 @@ class _ContactInformationState extends State<ContactInformation> {
           icon: Icon(
             selectedLang=="en_US"?Icons.keyboard_arrow_left:Icons.keyboard_arrow_right,
             color: Colors.white,
+
           ),
+          iconSize: 36,
         ),
         toolbarHeight: 80,
         title: Text("Contact_Us".tr,

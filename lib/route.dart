@@ -9,10 +9,9 @@ import 'package:nurture/screen/home.dart';
 import 'package:nurture/screen/paymentpending.dart';
 import 'package:nurture/screen/contactinformation.dart';
 
-
 class Routes {
   static final Map<String, WidgetBuilder> _routes = {
-    "/": (BuildContext context) => Login(),
+    "/": (BuildContext context) => Home(title: 'Flutter Demo Home Pages'),
     "/otpform": (BuildContext context) => OtpForm(),
     "/pinform": (BuildContext context) => PinForm(),
     "/home": (context) => Home(title: 'Flutter Demo Home Pages'),

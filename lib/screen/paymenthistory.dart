@@ -3,8 +3,9 @@ import 'package:nurture/widget/list.dart';
 import 'package:nurture/common/constants.dart';
 import 'package:nurture/model/paymenthistory.dart';
 import 'package:nurture/service/api.dart';
+
 class PaymentHistory extends StatefulWidget {
-  const PaymentHistory({ Key key }) : super(key: key);
+  const PaymentHistory({Key key}) : super(key: key);
 
   @override
   _PaymentHistoryState createState() => _PaymentHistoryState();
@@ -16,10 +17,10 @@ class _PaymentHistoryState extends State<PaymentHistory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
-         elevation: 0,
+      appBar: AppBar(
+        elevation: 0,
         centerTitle: true,
-      /*/ titleSpacing: 60,
+        /*/ titleSpacing: 60,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -37,53 +38,52 @@ class _PaymentHistoryState extends State<PaymentHistory> {
         flexibleSpace: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(colors: [
-              Color(0xff43CEA2),
-                Color(0xff279DD4),
+            Color(0xff43CEA2),
+            Color(0xff279DD4),
           ])),
         ),
       ),
-      body: ListView(children: [
-       // Header(),
-        Container(
-          child:FutureBuilder<PaymentHistoryResponseModel>(
-            future: api.getPaymentHistory(),
-            builder: (BuildContext context,
-                AsyncSnapshot<PaymentHistoryResponseModel> snapshot) {
-              if (snapshot.hasData) {
-                var response=snapshot.data?.response;
-                // print(data[0]);
-                // // data.response.length>0?
-                // var response=[];
-                return response.length>0?ListView.builder(
-                  itemCount: response.length,
-                  shrinkWrap: true,
-                  physics: ClampingScrollPhysics(),
-                  itemBuilder: (context, int index) {
-                    // print(response[index].studentname);
+      body: ListView(
+        children: [
+          // Header(),
+          Container(
+            child: FutureBuilder<PaymentHistoryResponseModel>(
+              future: api.getPaymentHistory(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<PaymentHistoryResponseModel> snapshot) {
+                if (snapshot.hasData) {
+                  var response = snapshot.data?.response;
+                  // print(data[0]);
+                  // // data.response.length>0?
+                  // var response=[];
+                  return response.length > 0
+                      ? ListView.builder(
+                          itemCount: response.length,
+                          shrinkWrap: true,
+                          physics: ClampingScrollPhysics(),
+                          itemBuilder: (context, int index) {
+                            // print(response[index].studentname);
 
-                    return paymentHistoryList(data:response[index]);
-                  },
-                ):Center(child:Text("No Data"));
+                            return paymentHistoryList(data: response[index]);
+                          },
+                        )
+                      : Center(child: Text("No Data"));
+                } else if (snapshot.hasError) {
+                  // return Text("${snapshot.error}");
+                  return Text("${snapshot.error}");
+                } else {
+                  return Center(child: CircularProgressIndicator());
+                }
 
-              } else if (snapshot.hasError) {
-                // return Text("${snapshot.error}");
-                return Text("${snapshot.error}");
-              }
-              else
-              {
-                return CircularProgressIndicator();
-              }
-
-              // By default, show a loading spinner.
-
-            },
+                // By default, show a loading spinner.
+              },
+            ),
           ),
-        ),
-      ],),
-      
+        ],
+      ),
     );
   }
- /* 
+  /* 
   Widget Header() {
     return Stack(
       children: [

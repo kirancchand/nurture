@@ -66,11 +66,11 @@ class _NotificationsState extends State<Notifications> {
                         )
                       : Center(child: Text("No Data"));
                 } else if (snapshot.hasError) {
-                  return CircularProgressIndicator();
+                  return Center(child: Text("No Data/Error"));
 
                   //return Text("${snapshot.error}");
                 } else {
-                  return CircularProgressIndicator();
+                  return Center(child: CircularProgressIndicator());
                 }
 
                 // By default, show a loading spinner.
